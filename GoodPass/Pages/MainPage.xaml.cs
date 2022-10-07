@@ -1,4 +1,6 @@
-﻿namespace GoodPass;
+﻿using DevExpress.Maui.Editors;
+
+namespace GoodPass;
 
 public partial class MainPage : ContentPage
 {
@@ -8,6 +10,8 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    PasswordEdit passwordEdit;
 
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
