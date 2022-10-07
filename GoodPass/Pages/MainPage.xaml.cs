@@ -1,4 +1,4 @@
-﻿using DevExpress.Maui.Editors;
+﻿using DevExpress.Maui.Editors; //do not support Windows
 
 namespace GoodPass;
 
