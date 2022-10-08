@@ -56,7 +56,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Controls\" />
 	  <Folder Include="Pages\" />
 	  <Folder Include="Data\" />
 	</ItemGroup>
@@ -71,6 +70,12 @@
 	  <PackageReference Include="DevExpress.Maui.Editors">
 	    <Version>22.1.5</Version>
 	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Controls\GPPasswordBox.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
