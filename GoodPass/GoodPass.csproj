@@ -58,6 +58,7 @@
 	<ItemGroup>
 	  <Folder Include="Pages\" />
 	  <Folder Include="Data\" />
+	  <Folder Include="Controls\" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
