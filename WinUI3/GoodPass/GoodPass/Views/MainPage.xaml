@@ -7,20 +7,35 @@
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d">
     
+        
     <Grid x:Name="ContentArea">
         <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="150" />
             <RowDefinition Height="48" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock
+        <TextBlock 
             Grid.Row="0"
-            x:Uid="Main_Title"
-            Style="{StaticResource PageTitleStyle}" />
+            Grid.Column="0"
+            Text="Login"
+            Style="{StaticResource PageTitleStyle}"/>
 
-        <Grid Grid.Row="1">
+        <Image x:Uid="Login_Icon" 
+               Grid.Row="1"
+               Grid.Column="1"
+               Source="/Assets/GoodPass128.png"
+        />
 
-        </Grid>
+
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="1"
+            x:Uid="Login_Title"
+            Text="Welcome to GoodPass"
+            HorizontalAlignment="Center"
+            FontSize="40"
+        />
 
     </Grid>
 
