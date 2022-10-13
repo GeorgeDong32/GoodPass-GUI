@@ -10,32 +10,44 @@
         
     <Grid x:Name="ContentArea">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
             <RowDefinition Height="150" />
             <RowDefinition Height="48" />
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <TextBlock 
-            Grid.Row="0"
-            Grid.Column="0"
-            Text="Login"
-            Style="{StaticResource PageTitleStyle}"/>
-
         <Image x:Uid="Login_Icon" 
-               Grid.Row="1"
-               Grid.Column="1"
-               Source="/Assets/GoodPass128.png"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Source="/Assets/GoodPass128.png"
         />
 
-
         <TextBlock
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="1"
             x:Uid="Login_Title"
             Text="Welcome to GoodPass"
             HorizontalAlignment="Center"
             FontSize="40"
         />
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            
+            <TextBlock
+                Width="400"
+                x:Uid="Login_Password_title"
+                Text="主密码"
+                TextAlignment="Left" 
+                FontSize="18" FontWeight="Light"
+            />
+
+            <PasswordBox
+                x:Uid="Login_PssswordBox"
+                Width="400"
+                Height="24"
+                PlaceholderText="请输入密码"
+            />
+        </StackPanel>
+        
 
     </Grid>
 
