@@ -1,4 +1,5 @@
-﻿using GoodPass.ViewModels;
+﻿using GoodPass.Services;
+using GoodPass.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 
@@ -16,4 +17,6 @@ public sealed partial class MainPage : Page
         ViewModel = App.GetService<MainViewModel>();
         InitializeComponent();
     }
+
+    //private void UnLock()=> NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
 }

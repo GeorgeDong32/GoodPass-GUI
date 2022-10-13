@@ -83,7 +83,7 @@ public partial class App : Application
         }).
         Build();
 
-        App.GetService<IAppNotificationService>().Initialize();
+       App.GetService<IAppNotificationService>().Initialize();
 
         UnhandledException += App_UnhandledException;
     }
