@@ -30,7 +30,8 @@
                 -->
                 <MenuBarItem x:Uid="ShellMenuBarItem_File">
                     <MenuFlyoutItem x:Uid="ShellMenuItem_File_Exit" Command="{x:Bind ViewModel.MenuFileExitCommand}" />
-                    <MenuFlyoutItem x:Uid="ShellMenuItem_File_Lock" Text="Lock" />
+                    <!--ToDo：应该替换为Command：MenuLock（保存文件+回到登录界面）-->
+                    <MenuFlyoutItem x:Uid="ShellMenuItem_File_Lock" Text="Lock" Command="{x:Bind ViewModel.MenuViewsMainCommand}"/>
                 </MenuBarItem>
                 <!--Page changing      
                 <MenuBarItem x:Uid="ShellMenuBarItem_Views">
