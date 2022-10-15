@@ -67,6 +67,9 @@
   <data name="ShellMenuBarItem_File.Title" xml:space="preserve">
     <value>File</value>
   </data>
+  <data name="ShellMenuBarItem_File.Title" xml:space="preserve">
+    <value>File</value>
+  </data>
   <data name="ShellMenuBarItem_Views.Title" xml:space="preserve">
     <value>Views</value>
   </data>
@@ -102,16 +105,22 @@
     <value>Default</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>关于</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>TODO: Replace with your app description.</value>
+    <value>安全简洁的密码管家</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>Privacy Statement</value>
+    <value>隐私声明</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://YourPrivacyUrlGoesHere/</value>
+    <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Statements%26Agreements/Privacy%20Statement.md</value>
+  </data>
+	<data name="SettingsPage_UserAgreementLink.Content" xml:space="preserve">
+    <value>用户协议</value>
+  </data>
+	<data name="SettingsPage_UserAgreementLink.NavigateUri" xml:space="preserve">
+    <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Statements%26Agreements/User%20Agreement.md</value>
   </data>
   <data name="ShellMenuBarSettingsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Settings</value>

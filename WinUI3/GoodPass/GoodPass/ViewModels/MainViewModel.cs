@@ -37,5 +37,5 @@ public class MainViewModel : ObservableRecipient
 
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
 
-    private void Login_UnLock()=> NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
+    public void Login_UnLock()=> NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
 }
