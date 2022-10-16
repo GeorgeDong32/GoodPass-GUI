@@ -24,7 +24,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <AppBarButton x:Name="ShellMenuBarItem_Back" Grid.Column="0" HorizontalAlignment="Left">
+            <AppBarButton x:Name="ShellMenuBarItem_Back" Grid.Column="0" HorizontalAlignment="Left"
+                          Command="{x:Bind ViewModel.GoBackCommand}">
                 <AppBarButton.Icon>
                     <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE72b;"/>
                 </AppBarButton.Icon>
