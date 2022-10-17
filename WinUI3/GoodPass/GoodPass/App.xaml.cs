@@ -23,9 +23,27 @@ public partial class App : Application
     // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
     // https://docs.microsoft.com/dotnet/core/extensions/configuration
     // https://docs.microsoft.com/dotnet/core/extensions/logging
+
+    public static bool LockConsition { get; set; }
+
     public IHost Host
     {
         get;
+    }
+
+    public static bool App_IsLock()
+    {
+        return LockConsition;
+    }
+
+    public static void App_UnLock()
+    {
+        LockConsition = true;
+    }
+
+    public static void App_Lock()
+    {
+        LockConsition = false;
     }
 
     public static T GetService<T>()
@@ -83,7 +101,9 @@ public partial class App : Application
         }).
         Build();
 
-       App.GetService<IAppNotificationService>().Initialize();
+        App.GetService<IAppNotificationService>().Initialize();
+
+        LockConsition = false;
 
         UnhandledException += App_UnhandledException;
     }
@@ -98,7 +118,7 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
+        //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
 
         await App.GetService<IActivationService>().ActivateAsync(args);
     }

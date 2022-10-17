@@ -4,9 +4,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using GoodPass.Contracts.Services;
-
+using GoodPass.ViewModels;
+using GoodPass.Views;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Store;
+using Windows.Globalization;
+using Windows.UI.ViewManagement;
 
 namespace GoodPass.ViewModels;
 
@@ -44,6 +49,11 @@ public class ShellViewModel : ObservableRecipient
         get;
     }
 
+    public ICommand MenuFileLockCommand
+    {
+        get;
+    }
+
     public bool IsBackEnabled
     {
         get => _isBackEnabled;
@@ -60,11 +70,17 @@ public class ShellViewModel : ObservableRecipient
         MenuViewsListDetailsCommand = new RelayCommand(OnMenuViewsListDetails);
         MenuViewsMainCommand = new RelayCommand(OnMenuViewsMain);
         GoBackCommand = new RelayCommand(GoBack);
+        MenuFileLockCommand = new RelayCommand(OnMenuFileLock);
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
 
-    private void OnMenuFileExit() => Application.Current.Exit();
+    private void OnMenuFileExit()
+    {
+        //ToDo:添加退出程序前文件保护和数据加密机制
+        OnMenuFileLock();
+        Application.Current.Exit();
+    }
 
     private void OnMenuSettings() => NavigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
 
@@ -72,5 +88,18 @@ public class ShellViewModel : ObservableRecipient
 
     private void OnMenuViewsMain() => NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
 
-    public void GoBack()=> NavigationService.GoBack();
+    private void OnMenuFileLock()
+    {
+        //ToDo:添加文件保存等锁定数据防护操作
+        App.App_Lock();
+        NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
+    }
+
+    public void GoBack()
+    {
+        
+        if(GoodPass.App.App_IsLock())
+            NavigationService.GoBack();
+        
+    }
 }
