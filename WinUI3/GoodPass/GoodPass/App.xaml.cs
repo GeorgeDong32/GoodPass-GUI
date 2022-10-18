@@ -23,10 +23,36 @@ public partial class App : Application
     // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
     // https://docs.microsoft.com/dotnet/core/extensions/configuration
     // https://docs.microsoft.com/dotnet/core/extensions/logging
+
     public IHost Host
     {
         get;
     }
+
+    /*App状态区*/
+    private static bool LockConsition
+    {
+        get; set;
+    }
+
+    private static bool InSettingsPage
+    {
+        get; set;
+    }
+
+    public static bool App_IsLock() => LockConsition;
+
+    public static void App_UnLock() => LockConsition = false;
+
+    public static void App_Lock() => LockConsition = true;
+
+    public static bool IsInSettingsPage() => InSettingsPage;
+
+    public static void GoInSettingsPage() => InSettingsPage = true;
+
+    public static void LeftSettingsPage() => InSettingsPage = false;
+
+    /*App 状态区结束*/
 
     public static T GetService<T>()
         where T : class
@@ -83,7 +109,9 @@ public partial class App : Application
         }).
         Build();
 
-       App.GetService<IAppNotificationService>().Initialize();
+        App.GetService<IAppNotificationService>().Initialize();
+
+        LockConsition = true; InSettingsPage = false;
 
         UnhandledException += App_UnhandledException;
     }
@@ -98,7 +126,7 @@ public partial class App : Application
     {
         base.OnLaunched(args);
 
-        App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
+        //App.GetService<IAppNotificationService>().Show(string.Format("AppNotificationSamplePayload".GetLocalized(), AppContext.BaseDirectory));
 
         await App.GetService<IActivationService>().ActivateAsync(args);
     }

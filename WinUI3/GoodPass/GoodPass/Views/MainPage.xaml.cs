@@ -25,6 +25,7 @@ public sealed partial class MainPage : Page
         //添加解锁逻辑
         if (MKCheck_Result=="pass")
         {
+            App.App_UnLock();
             ViewModel.Login_UnLock();
         }
         else if (MKCheck_Result=="npass")
