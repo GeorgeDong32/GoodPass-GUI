@@ -13,7 +13,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="36" />
         </Grid.RowDefinitions>
 
         <TextBlock
@@ -70,9 +71,15 @@
                     x:Uid="Settings_AboutDescription"
                     Margin="{StaticResource XSmallTopMargin}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
-                <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
-                <HyperlinkButton x:Uid="SettingsPage_UserAgreementLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
             </StackPanel>
+        </StackPanel>
+
+        <StackPanel x:Name="Settings_Agreements" Orientation="Horizontal" Grid.Row="2">
+            <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+
+            <HyperlinkButton x:Uid="SettingsPage_UserAgreementLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+
+            <HyperlinkButton x:Uid="SettingsPage_OpenSourceLicense" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
         </StackPanel>
     </Grid>
 </Page>
