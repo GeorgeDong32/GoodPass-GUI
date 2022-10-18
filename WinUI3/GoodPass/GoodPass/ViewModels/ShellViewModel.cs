@@ -82,7 +82,11 @@ public class ShellViewModel : ObservableRecipient
         Application.Current.Exit();
     }
 
-    private void OnMenuSettings() => NavigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+    private void OnMenuSettings()
+    {
+        App.GoInSettingsPage(); 
+        NavigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+    }
 
     private void OnMenuViewsListDetails() => NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
 
@@ -92,14 +96,20 @@ public class ShellViewModel : ObservableRecipient
     {
         //ToDo:添加文件保存等锁定数据防护操作
         App.App_Lock();
+        App.LeftSettingsPage();
         NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
     }
 
     public void GoBack()
     {
-        
-        if(GoodPass.App.App_IsLock())
+        if (!App.App_IsLock())
+        {
             NavigationService.GoBack();
-        
+        }
+        else if (App.IsInSettingsPage() == true)
+        {
+            App.LeftSettingsPage();
+            NavigationService.GoBack();
+        }
     }
 }

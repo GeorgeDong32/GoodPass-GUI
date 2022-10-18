@@ -24,27 +24,35 @@ public partial class App : Application
     // https://docs.microsoft.com/dotnet/core/extensions/configuration
     // https://docs.microsoft.com/dotnet/core/extensions/logging
 
-    public static bool LockConsition { get; set; }
-
     public IHost Host
     {
         get;
     }
 
-    public static bool App_IsLock()
+    /*App状态区*/
+    private static bool LockConsition
     {
-        return LockConsition;
+        get; set;
     }
 
-    public static void App_UnLock()
+    private static bool InSettingsPage
     {
-        LockConsition = true;
+        get; set;
     }
 
-    public static void App_Lock()
-    {
-        LockConsition = false;
-    }
+    public static bool App_IsLock() => LockConsition;
+
+    public static void App_UnLock() => LockConsition = false;
+
+    public static void App_Lock() => LockConsition = true;
+
+    public static bool IsInSettingsPage() => InSettingsPage;
+
+    public static void GoInSettingsPage() => InSettingsPage = true;
+
+    public static void LeftSettingsPage() => InSettingsPage = false;
+
+    /*App 状态区结束*/
 
     public static T GetService<T>()
         where T : class
@@ -103,7 +111,7 @@ public partial class App : Application
 
         App.GetService<IAppNotificationService>().Initialize();
 
-        LockConsition = false;
+        LockConsition = true; InSettingsPage = false;
 
         UnhandledException += App_UnhandledException;
     }

@@ -37,10 +37,5 @@ public sealed partial class MainPage : Page
         }
     }
 
-    public static string Reply()
-    {
-        return "MainPage";
-    }
-
     //private void UnLock()=> NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
 }
