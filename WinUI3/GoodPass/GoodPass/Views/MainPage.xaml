@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="48" />
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="160"/>
         </Grid.RowDefinitions>
 
         <Image x:Name="Login_Icon" Grid.Row="0" Grid.Column="1"
@@ -25,23 +25,20 @@
             FontSize="40"
         />
 
-        <Grid Grid.Row="2" Grid.Column="1" Width="480">
-            <Border CornerRadius="10" BorderThickness="2" BorderBrush="#e1e1e1" Width="450" Height="140"/>
+        <Grid x:Name="Login_PasswordArea" Grid.Row="2" Grid.Column="1" Width="480" >
+            <Border CornerRadius="10" BorderThickness="2" BorderBrush="#e1e1e1" Width="450" Height="150"/>
 
             <Grid Width="480" Height="120" VerticalAlignment="Center">
                 <TextBlock x:Name="Login_Password_title" Width="400" 
-                Text="主密码"
-                TextAlignment="Left" 
-                FontSize="22" FontWeight="Light"
-            />
+                           Text="主密码"
+                           TextAlignment="Left" 
+                           FontSize="22" FontWeight="Light"/>
 
-                <PasswordBox x:Name="Login_PssswordBox" Width="400" Height="32"
-                PlaceholderText="请输入密码以解锁" 
-            />
+                <PasswordBox x:Name="Login_PssswordBox" Width="400" Height="34"
+                             PlaceholderText="请输入密码以解锁"/>
 
-                <Button x:Name="Login_Check" Width="80" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                    FontFamily="Segoe MDL2 Assets" Content="&#xE785;" Click="Login_Check_Click"
-            />
+                <Button x:Name="Login_Check" Width="120" Height="35" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        FontFamily="Segoe MDL2 Assets" Content="&#xE785;" Click="Login_Check_Click" />
             </Grid>
             
 

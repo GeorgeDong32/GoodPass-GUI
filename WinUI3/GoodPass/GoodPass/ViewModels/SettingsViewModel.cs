@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 
 using GoodPass.Contracts.Services;
 using GoodPass.Helpers;
-
+using GoodPass.Views;
 using Microsoft.UI.Xaml;
 
 using Windows.ApplicationModel;
@@ -50,7 +50,10 @@ public class SettingsViewModel : ObservableRecipient
                     ElementTheme = param;
                     await _themeSelectorService.SetThemeAsync(param);
                 }
-            });
+            })
+        {
+
+        };
     }
 
     private static string GetVersionDescription()

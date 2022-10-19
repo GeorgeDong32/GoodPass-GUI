@@ -30,15 +30,9 @@ public partial class App : Application
     }
 
     /*App状态区*/
-    private static bool LockConsition
-    {
-        get; set;
-    }
+    private static bool LockConsition { get; set; }
 
-    private static bool InSettingsPage
-    {
-        get; set;
-    }
+    private static bool InSettingsPage { get; set; }
 
     public static bool App_IsLock() => LockConsition;
 
