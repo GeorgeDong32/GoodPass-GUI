@@ -5,8 +5,6 @@ using GoodPass.Helpers;
 using GoodPass.Models;
 
 using Microsoft.Extensions.Options;
-
-using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace GoodPass.Services;
