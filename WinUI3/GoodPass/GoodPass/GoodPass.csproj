@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\ExpandableSettingControl.xaml" />
+    <None Remove="Images\ImageResoueces.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +46,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Images\ImageResoueces.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Controls\ExpandableSettingControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

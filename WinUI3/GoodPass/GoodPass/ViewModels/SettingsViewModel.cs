@@ -7,7 +7,6 @@ using CommunityToolkit.Mvvm.Input;
 using GoodPass.Contracts.Services;
 using GoodPass.Helpers;
 using Microsoft.UI.Xaml;
-
 using Windows.ApplicationModel;
 
 namespace GoodPass.ViewModels;
