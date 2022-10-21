@@ -4,14 +4,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using GoodPass.Contracts.Services;
-using GoodPass.ViewModels;
-using GoodPass.Views;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using Windows.ApplicationModel.Store;
-using Windows.Globalization;
-using Windows.UI.ViewManagement;
 
 namespace GoodPass.ViewModels;
 
@@ -84,7 +78,7 @@ public class ShellViewModel : ObservableRecipient
 
     private void OnMenuSettings()
     {
-        App.GoInSettingsPage(); 
+        App.GoInSettingsPage();
         NavigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
     }
 

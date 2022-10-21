@@ -2,7 +2,6 @@
 using GoodPass.Contracts.Services;
 using GoodPass.Core.Contracts.Services;
 using GoodPass.Core.Services;
-using GoodPass.Helpers;
 using GoodPass.Models;
 using GoodPass.Notifications;
 using GoodPass.Services;
@@ -30,9 +29,15 @@ public partial class App : Application
     }
 
     /*App状态区*/
-    private static bool LockConsition { get; set; }
+    private static bool LockConsition
+    {
+        get; set;
+    }
 
-    private static bool InSettingsPage { get; set; }
+    private static bool InSettingsPage
+    {
+        get; set;
+    }
 
     public static bool App_IsLock() => LockConsition;
 
@@ -104,8 +109,6 @@ public partial class App : Application
         Build();
 
         App.GetService<IAppNotificationService>().Initialize();
-
-        LockConsition = true; InSettingsPage = false;
 
         UnhandledException += App_UnhandledException;
     }
