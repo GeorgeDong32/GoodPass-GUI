@@ -39,10 +39,12 @@ public class MasterKeyService : IMaterKeyService
         catch (System.IO.DirectoryNotFoundException)
         {
             _LocalMKHash = "Not found";
+            LocalMKHash = "Not found";
         }
         catch (System.IO.FileNotFoundException)
         {
             _LocalMKHash = "Not found";
+            LocalMKHash = "Not found";
         }
         finally
         {
@@ -56,14 +58,15 @@ public class MasterKeyService : IMaterKeyService
 
     public string CheckMasterKey(string InputKey)
     {
+        GetLocalMKHash();
         if (InputKey == _LocalMKHash)
             return "pass";
-        else if (InputKey != _LocalMKHash)
-            return "npass";
         else if (_LocalMKHash == "Not found")
             return "error: not found";
         else if (_LocalMKHash == "Empty")
             return "error: data broken";
+        else if (InputKey != _LocalMKHash)
+            return "npass";
         else return "Unknown Error";
     }
 

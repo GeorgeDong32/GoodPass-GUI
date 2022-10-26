@@ -6,13 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d">
-    
-        
+
     <Grid x:Name="LoginPage" RowSpacing="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="48" />
             <RowDefinition Height="160"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Image x:Name="Login_Icon" Grid.Row="0" Grid.Column="1"
@@ -40,10 +40,18 @@
                 <Button x:Name="Login_Check" Width="120" Height="35" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                         FontFamily="Segoe MDL2 Assets" Content="&#xE785;" Click="Login_Check_Click" ToolTipService.ToolTip="解锁"/>
             </Grid>
-            
-
         </Grid>
-        
+
+        <Grid Grid.Row="3" HorizontalAlignment="Center" Width="450">
+
+            <InfoBar x:Name="Login_InfoBar"
+                     IsOpen="False" IsIconVisible="True" IsClosable="True">
+                <InfoBar.Title>GoodPass:</InfoBar.Title>
+                <InfoBar.Background>
+                    <SolidColorBrush Color="Red" Opacity="0.5"/>
+                </InfoBar.Background>
+            </InfoBar>
+        </Grid>
 
     </Grid>
 
