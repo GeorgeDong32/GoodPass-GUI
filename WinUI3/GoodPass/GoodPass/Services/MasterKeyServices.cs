@@ -8,20 +8,50 @@ using Microsoft.Extensions.Options;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.System;
+using System;
 
 namespace GoodPass.Services;
 
 public class MasterKeyService : IMaterKeyService
 {
     private string _LocalMKHash;
+    readonly string userName;
 
-    private readonly string _LocalMKPath = "C:\\Users\\username\\AppData\\Local";
+    readonly string _appdataPath;
+
+    private readonly string _LocalMKPath; 
+
+    public MasterKeyService()
+    {
+        userName = Environment.UserName;
+        _appdataPath = $"C:\\Users\\{userName}\\AppData\\Local";
+        _LocalMKPath = Path.Combine(_appdataPath, "GoodPass", "MKconfig.txt");
+        _LocalMKHash = "";
+    }
 
     public string GetLocalMKHash()
     {
-        var LocalMKHash = File.ReadAllText(Path.Combine(_LocalMKPath,"GoodPass","MKconfig.txt"));
-        _LocalMKHash = LocalMKHash;
-        return LocalMKHash;
+        var LocalMKHash = "";
+        try
+        {
+            LocalMKHash = File.ReadAllText(_LocalMKPath);
+        }
+        catch (System.IO.DirectoryNotFoundException)
+        {
+            _LocalMKHash = "Not found";
+        }
+        catch (System.IO.FileNotFoundException)
+        {
+            _LocalMKHash = "Not found";
+        }
+        finally
+        {
+            if (LocalMKHash == "")
+                _LocalMKHash = "Empty";
+            else
+                _LocalMKHash = LocalMKHash;
+        }
+        return _LocalMKHash;
     }
 
     public string CheckMasterKey(string InputKey)
@@ -39,8 +69,8 @@ public class MasterKeyService : IMaterKeyService
 
     public void ProcessMKArray(string InputKey)
     {
-
+        App.EncryptBase = new int[40] { 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1 };
+        App.MKBase = App.EncryptBase;
     }
-
 
 }

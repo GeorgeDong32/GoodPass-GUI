@@ -38,7 +38,7 @@
                              PlaceholderText="请输入密码以解锁"/>
 
                 <Button x:Name="Login_Check" Width="120" Height="35" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                        FontFamily="Segoe MDL2 Assets" Content="&#xE785;" Click="Login_Check_Click" />
+                        FontFamily="Segoe MDL2 Assets" Content="&#xE785;" Click="Login_Check_Click" ToolTipService.ToolTip="解锁"/>
             </Grid>
             
 

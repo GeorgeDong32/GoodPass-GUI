@@ -9,6 +9,7 @@ using GoodPass.ViewModels;
 using GoodPass.Views;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 
@@ -27,6 +28,11 @@ public partial class App : Application
     {
         get;
     }
+
+    /*MasterKey加密数组*/
+    public static int[]? EncryptBase;
+    public static int[]? MKBase;
+    /*End MasterKey加密数组*/
 
     /*App状态区*/
     private static bool LockConsition
@@ -50,26 +56,13 @@ public partial class App : Application
     public static void GoInSettingsPage() => InSettingsPage = true;
 
     public static void LeftSettingsPage() => InSettingsPage = false;
-
     /*App 状态区结束*/
-
-    public static T GetService<T>()
-        where T : class
-    {
-        if ((App.Current as App)!.Host.Services.GetService(typeof(T)) is not T service)
-        {
-            throw new ArgumentException($"{typeof(T)} needs to be registered in ConfigureServices within App.xaml.cs.");
-        }
-
-        return service;
-    }
 
     public static WindowEx MainWindow { get; } = new MainWindow();
 
     public App()
     {
         InitializeComponent();
-
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).
@@ -88,6 +81,8 @@ public partial class App : Application
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IMaterKeyService, MasterKeyService>();
+            services.TryAddSingleton<MasterKeyService>();
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
@@ -111,6 +106,17 @@ public partial class App : Application
         App.GetService<IAppNotificationService>().Initialize();
 
         UnhandledException += App_UnhandledException;
+    }
+
+    public static T GetService<T>()
+        where T : class
+    {
+        if ((App.Current as App)!.Host.Services.GetService(typeof(T)) is not T service)
+        {
+            throw new ArgumentException($"{typeof(T)} needs to be registered in ConfigureServices within App.xaml.cs.");
+        }
+
+        return service;
     }
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
