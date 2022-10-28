@@ -1,43 +1,15 @@
-﻿using System.Security.Cryptography;
-var teststring = "test";
-try
+﻿var saltchar = new char[8];
+var saltbase = new int[8] { 39, 65, 110, 78, 95, 102, 116, 43 };
+var InputString = "test";
+for (var i = 0; i < 8; i++)
 {
-    SHA256 SHA256CSP
-        = SHA256.Create();
+    saltchar[i] = Convert.ToChar(saltbase[i]);
 
-    byte[] bytValue = System.Text.Encoding.UTF8.GetBytes(teststring);
-    byte[] bytHash = SHA256CSP.ComputeHash(bytValue);
-    SHA256CSP.Clear();
-
-    //根据计算得到的Hash码翻译为SHA-1码
-    string sHash = "", sTemp = "";
-    for (int counter = 0; counter < bytHash.Count(); counter++)
-    {
-        long i = bytHash[counter] / 16;
-        if (i > 9)
-        {
-            sTemp = ((char)(i - 10 + 0x41)).ToString();
-        }
-        else
-        {
-            sTemp = ((char)(i + 0x30)).ToString();
-        }
-        i = bytHash[counter] % 16;
-        if (i > 9)
-        {
-            sTemp += ((char)(i - 10 + 0x41)).ToString();
-        }
-        else
-        {
-            sTemp += ((char)(i + 0x30)).ToString();
-        }
-        sHash += sTemp;
-    }
-
-    //根据大小写规则决定返回的字符串
-    Console.WriteLine(sHash.ToUpper());
 }
-catch (Exception ex)
-{
-    throw new Exception(ex.Message);
-}
+Console.WriteLine(saltchar);
+var salt = new string(saltchar);
+Console.WriteLine(salt);
+var salthead = salt[..4];
+var salttail = salt[4..];
+var SaltedString = salthead + InputString + salttail;
+Console.WriteLine(SaltedString);
