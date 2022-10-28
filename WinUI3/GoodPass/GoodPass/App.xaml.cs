@@ -82,7 +82,8 @@ public partial class App : Application
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMaterKeyService, MasterKeyService>();
-            services.TryAddSingleton<MasterKeyService>();
+            services.AddSingleton<MasterKeyService>();
+            services.AddSingleton<GoodPassSHAServices>();
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
