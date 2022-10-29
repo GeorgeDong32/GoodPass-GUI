@@ -1,14 +1,4 @@
 ﻿using GoodPass.Contracts.Services;
-using GoodPass.Core.Contracts.Services;
-using GoodPass.Core.Helpers;
-using GoodPass.Helpers;
-using GoodPass.Models;
-
-using Microsoft.Extensions.Options;
-using Windows.Storage;
-using Windows.Storage.Streams;
-using Windows.System;
-using System;
 
 namespace GoodPass.Services;
 
@@ -19,7 +9,9 @@ public class MasterKeyService : IMaterKeyService
 
     readonly string _appdataPath;
 
-    private readonly string _LocalMKPath; 
+    private readonly string _LocalMKPath;
+
+    private GoodPassSHAServices GPHESService = new();
 
     public MasterKeyService()
     {
@@ -27,6 +19,61 @@ public class MasterKeyService : IMaterKeyService
         _appdataPath = $"C:\\Users\\{userName}\\AppData\\Local";
         _LocalMKPath = Path.Combine(_appdataPath, "GoodPass", "MKconfig.txt");
         _LocalMKHash = "";
+    }
+
+    public bool SetLocalMKHash(string MasterKey)
+    {
+        var GoodPassFolderPath = Path.Combine(_appdataPath, "GoodPass");
+        var MKconfigPath = Path.Combine(GoodPassFolderPath, "MKconfig.txt");
+        if (!System.IO.Directory.Exists(GoodPassFolderPath))
+        {
+            System.IO.Directory.CreateDirectory(GoodPassFolderPath);
+            if (System.IO.Directory.Exists(GoodPassFolderPath))
+            {
+                System.IO.File.Create(MKconfigPath).Close();
+                if (System.IO.File.Exists(MKconfigPath))
+                {
+                    System.IO.File.WriteAllText(MKconfigPath, GPHESService.getGPHES(MasterKey));
+                    return true;
+                }
+                else
+                {
+                    return false;
+                    throw new Exception("Failed to create config file!");
+                }
+            }
+            else
+            {
+                return false;
+                throw new Exception("Failed to create data folder!");
+            }
+        }
+        else if (System.IO.Directory.Exists(GoodPassFolderPath))
+        {
+            if (!System.IO.File.Exists(MKconfigPath))
+            {
+                System.IO.File.Create(MKconfigPath).Close();
+                if (System.IO.File.Exists(MKconfigPath))
+                {
+                    System.IO.File.WriteAllText(MKconfigPath, GPHESService.getGPHES(MasterKey));
+                    return true;
+                }
+                else
+                {
+                    return false;
+                    throw new Exception("Failed to create config file!");
+                }
+            }
+            else
+            {
+                System.IO.File.WriteAllText(MKconfigPath, GPHESService.getGPHES(MasterKey));
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
     }
 
     public string GetLocalMKHash()
@@ -58,14 +105,15 @@ public class MasterKeyService : IMaterKeyService
 
     public string CheckMasterKey(string InputKey)
     {
+        var InputKeyHash = GPHESService.getGPHES(InputKey);
         GetLocalMKHash();
-        if (InputKey == _LocalMKHash)
+        if (InputKeyHash == _LocalMKHash)
             return "pass";
         else if (_LocalMKHash == "Not found")
             return "error: not found";
         else if (_LocalMKHash == "Empty")
             return "error: data broken";
-        else if (InputKey != _LocalMKHash)
+        else if (InputKeyHash != _LocalMKHash)
             return "npass";
         else return "Unknown Error";
     }
