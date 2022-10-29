@@ -11,7 +11,7 @@ public class MasterKeyService : IMaterKeyService
 
     private readonly string _LocalMKPath;
 
-    private GoodPassSHAServices GPHESService = new();
+    private GoodPassSHAServices GPHESService = new GoodPassSHAServices();
 
     public MasterKeyService()
     {
@@ -105,23 +105,22 @@ public class MasterKeyService : IMaterKeyService
 
     public string CheckMasterKey(string InputKey)
     {
-        var InputKeyHash = GPHESService.getGPHES(InputKey);
         GetLocalMKHash();
-        if (InputKeyHash == _LocalMKHash)
+        if (InputKey == _LocalMKHash)
             return "pass";
         else if (_LocalMKHash == "Not found")
             return "error: not found";
         else if (_LocalMKHash == "Empty")
             return "error: data broken";
-        else if (InputKeyHash != _LocalMKHash)
+        else if (InputKey != _LocalMKHash)
             return "npass";
         else return "Unknown Error";
     }
 
-    public void ProcessMKArray(string InputKey)
-    {
-        App.EncryptBase = new int[40] { 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1 };
-        App.MKBase = App.EncryptBase;
-    }
+    // public void ProcessMKArray(string InputKey)
+    // {
+    //     App.EncryptBase = new int[40] { 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1 };
+    //     App.MKBase = App.EncryptBase;
+    // }
 
 }
