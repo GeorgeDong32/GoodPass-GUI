@@ -1,16 +1,4 @@
-﻿using GoodPass.Contracts.Services;
-using GoodPass.Core.Contracts.Services;
-using GoodPass.Core.Helpers;
-using GoodPass.Helpers;
-using GoodPass.Models;
-
-using Microsoft.Extensions.Options;
-using Windows.Storage;
-using Windows.Storage.Streams;
-using Windows.System;
-using System.Security.Cryptography;
-using System;
-using System.Text;
+﻿using System.Security.Cryptography;
 
 namespace GoodPass.Services;
 
