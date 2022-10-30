@@ -13,6 +13,7 @@
             <RowDefinition Height="48" />
             <RowDefinition Height="160"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Image x:Name="Login_Icon" Grid.Row="0" Grid.Column="1"
@@ -51,6 +52,10 @@
                     <SolidColorBrush Color="Red" Opacity="0.5"/>
                 </InfoBar.Background>
             </InfoBar>
+        </Grid>
+
+        <Grid Grid.Row="4" HorizontalAlignment="Center">
+            <Button x:Name="TestDialog" Click="ShowDialog_Click"/>
         </Grid>
 
     </Grid>
