@@ -1,5 +1,5 @@
 ﻿<ContentDialog
-    x:Class="GoodPass.Views.SetMKDialog"
+    x:Class="GoodPass.Views.GPDialog2"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,8 +14,7 @@
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <!-- Content body -->
-        <TextBlock Text="Lorem ipsum dolor sit amet, adipisicing elit." TextWrapping="Wrap" />
-        <CheckBox Content="Upload your content to the cloud."/>
+        <TextBlock Text="GoodPass Standard Dialog with two button" TextWrapping="Wrap" />
     </StackPanel>
 
 </ContentDialog>

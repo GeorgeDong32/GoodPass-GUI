@@ -24,7 +24,7 @@
   <ItemGroup>
     <None Remove="Controls\ExpandableSettingControl.xaml" />
     <None Remove="Images\ImageResoueces.xaml" />
-    <None Remove="Views\SetMKDialog.xaml" />
+    <None Remove="Views\GPDialog2.xaml" />
     <None Remove="Views\SetMKDialogContent.xaml" />
   </ItemGroup>
 
@@ -48,6 +48,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\GPDialog2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\SetMKDialogContent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,13 +78,5 @@
 
   <ItemGroup>
     <PRIResource Remove="Converters\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Views\SetMKDialog.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Remove="Views\SetMKDialog.xaml" />
   </ItemGroup>
 </Project>
