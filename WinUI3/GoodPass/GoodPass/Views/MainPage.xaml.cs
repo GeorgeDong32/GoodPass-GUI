@@ -74,9 +74,22 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private async void ShowDialog_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private async void ShowSetMKDialog()//密码设置弹窗
     {
-        SetMKDialog dialog = new();
+        //To Do: 弹窗=>密码设置弹窗"SetMKDialogContent"
+        GPDialog2 dialog = new();
+
+        // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+        dialog.XamlRoot = this.XamlRoot;
+        dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+        dialog.Content = new SetMKDialogContent();
+
+        await dialog.ShowAsync();
+    }
+
+    /*private async void ShowDialog_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        GPDialog2 dialog = new();
 
         // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
         dialog.XamlRoot = this.XamlRoot;
@@ -84,7 +97,7 @@ public sealed partial class MainPage : Page
         dialog.Content = new SetMKDialogContent();
 
         var result = await dialog.ShowAsync();
-    }
+    }*/
 
     //private void UnLock()=> NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
 }

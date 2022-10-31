@@ -98,8 +98,7 @@ public partial class App : Application
             services.AddTransient<MainPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
-            services.AddTransient<SetMKDialog>();
-
+            services.AddTransient<GPDialog2>();
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
