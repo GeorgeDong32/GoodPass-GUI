@@ -58,6 +58,7 @@ public sealed partial class MainPage : Page
             Login_InfoBar.IsOpen = true;
             Login_InfoBar.Message = "配置文件不存在！";
             //To Do: 添加进入设置密码界面
+            ShowSetMKDialog();
         }
         else if (MKCheck_Result == "error: data broken")
         {
@@ -77,14 +78,27 @@ public sealed partial class MainPage : Page
     private async void ShowSetMKDialog()//密码设置弹窗
     {
         //To Do: 弹窗=>密码设置弹窗"SetMKDialogContent"
-        GPDialog2 dialog = new();
+        SetMKDialog dialog = new();
+
+        // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+        //dialog.Title = "请设置主密码";
+        dialog.XamlRoot = this.XamlRoot;
+        dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+        //dialog.Content = new SetMKDialogContent();
+        _ = await dialog.ShowAsync();
+    }
+
+    private async void ShowResetMKDialog()//重设密码弹窗
+    {
+        //To Do: 弹窗=>密码设置弹窗"SetMKDialogContent"
+        SetMKDialog dialog = new();
 
         // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
         dialog.XamlRoot = this.XamlRoot;
         dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.Content = new SetMKDialogContent();
+        //dialog.Content = new SetMKDialogContent();
 
-        await dialog.ShowAsync();
+        _ = await dialog.ShowAsync();
     }
 
     /*private async void ShowDialog_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

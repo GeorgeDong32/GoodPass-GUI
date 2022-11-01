@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d"
-    Title="GoodPass Dialogs"
+    Title="GoodPass Dialogs" 
     PrimaryButtonText="确定"
     CloseButtonText="取消"
     DefaultButton="Primary"
