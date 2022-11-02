@@ -1,20 +1,9 @@
 ﻿using GoodPass.Services;
 using GoodPass.ViewModels;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
+using Windows.UI;
 
 namespace GoodPass.Views;
 
@@ -26,8 +15,8 @@ public sealed partial class MainPage : Page
     }
 
     public MasterKeyService MKS
-    { 
-        get;  
+    {
+        get;
     }
 
     public MainPage()
@@ -50,19 +39,23 @@ public sealed partial class MainPage : Page
         else if (MKCheck_Result == "npass")
         {
             Login_InfoBar.IsOpen = true;
+            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(100, 255, 0, 0));//设置提示为红色
             Login_InfoBar.Message = "密码错误，请检查后重试！";//底部横幅提示
         }
         else if (MKCheck_Result == "error: not found")
         {
             //报错：MKConfig路径不存在
             Login_InfoBar.IsOpen = true;
+            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(100, 255, 0, 0));
             Login_InfoBar.Message = "配置文件不存在！";
             //To Do: 添加进入设置密码界面
+            ShowSetMKDialog();
         }
         else if (MKCheck_Result == "error: data broken")
         {
             //报错：MKConfig数据损坏
             Login_InfoBar.IsOpen = true;
+            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(100, 255, 0, 0));
             Login_InfoBar.Message = "配置文件损坏，请修复！";
             //To Do: 添加进入重设密码界面
         }
@@ -70,6 +63,7 @@ public sealed partial class MainPage : Page
         {
             //报错：未知错误
             Login_InfoBar.IsOpen = true;
+            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(100, 255, 0, 0));
             Login_InfoBar.Message = "未知错误！";
         }
     }
@@ -77,14 +71,33 @@ public sealed partial class MainPage : Page
     private async void ShowSetMKDialog()//密码设置弹窗
     {
         //To Do: 弹窗=>密码设置弹窗"SetMKDialogContent"
-        GPDialog2 dialog = new();
+        SetMKDialog dialog = new();
+
+        // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+        //dialog.Title = "请设置主密码";
+        dialog.XamlRoot = this.XamlRoot;
+        dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+        //dialog.Content = new SetMKDialogContent();
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            Login_InfoBar.IsOpen = true;
+            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(50, 98, 255, 223));//设置提示为绿色
+            Login_InfoBar.Message = "成功设置主密码！";
+        }
+    }
+
+    private async void ShowResetMKDialog()//重设密码弹窗
+    {
+        //To Do: 弹窗=>密码设置弹窗"SetMKDialogContent"
+        SetMKDialog dialog = new();
 
         // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
         dialog.XamlRoot = this.XamlRoot;
         dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.Content = new SetMKDialogContent();
+        //dialog.Content = new SetMKDialogContent();
 
-        await dialog.ShowAsync();
+        _ = await dialog.ShowAsync();
     }
 
     /*private async void ShowDialog_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

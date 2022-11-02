@@ -9,7 +9,6 @@ using GoodPass.ViewModels;
 using GoodPass.Views;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 
@@ -99,6 +98,7 @@ public partial class App : Application
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
             services.AddTransient<GPDialog2>();
+            services.AddTransient<SetMKDialog>();
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));

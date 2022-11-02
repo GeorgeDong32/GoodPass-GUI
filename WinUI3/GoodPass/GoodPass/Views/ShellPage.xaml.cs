@@ -100,4 +100,14 @@ public sealed partial class ShellPage : Page
     {
         AnimatedIcon.SetState((UIElement)sender, "Normal");
     }
+
+    private void ShellMenuBarItem_Back_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        AnimatedIcon.SetState((UIElement)sender, "Pressed");
+    }
+
+    private void ShellMenuBarItem_Back_PointerReleased(object sender, PointerRoutedEventArgs e)
+    {
+        AnimatedIcon.SetState((UIElement)sender, "Normal");
+    }
 }
