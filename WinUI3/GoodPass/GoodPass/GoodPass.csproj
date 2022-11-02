@@ -25,7 +25,7 @@
     <None Remove="Controls\ExpandableSettingControl.xaml" />
     <None Remove="Images\ImageResoueces.xaml" />
     <None Remove="Views\GPDialog2.xaml" />
-    <None Remove="Views\SetMKDialogContent.xaml" />
+    <None Remove="Views\SetMKDialog.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,7 +51,7 @@
     <Page Update="Views\GPDialog2.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Update="Views\SetMKDialogContent.xaml">
+    <Page Update="Views\SetMKDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Images\ImageResoueces.xaml">

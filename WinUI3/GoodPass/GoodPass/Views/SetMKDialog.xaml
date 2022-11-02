@@ -21,8 +21,10 @@
 
         <RelativePanel x:Name="SetMKDialog_PBPanel1">
             <PasswordBox x:Name="SetMKDialog_PssswordBox1" Width="250" Height="36" Margin="0,0,8,0"
-                             PlaceholderText="请输入8-40位的主密码" PasswordRevealMode="Hidden"/>
-            <CheckBox Name="SetMKDialog_PB1CheckBox" RelativePanel.RightOf="SetMKDialog_PssswordBox1" 
+                             PlaceholderText="请输入8-40位的主密码" PasswordRevealMode="Hidden" PasswordChanged="SetMKDialog_PssswordBox1_PasswordChanged">
+            </PasswordBox>
+            <TextBlock x:Name="SetMKDialog_PB1Status" Margin="2" Height="16" HorizontalAlignment="Center" RelativePanel.Below="SetMKDialog_PssswordBox1"/>
+            <CheckBox Name="SetMKDialog_PB1CheckBox" Height="12" RelativePanel.RightOf="SetMKDialog_PssswordBox1" 
                       IsChecked="False" Content="显示密码"
                       Checked="RevealModeCheckbox_Changed1" 
                       Unchecked="RevealModeCheckbox_Changed1" />
@@ -30,7 +32,8 @@
 
         <RelativePanel x:Name="SetMKDialog_PBPanel2">
             <PasswordBox x:Name="SetMKDialog_PssswordBox2" Width="250" Height="36" Margin="0,0,8,0" 
-                         PlaceholderText="请再次输入您的主密码" PasswordRevealMode="Hidden"/>
+                         PlaceholderText="请再次输入您的主密码" PasswordRevealMode="Hidden" PasswordChanged="SetMKDialog_PssswordBox2_PasswordChanged"/>
+            <TextBlock x:Name="SetMKDialog_PB2Status" Margin="2" Height="16" HorizontalAlignment="Center" RelativePanel.Below="SetMKDialog_PssswordBox2"/>
             <CheckBox Name="SetMKDialog_PB2CheckBox" RelativePanel.RightOf="SetMKDialog_PssswordBox2" 
                       IsChecked="False" Content="显示密码"
                       Checked="RevealModeCheckbox_Changed2" 

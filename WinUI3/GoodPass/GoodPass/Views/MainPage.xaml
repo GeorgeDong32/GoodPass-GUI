@@ -47,10 +47,7 @@
 
             <InfoBar x:Name="Login_InfoBar"
                      IsOpen="False" IsIconVisible="True" IsClosable="True">
-                <InfoBar.Title>GoodPass:</InfoBar.Title>
-                <InfoBar.Background>
-                    <SolidColorBrush Color="Red" Opacity="0.5"/>
-                </InfoBar.Background>
+            <InfoBar.Title>GoodPass:</InfoBar.Title>
             </InfoBar>
         </Grid>
 
