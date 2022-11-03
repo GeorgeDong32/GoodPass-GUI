@@ -11,7 +11,7 @@ public class MasterKeyService : IMaterKeyService
 
     private readonly string _LocalMKPath;
 
-    private GoodPassSHAServices GPHESService = new();
+    private readonly GoodPassSHAServices GPHESService = new();
 
     public MasterKeyService()
     {

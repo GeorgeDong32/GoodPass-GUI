@@ -84,6 +84,20 @@ public sealed partial class SetMKDialog : ContentDialog
             _isSecure = false;
             IsPrimaryButtonEnabled = false;
         }
+        var MK1 = SetMKDialog_PssswordBox1.Password;
+        if (SetMKDialog_PssswordBox2.Password != MK1)
+        {
+            SetMKDialog_PB2Status.Text = "两次密码不一致";
+            IsPrimaryButtonEnabled = false;
+        }
+        else
+        {
+            SetMKDialog_PB2Status.Text = string.Empty;
+            if (_isSecure)
+                IsPrimaryButtonEnabled = true;
+            else
+                IsPrimaryButtonEnabled = false;
+        }
     }
 
     private void SetMKDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
