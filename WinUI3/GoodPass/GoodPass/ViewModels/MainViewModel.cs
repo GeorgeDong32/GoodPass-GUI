@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GoodPass.Contracts.Services;
-using GoodPass.Services;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace GoodPass.ViewModels;
@@ -37,5 +36,5 @@ public class MainViewModel : ObservableRecipient
 
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
 
-    public void Login_UnLock()=> NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
+    public void Login_UnLock() => NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
 }

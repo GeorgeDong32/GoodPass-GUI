@@ -25,10 +25,15 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <AppBarButton x:Name="ShellMenuBarItem_Back" Grid.Column="0" HorizontalAlignment="Left"
+                          AnimatedIcon.State="Normal"
+                          PointerPressed="ShellMenuBarItem_Back_PointerPressed"
+                          PointerReleased="ShellMenuBarItem_Back_PointerReleased"
                           Command="{x:Bind ViewModel.GoBackCommand}">
-                <AppBarButton.Icon>
-                    <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE72b;"/>
-                </AppBarButton.Icon>
+                <AnimatedIcon x:Name="ShellMenuBarGoBackIcon">
+                    <AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedBackVisualSource/>
+                    </AnimatedIcon.Source>
+                </AnimatedIcon>
             </AppBarButton>
             <MenuBar Grid.Column="1">
                 <MenuBarItem x:Uid="ShellMenuBarItem_File">

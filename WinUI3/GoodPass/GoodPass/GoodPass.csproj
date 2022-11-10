@@ -16,7 +16,16 @@
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Converters\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <None Remove="Converters\**" />
+    <Page Remove="Converters\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Controls\ExpandableSettingControl.xaml" />
+    <None Remove="Images\ImageResoueces.xaml" />
+    <None Remove="Views\GPDialog2.xaml" />
+    <None Remove="Views\SetMKDialog.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +48,15 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Views\GPDialog2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\SetMKDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Images\ImageResoueces.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Controls\ExpandableSettingControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -46,10 +64,6 @@
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Converters\" />
   </ItemGroup>
   
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
@@ -61,4 +75,8 @@
       <FrameworkSdkReference Remove="@(FrameworkSdkReference)" Condition="$([System.String]::Copy('%(FrameworkSdkReference.SDKName)').StartsWith('Microsoft.WindowsAppRuntime.'))" />
     </ItemGroup>
   </Target>
+
+  <ItemGroup>
+    <PRIResource Remove="Converters\**" />
+  </ItemGroup>
 </Project>

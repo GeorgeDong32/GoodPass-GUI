@@ -2,7 +2,6 @@
 using System.Web;
 
 using GoodPass.Contracts.Services;
-using GoodPass.ViewModels;
 
 using Microsoft.Windows.AppNotifications;
 

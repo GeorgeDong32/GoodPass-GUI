@@ -155,7 +155,7 @@
     <value>明亮</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>暗色主题</value>
+    <value>黑暗</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
     <value>跟随系统</value>

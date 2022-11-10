@@ -2,7 +2,6 @@
 using GoodPass.Contracts.Services;
 using GoodPass.Core.Contracts.Services;
 using GoodPass.Core.Services;
-using GoodPass.Helpers;
 using GoodPass.Models;
 using GoodPass.Notifications;
 using GoodPass.Services;
@@ -29,10 +28,21 @@ public partial class App : Application
         get;
     }
 
-    /*App状态区*/
-    private static bool LockConsition { get; set; }
+    /*MasterKey加密数组*/
+    public static int[]? EncryptBase;
+    public static int[]? MKBase;
+    /*End MasterKey加密数组*/
 
-    private static bool InSettingsPage { get; set; }
+    /*App状态区*/
+    private static bool LockConsition
+    {
+        get; set;
+    }
+
+    private static bool InSettingsPage
+    {
+        get; set;
+    }
 
     public static bool App_IsLock() => LockConsition;
 
@@ -45,26 +55,13 @@ public partial class App : Application
     public static void GoInSettingsPage() => InSettingsPage = true;
 
     public static void LeftSettingsPage() => InSettingsPage = false;
-
     /*App 状态区结束*/
-
-    public static T GetService<T>()
-        where T : class
-    {
-        if ((App.Current as App)!.Host.Services.GetService(typeof(T)) is not T service)
-        {
-            throw new ArgumentException($"{typeof(T)} needs to be registered in ConfigureServices within App.xaml.cs.");
-        }
-
-        return service;
-    }
 
     public static WindowEx MainWindow { get; } = new MainWindow();
 
     public App()
     {
         InitializeComponent();
-
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).
@@ -83,6 +80,9 @@ public partial class App : Application
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IMaterKeyService, MasterKeyService>();
+            services.AddSingleton<MasterKeyService>();
+            services.AddSingleton<GoodPassSHAServices>();
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
@@ -97,6 +97,8 @@ public partial class App : Application
             services.AddTransient<MainPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
+            services.AddTransient<GPDialog2>();
+            services.AddTransient<SetMKDialog>();
 
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
@@ -105,9 +107,18 @@ public partial class App : Application
 
         App.GetService<IAppNotificationService>().Initialize();
 
-        LockConsition = true; InSettingsPage = false;
-
         UnhandledException += App_UnhandledException;
+    }
+
+    public static T GetService<T>()
+        where T : class
+    {
+        if ((App.Current as App)!.Host.Services.GetService(typeof(T)) is not T service)
+        {
+            throw new ArgumentException($"{typeof(T)} needs to be registered in ConfigureServices within App.xaml.cs.");
+        }
+
+        return service;
     }
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
