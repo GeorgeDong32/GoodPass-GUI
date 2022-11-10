@@ -1,4 +1,5 @@
 ﻿using GoodPass.Contracts.Services;
+using GoodPass.Helpers;
 
 namespace GoodPass.Services;
 
@@ -12,6 +13,8 @@ public class MasterKeyService : IMaterKeyService
     private readonly string _LocalMKPath;
 
     private readonly GoodPassSHAServices GPHESService = new();
+
+    private readonly Helpers.TaskTConverter taskTConverter = new();
 
     public MasterKeyService()
     {
@@ -124,4 +127,45 @@ public class MasterKeyService : IMaterKeyService
         App.MKBase = App.EncryptBase;
     }
 
+    public async Task<string> GetLocalMKHashAsync()/*未测试*/
+    {
+        Task<string> LocalMKHash = taskTConverter.StringToTaskString(""); ;
+        try
+        {
+            LocalMKHash = File.ReadAllTextAsync(_LocalMKPath);
+        }
+        catch (System.IO.DirectoryNotFoundException)
+        {
+            _LocalMKHash = "Not found";
+            LocalMKHash = taskTConverter.StringToTaskString("Not found");
+        }
+        catch (System.IO.FileNotFoundException)
+        {
+            _LocalMKHash = "Not found";
+            LocalMKHash = taskTConverter.StringToTaskString("Not found");
+        }
+        finally
+        {
+            if (LocalMKHash.Result == "")
+                _LocalMKHash = "Empty";
+            else
+                _LocalMKHash = LocalMKHash.ToString();
+        }
+        return await LocalMKHash;
+    }
+
+    public async Task<string> CheckMasterKeyAsync(string InputKey)/*未测试*/
+    {
+        var InputKeyHash = GPHESService.getGPHES(InputKey);
+        var LocalMKHash = await GetLocalMKHashAsync();
+        if (InputKeyHash == LocalMKHash)
+            return "pass";
+        else if (LocalMKHash == "Not found")
+            return "error: not found";
+        else if (LocalMKHash == "Empty")
+            return "error: data broken";
+        else if (InputKeyHash != LocalMKHash)
+            return "npass";
+        else return "Unknown Error";
+    }
 }
