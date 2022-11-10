@@ -58,6 +58,7 @@ public sealed partial class MainPage : Page
             Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(100, 255, 0, 0));
             Login_InfoBar.Message = "配置文件损坏，请修复！";
             //To Do: 添加进入重设密码界面
+            ShowResetMKDialog();
         }
         else
         {
@@ -74,10 +75,8 @@ public sealed partial class MainPage : Page
         SetMKDialog dialog = new();
 
         // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-        //dialog.Title = "请设置主密码";
         dialog.XamlRoot = this.XamlRoot;
         dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
-        //dialog.Content = new SetMKDialogContent();
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
@@ -95,9 +94,14 @@ public sealed partial class MainPage : Page
         // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
         dialog.XamlRoot = this.XamlRoot;
         dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
-        //dialog.Content = new SetMKDialogContent();
-
-        _ = await dialog.ShowAsync();
+        dialog.Title = "请重新设置密码";
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            Login_InfoBar.IsOpen = true;
+            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(50, 98, 255, 223));//设置提示为绿色
+            Login_InfoBar.Message = "成功重设主密码";
+        }
     }
 
     /*private async void ShowDialog_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

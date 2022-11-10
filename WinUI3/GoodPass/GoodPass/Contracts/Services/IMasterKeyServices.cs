@@ -7,4 +7,8 @@ public interface IMaterKeyService
     string CheckMasterKey(string InputKey);
 
     void ProcessMKArray(string InputKey);
+
+    Task<string> GetLocalMKHashAsync();
+
+    Task<string> CheckMasterKeyAsync(string InputKey);
 }
