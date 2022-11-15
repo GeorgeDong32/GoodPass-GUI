@@ -36,10 +36,10 @@
                            FontSize="22" FontWeight="Light"/>
 
                 <PasswordBox x:Name="Login_PssswordBox" Width="400" Height="34"
-                             PlaceholderText="请输入密码以解锁"/>
+                             PlaceholderText="请输入密码以解锁" PasswordChanging="Login_PssswordBox_PasswordChanging"/>
 
                 <Button x:Name="Login_Check" Width="120" Height="35" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                        FontFamily="Segoe MDL2 Assets" Content="&#xE785;" Click="Login_Check_Click" ToolTipService.ToolTip="解锁"/>
+                        FontFamily="Segoe MDL2 Assets" Content="&#xE785;" Click="Login_Check_ClickAsync" ToolTipService.ToolTip="解锁"/>
             </Grid>
         </Grid>
 
