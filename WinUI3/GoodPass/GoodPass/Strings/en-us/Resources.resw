@@ -205,7 +205,7 @@
   <data name="SettingsPage_OpenSourceLicense.Content" xml:space="preserve">
     <value>开源许可证</value>
   </data>
-  <data name="SettingsPage_OpenSourceLicense。NavigateUri" xml:space="preserve">
+  <data name="SettingsPage_OpenSourceLicense.NavigateUri" xml:space="preserve">
     <value>https://github.com/GeorgeDong32/GoodPass/blob/main/LICENSE</value>
   </data>
   <data name="GoToGithub_Button.NavigateUri" xml:space="preserve">
