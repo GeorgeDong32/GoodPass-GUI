@@ -132,6 +132,8 @@ public class MasterKeyService : IMaterKeyService
         Task<string> LocalMKHash = taskTConverter.StringToTaskString(""); ;
         try
         {
+            //使用部分同步方法用以解决异步方法不抛出异常的问题
+            var tryreadfile = File.ReadAllText(_LocalMKPath);
             LocalMKHash = File.ReadAllTextAsync(_LocalMKPath);
         }
         catch (System.IO.DirectoryNotFoundException)
