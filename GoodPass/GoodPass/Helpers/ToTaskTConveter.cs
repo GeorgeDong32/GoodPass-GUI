@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-
-namespace GoodPass.Helpers;
+﻿namespace GoodPass.Helpers;
 
 public class TaskTConverter
 {

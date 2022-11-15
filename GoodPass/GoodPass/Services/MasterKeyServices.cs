@@ -1,5 +1,4 @@
 ﻿using GoodPass.Contracts.Services;
-using GoodPass.Helpers;
 
 namespace GoodPass.Services;
 
@@ -156,7 +155,7 @@ public class MasterKeyService : IMaterKeyService
         return await LocalMKHash;
     }
 
-    public async Task<string> CheckMasterKeyAsync(string InputKey)/*未测试*/
+    public async Task<string> CheckMasterKeyAsync(string InputKey)
     {
         var InputKeyHash = GPHESService.getGPHES(InputKey);
         var LocalMKHash = await GetLocalMKHashAsync();
