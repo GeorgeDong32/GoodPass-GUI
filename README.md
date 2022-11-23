@@ -5,7 +5,7 @@
 
 > Developed by GeorgeDong32 
 > 
-> <Copyright (c) GeorgeDong32(Github). All rights reserved.>
+> Copyright (c) GeorgeDong32(Github). All rights reserved.
 
 <h3>
 This repo is set up to help developer develop GoodPass and stores developing codes.<br>
