@@ -15,4 +15,4 @@ The codes there may have serious problems, so don't use them for other developme
 Go to [GoodPass](https://github.com/GeorgeDong32/GoodPass) for more detail infomations!
 
 ## License
-[The GoodPass License](https://github.com/GeorgeDong32/GoodPass/blob/main/LICENSE)
+[The GoodPass License](https://github.com/GeorgeDong32/GoodPass/blob/main/LICENSE.md)
