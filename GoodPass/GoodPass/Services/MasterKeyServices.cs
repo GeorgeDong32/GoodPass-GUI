@@ -126,7 +126,7 @@ public class MasterKeyService : IMaterKeyService
         App.MKBase = App.EncryptBase;
     }
 
-    public async Task<string> GetLocalMKHashAsync()/*未测试*/
+    public async Task<string> GetLocalMKHashAsync()/*ToDo：通过RATAsync的异常机制精简方法*/
     {
         Task<string> LocalMKHash = taskTConverter.StringToTaskString(""); ;
         try
@@ -147,10 +147,10 @@ public class MasterKeyService : IMaterKeyService
         }
         finally
         {
-            if (LocalMKHash.Result == "")
+            if (LocalMKHash.Result == String.Empty)
                 _LocalMKHash = "Empty";
             else
-                _LocalMKHash = LocalMKHash.ToString();
+                _LocalMKHash = LocalMKHash.Result;
         }
         return await LocalMKHash;
     }
@@ -163,7 +163,7 @@ public class MasterKeyService : IMaterKeyService
             return "pass";
         else if (LocalMKHash == "Not found")
             return "error: not found";
-        else if (LocalMKHash == "Empty")
+        else if (LocalMKHash == String.Empty)
             return "error: data broken";
         else if (InputKeyHash != LocalMKHash)
             return "npass";

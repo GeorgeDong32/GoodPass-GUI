@@ -1,6 +1,9 @@
 ﻿using GoodPass.Services;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Windows.UI;
 
 namespace GoodPass.Views;
 
@@ -20,6 +23,8 @@ public sealed partial class SetMKDialog : ContentDialog
         _isComplete = false; _isSecure = false;
         this.InitializeComponent();
         IsPrimaryButtonEnabled = false;
+        SetMKDialog_PB2Status.Foreground = new SolidColorBrush(Color.FromArgb(200, 255, 0, 0));
+        SetMKDialog_PB1Status.Foreground = new SolidColorBrush(Color.FromArgb(200, 255, 0, 0));
     }
 
     /*To Do: 设置密码相关逻辑代码*/
