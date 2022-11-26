@@ -147,10 +147,10 @@ public class MasterKeyService : IMaterKeyService
         }
         finally
         {
-            if (LocalMKHash.Result == "")
+            if (LocalMKHash.Result == String.Empty)
                 _LocalMKHash = "Empty";
             else
-                _LocalMKHash = LocalMKHash.ToString();
+                _LocalMKHash = LocalMKHash.Result;
         }
         return await LocalMKHash;
     }
@@ -163,7 +163,7 @@ public class MasterKeyService : IMaterKeyService
             return "pass";
         else if (LocalMKHash == "Not found")
             return "error: not found";
-        else if (LocalMKHash == "Empty")
+        else if (LocalMKHash == String.Empty)
             return "error: data broken";
         else if (InputKeyHash != LocalMKHash)
             return "npass";
