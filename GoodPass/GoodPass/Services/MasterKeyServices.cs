@@ -126,7 +126,7 @@ public class MasterKeyService : IMaterKeyService
         App.MKBase = App.EncryptBase;
     }
 
-    public async Task<string> GetLocalMKHashAsync()/*未测试*/
+    public async Task<string> GetLocalMKHashAsync()/*ToDo：通过RATAsync的异常机制精简方法*/
     {
         Task<string> LocalMKHash = taskTConverter.StringToTaskString(""); ;
         try
