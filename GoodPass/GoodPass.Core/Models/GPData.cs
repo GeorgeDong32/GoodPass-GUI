@@ -1,4 +1,5 @@
 ﻿namespace GoodPass.Core.Models;
+
 public class GPData
 {
     /*数据*/
