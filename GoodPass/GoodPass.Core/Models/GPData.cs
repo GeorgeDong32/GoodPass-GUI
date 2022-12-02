@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GoodPass.Core.Models;
+﻿namespace GoodPass.Core.Models;
 public class GPData
 {
     /*数据*/
@@ -12,7 +6,7 @@ public class GPData
     {
         get; set;
     }
-    
+
     public string PlatformUrl
     {
         get; set;
@@ -35,7 +29,7 @@ public class GPData
 
     public DateTime LatestUpdateTime
     {
-        get; set; 
+        get; set;
     }
 
     /*方法*/
