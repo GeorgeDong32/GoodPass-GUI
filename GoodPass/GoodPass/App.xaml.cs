@@ -83,6 +83,7 @@ public partial class App : Application
             services.AddSingleton<IMaterKeyService, MasterKeyService>();
             services.AddSingleton<MasterKeyService>();
             services.AddSingleton<GoodPassSHAServices>();
+            services.AddSingleton<GoodPassCryptographicServices>();
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
