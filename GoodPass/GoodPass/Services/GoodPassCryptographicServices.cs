@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-
-namespace GoodPass.Services;
+﻿namespace GoodPass.Services;
 
 //提供GPSES服务，用于对数据进行加解密
 public class GoodPassCryptographicServices

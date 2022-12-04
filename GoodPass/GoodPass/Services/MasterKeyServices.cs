@@ -1,5 +1,4 @@
 ﻿using GoodPass.Contracts.Services;
-using Microsoft.Extensions.Logging;
 
 namespace GoodPass.Services;
 
@@ -133,8 +132,8 @@ public class MasterKeyService : IMaterKeyService
     {
         App.EncryptBase = new int[40] { 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1 };
         App.MKBase = App.EncryptBase;
-        var MaxLength = Math.Min(40,InputKey.Length);
-        for(var i = 0; i < MaxLength; i++)
+        var MaxLength = Math.Min(40, InputKey.Length);
+        for (var i = 0; i < MaxLength; i++)
         {
             var key = InputKey[i];
             if (key >= 'a' && key <= 'z')
@@ -144,8 +143,8 @@ public class MasterKeyService : IMaterKeyService
             else if (key >= 'A' && key <= 'Z')
             {
                 App.MKBase[i] = key - 'A';
-            }               
-            else if(key >= '0' && key <= '9')
+            }
+            else if (key >= '0' && key <= '9')
             {
                 App.MKBase[i] = key - '0';
             }
