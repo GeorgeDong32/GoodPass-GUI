@@ -107,10 +107,18 @@ public class MasterKeyService : IMaterKeyService
 
     public string CheckMasterKey(string InputKey)
     {
+        /*Debug codes
+        string userName = Environment.UserName;
+        string logPath = $"C:\\Users\\{userName}\\Documents\\GoodPass\\GPlog.txt";
+        System.IO.File.WriteAllText(logPath,InputKey);
+        /*End Debug codes*/
         var InputKeyHash = GPHESService.getGPHES(InputKey);
         GetLocalMKHash();
         if (InputKeyHash == _LocalMKHash)
+        {
+            ProcessMKArray(InputKey);
             return "pass";
+        }
         else if (_LocalMKHash == "Not found")
             return "error: not found";
         else if (_LocalMKHash == "Empty")
@@ -124,6 +132,27 @@ public class MasterKeyService : IMaterKeyService
     {
         App.EncryptBase = new int[40] { 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1 };
         App.MKBase = App.EncryptBase;
+        var MaxLength = Math.Min(40, InputKey.Length);
+        for (var i = 0; i < MaxLength; i++)
+        {
+            var key = InputKey[i];
+            if (key >= 'a' && key <= 'z')
+            {
+                App.MKBase[i] = key - 'a';
+            }
+            else if (key >= 'A' && key <= 'Z')
+            {
+                App.MKBase[i] = key - 'A';
+            }
+            else if (key >= '0' && key <= '9')
+            {
+                App.MKBase[i] = key - '0';
+            }
+            else
+            {
+                App.MKBase[i] = App.EncryptBase[i];
+            }
+        }
     }
 
     public async Task<string> GetLocalMKHashAsync()/*ToDo：通过RATAsync的异常机制精简方法*/
@@ -157,10 +186,18 @@ public class MasterKeyService : IMaterKeyService
 
     public async Task<string> CheckMasterKeyAsync(string InputKey)
     {
+        /*Debug codes
+        string userName = Environment.UserName;
+        string logPath = $"C:\\Users\\{userName}\\Documents\\GoodPass\\GPlog.txt";
+        System.IO.File.WriteAllText(logPath, InputKey);
+        /*End Debug codes*/
         var InputKeyHash = GPHESService.getGPHES(InputKey);
         var LocalMKHash = await GetLocalMKHashAsync();
         if (InputKeyHash == LocalMKHash)
+        {
+            ProcessMKArray(InputKey);
             return "pass";
+        }
         else if (LocalMKHash == "Not found")
             return "error: not found";
         else if (LocalMKHash == String.Empty)
