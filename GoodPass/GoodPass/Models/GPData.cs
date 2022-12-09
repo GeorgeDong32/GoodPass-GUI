@@ -20,7 +20,7 @@ public class GPData
         get; set;
     }
 
-    private string EncPassword
+    public string EncPassword
     {
         get; set;
     }
