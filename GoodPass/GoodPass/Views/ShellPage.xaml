@@ -30,9 +30,10 @@
                           PointerReleased="ShellMenuBarItem_Back_PointerReleased"
                           Command="{x:Bind ViewModel.GoBackCommand}">
                 <AnimatedIcon x:Name="ShellMenuBarGoBackIcon">
-                    <AnimatedIcon.Source>
-                        <animatedvisuals:AnimatedBackVisualSource/>
-                    </AnimatedIcon.Source>
+                    <animatedvisuals:AnimatedBackVisualSource/>
+                    <AnimatedIcon.FallbackIconSource>
+                        <SymbolIconSource Symbol="Back"/>
+                    </AnimatedIcon.FallbackIconSource>
                 </AnimatedIcon>
             </AppBarButton>
             <MenuBar Grid.Column="1">
