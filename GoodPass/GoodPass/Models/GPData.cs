@@ -79,6 +79,7 @@ public class GPData
             var GPCS = new GoodPassCryptographicServices();
             DecPassword = newPassword;
             EncPassword = GPCS.encryptStr(newPassword);
+            LatestUpdateTime = DateTime.Now;
             return "Success";
         }
         else if (newPassword == DecPassword)
