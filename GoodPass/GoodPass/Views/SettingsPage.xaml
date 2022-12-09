@@ -18,7 +18,7 @@
             <RowDefinition Height="48" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="40" />
-            <RowDefinition Height="36" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="36" />
         </Grid.RowDefinitions>
 
@@ -82,16 +82,31 @@
         <HyperlinkButton x:Uid="GoToGithub_Button" Grid.Row="2" Margin="-12,8,0,0" VerticalContentAlignment="Center" >
             <RelativePanel>
                 <ImageIcon x:Name="GoToGithub_Button_Icon" Source="/Assets/GitHub-Mark-64px.png" Height="20" x:FieldModifier="public"/>
-                <TextBlock Text="View GitHub Repository" RelativePanel.RightOf="GoToGithub_Button_Icon" Margin="8,0,0,0" />
+                <TextBlock x:Uid="GoToGithub_Button_Text" RelativePanel.RightOf="GoToGithub_Button_Icon" Margin="8,0,0,0" />
             </RelativePanel>
         </HyperlinkButton>
 
         <StackPanel x:Name="Settings_Agreements" Orientation="Horizontal" Grid.Row="3">
-            <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+            <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" Height="36">
+                <RelativePanel>
+                    <FontIcon x:Name="SettingsPage_PrivacyTermsLink_Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xe729;"/>
+                    <TextBlock x:Uid="SettingsPage_PrivacyTermsLink_Text" RelativePanel.RightOf="SettingsPage_PrivacyTermsLink_Icon" Margin="8,0,0,0" />
+                </RelativePanel>
+            </HyperlinkButton>
 
-            <HyperlinkButton x:Uid="SettingsPage_UserAgreementLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+            <HyperlinkButton x:Uid="SettingsPage_UserAgreementLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" Height="36">
+                <RelativePanel>
+                    <FontIcon x:Name="SettingsPage_UserAgreementLink_Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xe7c3;"/>
+                    <TextBlock x:Uid="SettingsPage_UserAgreementLink_Text" RelativePanel.RightOf="SettingsPage_UserAgreementLink_Icon" Margin="8,0,0,0" />
+                </RelativePanel>
+            </HyperlinkButton>
 
-            <HyperlinkButton x:Uid="SettingsPage_OpenSourceLicense" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+            <HyperlinkButton x:Uid="SettingsPage_OpenSourceLicense" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" Height="36">
+                <RelativePanel>
+                    <FontIcon x:Name="SettingsPage_OpenSourceLicense_Icon" FontFamily="Segoe Fluent Icons" Glyph="&#xeb95;"/>
+                    <TextBlock x:Uid="SettingsPage_OpenSourceLicense_Text" RelativePanel.RightOf="SettingsPage_OpenSourceLicense_Icon" Margin="8,0,0,0" />
+                </RelativePanel>
+            </HyperlinkButton>
         </StackPanel>
         
         <StackPanel Grid.Row="3">

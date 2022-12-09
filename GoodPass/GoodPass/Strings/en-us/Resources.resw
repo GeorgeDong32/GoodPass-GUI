@@ -192,23 +192,26 @@
   <data name="ShellMenuItem_File_Lock.Text" xml:space="preserve">
     <value>锁定</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>隐私声明</value>
-  </data>
-  <data name="SettingsPage_UserAgreementLink.Content" xml:space="preserve">
-    <value>用户协议</value>
-  </data>
   <data name="Settings_Title.Text" xml:space="preserve">
     <value>设置</value>
     <comment>Page title for SettingsPage</comment>
-  </data>
-  <data name="SettingsPage_OpenSourceLicense.Content" xml:space="preserve">
-    <value>开源许可证</value>
   </data>
   <data name="SettingsPage_OpenSourceLicense.NavigateUri" xml:space="preserve">
     <value>https://github.com/GeorgeDong32/GoodPass/blob/main/LICENSE.md</value>
   </data>
   <data name="GoToGithub_Button.NavigateUri" xml:space="preserve">
     <value>https://github.com/GeorgeDong32/GoodPass</value>
+  </data>
+  <data name="GoToGithub_Button_Text.Text" xml:space="preserve">
+    <value>View GitHub Repository</value>
+  </data>
+  <data name="SettingsPage_OpenSourceLicense_Text.Text" xml:space="preserve">
+    <value>开源许可证</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink_Text.Text" xml:space="preserve">
+    <value>隐私声明</value>
+  </data>
+  <data name="SettingsPage_UserAgreementLink_Text.Text" xml:space="preserve">
+    <value>用户协议</value>
   </data>
 </root>
