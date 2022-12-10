@@ -20,7 +20,7 @@ public class GPData
         get; set;
     }
 
-    private string EncPassword
+    public string EncPassword
     {
         get; set;
     }
@@ -56,29 +56,30 @@ public class GPData
         LatestUpdateTime = latestUpdateTime;
     }
 
-    public void selfUpdate() //预留接口
+    public void SelfUpdate() //预留接口
     {
         /*Todo:添加数据自升级的相应代码*/
         LatestUpdateTime = DateTime.Now;
     }
 
-    public bool dataDecrypt()
+    public bool DataDecrypt()
     {
         var GPCS = new GoodPassCryptographicServices();
-        DecPassword = GPCS.decryptStr(EncPassword);
+        DecPassword = GPCS.DecryptStr(EncPassword);
         return true;
     }
 
-    public string getPassword() => DecPassword;
+    public string GetPassword() => DecPassword;
 
-    public string changePassword(string newPassword)
+    public string ChangePassword(string newPassword)
     {
-        dataDecrypt();
-        if (newPassword != DecPassword && newPassword != String.Empty && newPassword != null)
+        DataDecrypt();
+        if (newPassword != DecPassword && newPassword != string.Empty && newPassword != null)
         {
             var GPCS = new GoodPassCryptographicServices();
             DecPassword = newPassword;
-            EncPassword = GPCS.encryptStr(newPassword);
+            EncPassword = GPCS.EncryptStr(newPassword);
+            LatestUpdateTime = DateTime.Now;
             return "Success";
         }
         else if (newPassword == DecPassword)
