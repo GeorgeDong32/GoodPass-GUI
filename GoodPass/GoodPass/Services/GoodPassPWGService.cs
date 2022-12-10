@@ -2,7 +2,7 @@
 
 public class GoodPassPWGService //密码生成服务(随机密码+指定格式密码)
 {
-    public string randomPasswordNormal(int length) //生成随机密码
+    public string RandomPasswordNormal(int length) //生成随机密码
     {
         var random = new Random();
         var password = "";
@@ -25,7 +25,7 @@ public class GoodPassPWGService //密码生成服务(随机密码+指定格式�
         return password;
     }
 
-    public string randomPasswordSpec(int length) //生成含特殊字符的随机密码
+    public string RandomPasswordSpec(int length) //生成含特殊字符的随机密码
     {
         var random = new Random();
         var password = "";
@@ -51,58 +51,56 @@ public class GoodPassPWGService //密码生成服务(随机密码+指定格式�
         return password;
     }
 
-    public string gpstylePassword(string platformName, string accountName) //生成GoodPass风格密码
+    public string GPstylePassword(string platformName, string accountName) //生成GoodPass风格密码
     {
-        var gpPassword = "";
         var random = new Random();
         //对平台名进行大小写处理
         var PNLength = platformName.Length;
-        var temp = 0; char upcaseTemp;
+        int temp; char upcaseTemp;
         var platn = platformName;
         if (PNLength <= 5)
         {
             temp = random.Next(0, PNLength);
-            //将gpPassword上temp位置的字母变为大写
-            upcaseTemp = gpPassword[temp];
+            //将platn上temp位置的字母变为大写
+            upcaseTemp = platn[temp];
             if ((int)upcaseTemp >= 97)
             {
                 upcaseTemp = (char)(upcaseTemp - 32);
             }
-            gpPassword = gpPassword.Remove(temp, 1);
-            gpPassword = gpPassword.Insert(temp, upcaseTemp.ToString());
+            platn = platn.Remove(temp, 1);
+            platn = platn.Insert(temp, upcaseTemp.ToString());
         }
         else
         {
             for (var i = 0; i < 2; i++)
             {
                 temp = random.Next(0, PNLength);
-                //将gpPassword上temp位置的字母变为大写
-                upcaseTemp = gpPassword[temp];
+                //将platn上temp位置的字母变为大写
+                upcaseTemp = platn[temp];
                 if ((int)upcaseTemp >= 97)
                 {
                     upcaseTemp = (char)(upcaseTemp - 32);
                 }
-                gpPassword = gpPassword.Remove(temp, 1);
-                gpPassword = gpPassword.Insert(temp, upcaseTemp.ToString());
+                platn = platn.Remove(temp, 1);
+                platn = platn.Insert(temp, upcaseTemp.ToString());
             }
         }
         //处理账号名
         var accn = "";
         if (accountName.StartsWith("@"))
         {
-            accn = accountName.Substring(0, 4);
+            accn = accountName[..4];
         }
         else
         {
             accn = "@";
-            accn += accountName.Substring(0, 3);
+            accn += accountName[..3];
         }
         //处理时间戳补强串
-        var timePatch = "";
         var time = DateTime.Now;
-        char timePatch1 = (char)(64 + time.Month + time.Day);
-        char timePatch2 = (char)(64 + time.Hour + time.Minute);
-        timePatch = timePatch1.ToString() + timePatch2.ToString();
+        var timePatch1 = (char)(64 + time.Month + time.Day);
+        var timePatch2 = (char)(64 + time.Hour + time.Minute);
+        var timePatch = timePatch1.ToString() + timePatch2.ToString();
         temp = random.Next(0, 2);
         switch (temp)
         {
@@ -114,7 +112,7 @@ public class GoodPassPWGService //密码生成服务(随机密码+指定格式�
                 break;
         }
         //整合
-        gpPassword = platn + accn + timePatch;
+        var gpPassword = platn + accn + timePatch;
         return gpPassword;
     }
 }
