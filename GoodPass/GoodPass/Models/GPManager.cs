@@ -90,8 +90,8 @@ public class GPManager
     {
         if (File.Exists(filePath))
         {
-            var dataLines =  File.ReadLines(filePath);
-            dataLines =  dataLines.Skip(1); //跳过文件头
+            var dataLines = File.ReadLines(filePath);
+            dataLines = dataLines.Skip(1); //跳过文件头
             foreach (var line in dataLines)
             {
                 var data = line.Split(',');
