@@ -30,6 +30,8 @@ public class GoodPassCryptographicServices
 
     public string DecryptStr(string input)
     {
+        //确保CryptBase已经赋值
+        CryptBase = App.MKBase;
         if (input == null || input == string.Empty)
         {
             throw new ArgumentNullException("DecryptStr: input is null or empty");
@@ -94,6 +96,8 @@ public class GoodPassCryptographicServices
 
     public string EncryptStr(string input)//Todo：测试char-int是否按要求转换
     {
+        //确保CryptBase已经赋值
+        CryptBase = App.MKBase;
         //找数字位置
         var Strlength = input.Length;
         var npCount = 1;
