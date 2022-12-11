@@ -36,7 +36,7 @@ public class GoodPassCryptographicServices
         }
         var decStr = "";
         //找数字位置
-        NumPos[0] = (int)input[0];
+        NumPos[0] = (int)input[0] - 'A';
         for (var i = 1; i <= NumPos[0]; i++)
         {
             switch (i % 2)
@@ -50,8 +50,10 @@ public class GoodPassCryptographicServices
             }
         }
         //找特殊字符位置
-        var reinput = input.Reverse().ToString();
-        SpecPos[0] = (int)reinput[0] - 65;
+        var retemp = input.ToCharArray();
+        Array.Reverse(retemp);
+        var reinput = new string(retemp);
+        SpecPos[0] = (int)reinput[0] - 'A';
         for (var i = 1; i <= SpecPos[0]; i++)
         {
             SpecPos[i] = (int)reinput[i] - 65;
@@ -142,7 +144,7 @@ public class GoodPassCryptographicServices
         }
         //生成指示串头
         var head = "";
-        head += (char)NumPos[0];
+        head += (char)(NumPos[0] + 'A');
         for (var i = 1; i <= NumPos[0]; i++)
         {
             switch (i % 2)
