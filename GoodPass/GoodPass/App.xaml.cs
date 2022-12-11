@@ -37,6 +37,9 @@ public partial class App : Application
     public static GPManager DataManager;
     /*End 数据成员*/
 
+    /*公用方法类成员*/
+    public static GoodPassCryptographicServices? PublicGPCS;
+
     /*App状态区*/
     private static bool LockConsition
     {
@@ -89,6 +92,7 @@ public partial class App : Application
             services.AddSingleton<GoodPassSHAServices>();
             services.AddSingleton<GoodPassCryptographicServices>();
             services.AddSingleton<GoodPassPWGService>();
+            services.AddSingleton<GoodPassDataService>();
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
@@ -112,6 +116,8 @@ public partial class App : Application
         Build();
 
         DataManager = new GPManager();
+
+        PublicGPCS = new GoodPassCryptographicServices();
 
         App.GetService<IAppNotificationService>().Initialize();
 
