@@ -33,6 +33,10 @@ public partial class App : Application
     public static int[]? MKBase;
     /*End MasterKey加密数组*/
 
+    /*数据成员*/
+    public static GPManager DataManager;
+    /*End 数据成员*/
+
     /*App状态区*/
     private static bool LockConsition
     {
@@ -106,6 +110,8 @@ public partial class App : Application
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
         Build();
+
+        DataManager = new GPManager();
 
         App.GetService<IAppNotificationService>().Initialize();
 

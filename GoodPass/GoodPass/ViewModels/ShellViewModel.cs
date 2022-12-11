@@ -71,15 +71,26 @@ public class ShellViewModel : ObservableRecipient
 
     private void OnMenuFileExit()
     {
-        //ToDo:添加退出程序前文件保护和数据加密机制
+        //保存文件
+        var dataPath = Path.Combine($"C:\\Users\\{Environment.UserName}\\AppData\\Local", "GoodPass", "GoodPassData.csv");
+        App.DataManager.SaveToFile(dataPath);
+        //锁定并离开
         OnMenuFileLock();
         Application.Current.Exit();
     }
 
     private void OnMenuSettings()
     {
-        App.GoInSettingsPage();
-        NavigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+        if (App.IsInSettingsPage())
+        {
+            App.LeftSettingsPage();
+            GoBack();
+        }
+        else
+        {
+            App.GoInSettingsPage();
+            NavigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
+        }
     }
 
     private void OnMenuViewsListDetails() => NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
@@ -88,7 +99,10 @@ public class ShellViewModel : ObservableRecipient
 
     private void OnMenuFileLock()
     {
-        //ToDo:添加文件保存等锁定数据防护操作
+        //保存到文件
+        var dataPath = Path.Combine($"C:\\Users\\{Environment.UserName}\\AppData\\Local", "GoodPass", "GoodPassData.csv");
+        App.DataManager.SaveToFile(dataPath);
+        //锁定
         App.App_Lock();
         App.LeftSettingsPage();
         NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
@@ -100,7 +114,7 @@ public class ShellViewModel : ObservableRecipient
         {
             NavigationService.GoBack();
         }
-        else if (App.IsInSettingsPage() == true)
+        else if (App.IsInSettingsPage())
         {
             App.LeftSettingsPage();
             NavigationService.GoBack();

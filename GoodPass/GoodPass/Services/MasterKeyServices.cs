@@ -138,11 +138,25 @@ public class MasterKeyService : IMaterKeyService
             var key = InputKey[i];
             if (key >= 'a' && key <= 'z')
             {
-                App.MKBase[i] = key - 'a';
+                var temp = key - 'a';
+                while (temp >= 10)
+                {
+                    App.MKBase[i] = temp / 10;
+                    i++;
+                    temp %= 10;
+                }
+                App.MKBase[i] = temp;
             }
             else if (key >= 'A' && key <= 'Z')
             {
-                App.MKBase[i] = key - 'A';
+                var temp = key - 'A';
+                while (temp >= 10)
+                {
+                    App.MKBase[i] = temp / 10;
+                    i++;
+                    temp %= 10;
+                }
+                App.MKBase[i] = temp;
             }
             else if (key >= '0' && key <= '9')
             {
@@ -151,6 +165,10 @@ public class MasterKeyService : IMaterKeyService
             else
             {
                 App.MKBase[i] = App.EncryptBase[i];
+            }
+            if (i >= 40)//防止溢出
+            {
+                break;
             }
         }
     }
