@@ -3,15 +3,17 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using GoodPass.Contracts.ViewModels;
-using GoodPass.Core.Contracts.Services;
-using GoodPass.Core.Models;
+using GoodPass.Models;
+using GoodPass.Services;
 
 namespace GoodPass.ViewModels;
 
 public class ListDetailsViewModel : ObservableRecipient, INavigationAware
 {
+    /*原始代码
     private readonly ISampleDataService _sampleDataService;
     private SampleOrder? _selected;
+
 
     public SampleOrder? Selected
     {
@@ -37,11 +39,7 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
         {
             SampleItems.Add(item);
         }
-    }
-
-    public void OnNavigatedFrom()
-    {
-    }
+    }  
 
     public void EnsureItemSelected()
     {
@@ -50,4 +48,46 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
             Selected = SampleItems.First();
         }
     }
+    /*End 原始代码*/
+
+    public void OnNavigatedFrom()
+    {
+    }
+
+    /*待部署代码*/
+    private readonly GoodPassDataService _dataService;
+    private GPData? _selectedData;
+    public ObservableCollection<GPData> DataItems { get; private set; } = new ObservableCollection<GPData>();
+
+    public ListDetailsViewModel(GoodPassDataService goodPassDataService)
+    {
+        _dataService = goodPassDataService;
+    }
+
+    public async void OnNavigatedTo(object parameter)
+    {
+        DataItems.Clear();
+
+        var datas = await _dataService.GetListDetailsDataAsync();
+
+        foreach (var data in datas)
+        {
+            DataItems.Add(data);
+        }
+    }
+
+    public GPData? SlectedData
+    {
+        get => _selectedData;
+        set => SetProperty(ref _selectedData, value);
+    }
+
+    public void EnsureItemSelected()
+    {
+        if (SlectedData == null)
+        {
+            SlectedData = DataItems.First();
+        }
+    }
+    /*End 待部署代码*/
 }
