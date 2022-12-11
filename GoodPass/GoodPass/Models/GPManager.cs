@@ -131,4 +131,9 @@ public class GPManager
             return true;
         }
     }
+
+    public IEnumerable<GPData> GetAllDatas()
+    {
+        return GPDatas;
+    }
 }
