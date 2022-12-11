@@ -9,8 +9,9 @@ public class GoodPassDataService
     private static IEnumerable<GPData> AllDatas()
     {
         var manager = App.DataManager;
+        manager.DecryptAllDatas();
         var datas = manager.GetAllDatas();
-        if (datas != null)
+        if (datas != null && datas.Count() != 0)
         {
             return datas;
         }
@@ -18,8 +19,9 @@ public class GoodPassDataService
         {
             datas = new List<GPData>()
             {
-                new GPData("Sample", "https://github.com/GeorgeDong32/GoodPass", "SampleAccount", App.PublicGPCS.DecryptStr("SamplePassword"), DateTime.Now)
+                new GPData("Sample", "https://github.com/GeorgeDong32/GoodPass", "SampleAccount", App.PublicGPCS.EncryptStr("SamplePassword"), DateTime.Now)
             };
+            datas.First().DataDecrypt();
             return datas;
         }
     }

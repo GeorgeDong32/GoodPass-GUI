@@ -136,4 +136,12 @@ public class GPManager
     {
         return GPDatas;
     }
+
+    public void DecryptAllDatas()
+    {
+        foreach (var data in GPDatas)
+        {
+            data.DataDecrypt();
+        }
+    }
 }
