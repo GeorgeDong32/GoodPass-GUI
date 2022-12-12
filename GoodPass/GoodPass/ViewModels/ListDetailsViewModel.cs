@@ -10,51 +10,10 @@ namespace GoodPass.ViewModels;
 
 public class ListDetailsViewModel : ObservableRecipient, INavigationAware
 {
-    /*原始代码
-    private readonly ISampleDataService _sampleDataService;
-    private SampleOrder? _selected;
-
-
-    public SampleOrder? Selected
-    {
-        get => _selected;
-        set => SetProperty(ref _selected, value);
-    }
-
-    public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
-
-    public ListDetailsViewModel(ISampleDataService sampleDataService)
-    {
-        _sampleDataService = sampleDataService;
-    }
-
-    public async void OnNavigatedTo(object parameter)
-    {
-        SampleItems.Clear();
-
-        // TODO: Replace with real data.
-        var data = await _sampleDataService.GetListDetailsDataAsync();
-
-        foreach (var item in data)
-        {
-            SampleItems.Add(item);
-        }
-    }  
-
-    public void EnsureItemSelected()
-    {
-        if (Selected == null)
-        {
-            Selected = SampleItems.First();
-        }
-    }
-    /*End 原始代码*/
-
     public void OnNavigatedFrom()
     {
     }
 
-    /*待部署代码*/
     private readonly GoodPassDataService _dataService;
     private GPData? _selectedData;
     public ObservableCollection<GPData> DataItems { get; private set; } = new ObservableCollection<GPData>();
@@ -74,6 +33,7 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
         {
             DataItems.Add(data);
         }
+        EnsureItemSelected();
     }
 
     public GPData? SlectedData
@@ -89,5 +49,4 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
             SlectedData = DataItems.First();
         }
     }
-    /*End 待部署代码*/
 }
