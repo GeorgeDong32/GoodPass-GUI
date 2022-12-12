@@ -19,7 +19,7 @@ public class GoodPassDataService
         {
             datas = new List<GPData>()
             {
-                new GPData("Sample", "https://github.com/GeorgeDong32/GoodPass", "SampleAccount", App.PublicGPCS.EncryptStr("SamplePassword"), DateTime.Now)
+                new GPData("Sample", "https://github.com/GeorgeDong32/GoodPass", "SampleAccount", App.GetService<GoodPassCryptographicServices>().EncryptStr("SamplePassword"), DateTime.Now)
             };
             datas.First().DataDecrypt();
             return datas;

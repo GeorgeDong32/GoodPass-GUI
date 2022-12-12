@@ -37,9 +37,6 @@ public partial class App : Application
     public static GPManager DataManager;
     /*End 数据成员*/
 
-    /*公用方法类成员*/
-    public static GoodPassCryptographicServices? PublicGPCS;
-
     /*App状态区*/
     private static bool LockConsition
     {
@@ -115,9 +112,7 @@ public partial class App : Application
         }).
         Build();
 
-        DataManager = new GPManager();
-
-        PublicGPCS = new GoodPassCryptographicServices();
+        /*禁止在类中初始化static成员*/
 
         App.GetService<IAppNotificationService>().Initialize();
 
