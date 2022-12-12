@@ -73,6 +73,7 @@ public sealed partial class MainPage : Page
     {
         var passwordInput = Login_PssswordBox.Password;
         var MKCheck_Result = await MKS.CheckMasterKeyAsync(passwordInput);
+        App.DataManager = new Models.GPManager();
         //添加解锁逻辑
         if (MKCheck_Result == "pass")
         {
