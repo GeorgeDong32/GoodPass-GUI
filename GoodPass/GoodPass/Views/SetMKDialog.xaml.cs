@@ -8,10 +8,7 @@ namespace GoodPass.Views;
 
 public sealed partial class SetMKDialog : ContentDialog
 {
-    public bool _isComplete
-    {
-        get; set;
-    }
+    
     private bool _isSecure
     {
         get; set;
@@ -19,7 +16,7 @@ public sealed partial class SetMKDialog : ContentDialog
 
     public SetMKDialog()
     {
-        _isComplete = false; _isSecure = false;
+        _isSecure = false;
         this.InitializeComponent();
         IsPrimaryButtonEnabled = false;
         SetMKDialog_PB2Status.Foreground = new SolidColorBrush(Color.FromArgb(200, 255, 0, 0));
@@ -29,7 +26,7 @@ public sealed partial class SetMKDialog : ContentDialog
     /*To Do: 设置密码相关逻辑代码*/
     private void RevealModeCheckbox_Changed1(object sender, RoutedEventArgs e)
     {
-        if (SetMKDialog_PB1CheckBox.IsChecked == true)
+        if (SetMKDialog_PB1RevealBtn.IsChecked == true)
         {
             SetMKDialog_PssswordBox1.PasswordRevealMode = PasswordRevealMode.Visible;
         }
@@ -41,7 +38,7 @@ public sealed partial class SetMKDialog : ContentDialog
 
     private void RevealModeCheckbox_Changed2(object sender, RoutedEventArgs e)
     {
-        if (SetMKDialog_PB2CheckBox.IsChecked == true)
+        if (SetMKDialog_PB2RevealBtn.IsChecked == true)
         {
             SetMKDialog_PssswordBox2.PasswordRevealMode = PasswordRevealMode.Visible;
         }
