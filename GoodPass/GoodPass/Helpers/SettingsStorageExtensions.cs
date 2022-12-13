@@ -1,4 +1,4 @@
-﻿using GoodPass.Core.Helpers;
+﻿using GoodPass.Helpers;
 
 using Windows.Storage;
 using Windows.Storage.Streams;
