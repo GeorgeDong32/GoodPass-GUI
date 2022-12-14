@@ -42,15 +42,15 @@ jobs:
     - name: Build
       run: msbuild $env:Solution_Name /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}
       
-  prlabeler:
-      permissions:
-        contents: read
-        pull-requests: write
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/labeler@v4
-          with:
-            repo-token: "${{ secrets.AM_TOKEN }}"
+#   prlabeler:
+#       permissions:
+#         contents: read
+#         pull-requests: write
+#       runs-on: ubuntu-latest
+#       steps:
+#         - uses: actions/labeler@v4
+#           with:
+#             repo-token: "${{ secrets.AM_TOKEN }}"
 
     # - name: Test
     #   run: '& "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" ${env:Test_Project_Name}\bin\${{ matrix.platform }}\${{ matrix.configuration }}\**\${env:Test_Project_Name}.dll'
