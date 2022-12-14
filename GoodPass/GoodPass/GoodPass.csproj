@@ -22,7 +22,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>07925DD98A5C4DAD681941400F0DC122B0C157AB</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>1E6E72D37C25BAA2B2E3A386421C1E5249E17883</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Converters\**" />
