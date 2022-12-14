@@ -51,9 +51,6 @@
 	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
-	<!--ItemGroup>
-    <ProjectReference Include="..\GoodPass.Core\GoodPass.Core.csproj" />
-  </ItemGroup-->
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -12,7 +12,6 @@
     >
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Spacing="2">
-        <!-- To Do: 添加设置密码界面 -->
         <TextBlock x:Name="SetMKDialog_TB1" Width="400" 
                            Text="设置密码"
                            TextAlignment="Left" 
