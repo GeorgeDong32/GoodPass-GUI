@@ -1,10 +1,11 @@
 # GoodPass-v3
+[![Template Studio for WinUI Build](https://github.com/GeorgeDong32/GoodPass-v3/actions/workflows/WinUI-Template-Build.yml/badge.svg)](https://github.com/GeorgeDong32/GoodPass-v3/actions/workflows/WinUI-Template-Build.yml)
 <h1 align="center">
   <img src="https://github.com/GeorgeDong32/GoodPass/blob/resource/Title%20Photo/GoodPass3.0_Developer.png" alt="GoodPass" width="400">
 </h1>
 
 > Developed by GeorgeDong32 
-> 
+>
 > Copyright (c) GeorgeDong32(Github). All rights reserved.
 
 <h3>
