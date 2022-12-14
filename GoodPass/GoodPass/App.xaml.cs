@@ -1,11 +1,10 @@
 ﻿using GoodPass.Activation;
 using GoodPass.Contracts.Services;
-using GoodPass.Services;
 using GoodPass.Models;
 using GoodPass.Notifications;
+using GoodPass.Services;
 using GoodPass.ViewModels;
 using GoodPass.Views;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
