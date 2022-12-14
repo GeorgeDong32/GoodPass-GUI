@@ -1,6 +1,4 @@
-﻿using GoodPass.Helpers;
-
-using Windows.Storage;
+﻿using Windows.Storage;
 using Windows.Storage.Streams;
 
 namespace GoodPass.Helpers;

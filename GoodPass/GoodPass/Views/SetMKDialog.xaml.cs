@@ -8,7 +8,7 @@ namespace GoodPass.Views;
 
 public sealed partial class SetMKDialog : ContentDialog
 {
-    
+
     private bool _isSecure
     {
         get; set;
