@@ -46,7 +46,7 @@ jobs:
     - name: Decode the pfx
       run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
-        $certificatePath = Join-Path -Path $env:ProjectName -ChildPath GitHubActionsWorkflow.pfx
+        $certificatePath = Join-Path -Path $env:Project_Name -ChildPath GitHubActionsWorkflow.pfx
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
