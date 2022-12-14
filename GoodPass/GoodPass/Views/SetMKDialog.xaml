@@ -19,7 +19,7 @@
 
         <RelativePanel x:Name="SetMKDialog_PBPanel1" Height="64" Margin="0,0,0,4" VerticalAlignment="Center"><!--Margin:左上右下-->
             <PasswordBox x:Name="SetMKDialog_PssswordBox1" Width="250" Height="36" Margin="0,0,8,0"
-                             PlaceholderText="请输入8-40位的主密码" PasswordRevealMode="Hidden" PasswordChanged="SetMKDialog_PssswordBox1_PasswordChanged">
+                         PlaceholderText="请输入8-40位的主密码" PasswordRevealMode="Hidden" PasswordChanged="SetMKDialog_PssswordBox1_PasswordChanged">
             </PasswordBox>
             <TextBlock x:Name="SetMKDialog_PB1Status" Margin="2" Height="20" HorizontalAlignment="Center" Foreground="Red" RelativePanel.Below="SetMKDialog_PssswordBox1"/>
             <ToggleButton Name="SetMKDialog_PB1RevealBtn" Height="28" RelativePanel.RightOf="SetMKDialog_PssswordBox1" 
