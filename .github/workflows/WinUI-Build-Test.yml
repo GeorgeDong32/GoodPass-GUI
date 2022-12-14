@@ -40,7 +40,9 @@ jobs:
       run: dotnet restore $env:Solution_Name
   
     - name: Build
-      run: msbuild $env:Solution_Name /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}
+      run: msbuild $env:Solution_Name /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /p:AppxPackageDir=C:\Package\x64
+      env:
+        BuildMode: SideloadOnly
       
 #   prlabeler:
 #       permissions:
