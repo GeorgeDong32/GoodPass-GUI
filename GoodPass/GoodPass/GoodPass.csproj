@@ -48,11 +48,12 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.3" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
     <PackageReference Include="WinUIEx" Version="1.8.0" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
+	<!--ItemGroup>
     <ProjectReference Include="..\GoodPass.Core\GoodPass.Core.csproj" />
-  </ItemGroup>
+  </ItemGroup-->
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
