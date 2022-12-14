@@ -64,11 +64,11 @@ public sealed partial class ListDetailsDetailControl : UserControl
 
     private void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
     {
-
+        //Todo：添加编辑模式代码
     }
 
     private void ListDetailsDetailControl_DeleteButton_Click(object sender, RoutedEventArgs e)
     {
-
+        //Todo：添加删除模式代码
     }
 }
