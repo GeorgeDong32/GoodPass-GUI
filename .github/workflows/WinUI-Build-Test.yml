@@ -20,6 +20,7 @@ jobs:
     env:
       Solution_Name: GoodPass
       Project_Name: GoodPass
+      ProjectDir: GoodPass
       # Test_Project_Name: App1.Tests.MSTest
 
     steps:
