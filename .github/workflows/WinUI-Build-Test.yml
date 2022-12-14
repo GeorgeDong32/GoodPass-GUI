@@ -43,6 +43,13 @@ jobs:
       run: msbuild $env:Solution_Name /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /p:AppxPackageDir=C:\Package\x64
       env:
         BuildMode: SideloadOnly
+        
+    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: MSIX Package
+        path: GoodPass-v3/Packages/**/GoodPass*.msix
       
 #   prlabeler:
 #       permissions:
