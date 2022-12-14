@@ -18,7 +18,7 @@ jobs:
 
     # TODO: Update environment variables.
     env:
-      Solution_Name: GoodPass.sln
+      Solution_Name: GoodPass
       Project_Name: GoodPass
       # Test_Project_Name: App1.Tests.MSTest
 
