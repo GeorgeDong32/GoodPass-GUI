@@ -42,15 +42,44 @@ jobs:
     - name: Build
       run: msbuild $env:Solution_Name /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}
       
-  prlabeler:
-      permissions:
-        contents: read
-        pull-requests: write
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/labeler@v4
-          with:
-            repo-token: "${{ secrets.AM_TOKEN }}"
+    # Decode the base 64 encoded pfx and save the Signing_Certificate
+    - name: Decode the pfx
+      run: |
+        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
+        $certificatePath = Join-Path -Path $env:ProjectDir -ChildPath GitHubActionsWorkflow.pfx
+        [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+        
+    # Create the app package by building and packaging the Windows Application Packaging project
+    - name: Create the app package
+      run: msbuild $env:Solution_Name /p:AppxBundlePlatforms="$env:Appx_Bundle_Platforms" /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GoodPass_TemporaryKey.pfx /p:AppxPackageDir="$env:Appx_Package_Dir" /p:GenerateAppxPackageOnBuild=true
+      # run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+      env:
+        Appx_Bundle: Never
+        Appx_Bundle_Platforms: x64
+        Appx_Package_Build_Mode: SideloadOnly
+        Appx_Package_Dir: Packages\
+        Configuration: ${{ matrix.configuration }}
+
+    # Remove the pfx
+    # - name: Remove the pfx
+    #  run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
+
+    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: MSIX Package
+        path: GoodPass-v3/Packages/**/GoodPass*.msix
+        
+#   prlabeler:
+#       permissions:
+#         contents: read
+#         pull-requests: write
+#       runs-on: ubuntu-latest
+#       steps:
+#         - uses: actions/labeler@v4
+#           with:
+#             repo-token: "${{ secrets.AM_TOKEN }}"
 
     # - name: Test
     #   run: '& "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" ${env:Test_Project_Name}\bin\${{ matrix.platform }}\${{ matrix.configuration }}\**\${env:Test_Project_Name}.dll'
