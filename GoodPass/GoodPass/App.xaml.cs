@@ -33,6 +33,10 @@ public partial class App : Application
     public static int[]? MKBase;
     /*End MasterKey加密数组*/
 
+    /*数据成员*/
+    public static GPManager DataManager;
+    /*End 数据成员*/
+
     /*App状态区*/
     private static bool LockConsition
     {
@@ -84,6 +88,8 @@ public partial class App : Application
             services.AddSingleton<MasterKeyService>();
             services.AddSingleton<GoodPassSHAServices>();
             services.AddSingleton<GoodPassCryptographicServices>();
+            services.AddSingleton<GoodPassPWGService>();
+            services.AddSingleton<GoodPassDataService>();
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
@@ -105,6 +111,8 @@ public partial class App : Application
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
         Build();
+
+        /*禁止在类中初始化static成员*/
 
         App.GetService<IAppNotificationService>().Initialize();
 
