@@ -1,4 +1,4 @@
-name: WinUI Build Test
+name: WinUI-Debug-Build
 # Only for build test
 
 on:
