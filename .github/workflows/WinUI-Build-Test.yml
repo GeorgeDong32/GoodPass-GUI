@@ -9,11 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        configuration: [Debug, Release]
-        platform: [x64]
+  Debug-x64:
 
     runs-on: windows-latest
 
@@ -21,6 +17,8 @@ jobs:
     env:
       Solution_Name: GoodPass
       Project_Name: GoodPass
+      configuration: Debug
+      platform: x64
 
     steps:
     - name: Checkout
@@ -40,7 +38,7 @@ jobs:
       run: dotnet restore $env:Solution_Name
   
     - name: Build
-      run: msbuild $env:Solution_Name /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /p:AppxPackageDir=C:\Package\x64
+      run: msbuild $env:Solution_Name /p:Configuration=${{ env:configuration }} /p:Platform=${{ env:platform }} /p:AppxPackageDir=C:\Package\x64
       env:
         BuildMode: SideloadOnly
 
