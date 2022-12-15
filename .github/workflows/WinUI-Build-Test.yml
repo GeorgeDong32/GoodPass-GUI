@@ -1,4 +1,5 @@
 name: WinUI Build Test
+# Only for build test
 
 on:
 #   push:
@@ -11,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        configuration: [Debug]
+        configuration: [Debug, Release]
         platform: [x64]
 
     runs-on: windows-latest
@@ -42,39 +43,6 @@ jobs:
       run: msbuild $env:Solution_Name /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /p:AppxPackageDir=C:\Package\x64
       env:
         BuildMode: SideloadOnly
-        
-    - name: Decode the pfx
-      run: |
-        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
-        $certificatePath = Join-Path -Path $env:Project_Name -ChildPath GitHubActionsWorkflow.pfx
-        [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
-    
-    # Create the app package by building and packaging the Windows Application Packaging project
-    - name: Create the app package
-      run: msbuild $env:Solution_Name /p:AppxBundlePlatforms="$env:Appx_Bundle_Platforms" /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GoodPass_TemporaryKey.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }} /p:AppxPackageDir="$env:Appx_Package_Dir" /p:GenerateAppxPackageOnBuild=true
-      env:
-        Appx_Bundle: Never
-        Appx_Bundle_Platforms: x64
-        Appx_Package_Build_Mode: SideloadOnly
-        Appx_Package_Dir: Packages\
-        Configuration: ${{ matrix.configuration }}
-        
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: MSIX Package
-        path: GoodPass-v3/Packages/**/GoodPass*.msix
-      
-#   prlabeler:
-#       permissions:
-#         contents: read
-#         pull-requests: write
-#       runs-on: ubuntu-latest
-#       steps:
-#         - uses: actions/labeler@v4
-#           with:
-#             repo-token: "${{ secrets.AM_TOKEN }}"
 
     # - name: Test
     #   run: '& "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" ${env:Test_Project_Name}\bin\${{ matrix.platform }}\${{ matrix.configuration }}\**\${env:Test_Project_Name}.dll'
