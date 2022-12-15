@@ -1,13 +1,10 @@
 ﻿using GoodPass.Activation;
 using GoodPass.Contracts.Services;
-using GoodPass.Core.Contracts.Services;
-using GoodPass.Core.Services;
 using GoodPass.Models;
 using GoodPass.Notifications;
 using GoodPass.Services;
 using GoodPass.ViewModels;
 using GoodPass.Views;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -90,8 +87,6 @@ public partial class App : Application
             services.AddSingleton<GoodPassCryptographicServices>();
             services.AddSingleton<GoodPassPWGService>();
             services.AddSingleton<GoodPassDataService>();
-
-            // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IFileService, FileService>();
 

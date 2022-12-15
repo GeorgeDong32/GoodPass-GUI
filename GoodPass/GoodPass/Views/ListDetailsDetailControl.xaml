@@ -50,7 +50,7 @@
                         AutomationProperties.Name="ListDetailsDetailControl_AcconutNameCopyButton"
                         Width="40"
                         Height="31.5">
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C8;" FontSize="16"/>
+                        <FontIcon x:Name="ListDetailsDetailControl_AcconutNameCopyButtonIcon" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C8;" FontSize="16"/>
                     </Button>
 
                     <TeachingTip 
