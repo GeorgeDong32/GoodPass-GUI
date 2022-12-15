@@ -22,6 +22,7 @@ public class GoodPassDataService
                 new GPData("Sample", "https://github.com/GeorgeDong32/GoodPass", "SampleAccount", App.GetService<GoodPassCryptographicServices>().EncryptStr("SamplePassword"), DateTime.Now)
             };
             datas.First().DataDecrypt();
+            manager.AddData(datas.First());
             return datas;
         }
     }

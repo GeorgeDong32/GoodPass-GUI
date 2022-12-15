@@ -67,8 +67,21 @@ public sealed partial class ListDetailsDetailControl : UserControl
         //Todo：添加编辑模式代码
     }
 
-    private void ListDetailsDetailControl_DeleteButton_Click(object sender, RoutedEventArgs e)
+    private async void ListDetailsDetailControl_DeleteButton_Click(object sender, RoutedEventArgs e)
     {
-        //Todo：添加删除模式代码
+        //弹窗提示用户确认
+        var dialog = new GPDialog2();
+        dialog.XamlRoot = this.XamlRoot;
+        dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+        dialog.Title = "删除确认";
+        dialog.Content = "您确定要删除这组数据吗？";
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            var tarPlatform = ListDetailsMenuItem.PlatformName;
+            var tarAccountName = ListDetailsMenuItem.AccountName;
+            App.DataManager.DeleteData(tarPlatform, tarAccountName);
+            //Todo:刷新页面
+        }
     }
-}
+}  

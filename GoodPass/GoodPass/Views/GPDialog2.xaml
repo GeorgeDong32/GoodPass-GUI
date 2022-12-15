@@ -14,7 +14,7 @@
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <!-- Content body -->
-        <TextBlock Text="GoodPass Standard Dialog with two button" TextWrapping="Wrap" />
+        <TextBlock x:Name="Dialog2Text" TextWrapping="Wrap"/>
     </StackPanel>
 
 </ContentDialog>

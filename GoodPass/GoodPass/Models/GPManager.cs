@@ -1,4 +1,6 @@
-﻿namespace GoodPass.Models;
+﻿using System;
+
+namespace GoodPass.Models;
 
 public class GPManager
 {
@@ -13,7 +15,7 @@ public class GPManager
 
     public int[] FuzzySearch(string platformName) //预留接口（模糊搜索）
     {
-        var indexArray = new int[1];
+        var indexArray = new int[1] { -1 };
         var indexArrayCount = 0;
         foreach (var data in GPDatas)
         {
@@ -44,6 +46,10 @@ public class GPManager
         var indexArray = FuzzySearch(platformName);
         foreach (var index in indexArray)
         {
+            if (index == -1)
+            {
+                break;
+            }
             if (GPDatas[index].AccountName == accountName)
             {
                 return false;
@@ -59,6 +65,10 @@ public class GPManager
         var indexArray = FuzzySearch(platformName);
         foreach (var index in indexArray)
         {
+            if (index == -1)
+            {
+                break;
+            }
             if (GPDatas[index].AccountName == accountName)
             {
                 return false;
@@ -66,6 +76,24 @@ public class GPManager
         }
         var datatemp = new GPData(platformName, platformUrl, accountName, encPassword, latestUpdateTime);
         GPDatas.Add(datatemp);
+        return true;
+    }
+
+    public bool AddData(GPData data)
+    {
+        var indexArray = FuzzySearch(data.PlatformName);
+        foreach (var index in indexArray)
+        {
+            if (index == -1)
+            {
+                break;
+            }
+            if (GPDatas[index].AccountName == data.AccountName)
+            {
+                return false;
+            }
+        }
+        GPDatas.Add(data);
         return true;
     }
 
