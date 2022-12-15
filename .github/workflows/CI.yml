@@ -10,7 +10,7 @@ on:
   check_suite:
     types:
       - completed
-  status: {}
+  status: { pass }
 jobs:
   automerge:
     runs-on: ubuntu-latest
