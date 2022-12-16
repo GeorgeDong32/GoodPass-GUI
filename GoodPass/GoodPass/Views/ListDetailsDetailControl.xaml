@@ -30,6 +30,7 @@
                     <TextBlock
                         x:Uid="ListDetailsDetailControl_AccountNameTitle"
                         x:Name="ListDetailsDetailControl_AccountNameTitle" 
+                        Text="Account Name" 
                         Style="{StaticResource DetailSubTitleStyle}" 
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"/>
 
@@ -55,7 +56,8 @@
                     <TeachingTip 
                         x:Name="CopiedTipforAcconutNameCopyButton"
                         x:Uid="CopiedTipforAcconutNameCopyButton"
-                        Target="{x:Bind ListDetailsDetailControl_AcconutNameCopyButton}">
+                        Target="{x:Bind ListDetailsDetailControl_AcconutNameCopyButton}"
+                        Title="AccountName has copied!">
                         <TeachingTip.IconSource>
                             <SymbolIconSource Symbol="Accept" />
                         </TeachingTip.IconSource>
@@ -66,6 +68,7 @@
                     <TextBlock
                         x:Name="ListDetailsDetailControl_PasswordTitle"
                         x:Uid="ListDetailsDetailControl_PasswordTitle"
+                        Text="Password"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"
                         Style="{StaticResource DetailSubTitleStyle}" />
 
@@ -93,7 +96,8 @@
                     <TeachingTip 
                         x:Name="CopiedTipforPasswordCopyButton"
                         x:Uid="CopiedTipforPasswordCopyButton"
-                        Target="{x:Bind ListDetailsDetailControl_PasswordCopyButton}">
+                        Target="{x:Bind ListDetailsDetailControl_PasswordCopyButton}"
+                        Title="Password has copied!">
                         <TeachingTip.IconSource>
                             <SymbolIconSource Symbol="Accept" />
                         </TeachingTip.IconSource>
@@ -115,6 +119,7 @@
                     <TextBlock
                         x:Name="ListDetailsDetailControl_PlatformUrlTitle"
                         x:Uid="ListDetailsDetailControl_PlatformUrlTitle"
+                        Text="Platfrom Url"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"
                         Style="{StaticResource DetailSubTitleStyle}" />
 
@@ -140,6 +145,7 @@
                     <TextBlock
                         x:Name="ListDetailsDetailControl_LastmodifiedTitle"
                         x:Uid="ListDetailsDetailControl_LastmodifiedTitle"
+                        Text="Last modified"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"                     
                         Style="{StaticResource DetailSubTitleStyle}" />
                     <TextBlock 
