@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GoodPass.Models;
+﻿namespace GoodPass.Models;
 
 public class GPManager
 {
