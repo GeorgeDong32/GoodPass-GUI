@@ -30,7 +30,6 @@
                     <TextBlock
                         x:Uid="ListDetailsDetailControl_AccountNameTitle"
                         x:Name="ListDetailsDetailControl_AccountNameTitle" 
-                        Text="Account Name" 
                         Style="{StaticResource DetailSubTitleStyle}" 
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"/>
 
@@ -56,8 +55,7 @@
                     <TeachingTip 
                         x:Name="CopiedTipforAcconutNameCopyButton"
                         x:Uid="CopiedTipforAcconutNameCopyButton"
-                        Target="{x:Bind ListDetailsDetailControl_AcconutNameCopyButton}"
-                        Title="AccountName has copied!">
+                        Target="{x:Bind ListDetailsDetailControl_AcconutNameCopyButton}">
                         <TeachingTip.IconSource>
                             <SymbolIconSource Symbol="Accept" />
                         </TeachingTip.IconSource>
@@ -69,7 +67,6 @@
                         x:Name="ListDetailsDetailControl_PasswordTitle"
                         x:Uid="ListDetailsDetailControl_PasswordTitle"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"
-                        Text="Password"
                         Style="{StaticResource DetailSubTitleStyle}" />
 
                     <PasswordBox 
@@ -96,8 +93,7 @@
                     <TeachingTip 
                         x:Name="CopiedTipforPasswordCopyButton"
                         x:Uid="CopiedTipforPasswordCopyButton"
-                        Target="{x:Bind ListDetailsDetailControl_PasswordCopyButton}"
-                        Title="Password has copied!">
+                        Target="{x:Bind ListDetailsDetailControl_PasswordCopyButton}">
                         <TeachingTip.IconSource>
                             <SymbolIconSource Symbol="Accept" />
                         </TeachingTip.IconSource>
@@ -120,7 +116,6 @@
                         x:Name="ListDetailsDetailControl_PlatformUrlTitle"
                         x:Uid="ListDetailsDetailControl_PlatformUrlTitle"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"
-                        Text="Platfrom Url"
                         Style="{StaticResource DetailSubTitleStyle}" />
 
                     <HyperlinkButton x:Name="ListDetailsDetailControl_PlatformUrlHyperLink" 
@@ -145,8 +140,7 @@
                     <TextBlock
                         x:Name="ListDetailsDetailControl_LastmodifiedTitle"
                         x:Uid="ListDetailsDetailControl_LastmodifiedTitle"
-                        Margin="{StaticResource ListDetailsDetailControlDetailMargin}"                    
-                        Text="Last modified"
+                        Margin="{StaticResource ListDetailsDetailControlDetailMargin}"                     
                         Style="{StaticResource DetailSubTitleStyle}" />
                     <TextBlock 
                         Text="{x:Bind ListDetailsMenuItem.LatestUpdateTime, Mode=OneWay}" 

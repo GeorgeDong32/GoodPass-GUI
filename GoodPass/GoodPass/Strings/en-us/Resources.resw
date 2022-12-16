@@ -214,4 +214,16 @@
   <data name="SettingsPage_UserAgreementLink_Text.Text" xml:space="preserve">
     <value>用户协议</value>
   </data>
+  <data name="ListDetailsDetailControl_AccountNameTitle.Txet" xml:space="preserve">
+    <value>账号</value>
+  </data>
+  <data name="ListDetailsDetailControl_LastmodifiedTitle.Text" xml:space="preserve">
+    <value>最后更改时间</value>
+  </data>
+  <data name="ListDetailsDetailControl_PasswordTitle.Text" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="ListDetailsDetailControl_PlatformUrlTitle.Text" xml:space="preserve">
+    <value>平台链接</value>
+  </data>
 </root>
