@@ -42,3 +42,8 @@ jobs:
 
     # - name: Test
     #   run: '& "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" ${env:Test_Project_Name}\bin\${{ matrix.platform }}\${{ matrix.configuration }}\**\${env:Test_Project_Name}.dll'
+  PR-Labeler:
+    uses: ./.github/workflows/PR-Labeler.yml
+    
+  AutoMerge:
+    uses: ./.github/workflows/CI.yml
