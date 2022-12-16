@@ -9,3 +9,4 @@ jobs:
       - uses: actions/labeler@v4
         with:
           repo-token: "${{ secrets.AM_TOKEN }}"
+          configuration-path: .github/labeler.yml
