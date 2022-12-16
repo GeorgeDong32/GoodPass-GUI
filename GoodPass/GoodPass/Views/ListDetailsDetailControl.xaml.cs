@@ -82,6 +82,10 @@ public sealed partial class ListDetailsDetailControl : UserControl
             var tarAccountName = ListDetailsMenuItem.AccountName;
             App.DataManager.DeleteData(tarPlatform, tarAccountName);
             //Todo:刷新页面
+            //可参考资料 https://blog.csdn.net/timewaitfornoone/article/details/104442371
+            //可参考资料 https://stackoverflow.com/questions/52710086/how-to-refresh-a-page-in-uwp
+            //Todo:访问父级资源
+            //可参考资料 https://stackoverflow.com/questions/52828684/how-to-get-parent-page-from-usercontrol-in-uwp
         }
     }
 }  

@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
+    <!--Todo:解决UserControl使用strings资源问题-->
     <ScrollViewer
         Name="ForegroundElement"
         HorizontalAlignment="Stretch"
