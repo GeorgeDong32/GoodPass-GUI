@@ -1,1 +1,15 @@
+name: CI-WinUI3
 
+on:
+  workflow_run:
+    workflows: [WinUI-Debug-Build]
+    types: [completed]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v4
+        with:
+          repo-token: "${{ secrets.AM_TOKEN }}"
+          configuration-path: .github/labeler.yml
