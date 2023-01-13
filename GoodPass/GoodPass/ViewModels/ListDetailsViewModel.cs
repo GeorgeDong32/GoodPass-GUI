@@ -49,4 +49,10 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
             SlectedData = DataItems.First();
         }
     }
+
+    public bool DeleteDataItem(GPData targetItem)
+    {
+
+        return DataItems.Remove(targetItem);
+    }
 }
