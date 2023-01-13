@@ -1,6 +1,7 @@
 automerge: 
 - '*'
 - 'GoodPass/**/*'
+- 'GoodPass/*'
 - '.github/**/*'
 - 'InstallTips/**/*'
 
@@ -11,3 +12,4 @@ documentation:
 
 code:
 - 'GoodPass/**/*'
+- 'GoodPass/*'
