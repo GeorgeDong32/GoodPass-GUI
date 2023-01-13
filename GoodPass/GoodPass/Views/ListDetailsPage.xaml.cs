@@ -26,4 +26,9 @@ public sealed partial class ListDetailsPage : Page
             ViewModel.EnsureItemSelected();
         }
     }
+
+    private void ListDetailsViewControl_DataContextChanged(Microsoft.UI.Xaml.FrameworkElement sender, Microsoft.UI.Xaml.DataContextChangedEventArgs args)
+    {
+
+    }
 }

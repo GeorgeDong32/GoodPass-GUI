@@ -1,5 +1,6 @@
 ﻿using GoodPass.Models;
 using GoodPass.ViewModels;
+using GoodPass.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
@@ -82,10 +83,21 @@ public sealed partial class ListDetailsDetailControl : UserControl
             var tarAccountName = ListDetailsMenuItem.AccountName;
             try
             {
-                App.DataManager.DeleteData(tarPlatform, tarAccountName);
                 ViewModel.DeleteDataItem(App.DataManager.GetData(tarPlatform, tarAccountName));
+                var delResult = App.DataManager.DeleteData(tarPlatform, tarAccountName);
+                if (delResult == false)
+                    throw new GPObjectNotFoundException("Data Not Found!");
             }
             catch (System.ArgumentOutOfRangeException)
+            {
+                var warningDialog = new GPDialog2();
+                warningDialog.XamlRoot = this.XamlRoot;
+                warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+                warningDialog.Title = "出错了！";
+                warningDialog.Content = "您试图删除一个不存在的对象";
+                warningDialog.ShowAsync();
+            }
+            catch (GPObjectNotFoundException)
             {
                 var warningDialog = new GPDialog2();
                 warningDialog.XamlRoot = this.XamlRoot;

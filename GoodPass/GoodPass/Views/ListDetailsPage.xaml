@@ -65,6 +65,7 @@
             BackButtonBehavior="Inline"
             Background="Transparent"
             BorderBrush="Transparent"
+            DataContextChanged="ListDetailsViewControl_DataContextChanged"
             DetailsTemplate="{StaticResource DetailsTemplate}"
             ItemTemplate="{StaticResource ItemTemplate}"
             ItemsSource="{x:Bind ViewModel.DataItems}"

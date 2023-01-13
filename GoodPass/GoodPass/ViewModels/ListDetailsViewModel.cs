@@ -52,7 +52,6 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
 
     public bool DeleteDataItem(GPData targetItem)
     {
-
         return DataItems.Remove(targetItem);
     }
 }
