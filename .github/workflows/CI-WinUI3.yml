@@ -9,7 +9,17 @@ jobs:
   on-success:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/labeler@v4
-        with:
-          repo-token: "${{ secrets.AM_TOKEN }}"
-          configuration-path: .github/labeler.yml
+      - id: automerge
+        name: automerge
+        uses: "pascalgn/automerge-action@v0.15.3"
+        env:
+            GITHUB_TOKEN: "${{ secrets.AM_TOKEN }}"
+            MERGE_LABELS: "!in progress,!invalid"
+            MERGE_METHOD: "merge"
+            MERGE_COMMIT_MESSAGE: "pull-request-title"
+            MERGE_FORKS: "false"
+            MERGE_RETRIES: "10"
+            MERGE_RETRY_SLEEP: "60000"
+            MERGE_REQUIRED_APPROVALS: "0"
+            UPDATE_LABELS: ""
+            UPDATE_METHOD: "merge"
