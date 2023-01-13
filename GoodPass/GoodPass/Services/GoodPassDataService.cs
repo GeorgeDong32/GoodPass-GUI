@@ -19,7 +19,12 @@ public class GoodPassDataService
         {
             datas = new List<GPData>()
             {
-                new GPData("Sample", "https://github.com/GeorgeDong32/GoodPass", "SampleAccount", App.GetService<GoodPassCryptographicServices>().EncryptStr("SamplePassword"), DateTime.Now)
+                //常规代码
+                //new GPData("Sample", "https://github.com/GeorgeDong32/GoodPass", "SampleAccount", App.GetService<GoodPassCryptographicServices>().EncryptStr("SamplePassword"), DateTime.Now)
+                //测试代码2023.1.13
+                new GPData("Test", "https://github.com/GeorgeDong32/GoodPass", "001", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now),
+                new GPData("Test", "https://github.com/GeorgeDong32/GoodPass", "002", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now), 
+                new GPData("Test", "https://github.com/GeorgeDong32/GoodPass", "003", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now) 
             };
             datas.First().DataDecrypt();
             manager.AddData(datas.First());
@@ -33,7 +38,6 @@ public class GoodPassDataService
         {
             _allDatas = new List<GPData>(AllDatas());
         }
-
         await Task.CompletedTask;
         return _allDatas;
     }
