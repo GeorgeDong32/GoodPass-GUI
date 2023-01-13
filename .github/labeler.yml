@@ -1,5 +1,13 @@
 automerge: 
 - '*'
-- 'GoodPass/*'
-- '.github/*'
-- 'InstallTips/*'
+- 'GoodPass/**/*'
+- '.github/**/*'
+- 'InstallTips/**/*'
+
+documentation:
+- '*'
+- '.github/**/*'
+- 'InstallTips/**/*'
+
+code:
+- 'GoodPass/**/*'
