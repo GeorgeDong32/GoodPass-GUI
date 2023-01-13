@@ -26,8 +26,11 @@ public class GoodPassDataService
                 new GPData("Test", "https://github.com/GeorgeDong32/GoodPass", "002", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now), 
                 new GPData("Test", "https://github.com/GeorgeDong32/GoodPass", "003", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now) 
             };
-            datas.First().DataDecrypt();
-            manager.AddData(datas.First());
+            foreach (var data in datas)
+            {
+                data.DataDecrypt();
+                manager.AddData(data);
+            }
             return datas;
         }
     }
