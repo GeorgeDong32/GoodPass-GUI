@@ -1,5 +1,6 @@
 ﻿using GoodPass.Models;
 using GoodPass.ViewModels;
+using GoodPass.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
@@ -80,7 +81,32 @@ public sealed partial class ListDetailsDetailControl : UserControl
         {
             var tarPlatform = ListDetailsMenuItem.PlatformName;
             var tarAccountName = ListDetailsMenuItem.AccountName;
-            App.DataManager.DeleteData(tarPlatform, tarAccountName);
+            try
+            {
+                ViewModel.DeleteDataItem(App.DataManager.GetData(tarPlatform, tarAccountName));
+                var delResult = App.DataManager.DeleteData(tarPlatform, tarAccountName);
+                if (delResult == false)
+                    throw new GPObjectNotFoundException("Data Not Found!");
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                var warningDialog = new GPDialog2();
+                warningDialog.XamlRoot = this.XamlRoot;
+                warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+                warningDialog.Title = "出错了！";
+                warningDialog.Content = "您试图删除一个不存在的对象";
+                warningDialog.ShowAsync();
+            }
+            catch (GPObjectNotFoundException)
+            {
+                var warningDialog = new GPDialog2();
+                warningDialog.XamlRoot = this.XamlRoot;
+                warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+                warningDialog.Title = "出错了！";
+                warningDialog.Content = "您试图删除一个不存在的对象";
+                warningDialog.ShowAsync();
+            }
+            
             //Todo:刷新页面
             //可参考资料 https://blog.csdn.net/timewaitfornoone/article/details/104442371
             //可参考资料 https://stackoverflow.com/questions/52710086/how-to-refresh-a-page-in-uwp

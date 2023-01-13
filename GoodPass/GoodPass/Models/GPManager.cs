@@ -1,4 +1,6 @@
-﻿namespace GoodPass.Models;
+﻿using System;
+
+namespace GoodPass.Models;
 
 public class GPManager
 {
@@ -169,5 +171,22 @@ public class GPManager
         {
             data.DataDecrypt();
         }
+    }
+
+    public GPData GetData(int index)
+    {
+        if (index == -1 || index > GPDatas.Count)
+            return null;
+        else
+            return GPDatas[index];
+    }
+
+    public GPData GetData(string platformName, string accountName)
+    {
+        var targetIndex = AccurateSearch(platformName, accountName);
+        if (targetIndex == -1 || targetIndex > GPDatas.Count)
+            return null;
+        else
+            return GPDatas[targetIndex];
     }
 }
