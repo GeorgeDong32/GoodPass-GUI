@@ -66,7 +66,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
         dialog.XamlRoot = this.XamlRoot;
         dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
         dialog.Title = "删除确认";
-        dialog.Content = "您确定要删除这个数据吗？";
+        dialog.Content = "您确定要删除这个数据吗？该操作不可撤销！";
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
