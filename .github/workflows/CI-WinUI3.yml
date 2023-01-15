@@ -14,7 +14,7 @@ jobs:
         uses: "pascalgn/automerge-action@v0.15.3"
         env:
             GITHUB_TOKEN: "${{ secrets.AM_TOKEN }}"
-            MERGE_LABELS: "!in progress,!invalid"
+            MERGE_LABELS: "CI,!in progress,!invalid"
             MERGE_METHOD: "merge"
             MERGE_COMMIT_MESSAGE: "pull-request-title"
             MERGE_FORKS: "false"
