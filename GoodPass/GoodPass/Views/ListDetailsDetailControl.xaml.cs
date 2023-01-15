@@ -24,7 +24,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
 
     public ListDetailsDetailControl()
     {
-        ViewModel = App.GetService<ListDetailsViewModel>();
+        ViewModel = App.ListDetailsVM;
         InitializeComponent();
     }
 
