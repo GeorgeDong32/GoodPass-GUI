@@ -32,6 +32,8 @@ public partial class App : Application
 
     /*数据成员*/
     public static GPManager DataManager;
+
+    public static ListDetailsViewModel ListDetailsVM;
     /*End 数据成员*/
 
     /*App状态区*/
@@ -89,6 +91,7 @@ public partial class App : Application
             services.AddSingleton<GoodPassDataService>();
             services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<ListDetailsViewModel>();
 
             // Views and ViewModels
             services.AddTransient<SettingsViewModel>();
