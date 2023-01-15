@@ -1,6 +1,5 @@
 ﻿using GoodPass.Helpers;
 using GoodPass.Models;
-using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
@@ -9,14 +8,8 @@ namespace GoodPass.Views;
 
 public sealed partial class ListDetailsDetailControl : UserControl
 {
-    public ListDetailsViewModel ViewModel
-    {
-        get;
-    }
-
     public GPData? ListDetailsMenuItem
     {
-
         get => GetValue(ListDetailsMenuItemProperty) as GPData;
         set => SetValue(ListDetailsMenuItemProperty, value);
     }
@@ -24,7 +17,6 @@ public sealed partial class ListDetailsDetailControl : UserControl
 
     public ListDetailsDetailControl()
     {
-        ViewModel = App.ListDetailsVM;
         InitializeComponent();
     }
 
@@ -60,7 +52,6 @@ public sealed partial class ListDetailsDetailControl : UserControl
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
         else
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
-
     }
 
     private void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
@@ -75,7 +66,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
         dialog.XamlRoot = this.XamlRoot;
         dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
         dialog.Title = "删除确认";
-        dialog.Content = "您确定要删除这组数据吗？";
+        dialog.Content = "您确定要删除这个数据吗？";
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
@@ -83,8 +74,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             var tarAccountName = ListDetailsMenuItem.AccountName;
             try
             {
-                //Todo:访问父页的ViewModel才可以实现删除数据
-                ViewModel.DeleteDataItem(App.DataManager.GetData(tarPlatform, tarAccountName));
+                App.ListDetailsVM.DeleteDataItem(App.DataManager.GetData(tarPlatform, tarAccountName));
                 var delResult = App.DataManager.DeleteData(tarPlatform, tarAccountName);
                 if (delResult == false)
                     throw new GPObjectNotFoundException("Data Not Found!");
@@ -96,7 +86,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
                 warningDialog.Title = "出错了！";
                 warningDialog.Content = "您试图删除一个不存在的对象";
-                warningDialog.ShowAsync();
+                var _ = await warningDialog.ShowAsync();
             }
             catch (GPObjectNotFoundException)
             {
@@ -105,17 +95,8 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
                 warningDialog.Title = "出错了！";
                 warningDialog.Content = "您试图删除一个不存在的对象";
-                warningDialog.ShowAsync();
+                var _ = await warningDialog.ShowAsync();
             }
-
-            /*var shellVM = App.GetService<ShellViewModel>();
-            var navigationService = shellVM.NavigationService;
-            navigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);*/
-            //Todo:刷新页面
-            //可参考资料 https://blog.csdn.net/timewaitfornoone/article/details/104442371
-            //可参考资料 https://stackoverflow.com/questions/52710086/how-to-refresh-a-page-in-uwp
-            //Todo:访问父级资源
-            //可参考资料 https://stackoverflow.com/questions/52828684/how-to-get-parent-page-from-usercontrol-in-uwp
         }
     }
 }
