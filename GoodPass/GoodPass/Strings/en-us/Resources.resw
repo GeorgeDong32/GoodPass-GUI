@@ -226,4 +226,7 @@
   <data name="ListDetailsDetailControl_PlatformUrlTitleText" xml:space="preserve">
     <value>平台链接</value>
   </data>
+  <data name="ShellMenuBarAddDataButtonText.Text" xml:space="preserve">
+    <value>添加数据</value>
+  </data>
 </root>

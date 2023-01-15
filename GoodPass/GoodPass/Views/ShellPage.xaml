@@ -33,6 +33,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <AppBarButton
                 x:Name="ShellMenuBarItem_Back"
@@ -57,9 +58,26 @@
                 </MenuBarItem>
             </MenuBar>
             <AppBarButton
+                x:Name="ShellMenuBarAddDataButton"
+                Grid.Column="2"
+                Command="{x:Bind ViewModel.MenuAddDataCommand}">
+                <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <FontIcon
+                        x:Name="ShellMenuBarAddDataButtonIcon"
+                        Margin="0,0,4,0"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="18"
+                        Glyph="&#xE710;" />
+                    <TextBlock
+                        x:Name="ShellMenuBarAddDataButtonText"
+                        x:Uid="ShellMenuBarAddDataButtonText"
+                        RelativePanel.RightOf="ShellMenuBarAddDataButtonIcon" />
+                </RelativePanel>
+            </AppBarButton>
+            <AppBarButton
                 x:Name="ShellMenuBarSettingsButton"
                 x:Uid="ShellMenuBarSettingsButton"
-                Grid.Column="2"
+                Grid.Column="3"
                 AnimatedIcon.State="Normal"
                 Command="{x:Bind ViewModel.MenuSettingsCommand}"
                 PointerEntered="ShellMenuBarSettingsButton_PointerEntered"

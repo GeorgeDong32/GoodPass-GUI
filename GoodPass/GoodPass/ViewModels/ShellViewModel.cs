@@ -48,6 +48,11 @@ public class ShellViewModel : ObservableRecipient
         get;
     }
 
+    public ICommand MenuAddDataCommand
+    {
+        get;
+    }
+
     public bool IsBackEnabled
     {
         get => _isBackEnabled;
@@ -65,6 +70,7 @@ public class ShellViewModel : ObservableRecipient
         MenuViewsMainCommand = new RelayCommand(OnMenuViewsMain);
         GoBackCommand = new RelayCommand(GoBack);
         MenuFileLockCommand = new RelayCommand(OnMenuFileLock);
+        MenuAddDataCommand = new RelayCommand(OnMenuAddDataClick);
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
@@ -106,6 +112,11 @@ public class ShellViewModel : ObservableRecipient
         App.App_Lock();
         App.LeftSettingsPage();
         NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
+    }
+
+    private void OnMenuAddDataClick()
+    {
+        //Todo: 添加数据相关代码
     }
 
     public void GoBack()
