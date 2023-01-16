@@ -36,9 +36,11 @@
                         Style="{StaticResource DetailSubTitleStyle}"
                         Text="Account Name" />
 
-                    <TextBlock
+                    <TextBox
                         x:Name="ListDetailsDetailControl_AccountNameText"
+                        Width="350"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"
+                        IsReadOnly="True"
                         RelativePanel.Below="ListDetailsDetailControl_AccountNameTitle"
                         Style="{StaticResource DetailBodyBaseMediumStyle}"
                         Text="{x:Bind ListDetailsMenuItem.AccountName, Mode=OneWay}" />
