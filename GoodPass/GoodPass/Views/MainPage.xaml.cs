@@ -21,6 +21,7 @@ public sealed partial class MainPage : Page
 
     public MainPage()
     {
+        App.App_Lock();
         ViewModel = App.GetService<MainViewModel>();
         MKS = App.GetService<MasterKeyService>();
         InitializeComponent();

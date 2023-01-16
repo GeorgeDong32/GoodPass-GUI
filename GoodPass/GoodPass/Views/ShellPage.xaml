@@ -60,7 +60,7 @@
             <AppBarButton
                 x:Name="ShellMenuBarAddDataButton"
                 Grid.Column="2"
-                Command="{x:Bind ViewModel.MenuAddDataCommand}">
+                Click="ShellMenuBarAddDataButton_Click">
                 <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <FontIcon
                         x:Name="ShellMenuBarAddDataButtonIcon"
@@ -73,6 +73,13 @@
                         x:Uid="ShellMenuBarAddDataButtonText"
                         RelativePanel.RightOf="ShellMenuBarAddDataButtonIcon" />
                 </RelativePanel>
+                <AppBarButton.Flyout>
+                    <Flyout LightDismissOverlayMode="On">
+                        <StackPanel>
+                            <TextBlock x:Uid="ShellMenuBarAddDataButton_Flyout_Title" />
+                        </StackPanel>
+                    </Flyout>
+                </AppBarButton.Flyout>
             </AppBarButton>
             <AppBarButton
                 x:Name="ShellMenuBarSettingsButton"

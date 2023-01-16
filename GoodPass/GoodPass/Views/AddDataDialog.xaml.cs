@@ -1,18 +1,34 @@
-// Copyright (c) Microsoft Corporation and Contributors.
-// Licensed under the MIT License.
+﻿using Microsoft.UI.Xaml.Controls;
 
-using Microsoft.UI.Xaml.Controls;
+namespace GoodPass.Views;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
-namespace GoodPass.Views
+public sealed partial class AddDataDialog : ContentDialog
 {
-    public sealed partial class AddDataDialog : UserControl
+    public AddDataDialog()
     {
-        public AddDataDialog()
-        {
-            this.InitializeComponent();
-        }
+        this.InitializeComponent();
+    }
+
+    private void AddDataDialog_PasswordMode_RandomNoSpec_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        AddDataDialog_PasswordModeText.Text = AddDataDialog_PasswordMode_RandomNoSpec.Text;
+    }
+
+    private void AddDataDialog_PasswordMode_RandomSpec_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        AddDataDialog_PasswordModeText.Text = AddDataDialog_PasswordMode_RandomSpec.Text;
+    }
+
+    private void AddDataDialog_PasswordMode_GPStyle_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        AddDataDialog_PasswordModeText.Text = AddDataDialog_PasswordMode_GPStyle.Text;
+    }
+
+    private void Add_PasswordRevealButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if (Add_PasswordRevealButton.IsChecked == true)
+            AddDataDialog_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
+        else
+            AddDataDialog_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
     }
 }

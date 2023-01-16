@@ -47,7 +47,7 @@ public partial class App : Application
         get; set;
     }
 
-    public static bool App_IsLock() => LockConsition;
+    public static bool App_IsLock() => LockConsition;//true为锁定状态，false为解锁状态
 
     public static void App_UnLock() => LockConsition = false;
 

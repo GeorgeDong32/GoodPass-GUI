@@ -1,13 +1,13 @@
 ﻿using GoodPass.Contracts.Services;
 using GoodPass.Helpers;
 using GoodPass.ViewModels;
-
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-
 using Windows.System;
+using Windows.UI;
 
 namespace GoodPass.Views;
 
@@ -113,5 +113,27 @@ public sealed partial class ShellPage : Page
     private void ShellMenuBarItem_Back_PointerReleased(object sender, PointerRoutedEventArgs e)
     {
         AnimatedIcon.SetState((UIElement)sender, "Normal");
+    }
+
+    private void ShellMenuBarAddDataButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (App.App_IsLock())
+        {
+            ShellMenuBarAddDataButton.Flyout.ShowAt(ShellMenuBarSettingsButton);
+        }
+        else if (App.App_IsLock() == false)
+        {
+            ShellMenuBarAddDataButton.Flyout.Hide();
+            AddDataDialog dialog = new()
+            {
+                XamlRoot = this.XamlRoot,
+                Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
+            };
+            var result = dialog.ShowAsync();
+        }
+        else
+        {
+            ShellMenuBarAddDataButton.Flyout.ShowAt(ShellMenuBarSettingsButton);
+        }
     }
 }
