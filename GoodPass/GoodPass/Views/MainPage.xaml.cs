@@ -115,11 +115,12 @@ public sealed partial class MainPage : Page
 
     private async void ShowSetMKDialog()//密码设置弹窗
     {
-        SetMKDialog dialog = new();
-
-        // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-        dialog.XamlRoot = this.XamlRoot;
-        dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+        SetMKDialog dialog = new()
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = this.XamlRoot,
+            Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
+        };
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
@@ -131,12 +132,13 @@ public sealed partial class MainPage : Page
 
     private async void ShowResetMKDialog()//重设密码弹窗
     {
-        SetMKDialog dialog = new();
-
-        // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-        dialog.XamlRoot = this.XamlRoot;
-        dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.Title = "请重新设置密码";
+        SetMKDialog dialog = new()
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = this.XamlRoot,
+            Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "请重新设置密码"
+        };
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
