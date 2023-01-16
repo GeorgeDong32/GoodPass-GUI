@@ -135,6 +135,7 @@ public class GPManager
         }
     }
 
+    //Todo:出现文件被GoodPass某一进程占用情况
     public bool SaveToFile(string filePath)//保存数据到文件
     {
         if (File.Exists(filePath))

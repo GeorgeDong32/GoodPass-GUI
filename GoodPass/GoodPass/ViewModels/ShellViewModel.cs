@@ -1,9 +1,8 @@
 ﻿using System.Windows.Input;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
 using GoodPass.Contracts.Services;
+using GoodPass.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
 
@@ -48,11 +47,6 @@ public class ShellViewModel : ObservableRecipient
         get;
     }
 
-    public ICommand MenuAddDataCommand
-    {
-        get;
-    }
-
     public bool IsBackEnabled
     {
         get => _isBackEnabled;
@@ -70,7 +64,6 @@ public class ShellViewModel : ObservableRecipient
         MenuViewsMainCommand = new RelayCommand(OnMenuViewsMain);
         GoBackCommand = new RelayCommand(GoBack);
         MenuFileLockCommand = new RelayCommand(OnMenuFileLock);
-        MenuAddDataCommand = new RelayCommand(OnMenuAddDataClick);
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
@@ -89,7 +82,6 @@ public class ShellViewModel : ObservableRecipient
     {
         if (App.IsInSettingsPage())
         {
-            App.LeftSettingsPage();
             GoBack();
         }
         else
@@ -114,14 +106,9 @@ public class ShellViewModel : ObservableRecipient
         NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
     }
 
-    private void OnMenuAddDataClick()
-    {
-        //Todo: 添加数据相关代码
-    }
-
     public void GoBack()
     {
-        if (!App.App_IsLock())
+        if (!App.App_IsLock() && !App.IsInSettingsPage())
         {
             NavigationService.GoBack();
         }
