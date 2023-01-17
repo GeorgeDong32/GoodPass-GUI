@@ -87,7 +87,6 @@ public partial class App : Application
             services.AddSingleton<MasterKeyService>();
             services.AddSingleton<GoodPassSHAServices>();
             services.AddSingleton<GoodPassCryptographicServices>();
-            services.AddSingleton<GoodPassPWGService>();
             services.AddSingleton<GoodPassDataService>();
             services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IFileService, FileService>();
