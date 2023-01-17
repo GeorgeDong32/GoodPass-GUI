@@ -12,7 +12,7 @@
     mc:Ignorable="d">
 
     <StackPanel
-        Width="485"
+        Width="550"
         HorizontalAlignment="Left"
         VerticalAlignment="Stretch"
         Spacing="8">
@@ -68,7 +68,7 @@
             <PasswordBox
                 x:Name="AddDataDialog_PasswordBox"
                 x:Uid="AddDataDialog_PasswordBox"
-                Width="250"
+                Width="200"
                 Margin="0,0,8,0" />
             <ToggleButton
                 x:Name="Add_PasswordRevealButton"
@@ -103,9 +103,36 @@
                             x:Uid="AddDataDialog_PasswordMode_GPStyle"
                             Click="AddDataDialog_PasswordMode_GPStyle_Click" />
                     </MenuFlyout>
-
                 </DropDownButton.Flyout>
             </DropDownButton>
+            <TeachingTip
+                x:Name="AddDataDialog_PasswordModeTeachtip"
+                x:Uid="AddDataDialog_PasswordModeTeachtip"
+                IsLightDismissEnabled="True"
+                IsOpen="False"
+                Target="{x:Bind AddDataDialog_PasswordMode}">
+                <TeachingTip.IconSource>
+                    <FontIconSource FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE783;" />
+                </TeachingTip.IconSource>
+            </TeachingTip>
+            <TextBox
+                x:Name="AddDataDialog_PasswordLengthBox"
+                x:Uid="AddDataDialog_PasswordLengthBox"
+                Width="32"
+                Margin="8,0,0,0"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.RightOf="AddDataDialog_PasswordMode"
+                ToolTipService.ToolTip="Input the password length you want to generate" />
+            <TeachingTip
+                x:Name="AddDataDialog_PasswordLengthTeachtip"
+                x:Uid="AddDataDialog_PasswordLengthTeachtip"
+                IsLightDismissEnabled="True"
+                IsOpen="False"
+                Target="{x:Bind AddDataDialog_PasswordLengthBox}">
+                <TeachingTip.IconSource>
+                    <FontIconSource FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE783;" />
+                </TeachingTip.IconSource>
+            </TeachingTip>
         </RelativePanel>
         <RelativePanel x:Name="AddDataDialog_PlatformUrlPanel" HorizontalAlignment="Left">
             <TextBox
