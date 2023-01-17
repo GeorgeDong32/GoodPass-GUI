@@ -1,8 +1,8 @@
 ﻿namespace GoodPass.Services;
 
-public class GoodPassPWGService //密码生成服务(随机密码+指定格式密码)
+public static class GoodPassPWGService //密码生成服务(随机密码+指定格式密码)
 {
-    public string RandomPasswordNormal(int length) //生成随机密码
+    public static string RandomPasswordNormal(int length) //生成随机密码
     {
         var random = new Random();
         var password = "";
@@ -25,7 +25,7 @@ public class GoodPassPWGService //密码生成服务(随机密码+指定格式�
         return password;
     }
 
-    public string RandomPasswordSpec(int length) //生成含特殊字符的随机密码
+    public static string RandomPasswordSpec(int length) //生成含特殊字符的随机密码
     {
         var random = new Random();
         var password = "";
@@ -51,7 +51,7 @@ public class GoodPassPWGService //密码生成服务(随机密码+指定格式�
         return password;
     }
 
-    public string GPstylePassword(string platformName, string accountName) //生成GoodPass风格密码
+    public static string GPstylePassword(string platformName, string accountName) //生成GoodPass风格密码
     {
         var random = new Random();
         //对平台名进行大小写处理
