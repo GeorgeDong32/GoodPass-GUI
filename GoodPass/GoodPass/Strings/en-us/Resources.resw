@@ -263,7 +263,7 @@
     <value>平台链接</value>
   </data>
   <data name="AddDataDialog_PlatformUrlBox.PlaceholderText" xml:space="preserve">
-    <value>请输入平台链接</value>
+    <value>https://example.com</value>
   </data>
   <data name="ShellMenuBarAddDataButton_Flyout_Title.Text" xml:space="preserve">
     <value>请先解锁后再添加数据！</value>
@@ -276,5 +276,11 @@
   </data>
   <data name="AddDataDialog_UrlCheckText.Text" xml:space="preserve">
     <value>Url为空，可选择添加链接</value>
+  </data>
+  <data name="AddDataDialog_PasswordLengthBox.PlaceholderText" xml:space="preserve">
+    <value>长度</value>
+  </data>
+  <data name="AddDataDialog_PasswordLengthTeachtip.Title" xml:space="preserve">
+    <value>请先输入生成密码长度</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using GoodPass.Services;
 
 namespace GoodPass.Views;
 
@@ -12,19 +13,112 @@ public sealed partial class AddDataDialog : ContentDialog
     private void AddDataDialog_PasswordMode_RandomNoSpec_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         AddDataDialog_PasswordModeText.Text = AddDataDialog_PasswordMode_RandomNoSpec.Text;
-        //Todo:生成对应样式的密码并填充到密码框内
+        if (AddDataDialog_PasswordLengthBox.Text == String.Empty)
+        {
+            AddDataDialog_PasswordLengthTeachtip.IsOpen = true;
+        }
+        else
+        {
+            var genLength = 0;
+            var LengthCheck = true;
+            try
+            {
+                genLength = Convert.ToInt32(AddDataDialog_PasswordLengthBox.Text);
+            }
+            catch (FormatException)
+            {
+                AddDataDialog_PasswordLengthTeachtip.Title = "输入长度非数字！";
+                AddDataDialog_PasswordLengthTeachtip.IsOpen = true;
+                LengthCheck = false;
+            }
+            catch (OverflowException)
+            {
+                AddDataDialog_PasswordLengthTeachtip.Title = "输入长度超限！";
+                AddDataDialog_PasswordLengthTeachtip.IsOpen = true;
+                LengthCheck = false;
+            }
+            if (LengthCheck)
+            {
+                if (genLength > 0 && genLength <= 24)
+                {
+                    AddDataDialog_PasswordBox.Password = GoodPassPWGService.RandomPasswordNormal(genLength);
+                }
+                else
+                {
+                    AddDataDialog_PasswordLengthTeachtip.Title = "输入长度超限";
+                    AddDataDialog_PasswordLengthTeachtip.IsOpen = true;
+                }
+            }
+        }
     }
 
     private void AddDataDialog_PasswordMode_RandomSpec_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         AddDataDialog_PasswordModeText.Text = AddDataDialog_PasswordMode_RandomSpec.Text;
-        //Todo:生成对应样式的密码并填充到密码框内
+        if (AddDataDialog_PasswordLengthBox.Text == String.Empty)
+        {
+            AddDataDialog_PasswordLengthTeachtip.IsOpen = true;
+        }
+        else
+        {
+            var genLength = 0;
+            var LengthCheck = true;
+            try
+            {
+                genLength = Convert.ToInt32(AddDataDialog_PasswordLengthBox.Text);
+            }
+            catch (FormatException)
+            {
+                AddDataDialog_PasswordLengthTeachtip.Title = "输入长度非数字！";
+                AddDataDialog_PasswordLengthTeachtip.IsOpen = true;
+                LengthCheck = false;
+            }
+            catch (OverflowException)
+            {
+                AddDataDialog_PasswordLengthTeachtip.Title = "输入长度超限！";
+                AddDataDialog_PasswordLengthTeachtip.IsOpen = true;
+                LengthCheck = false;
+            }
+            if (LengthCheck)
+            {
+                if (genLength > 0 && genLength <= 24)
+                {
+                    AddDataDialog_PasswordBox.Password = GoodPassPWGService.RandomPasswordSpec(genLength);
+                }
+                else
+                {
+                    AddDataDialog_PasswordLengthTeachtip.Title = "输入长度超限";
+                    AddDataDialog_PasswordLengthTeachtip.IsOpen = true;
+                }
+            }
+        }
     }
 
     private void AddDataDialog_PasswordMode_GPStyle_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         AddDataDialog_PasswordModeText.Text = AddDataDialog_PasswordMode_GPStyle.Text;
-        //Todo:生成对应样式的密码并填充到密码框内
+        if (AddDataDialog_AccountBox.Text == String.Empty)
+        {
+            if (AddDataDialog_PlatformBox.Text == String.Empty)
+            {
+                AddDataDialog_PasswordModeTeachtip.Title = "账户名和平台名不能为空！";
+                AddDataDialog_PasswordModeTeachtip.IsOpen = true;
+            }
+            else if (AddDataDialog_PlatformBox.Text != String.Empty)
+            {
+                AddDataDialog_PasswordModeTeachtip.Title = "账户名不能为空！";
+                AddDataDialog_PasswordModeTeachtip.IsOpen = true;
+            }
+        }
+        else if (AddDataDialog_PlatformBox.Text == String.Empty)
+        {
+            AddDataDialog_PasswordModeTeachtip.Title = "平台名不能为空！";
+            AddDataDialog_PasswordModeTeachtip.IsOpen = true;
+        }
+        else
+        {
+            AddDataDialog_PasswordBox.Password = GoodPassPWGService.GPstylePassword(AddDataDialog_PlatformBox.Text, AddDataDialog_AccountBox.Text);
+        }
     }
 
     private void Add_PasswordRevealButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
