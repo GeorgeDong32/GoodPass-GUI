@@ -268,4 +268,13 @@
   <data name="ShellMenuBarAddDataButton_Flyout_Title.Text" xml:space="preserve">
     <value>请先解锁后再添加数据！</value>
   </data>
+  <data name="AddDataDialog_PlatformCheckText.Text" xml:space="preserve">
+    <value>平台名不能为空</value>
+  </data>
+  <data name="AddDataDialog_AccountCheckText.Text" xml:space="preserve">
+    <value>账号名不能为空</value>
+  </data>
+  <data name="AddDataDialog_UrlCheckText.Text" xml:space="preserve">
+    <value>Url为空，可选择添加链接</value>
+  </data>
 </root>
