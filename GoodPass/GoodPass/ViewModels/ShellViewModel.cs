@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GoodPass.Contracts.Services;
-using GoodPass.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
 

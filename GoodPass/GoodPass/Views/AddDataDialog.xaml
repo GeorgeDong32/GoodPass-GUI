@@ -7,6 +7,7 @@
     Title="添加数据"
     CloseButtonText="取消"
     DefaultButton="Primary"
+    PrimaryButtonClick="AddDataDialog_PrimaryButtonClick"
     PrimaryButtonText="确定"
     mc:Ignorable="d">
 
@@ -15,18 +16,54 @@
         HorizontalAlignment="Left"
         VerticalAlignment="Stretch"
         Spacing="8">
-        <StackPanel x:Name="AddDataDialog_PlatformPanel" HorizontalAlignment="Left">
+        <RelativePanel x:Name="AddDataDialog_PlatformPanel" HorizontalAlignment="Left">
             <TextBox
                 x:Name="AddDataDialog_PlatformBox"
                 x:Uid="AddDataDialog_PlatformBox"
-                Width="250" />
-        </StackPanel>
-        <StackPanel x:Name="AddDataDialog_AccountPanel" HorizontalAlignment="Left">
+                Width="250"
+                TextChanged="AddDataDialog_PlatformBox_TextChanged" />
+            <RelativePanel
+                x:Name="AddDataDialog_PlatformCheckPanel"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.RightOf="AddDataDialog_PlatformBox">
+                <FontIcon
+                    x:Name="AddDataDialog_PlatformCheckIcon"
+                    Margin="8,2,0,8"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="14"
+                    Glyph="&#xE711;" />
+                <!--  E711 叉图标，E73E 勾图标  -->
+                <TextBlock
+                    x:Name="AddDataDialog_PlatformCheckText"
+                    x:Uid="AddDataDialog_PlatformCheckText"
+                    Margin="4,0,0,0"
+                    RelativePanel.RightOf="AddDataDialog_PlatformCheckIcon" />
+            </RelativePanel>
+        </RelativePanel>
+        <RelativePanel x:Name="AddDataDialog_AccountPanel" HorizontalAlignment="Left">
             <TextBox
                 x:Name="AddDataDialog_AccountBox"
                 x:Uid="AddDataDialog_AccountBox"
-                Width="250" />
-        </StackPanel>
+                Width="250"
+                TextChanged="AddDataDialog_AccountBox_TextChanged" />
+            <RelativePanel
+                x:Name="AddDataDialog_AccountCheckPanel"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.RightOf="AddDataDialog_AccountBox">
+                <FontIcon
+                    x:Name="AddDataDialog_AccountCheckIcon"
+                    Margin="8,2,0,8"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="14"
+                    Glyph="&#xE711;" />
+                <!--  E711 叉图标，E73E 勾图标  -->
+                <TextBlock
+                    x:Name="AddDataDialog_AccountCheckText"
+                    x:Uid="AddDataDialog_AccountCheckText"
+                    Margin="4,0,0,0"
+                    RelativePanel.RightOf="AddDataDialog_AccountCheckIcon" />
+            </RelativePanel>
+        </RelativePanel>
         <RelativePanel x:Name="AddDataDialog_PasswordPanel" VerticalAlignment="Bottom">
             <PasswordBox
                 x:Name="AddDataDialog_PasswordBox"
@@ -70,12 +107,30 @@
                 </DropDownButton.Flyout>
             </DropDownButton>
         </RelativePanel>
-        <StackPanel x:Name="AddDataDialog_PlatformUrlPanel" HorizontalAlignment="Left">
+        <RelativePanel x:Name="AddDataDialog_PlatformUrlPanel" HorizontalAlignment="Left">
             <TextBox
                 x:Name="AddDataDialog_PlatformUrlBox"
                 x:Uid="AddDataDialog_PlatformUrlBox"
-                Width="250" />
-        </StackPanel>
+                Width="250"
+                TextChanged="AddDataDialog_PlatformUrlBox_TextChanged" />
+            <RelativePanel
+                x:Name="AddDataDialog_UrlCheckPanel"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.RightOf="AddDataDialog_PlatformUrlBox">
+                <FontIcon
+                    x:Name="AddDataDialog_UrlCheckIcon"
+                    Margin="8,2,0,8"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="14"
+                    Glyph="&#xE946;" />
+                <!--  E711 叉图标，E73E 勾图标，E946感叹号  -->
+                <TextBlock
+                    x:Name="AddDataDialog_UrlCheckText"
+                    x:Uid="AddDataDialog_UrlCheckText"
+                    Margin="4,0,0,0"
+                    RelativePanel.RightOf="AddDataDialog_UrlCheckIcon" />
+            </RelativePanel>
+        </RelativePanel>
     </StackPanel>
 
 </ContentDialog>
