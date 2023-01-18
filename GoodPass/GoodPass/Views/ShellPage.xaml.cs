@@ -113,7 +113,7 @@ public sealed partial class ShellPage : Page
         AnimatedIcon.SetState((UIElement)sender, "Normal");
     }
 
-    private void ShellMenuBarAddDataButton_Click(object sender, RoutedEventArgs e)
+    private async void ShellMenuBarAddDataButton_Click(object sender, RoutedEventArgs e)
     {
         if (App.App_IsLock())
         {
@@ -122,12 +122,23 @@ public sealed partial class ShellPage : Page
         else if (App.App_IsLock() == false)
         {
             ShellMenuBarAddDataButton.Flyout.Hide();
-            AddDataDialog dialog = new()
+            AddDataDialog addDataDialog = new()
             {
                 XamlRoot = this.XamlRoot,
                 Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
             };
-            var result = dialog.ShowAsync();
+            var result = await addDataDialog.ShowAsync();
+            if (addDataDialog.Result == Models.AddDataResult.Failure_Duplicate)
+            {
+                GPDialog2 warningdialog = new()
+                {
+                    XamlRoot = this.XamlRoot,
+                    Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
+                };
+                warningdialog.Title = "出错了！";
+                warningdialog.Content = "数据重复，请前往修改已存在的数据";
+                var _ = await warningdialog.ShowAsync();
+            }
         }
         else
         {

@@ -69,7 +69,8 @@
                 x:Name="AddDataDialog_PasswordBox"
                 x:Uid="AddDataDialog_PasswordBox"
                 Width="200"
-                Margin="0,0,8,0" />
+                Margin="0,0,8,0"
+                PasswordChanged="AddDataDialog_PasswordBox_PasswordChanged" />
             <ToggleButton
                 x:Name="Add_PasswordRevealButton"
                 Height="31.5"
@@ -118,7 +119,7 @@
             <TextBox
                 x:Name="AddDataDialog_PasswordLengthBox"
                 x:Uid="AddDataDialog_PasswordLengthBox"
-                Width="32"
+                Width="Auto"
                 Margin="8,0,0,0"
                 RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.RightOf="AddDataDialog_PasswordMode"
