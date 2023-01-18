@@ -54,4 +54,9 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
     {
         return DataItems.Remove(targetItem);
     }
+
+    public void AddDataItem(GPData newData)
+    {
+        DataItems.Add(newData);
+    }
 }
