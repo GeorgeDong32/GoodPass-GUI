@@ -18,7 +18,6 @@ public sealed partial class ListDetailsDetailControl : UserControl
     public ListDetailsDetailControl()
     {
         InitializeComponent();
-        //this.ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = new Uri();
     }
 
     private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
