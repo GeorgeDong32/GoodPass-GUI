@@ -1,4 +1,6 @@
-﻿namespace GoodPass.Models;
+﻿using GoodPass.Services;
+
+namespace GoodPass.Models;
 
 public class GPManager
 {
@@ -39,7 +41,7 @@ public class GPManager
         return -1;
     }
 
-    public bool AddData(string platformName, string platformUrl, string accountName, string encPassword)//手动添加数据
+    public bool AddData(string platformName, string platformUrl, string accountName, string password)
     {
         var indexArray = FuzzySearch(platformName);
         foreach (var index in indexArray)
@@ -53,6 +55,8 @@ public class GPManager
                 return false;
             }
         }
+        var cryptService = new GoodPassCryptographicServices();
+        var encPassword = cryptService.EncryptStr(password);
         var datatemp = new GPData(platformName, platformUrl, accountName, encPassword, DateTime.Now);
         GPDatas.Add(datatemp);
         return true;
