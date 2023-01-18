@@ -56,6 +56,16 @@ public class GPData
         LatestUpdateTime = data.LatestUpdateTime;
     }
 
+    public GPData(string platformName, string accountName, string encPassword, DateTime latestUpdateTime)
+    {
+        PlatformName = platformName;
+        PlatformUrl = null;
+        AccountName = accountName;
+        EncPassword = encPassword;
+        DecPassword = EncPassword;
+        LatestUpdateTime = latestUpdateTime;
+    }
+
     public GPData(string platformName, string platformUrl, string accountName, string encPassword, DateTime latestUpdateTime)
     {
         PlatformName = platformName;
