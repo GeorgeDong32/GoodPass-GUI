@@ -1,8 +1,6 @@
 ﻿using System.Windows.Input;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
 using GoodPass.Contracts.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
@@ -83,7 +81,6 @@ public class ShellViewModel : ObservableRecipient
     {
         if (App.IsInSettingsPage())
         {
-            App.LeftSettingsPage();
             GoBack();
         }
         else
@@ -110,7 +107,7 @@ public class ShellViewModel : ObservableRecipient
 
     public void GoBack()
     {
-        if (!App.App_IsLock())
+        if (!App.App_IsLock() && !App.IsInSettingsPage())
         {
             NavigationService.GoBack();
         }

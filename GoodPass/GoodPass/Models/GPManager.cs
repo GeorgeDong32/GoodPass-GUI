@@ -13,7 +13,7 @@ public class GPManager
 
     public int[] FuzzySearch(string platformName) //预留接口（模糊搜索）
     {
-        var indexArray = new int[1];
+        var indexArray = new int[1] { -1 };
         var indexArrayCount = 0;
         foreach (var data in GPDatas)
         {
@@ -44,6 +44,10 @@ public class GPManager
         var indexArray = FuzzySearch(platformName);
         foreach (var index in indexArray)
         {
+            if (index == -1)
+            {
+                break;
+            }
             if (GPDatas[index].AccountName == accountName)
             {
                 return false;
@@ -59,6 +63,10 @@ public class GPManager
         var indexArray = FuzzySearch(platformName);
         foreach (var index in indexArray)
         {
+            if (index == -1)
+            {
+                break;
+            }
             if (GPDatas[index].AccountName == accountName)
             {
                 return false;
@@ -66,6 +74,24 @@ public class GPManager
         }
         var datatemp = new GPData(platformName, platformUrl, accountName, encPassword, latestUpdateTime);
         GPDatas.Add(datatemp);
+        return true;
+    }
+
+    public bool AddData(GPData data)
+    {
+        var indexArray = FuzzySearch(data.PlatformName);
+        foreach (var index in indexArray)
+        {
+            if (index == -1)
+            {
+                break;
+            }
+            if (GPDatas[index].AccountName == data.AccountName)
+            {
+                return false;
+            }
+        }
+        GPDatas.Add(data);
         return true;
     }
 
@@ -109,6 +135,7 @@ public class GPManager
         }
     }
 
+    //Todo:出现文件被GoodPass某一进程占用情况
     public bool SaveToFile(string filePath)//保存数据到文件
     {
         if (File.Exists(filePath))
@@ -143,5 +170,22 @@ public class GPManager
         {
             data.DataDecrypt();
         }
+    }
+
+    public GPData GetData(int index)
+    {
+        if (index == -1 || index > GPDatas.Count)
+            return null;
+        else
+            return GPDatas[index];
+    }
+
+    public GPData GetData(string platformName, string accountName)
+    {
+        var targetIndex = AccurateSearch(platformName, accountName);
+        if (targetIndex == -1 || targetIndex > GPDatas.Count)
+            return null;
+        else
+            return GPDatas[targetIndex];
     }
 }

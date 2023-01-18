@@ -1,5 +1,5 @@
-﻿using GoodPass.Models;
-using GoodPass.ViewModels;
+﻿using GoodPass.Helpers;
+using GoodPass.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
@@ -8,14 +8,8 @@ namespace GoodPass.Views;
 
 public sealed partial class ListDetailsDetailControl : UserControl
 {
-    public ListDetailsViewModel ViewModel
-    {
-        get;
-    }
-
     public GPData? ListDetailsMenuItem
     {
-
         get => GetValue(ListDetailsMenuItemProperty) as GPData;
         set => SetValue(ListDetailsMenuItemProperty, value);
     }
@@ -23,7 +17,6 @@ public sealed partial class ListDetailsDetailControl : UserControl
 
     public ListDetailsDetailControl()
     {
-        ViewModel = App.GetService<ListDetailsViewModel>();
         InitializeComponent();
     }
 
@@ -59,7 +52,6 @@ public sealed partial class ListDetailsDetailControl : UserControl
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
         else
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
-
     }
 
     private void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
@@ -67,8 +59,44 @@ public sealed partial class ListDetailsDetailControl : UserControl
         //Todo：添加编辑模式代码
     }
 
-    private void ListDetailsDetailControl_DeleteButton_Click(object sender, RoutedEventArgs e)
+    private async void ListDetailsDetailControl_DeleteButton_Click(object sender, RoutedEventArgs e)
     {
-        //Todo：添加删除模式代码
+        //弹窗提示用户确认
+        var dialog = new GPDialog2();
+        dialog.XamlRoot = this.XamlRoot;
+        dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+        dialog.Title = "删除确认";
+        dialog.Content = "您确定要删除这个数据吗？该操作不可撤销！";
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            var tarPlatform = ListDetailsMenuItem.PlatformName;
+            var tarAccountName = ListDetailsMenuItem.AccountName;
+            try
+            {
+                App.ListDetailsVM.DeleteDataItem(App.DataManager.GetData(tarPlatform, tarAccountName));
+                var delResult = App.DataManager.DeleteData(tarPlatform, tarAccountName);
+                if (delResult == false)
+                    throw new GPObjectNotFoundException("Data Not Found!");
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                var warningDialog = new GPDialog2();
+                warningDialog.XamlRoot = XamlRoot;
+                warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+                warningDialog.Title = "出错了！";
+                warningDialog.Content = "您试图删除一个不存在的对象";
+                var _ = await warningDialog.ShowAsync();
+            }
+            catch (GPObjectNotFoundException)
+            {
+                var warningDialog = new GPDialog2();
+                warningDialog.XamlRoot = XamlRoot;
+                warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+                warningDialog.Title = "出错了！";
+                warningDialog.Content = "您试图删除一个不存在的对象";
+                var _ = await warningDialog.ShowAsync();
+            }
+        }
     }
 }
