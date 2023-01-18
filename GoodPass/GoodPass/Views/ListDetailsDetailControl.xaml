@@ -140,7 +140,7 @@
                     <HyperlinkButton
                         x:Name="ListDetailsDetailControl_PlatformUrlHyperLink"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"
-                        NavigateUri="{x:Bind ListDetailsMenuItem.PlatformUrl}"
+                        Click="ListDetailsDetailControl_PlatformUrlHyperLink_Click"
                         RelativePanel.Below="ListDetailsDetailControl_PlatformUrlTitle">
                         <RelativePanel VerticalAlignment="Center">
                             <FontIcon

@@ -18,6 +18,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
     public ListDetailsDetailControl()
     {
         InitializeComponent();
+        //this.ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = new Uri();
     }
 
     private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -97,6 +98,24 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 warningDialog.Content = "您试图删除一个不存在的对象";
                 var _ = await warningDialog.ShowAsync();
             }
+        }
+    }
+
+    private async void ListDetailsDetailControl_PlatformUrlHyperLink_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = new Uri(ListDetailsMenuItem.PlatformUrl);
+        }
+        catch (ArgumentNullException)
+        {
+            ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = null;
+            var warningDialog = new GPDialog2();
+            warningDialog.XamlRoot = XamlRoot;
+            warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+            warningDialog.Title = "出错了！";
+            warningDialog.Content = "链接为空，无法访问！";
+            var _ = await warningDialog.ShowAsync();
         }
     }
 }
