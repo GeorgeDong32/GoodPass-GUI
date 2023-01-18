@@ -24,7 +24,7 @@ public class GoodPassDataService
                 //测试代码2023.1.13
                 new GPData("Test", "https://github.com/GeorgeDong32/GoodPass-v3", "001", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now),
                 new GPData("Test", "https://github.com/GeorgeDong32/GoodPass", "002", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now),
-                new GPData("Test", "003", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now)
+                new GPData("Test", String.Empty ,"003", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now)
             };
             foreach (var data in datas)
             {
