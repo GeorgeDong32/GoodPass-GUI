@@ -116,5 +116,15 @@ public sealed partial class ListDetailsDetailControl : UserControl
             warningDialog.Content = "链接为空，无法访问！";
             var _ = await warningDialog.ShowAsync();
         }
+        catch (UriFormatException)
+        {
+            ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = null;
+            var warningDialog = new GPDialog2();
+            warningDialog.XamlRoot = XamlRoot;
+            warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
+            warningDialog.Title = "出错了！";
+            warningDialog.Content = "链接为空，无法访问！";
+            var _ = await warningDialog.ShowAsync();
+        }
     }
 }
