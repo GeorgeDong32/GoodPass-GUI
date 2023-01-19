@@ -2,7 +2,7 @@
 using GoodPass.Services;
 using GoodPass.Models;
 
-namespace GoodPass.Views;
+namespace GoodPass.Dialogs;
 
 public sealed partial class AddDataDialog : ContentDialog
 {

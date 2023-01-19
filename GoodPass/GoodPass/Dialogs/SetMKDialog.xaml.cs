@@ -4,7 +4,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Windows.UI;
 
-namespace GoodPass.Views;
+namespace GoodPass.Dialogs;
 
 public sealed partial class SetMKDialog : ContentDialog
 {
