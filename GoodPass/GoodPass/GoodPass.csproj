@@ -90,4 +90,8 @@
   <ItemGroup>
     <PRIResource Remove="Converters\**" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dialogs\" />
+  </ItemGroup>
 </Project>

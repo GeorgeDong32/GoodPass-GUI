@@ -5,9 +5,9 @@ namespace GoodPass.Services;
 /*Descriptions*/
 //Provide SHA256 and GPHES hash service
 
-public class GoodPassSHAServices
+public static class GoodPassSHAServices
 {
-    public string getSHA256(string InputString)
+    public static string getSHA256(string InputString)
     {
         //get SHA256 hash of the InputString
         try
@@ -48,7 +48,7 @@ public class GoodPassSHAServices
         }
     }
 
-    public string getGPHES(string InputString)
+    public static string getGPHES(string InputString)
     {
         try
         {

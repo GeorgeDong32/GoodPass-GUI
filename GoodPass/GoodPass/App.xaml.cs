@@ -1,5 +1,6 @@
 ﻿using GoodPass.Activation;
 using GoodPass.Contracts.Services;
+using GoodPass.Dialogs;
 using GoodPass.Models;
 using GoodPass.Notifications;
 using GoodPass.Services;
@@ -85,10 +86,9 @@ public partial class App : Application
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMaterKeyService, MasterKeyService>();
             services.AddSingleton<MasterKeyService>();
-            services.AddSingleton<GoodPassSHAServices>();
+            //services.AddSingleton<GoodPassSHAServices>();
             services.AddSingleton<GoodPassCryptographicServices>();
             services.AddSingleton<GoodPassDataService>();
-            services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<ListDetailsViewModel>();
 

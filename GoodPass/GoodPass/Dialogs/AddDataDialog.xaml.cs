@@ -1,8 +1,8 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using GoodPass.Models;
 using GoodPass.Services;
-using GoodPass.Models;
+using Microsoft.UI.Xaml.Controls;
 
-namespace GoodPass.Views;
+namespace GoodPass.Dialogs;
 
 public sealed partial class AddDataDialog : ContentDialog
 {

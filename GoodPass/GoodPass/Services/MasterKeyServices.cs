@@ -1,4 +1,5 @@
 ﻿using GoodPass.Contracts.Services;
+using GoodPass.Helpers;
 
 namespace GoodPass.Services;
 
@@ -10,10 +11,6 @@ public class MasterKeyService : IMaterKeyService
     readonly string _appdataPath;
 
     private readonly string _LocalMKPath;
-
-    private readonly GoodPassSHAServices GPHESService = new();
-
-    private readonly Helpers.TaskTConverter taskTConverter = new();
 
     public MasterKeyService()
     {
@@ -35,7 +32,7 @@ public class MasterKeyService : IMaterKeyService
                 System.IO.File.Create(MKconfigPath).Close();
                 if (System.IO.File.Exists(MKconfigPath))
                 {
-                    System.IO.File.WriteAllText(MKconfigPath, GPHESService.getGPHES(MasterKey));
+                    System.IO.File.WriteAllText(MKconfigPath, GoodPassSHAServices.getGPHES(MasterKey));
                     return true;
                 }
                 else
@@ -57,7 +54,7 @@ public class MasterKeyService : IMaterKeyService
                 System.IO.File.Create(MKconfigPath).Close();
                 if (System.IO.File.Exists(MKconfigPath))
                 {
-                    System.IO.File.WriteAllText(MKconfigPath, GPHESService.getGPHES(MasterKey));
+                    System.IO.File.WriteAllText(MKconfigPath, GoodPassSHAServices.getGPHES(MasterKey));
                     return true;
                 }
                 else
@@ -68,7 +65,7 @@ public class MasterKeyService : IMaterKeyService
             }
             else
             {
-                System.IO.File.WriteAllText(MKconfigPath, GPHESService.getGPHES(MasterKey));
+                System.IO.File.WriteAllText(MKconfigPath, GoodPassSHAServices.getGPHES(MasterKey));
                 return true;
             }
         }
@@ -112,7 +109,7 @@ public class MasterKeyService : IMaterKeyService
         string logPath = $"C:\\Users\\{userName}\\Documents\\GoodPass\\GPlog.txt";
         System.IO.File.WriteAllText(logPath,InputKey);
         /*End Debug codes*/
-        var InputKeyHash = GPHESService.getGPHES(InputKey);
+        var InputKeyHash = GoodPassSHAServices.getGPHES(InputKey);
         GetLocalMKHash();
         if (InputKeyHash == _LocalMKHash)
         {
@@ -175,7 +172,7 @@ public class MasterKeyService : IMaterKeyService
 
     public async Task<string> GetLocalMKHashAsync()/*ToDo：通过RATAsync的异常机制精简方法*/
     {
-        Task<string> LocalMKHash = taskTConverter.StringToTaskString(""); ;
+        Task<string> LocalMKHash = TaskTConverter.StringToTaskString(""); ;
         try
         {
             //使用部分同步方法用以解决异步方法不抛出异常的问题
@@ -185,12 +182,12 @@ public class MasterKeyService : IMaterKeyService
         catch (System.IO.DirectoryNotFoundException)
         {
             _LocalMKHash = "Not found";
-            LocalMKHash = taskTConverter.StringToTaskString("Not found");
+            LocalMKHash = TaskTConverter.StringToTaskString("Not found");
         }
         catch (System.IO.FileNotFoundException)
         {
             _LocalMKHash = "Not found";
-            LocalMKHash = taskTConverter.StringToTaskString("Not found");
+            LocalMKHash = TaskTConverter.StringToTaskString("Not found");
         }
         finally
         {
@@ -209,7 +206,7 @@ public class MasterKeyService : IMaterKeyService
         string logPath = $"C:\\Users\\{userName}\\Documents\\GoodPass\\GPlog.txt";
         System.IO.File.WriteAllText(logPath, InputKey);
         /*End Debug codes*/
-        var InputKeyHash = GPHESService.getGPHES(InputKey);
+        var InputKeyHash = GoodPassSHAServices.getGPHES(InputKey);
         var LocalMKHash = await GetLocalMKHashAsync();
         if (InputKeyHash == LocalMKHash)
         {
