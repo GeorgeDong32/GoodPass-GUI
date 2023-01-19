@@ -139,12 +139,12 @@ public class GPManager
         }
     }
 
-    //Todo:出现文件被GoodPass某一进程占用情况
+    //Todo:出现文件被GoodPass某一进程占用情况（在沙盒中） 若自行创建文件夹则不会
     public bool SaveToFile(string filePath)//保存数据到文件
     {
         if (File.Exists(filePath))
         {
-            File.WriteAllText(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime");
+            File.WriteAllText(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime\n");
             foreach (var data in GPDatas)
             {
                 File.AppendAllText(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.EncPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
@@ -154,7 +154,7 @@ public class GPManager
         else
         {
             File.Create(filePath);
-            File.WriteAllText(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime");
+            File.WriteAllText(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime\n");
             foreach (var data in GPDatas)
             {
                 File.AppendAllText(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.EncPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
