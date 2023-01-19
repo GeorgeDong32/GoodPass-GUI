@@ -1,5 +1,6 @@
 ﻿using GoodPass.Activation;
 using GoodPass.Contracts.Services;
+using GoodPass.Dialogs;
 using GoodPass.Models;
 using GoodPass.Notifications;
 using GoodPass.Services;

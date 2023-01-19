@@ -1,4 +1,5 @@
 ﻿using GoodPass.Contracts.Services;
+using GoodPass.Dialogs;
 using GoodPass.Helpers;
 using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
