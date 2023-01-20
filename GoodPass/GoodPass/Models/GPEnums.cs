@@ -12,5 +12,6 @@ public enum EditDataResult
 {
     Success,
     Failure,
-    UnknowError
+    UnknowError,
+    Nochange
 }
