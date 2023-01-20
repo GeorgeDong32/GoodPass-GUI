@@ -55,9 +55,25 @@ public sealed partial class ListDetailsDetailControl : UserControl
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
     }
 
-    private void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
+    private async void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
     {
-        //Todo：添加编辑模式代码
+        var dialog = new EditDataDialog(ListDetailsDetailControl_AccountNameText.Text, PlatformNameText.Text, ListDetailsDetailControl_PlatformUrlHyperLinkText.Text, ListDetailsDetailControl_PasswordBox.Password)
+        {
+            XamlRoot = this.XamlRoot,
+            Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
+        };
+        var result = await dialog.ShowAsync();
+        if (dialog.Result == EditDataResult.Nochange)
+        {
+            var warningdialog = new GPDialog2()
+            {
+                XamlRoot = this.XamlRoot,
+                Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = "提示",
+                Content = "数据没有任何修改！"
+            };
+            warningdialog.ShowAsync();
+        }
     }
 
     private async void ListDetailsDetailControl_DeleteButton_Click(object sender, RoutedEventArgs e)

@@ -21,6 +21,7 @@
                     FontSize="48"
                     Glyph="&#xE77B;" />
                 <TextBlock
+                    x:Name="PlatformNameText"
                     Margin="{StaticResource SmallLeftMargin}"
                     VerticalAlignment="Center"
                     Style="{ThemeResource TitleTextBlockStyle}"
@@ -149,6 +150,7 @@
                                 FontFamily="{StaticResource SymbolThemeFontFamily}"
                                 Glyph="&#xE71B;" />
                             <TextBlock
+                                x:Name="ListDetailsDetailControl_PlatformUrlHyperLinkText"
                                 Margin="2,6,0,8"
                                 RelativePanel.RightOf="ListDetailsDetailControl_PlatformUrlHyperLinkIcon"
                                 Style="{StaticResource DetailBodyStyle}"
