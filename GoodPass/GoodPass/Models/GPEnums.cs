@@ -7,3 +7,10 @@ public enum AddDataResult
     Failure,
     Undetermined
 }
+
+public enum EditDataResult
+{
+    Success,
+    Failure,
+    UnknowError
+}
