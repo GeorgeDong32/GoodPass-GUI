@@ -115,4 +115,32 @@ public class GPData
             return "Unknown Error";
         }
     }
+
+    public bool ChangeUrl(string newUrl)
+    {
+        if (newUrl == this.PlatformUrl)
+        {
+            return false;
+        }
+        else
+        {
+            PlatformUrl = newUrl;
+            LatestUpdateTime = DateTime.Now;
+            return true;
+        }
+    }
+
+    public bool ChangeAccountName(string newAccountName)
+    {
+        if (newAccountName == AccountName)
+        {
+            return false;
+        }
+        else
+        {
+            AccountName = newAccountName;
+            LatestUpdateTime = DateTime.Now;
+            return true;
+        }
+    }
 }

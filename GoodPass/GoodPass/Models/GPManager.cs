@@ -113,10 +113,63 @@ public class GPManager
         return false;
     }
 
-    public string ChangeData(string platformName, string accountName, string newPassword)//重新设置密码
+    public string ChangePassword(string platformName, string accountName, string newPassword)//重新设置密码
     {
         var targetIndex = AccurateSearch(platformName, accountName);
         return GPDatas[targetIndex].ChangePassword(newPassword);
+    }
+
+    public bool ChangeUrl(string platformName, string accountName, string newUrl)
+    {
+        var targetIndex = AccurateSearch(platformName, accountName);
+        if (targetIndex == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return GPDatas[targetIndex].ChangeUrl(newUrl);
+        }
+    }
+
+    public bool ChangeAccountName(string platformName, string accountName, string newAccountName)
+    {
+        var targetIndex = AccurateSearch(platformName, accountName);
+        if (targetIndex == -1)
+        {
+            return false;
+        }
+        else
+        {
+            GPDatas[targetIndex].ChangeAccountName(newAccountName);
+            if (GPDatas[targetIndex].AccountName == newAccountName)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    public bool ChangePlatformName(string platformName, string accountName, string newPlatformName)
+    {
+        if (platformName == newPlatformName)
+            return false;
+        var targetIndex = AccurateSearch(platformName, accountName);
+        if (targetIndex == -1)
+        {
+            return false;
+        }
+        else
+        {
+            GPDatas[targetIndex].DataDecrypt();
+            var password = GPDatas[targetIndex].GetPassword();
+            var platformUrl = GPDatas[targetIndex].PlatformUrl;
+            DeleteData(platformName, accountName);
+            return AddData(newPlatformName, platformUrl, accountName, password);
+        }
     }
 
     public bool LoadFormFile(string filePath)//从文件导入数据
