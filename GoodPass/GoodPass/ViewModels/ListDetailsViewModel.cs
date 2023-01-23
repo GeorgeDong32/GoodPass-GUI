@@ -59,4 +59,53 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
     {
         DataItems.Add(newData);
     }
+
+    public bool ChangeItemPassword(GPData targetItem, string newPassword)
+    {
+        var index = DataItems.IndexOf(targetItem);
+        var item = DataItems[index];
+        var result = item.ChangePassword(newPassword);
+        return result switch
+        {
+            "Success" => true,
+            "SamePassword" => false,
+            "Empty" => false,
+            "Unknown Error" => false,
+            _ => false,
+        };
+    }
+
+    public bool ChangeItemUrl(GPData targetItem, string newUrl)
+    {
+        var index = DataItems.IndexOf(targetItem);
+        var item = DataItems[index];
+        return item.ChangeUrl(newUrl);
+    }
+
+    public bool ChangeItemAccountName(GPData targetItem, string newAccountName)
+    {
+        var index = DataItems.IndexOf(targetItem);
+        var item = DataItems[index];
+        return item.ChangeAccountName(newAccountName);
+    }
+
+    public bool ChangeItemPlatformName(GPData targetItem, string newPlatformName)
+    {
+        var index = DataItems.IndexOf(targetItem);
+        if (index != -1)
+        {
+            var item = DataItems[index];
+            var newItem = new GPData(newPlatformName, item.PlatformUrl, item.AccountName, item.EncPassword, DateTime.Now);
+            DataItems.Add(newItem);
+            index = DataItems.IndexOf(newItem);
+            if (index != -1)
+                return DataItems.Remove(item);
+            else
+                return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

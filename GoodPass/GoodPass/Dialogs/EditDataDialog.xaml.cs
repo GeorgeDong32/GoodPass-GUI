@@ -1,5 +1,6 @@
 ﻿using GoodPass.Models;
 using GoodPass.Services;
+using Microsoft.Graphics.Canvas.Text;
 using Microsoft.UI.Xaml.Controls;
 
 namespace GoodPass.Dialogs;
@@ -14,7 +15,7 @@ public sealed partial class EditDataDialog : ContentDialog
     private readonly string oldAccountName;
     private readonly string oldPlatformName;
     private readonly string oldPassword;
-    private  readonly string oldPlatformUrl;
+    private readonly string oldPlatformUrl;
 
     public EditDataDialog(string accountName, string platformName, string platformUrl, string password)
     {
@@ -274,13 +275,114 @@ public sealed partial class EditDataDialog : ContentDialog
 
     private void EditDataDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
+        /*Test info*/
+        /* 20230123
+        1. NoChange -- 测试通过
+        2. ChangeUrl -- 测试未通过，url数据成功更新，但page未刷新
+        3. ChangePassword -- 测试未通过，password在VM内更新成功，但page切换后丢失
+        4. ChangeAccountName -- 测试未通过，AccountName成功更新，但文本框未更新，侧栏小标题未更新
+        5. CHangePlatformName -- 测试通过，原数据删除，增加新数据，自动刷新
+        */
         if (EditDataDialog_PlatformBox.Text == oldPlatformName && EditDataDialog_AccountBox.Text == oldAccountName && EditDataDialog_PasswordBox.Password == oldPassword && EditDataDialog_PlatformUrlBox.Text == oldPlatformUrl)
         {
             this.Result = EditDataResult.Nochange;
         }
         else
         {
-            //添加编辑修改代码
+            var accountNameChanged = false;
+            if (EditDataDialog_PlatformUrlBox.Text != oldPlatformUrl)
+            {
+                var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
+                var check = App.DataManager.ChangeUrl(oldPlatformName, oldAccountName, EditDataDialog_PlatformUrlBox.Text);
+                if (check)
+                {
+                    App.ListDetailsVM.ChangeItemUrl(targetItem, EditDataDialog_PlatformUrlBox.Text);
+                    this.Result = EditDataResult.Success;
+                }
+                else
+                {
+                    this.Result = EditDataResult.Failure;
+                }
+            }
+            if (EditDataDialog_PasswordBox.Password != oldPassword)
+            {
+                var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
+                var check = App.DataManager.ChangePassword(oldPlatformName, oldAccountName, EditDataDialog_PasswordBox.Password);
+                switch (check)
+                {
+                    case "Success":
+                        App.ListDetailsVM.ChangeItemPassword(targetItem , EditDataDialog_PasswordBox.Password);
+                        this.Result = EditDataResult.Success;
+                        break;
+                    case "SamePassword":
+                        this.Result = EditDataResult.Failure;
+                        break;
+                    case "Empty":
+                        this.Result = EditDataResult.Failure;
+                        break;
+                    case "Unknown Error":
+                        this.Result = EditDataResult.UnknowError;
+                        break;
+                }
+            }
+            if (EditDataDialog_AccountBox.Text != oldAccountName)
+            {
+                var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
+                var check = App.DataManager.ChangeAccountName(oldPlatformName, oldAccountName, EditDataDialog_AccountBox.Text);
+                if (check)
+                {
+                    check = App.ListDetailsVM.ChangeItemAccountName(targetItem, EditDataDialog_AccountBox.Text);
+                    if (check)
+                    {
+                        this.Result = EditDataResult.Success;
+                        accountNameChanged = true;
+                    }
+                    else
+                        this.Result = EditDataResult.Failure;
+                }
+                else
+                {
+                    this.Result = EditDataResult.Failure;
+                }
+            }
+            if (EditDataDialog_PlatformBox.Text != oldPlatformName)
+            {
+                if (accountNameChanged)
+                {
+                    var newAccountName = EditDataDialog_AccountBox.Text;
+                    var targetItem = App.DataManager.GetData(oldPlatformName, newAccountName);
+                    var check = App.DataManager.ChangePlatformName(oldPlatformName, newAccountName, EditDataDialog_PlatformBox.Text);
+                    if (check)
+                    {
+                        check = App.ListDetailsVM.ChangeItemPlatformName(targetItem, EditDataDialog_PlatformBox.Text);
+                        if (check)
+                            this.Result = EditDataResult.Success;
+                        else
+                            this.Result = EditDataResult.Failure;
+                    }
+                    else
+                    {
+                        this.Result = EditDataResult.Failure;
+                    }
+                }
+                else
+                {
+                    var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
+                    var check = App.DataManager.ChangePlatformName(oldPlatformName, oldAccountName, EditDataDialog_PlatformBox.Text);
+                    if (check)
+                    {
+                        check = App.ListDetailsVM.ChangeItemPlatformName(targetItem, EditDataDialog_PlatformBox.Text);
+                        if (check)
+                            this.Result = EditDataResult.Success;
+                        else
+                            this.Result = EditDataResult.Failure;
+                    }
+                    else
+                    {
+                        this.Result = EditDataResult.Failure;
+                    }
+                }
+            }
         }
     }
 
