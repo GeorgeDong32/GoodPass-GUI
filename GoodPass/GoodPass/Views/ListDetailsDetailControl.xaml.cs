@@ -62,7 +62,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             XamlRoot = this.XamlRoot,
             Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
         };
-        var result = await dialog.ShowAsync();
+        var _ = await dialog.ShowAsync();
         if (dialog.Result == EditDataResult.Nochange)
         {
             var warningdialog = new GPDialog2()
@@ -73,6 +73,10 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 Content = "数据没有任何修改！"
             };
             warningdialog.ShowAsync();
+        }
+        else
+        {
+            
         }
     }
 

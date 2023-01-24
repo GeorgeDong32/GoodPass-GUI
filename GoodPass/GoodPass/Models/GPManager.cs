@@ -165,7 +165,7 @@ public class GPManager
         else
         {
             GPDatas[targetIndex].DataDecrypt();
-            var password = GPDatas[targetIndex].GetPassword();
+            var password = GPDatas[targetIndex].GetPassword;
             var platformUrl = GPDatas[targetIndex].PlatformUrl;
             DeleteData(platformName, accountName);
             return AddData(newPlatformName, platformUrl, accountName, password);
