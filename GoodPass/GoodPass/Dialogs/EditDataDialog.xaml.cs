@@ -1,5 +1,6 @@
 ﻿using GoodPass.Models;
 using GoodPass.Services;
+using GoodPass.ViewModels;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.UI.Xaml.Controls;
 
@@ -278,10 +279,10 @@ public sealed partial class EditDataDialog : ContentDialog
         /*Test info*/
         /* 20230123
         1. NoChange -- 测试通过
-        2. ChangeUrl -- 测试未通过，url数据成功更新，但page未刷新
-        3. ChangePassword -- 测试未通过，password在VM内更新成功，但page切换后丢失
-        4. ChangeAccountName -- 测试未通过，AccountName成功更新，但文本框未更新，侧栏小标题未更新
+        2. ChangeUrl -- 测试未通过，url数据成功更新，但page未刷新，需重新NavigateTo才能实现
+        4. ChangeAccountName -- 测试未通过，AccountName成功更新，文本框未更新，侧栏小标题未更新
         5. CHangePlatformName -- 测试通过，原数据删除，增加新数据，自动刷新
+        重大bug:修改时两个列表中的GPData时间不一致，导致无法2次修改
         */
         if (EditDataDialog_PlatformBox.Text == oldPlatformName && EditDataDialog_AccountBox.Text == oldAccountName && EditDataDialog_PasswordBox.Password == oldPassword && EditDataDialog_PlatformUrlBox.Text == oldPlatformUrl)
         {

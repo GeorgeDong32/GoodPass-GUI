@@ -89,7 +89,7 @@ public class GPData
         return true;
     }
 
-    public string GetPassword() => DecPassword;
+    public string GetPassword => DecPassword;
 
     public string ChangePassword(string newPassword)
     {
