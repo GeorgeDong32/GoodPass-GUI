@@ -25,7 +25,7 @@
                     Margin="{StaticResource SmallLeftMargin}"
                     VerticalAlignment="Center"
                     Style="{ThemeResource TitleTextBlockStyle}"
-                    Text="{x:Bind ListDetailsMenuItem.PlatformName, Mode=TwoWay}" />
+                    Text="{x:Bind ListDetailsMenuItem.PlatformName, Mode=OneWay}" />
             </StackPanel>
             <StackPanel x:Name="ListDetailsDetailControl_DataDetails" Padding="0,15,0,0">
 
@@ -44,7 +44,7 @@
                         IsReadOnly="True"
                         RelativePanel.Below="ListDetailsDetailControl_AccountNameTitle"
                         Style="{StaticResource DetailBodyBaseMediumStyle}"
-                        Text="{x:Bind ListDetailsMenuItem.AccountName, Mode=TwoWay}" />
+                        Text="{x:Bind ListDetailsMenuItem.AccountName, Mode=OneWay}" />
                     <Button
                         x:Name="ListDetailsDetailControl_AcconutNameCopyButton"
                         x:Uid="ListDetailsDetailControl_AcconutNameCopyButton"

@@ -16,7 +16,12 @@ public sealed partial class EditDataDialog : ContentDialog
     private readonly string oldAccountName;
     private readonly string oldPlatformName;
     private readonly string oldPassword;
-    private readonly string oldPlatformUrl;
+    private readonly string? oldPlatformUrl;
+
+    public string newAccountName;
+    public string newPlatformName;
+    public string newPassword;
+    public string? newPlatformUrl;
 
     public EditDataDialog(string accountName, string platformName, string platformUrl, string password)
     {
@@ -31,6 +36,10 @@ public sealed partial class EditDataDialog : ContentDialog
         oldPlatformName = platformName;
         oldPassword = password;
         oldPlatformUrl = platformUrl;
+        newAccountName = accountName;
+        newPlatformName = platformName;
+        newPassword = password;
+        newPlatformUrl = platformUrl;
         if (platformUrl != String.Empty)
         {
             EditDataDialog_UrlCheckIcon.Glyph = "\xE73E";
@@ -283,7 +292,18 @@ public sealed partial class EditDataDialog : ContentDialog
         4. ChangeAccountName -- 测试未通过，AccountName成功更新，文本框未更新，侧栏小标题未更新
         5. CHangePlatformName -- 测试通过，原数据删除，增加新数据，自动刷新
         重大bug:修改时两个列表中的GPData时间不一致，导致无法2次修改
+        /* 20230125
+        在ListDetailsDetailControl.xaml.cs中添加更新数据响应函数
+        1. NoChange -- 测试通过
+        2. ChangeUrl -- 测试通过，且无二次修改问题
+        3. ChangePassword -- 测试通过，且无二次修改问题
+        4. ChangeAccountName -- 测试未通过，VM中AccountName被未知进程修改，使VM修改报错
+        5. ChangePlatformName -- 测试未通过，修改平台名回到原名时出错
+        bug list:
+        重大bug:修改时两个列表中的GPData时间不一致，导致无法2次修改(似乎在无断点情况下不会复现)
+        新增bug，锁定后再次进入编辑时均报错。
         */
+        /*end Test info*/
         if (EditDataDialog_PlatformBox.Text == oldPlatformName && EditDataDialog_AccountBox.Text == oldAccountName && EditDataDialog_PasswordBox.Password == oldPassword && EditDataDialog_PlatformUrlBox.Text == oldPlatformUrl)
         {
             this.Result = EditDataResult.Nochange;
@@ -293,6 +313,7 @@ public sealed partial class EditDataDialog : ContentDialog
             var accountNameChanged = false;
             if (EditDataDialog_PlatformUrlBox.Text != oldPlatformUrl)
             {
+                newPlatformUrl = EditDataDialog_PlatformUrlBox.Text;
                 var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
                 var check = App.DataManager.ChangeUrl(oldPlatformName, oldAccountName, EditDataDialog_PlatformUrlBox.Text);
                 if (check)
@@ -307,6 +328,7 @@ public sealed partial class EditDataDialog : ContentDialog
             }
             if (EditDataDialog_PasswordBox.Password != oldPassword)
             {
+                newPassword = EditDataDialog_PasswordBox.Password;
                 var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
                 var check = App.DataManager.ChangePassword(oldPlatformName, oldAccountName, EditDataDialog_PasswordBox.Password);
                 switch (check)
@@ -328,6 +350,7 @@ public sealed partial class EditDataDialog : ContentDialog
             }
             if (EditDataDialog_AccountBox.Text != oldAccountName)
             {
+                newAccountName = EditDataDialog_AccountBox.Text;
                 var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
                 var check = App.DataManager.ChangeAccountName(oldPlatformName, oldAccountName, EditDataDialog_AccountBox.Text);
                 if (check)
@@ -348,6 +371,7 @@ public sealed partial class EditDataDialog : ContentDialog
             }
             if (EditDataDialog_PlatformBox.Text != oldPlatformName)
             {
+                newPlatformName = EditDataDialog_PlatformBox.Text;
                 if (accountNameChanged)
                 {
                     var newAccountName = EditDataDialog_AccountBox.Text;

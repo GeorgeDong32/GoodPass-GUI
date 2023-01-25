@@ -74,9 +74,24 @@ public sealed partial class ListDetailsDetailControl : UserControl
             };
             warningdialog.ShowAsync();
         }
-        else
+        else if (dialog.Result == EditDataResult.Success)
         {
-            
+            ListDetailsDetailControl_AccountNameText.Text = dialog.newAccountName;
+            ListDetailsDetailControl_PasswordBox.Password = dialog.newPassword;
+            ListDetailsDetailControl_PlatformUrlHyperLinkText.Text = dialog.newPlatformUrl;
+            ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = new Uri(dialog.newPlatformUrl);
+            PlatformNameText.Text = dialog.newPlatformName;
+        }
+        else if (dialog.Result == EditDataResult.Failure)
+        {
+            var warningdialog = new GPDialog2()
+            {
+                XamlRoot = this.XamlRoot,
+                Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = "出错了！",
+                Content = "编辑数据过程中出错，请重试或者联系开发者"
+            };
+            warningdialog.ShowAsync();
         }
     }
 
