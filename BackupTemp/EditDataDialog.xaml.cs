@@ -292,18 +292,7 @@ public sealed partial class EditDataDialog : ContentDialog
         4. ChangeAccountName -- 测试未通过，AccountName成功更新，文本框未更新，侧栏小标题未更新
         5. CHangePlatformName -- 测试通过，原数据删除，增加新数据，自动刷新
         重大bug:修改时两个列表中的GPData时间不一致，导致无法2次修改
-        /* 20230125
-        在ListDetailsDetailControl.xaml.cs中添加更新数据响应函数
-        1. NoChange -- 测试通过
-        2. ChangeUrl -- 测试通过，且无二次修改问题
-        3. ChangePassword -- 测试通过，且无二次修改问题
-        4. ChangeAccountName -- 测试未通过，VM中AccountName被未知进程修改，使VM修改报错
-        5. ChangePlatformName -- 测试未通过，修改平台名回到原名时出错
-        bug list:
-        重大bug:修改时两个列表中的GPData时间不一致，导致无法2次修改(似乎在无断点情况下不会复现)
-        新增bug，锁定后再次进入编辑时均报错。
         */
-        /*end Test info*/
         if (EditDataDialog_PlatformBox.Text == oldPlatformName && EditDataDialog_AccountBox.Text == oldAccountName && EditDataDialog_PasswordBox.Password == oldPassword && EditDataDialog_PlatformUrlBox.Text == oldPlatformUrl)
         {
             this.Result = EditDataResult.Nochange;
