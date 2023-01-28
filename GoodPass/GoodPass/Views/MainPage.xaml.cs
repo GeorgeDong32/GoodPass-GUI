@@ -80,6 +80,7 @@ public sealed partial class MainPage : Page
         if (MKCheck_Result == "pass")
         {
             App.App_UnLock();
+            App.DataManager.LoadFormFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
             ViewModel.Login_UnLock();
         }
         else if (MKCheck_Result == "npass")
