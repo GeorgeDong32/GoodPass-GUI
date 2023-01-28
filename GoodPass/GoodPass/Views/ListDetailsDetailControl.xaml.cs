@@ -81,6 +81,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             ListDetailsDetailControl_PlatformUrlHyperLinkText.Text = dialog.newPlatformUrl;
             ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = new Uri(dialog.newPlatformUrl);
             PlatformNameText.Text = dialog.newPlatformName;
+            ListDetailsDetailControl_LastmodifiedText.Text = dialog.newDateTime.ToString();
         }
         else if (dialog.Result == EditDataResult.Failure)
         {
