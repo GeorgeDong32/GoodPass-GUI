@@ -167,6 +167,7 @@
                         Style="{StaticResource DetailSubTitleStyle}"
                         Text="Last modified" />
                     <TextBlock
+                        x:Name="ListDetailsDetailControl_LastmodifiedText"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"
                         RelativePanel.Below="ListDetailsDetailControl_LastmodifiedTitle"
                         Style="{StaticResource DetailBodyStyle}"

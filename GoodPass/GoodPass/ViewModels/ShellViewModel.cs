@@ -69,10 +69,7 @@ public class ShellViewModel : ObservableRecipient
 
     private void OnMenuFileExit()
     {
-        //保存文件
-        var dataPath = Path.Combine($"C:\\Users\\{Environment.UserName}\\AppData\\Local", "GoodPass", "GoodPassData.csv");
-        App.DataManager.SaveToFile(dataPath);
-        //锁定并离开
+        //锁定保存并离开
         OnMenuFileLock();
         Application.Current.Exit();
     }
@@ -98,7 +95,8 @@ public class ShellViewModel : ObservableRecipient
     {
         //保存到文件
         var dataPath = Path.Combine($"C:\\Users\\{Environment.UserName}\\AppData\\Local", "GoodPass", "GoodPassData.csv");
-        App.DataManager.SaveToFile(dataPath);
+        if (App.DataManager != null)
+            App.DataManager.SaveToFile(dataPath);
         //锁定
         App.App_Lock();
         App.LeftSettingsPage();

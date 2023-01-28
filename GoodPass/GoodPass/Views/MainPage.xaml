@@ -58,6 +58,7 @@
                     x:Name="Login_PssswordBox"
                     Width="400"
                     Height="34"
+                    KeyDown="Login_PssswordBox_KeyDown"
                     PasswordChanging="Login_PssswordBox_PasswordChanging"
                     PlaceholderText="请输入密码以解锁" />
 
