@@ -19,6 +19,13 @@ public sealed partial class ListDetailsDetailControl : UserControl
     public ListDetailsDetailControl()
     {
         InitializeComponent();
+        //ListDetailsDetailControl_PasswordBox.Password = ListDetailsMenuItem.GetPassword;
+        //SetPasswordBox();
+    }
+
+    public void SetPasswordBox()
+    {
+        ListDetailsDetailControl_PasswordBox.Password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
     }
 
     private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -31,7 +38,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
 
     private void ListDetailsDetailControl_PasswordCopyButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var password = ListDetailsDetailControl_PasswordBox.Password;
+        var password = ListDetailsMenuItem.GetPassword;
         var passwordDatapackage = new DataPackage();
         passwordDatapackage.SetText(password);
         Clipboard.SetContent(passwordDatapackage);
@@ -49,6 +56,8 @@ public sealed partial class ListDetailsDetailControl : UserControl
 
     private void PasswordRevealButton_Click(object sender, RoutedEventArgs e)
     {
+        var password = ListDetailsMenuItem.GetPassword;
+        ListDetailsDetailControl_PasswordBox.Password = password;
         if (PasswordRevealButton.IsChecked == true)
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
         else
@@ -62,7 +71,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             XamlRoot = this.XamlRoot,
             Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
         };
-        var _ = await dialog.ShowAsync();
+        _ = await dialog.ShowAsync();
         if (dialog.Result == EditDataResult.Nochange)
         {
             var warningdialog = new GPDialog2()
@@ -72,7 +81,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 Title = "提示",
                 Content = "数据没有任何修改！"
             };
-            warningdialog.ShowAsync();
+            _ = warningdialog.ShowAsync();
         }
         else if (dialog.Result == EditDataResult.Success)
         {
@@ -82,6 +91,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = new Uri(dialog.newPlatformUrl);
             PlatformNameText.Text = dialog.newPlatformName;
             ListDetailsDetailControl_LastmodifiedText.Text = dialog.newDateTime.ToString();
+            App.DataManager.SaveToFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
         }
         else if (dialog.Result == EditDataResult.Failure)
         {
@@ -92,7 +102,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 Title = "出错了！",
                 Content = "编辑数据过程中出错，请重试或者联系开发者"
             };
-            warningdialog.ShowAsync();
+            _ = warningdialog.ShowAsync();
         }
     }
 
@@ -115,6 +125,8 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 var delResult = App.DataManager.DeleteData(tarPlatform, tarAccountName);
                 if (delResult == false)
                     throw new GPObjectNotFoundException("Data Not Found!");
+                else
+                    App.DataManager.SaveToFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
             }
             catch (System.ArgumentOutOfRangeException)
             {
@@ -123,7 +135,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
                 warningDialog.Title = "出错了！";
                 warningDialog.Content = "您试图删除一个不存在的对象";
-                var _ = await warningDialog.ShowAsync();
+                _ = await warningDialog.ShowAsync();
             }
             catch (GPObjectNotFoundException)
             {
@@ -132,7 +144,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
                 warningDialog.Title = "出错了！";
                 warningDialog.Content = "您试图删除一个不存在的对象";
-                var _ = await warningDialog.ShowAsync();
+                _ = await warningDialog.ShowAsync();
             }
         }
     }
@@ -151,7 +163,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
             warningDialog.Title = "出错了！";
             warningDialog.Content = "链接为空，无法访问！";
-            var _ = await warningDialog.ShowAsync();
+            _ = await warningDialog.ShowAsync();
         }
         catch (UriFormatException)
         {
@@ -161,7 +173,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             warningDialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
             warningDialog.Title = "出错了！";
             warningDialog.Content = "链接为空，无法访问！";
-            var _ = await warningDialog.ShowAsync();
+            _ = await warningDialog.ShowAsync();
         }
     }
 }
