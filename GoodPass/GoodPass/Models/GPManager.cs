@@ -176,6 +176,8 @@ public class GPManager
     {
         if (File.Exists(filePath))
         {
+            if (GPDatas.Count != 0)
+                GPDatas.Clear();
             var dataLines = File.ReadLines(filePath);
             dataLines = dataLines.Skip(1); //跳过文件头
             foreach (var line in dataLines)

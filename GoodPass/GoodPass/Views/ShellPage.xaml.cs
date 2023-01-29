@@ -138,7 +138,7 @@ public sealed partial class ShellPage : Page
                 };
                 warningdialog.Title = "出错了！";
                 warningdialog.Content = "数据重复，请前往修改已存在的数据";
-                var _ = await warningdialog.ShowAsync();
+                _ = await warningdialog.ShowAsync();
             }
         }
         else

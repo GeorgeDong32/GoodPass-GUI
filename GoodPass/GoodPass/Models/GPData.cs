@@ -35,6 +35,8 @@ public class GPData
         get; set;
     }
 
+    public readonly string GetPassword;
+
     /*方法*/
     public GPData()
     {
@@ -43,6 +45,7 @@ public class GPData
         AccountName = "No Name";
         DecPassword = "DecPassword";
         EncPassword = DecPassword;
+        GetPassword = DecPassword;
         LatestUpdateTime = DateTime.Now;
     }
 
@@ -54,6 +57,7 @@ public class GPData
         DecPassword = data.DecPassword;
         EncPassword = data.EncPassword;
         LatestUpdateTime = data.LatestUpdateTime;
+        GetPassword = data.DecPassword;
     }
 
     public GPData(string platformName, string accountName, string encPassword, DateTime latestUpdateTime)
@@ -62,7 +66,9 @@ public class GPData
         PlatformUrl = null;
         AccountName = accountName;
         EncPassword = encPassword;
-        DecPassword = EncPassword;
+        var GPCS = new GoodPassCryptographicServices();
+        DecPassword = GPCS.DecryptStr(EncPassword);
+        GetPassword = DecPassword;
         LatestUpdateTime = latestUpdateTime;
     }
 
@@ -72,7 +78,9 @@ public class GPData
         PlatformUrl = platformUrl;
         AccountName = accountName;
         EncPassword = encPassword;
-        DecPassword = EncPassword;
+        var GPCS = new GoodPassCryptographicServices();
+        DecPassword = GPCS.DecryptStr(EncPassword);
+        GetPassword = DecPassword;
         LatestUpdateTime = latestUpdateTime;
     }
 
@@ -88,8 +96,6 @@ public class GPData
         DecPassword = GPCS.DecryptStr(EncPassword);
         return true;
     }
-
-    public string GetPassword => DecPassword;
 
     public string ChangePassword(string newPassword)
     {
