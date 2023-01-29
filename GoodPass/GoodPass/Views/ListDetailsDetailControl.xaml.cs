@@ -38,7 +38,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
 
     private void ListDetailsDetailControl_PasswordCopyButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var password = ListDetailsMenuItem.GetPassword;
+        var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
         var passwordDatapackage = new DataPackage();
         passwordDatapackage.SetText(password);
         Clipboard.SetContent(passwordDatapackage);
@@ -56,7 +56,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
 
     private void PasswordRevealButton_Click(object sender, RoutedEventArgs e)
     {
-        var password = ListDetailsMenuItem.GetPassword;
+        var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
         ListDetailsDetailControl_PasswordBox.Password = password;
         if (PasswordRevealButton.IsChecked == true)
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
