@@ -285,31 +285,6 @@ public sealed partial class EditDataDialog : ContentDialog
 
     private void EditDataDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
-        /*Test info*/
-        /* 20230123
-        1. NoChange -- 测试通过
-        2. ChangeUrl -- 测试未通过，url数据成功更新，但page未刷新，需重新NavigateTo才能实现
-        4. ChangeAccountName -- 测试未通过，AccountName成功更新，文本框未更新，侧栏小标题未更新
-        5. CHangePlatformName -- 测试通过，原数据删除，增加新数据，自动刷新
-        bug list:
-        重大bug1:修改时两个列表中的GPData时间不一致，导致无法2次修改
-        /* 20230125
-        在ListDetailsDetailControl.xaml.cs中添加更新数据响应函数
-        1. NoChange -- 测试通过
-        2. ChangeUrl -- 测试通过，且无二次修改问题
-        3. ChangePassword -- 测试通过，且无二次修改问题
-        4. ChangeAccountName -- 测试未通过，VM中AccountName被未知进程修改，使VM修改报错
-        5. ChangePlatformName -- 测试未通过，修改平台名回到原名时出错
-        bug list:
-        重大bug1:修改时两个列表中的GPData时间不一致，导致无法2次修改(似乎在无断点情况下不会复现)
-        新增bug2，锁定后再次进入编辑时均报错。
-        /* 20230128
-        删除ListDetailsDetailControl.xaml.cs中所有在VM中的操作，VM的data绑定后似乎会自动同步
-        bug list:
-        上述bug1在新版本中未复现
-        bug2转变为锁定后VM中数据未同步Manager中数据
-        */
-        /*end Test info*/
         if (EditDataDialog_PlatformBox.Text == oldPlatformName && EditDataDialog_AccountBox.Text == oldAccountName && EditDataDialog_PasswordBox.Password == oldPassword && EditDataDialog_PlatformUrlBox.Text == oldPlatformUrl)
         {
             this.Result = EditDataResult.Nochange;
@@ -320,7 +295,6 @@ public sealed partial class EditDataDialog : ContentDialog
             if (EditDataDialog_PlatformUrlBox.Text != oldPlatformUrl)
             {
                 newPlatformUrl = EditDataDialog_PlatformUrlBox.Text;
-                var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
                 var check = App.DataManager.ChangeUrl(oldPlatformName, oldAccountName, EditDataDialog_PlatformUrlBox.Text);
                 if (check)
                 {
@@ -334,7 +308,6 @@ public sealed partial class EditDataDialog : ContentDialog
             if (EditDataDialog_PasswordBox.Password != oldPassword)
             {
                 newPassword = EditDataDialog_PasswordBox.Password;
-                var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
                 var check = App.DataManager.ChangePassword(oldPlatformName, oldAccountName, EditDataDialog_PasswordBox.Password);
                 switch (check)
                 {
@@ -355,14 +328,9 @@ public sealed partial class EditDataDialog : ContentDialog
             if (EditDataDialog_AccountBox.Text != oldAccountName)
             {
                 newAccountName = EditDataDialog_AccountBox.Text;
-                var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
                 var check = App.DataManager.ChangeAccountName(oldPlatformName, oldAccountName, EditDataDialog_AccountBox.Text);
                 if (check)
                 {
-                    /*Test 移除对VM改名*/
-                    //test result: 改名成功，且无报错信息，后续修改无异常
-                    //check = App.ListDetailsVM.ChangeItemAccountName(targetItem, EditDataDialog_AccountBox.Text);
-                    /*end 移除对VM改名*/
                     if (check)
                     {
                         this.Result = EditDataResult.Success;
@@ -382,7 +350,6 @@ public sealed partial class EditDataDialog : ContentDialog
                 if (accountNameChanged)
                 {
                     var newAccountName = EditDataDialog_AccountBox.Text;
-                    var targetItem = App.DataManager.GetData(oldPlatformName, newAccountName);
                     var check = App.DataManager.ChangePlatformName(oldPlatformName, newAccountName, EditDataDialog_PlatformBox.Text);
                     if (check)
                     {
@@ -395,7 +362,6 @@ public sealed partial class EditDataDialog : ContentDialog
                 }
                 else
                 {
-                    var targetItem = App.DataManager.GetData(oldPlatformName, oldAccountName);
                     var check = App.DataManager.ChangePlatformName(oldPlatformName, oldAccountName, EditDataDialog_PlatformBox.Text);
                     if (check)
                     {
@@ -409,6 +375,7 @@ public sealed partial class EditDataDialog : ContentDialog
             }
         }
         newDateTime = App.DataManager.GetData(newPlatformName, newAccountName).LatestUpdateTime;
+        App.ListDetailsVM.OnNavigatedTo(null);
     }
 
     private bool EditDataCheck()
