@@ -11,17 +11,22 @@ public sealed partial class EditDataDialog : ContentDialog
         get; set;
     }
 
+    //旧数据
     private readonly string oldAccountName;
     private readonly string oldPlatformName;
     private readonly string oldPassword;
     private readonly string? oldPlatformUrl;
 
+    //新数据
     public string newAccountName;
     public string newPlatformName;
     public string newPassword;
     public string? newPlatformUrl;
     public DateTime newDateTime;
 
+    /// <summary>
+    /// 编辑对话窗构造函数
+    /// </summary>
     public EditDataDialog(string accountName, string platformName, string platformUrl, string password)
     {
         this.InitializeComponent();
@@ -47,6 +52,9 @@ public sealed partial class EditDataDialog : ContentDialog
         }
     }
 
+    /// <summary>
+    /// 生成无特殊字符的随机密码
+    /// </summary>
     private void EditDataDialog_PasswordMode_RandomNoSpec_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         EditDataDialog_PasswordModeText.Text = EditDataDialog_PasswordMode_RandomNoSpec.Text;
@@ -89,6 +97,9 @@ public sealed partial class EditDataDialog : ContentDialog
         }
     }
 
+    /// <summary>
+    /// 生成含特殊字符的随机密码
+    /// </summary>
     private void EditDataDialog_PasswordMode_RandomSpec_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         EditDataDialog_PasswordModeText.Text = EditDataDialog_PasswordMode_RandomSpec.Text;
@@ -131,6 +142,9 @@ public sealed partial class EditDataDialog : ContentDialog
         }
     }
 
+    /// <summary>
+    /// 生成GoodPass样式的密码
+    /// </summary>
     private void EditDataDialog_PasswordMode_GPStyle_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         EditDataDialog_PasswordModeText.Text = EditDataDialog_PasswordMode_GPStyle.Text;
@@ -283,6 +297,9 @@ public sealed partial class EditDataDialog : ContentDialog
         }
     }
 
+    /// <summary>
+    /// 编辑确定后的处理
+    /// </summary>
     private void EditDataDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
         if (EditDataDialog_PlatformBox.Text == oldPlatformName && EditDataDialog_AccountBox.Text == oldAccountName && EditDataDialog_PasswordBox.Password == oldPassword && EditDataDialog_PlatformUrlBox.Text == oldPlatformUrl)
@@ -378,18 +395,15 @@ public sealed partial class EditDataDialog : ContentDialog
         App.ListDetailsVM.OnNavigatedTo(null);
     }
 
+    /// <summary>
+    /// 检查编辑弹窗内的数据是否合法
+    /// </summary>
+    /// <returns>编辑结果是否合法</returns>
     private bool EditDataCheck()
     {
         if (EditDataDialog_PlatformBox.Text != String.Empty && EditDataDialog_AccountBox.Text != String.Empty && EditDataDialog_PasswordBox.Password != String.Empty)
         {
-            if (EditDataDialog_UrlCheckText.Text == "平台Url合法" || EditDataDialog_UrlCheckText.Text == "Url为空，可选择添加链接")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return EditDataDialog_UrlCheckText.Text == "平台Url合法" || EditDataDialog_UrlCheckText.Text == "Url为空，可选择添加链接";
         }
         else
         {

@@ -19,13 +19,6 @@ public sealed partial class ListDetailsDetailControl : UserControl
     public ListDetailsDetailControl()
     {
         InitializeComponent();
-        //ListDetailsDetailControl_PasswordBox.Password = ListDetailsMenuItem.GetPassword;
-        //SetPasswordBox();
-    }
-
-    public void SetPasswordBox()
-    {
-        ListDetailsDetailControl_PasswordBox.Password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
     }
 
     private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -36,6 +29,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
         }
     }
 
+    /// <summary>
+    /// 复制密码到Windows剪贴板
+    /// </summary>
     private void ListDetailsDetailControl_PasswordCopyButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
@@ -45,6 +41,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
         CopiedTipforPasswordCopyButton.IsOpen = true;
     }
 
+    /// <summary>
+    /// 复制账号到Windows剪贴板
+    /// </summary>
     private void ListDetailsDetailControl_AcconutNameCopyButton_Click(object sender, RoutedEventArgs e)
     {
         var accountName = ListDetailsDetailControl_AccountNameText.Text;
@@ -54,6 +53,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
         CopiedTipforAcconutNameCopyButton.IsOpen = true;
     }
 
+    /// <summary>
+    /// 显示PasswordBox中的密码
+    /// </summary>
     private void PasswordRevealButton_Click(object sender, RoutedEventArgs e)
     {
         var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
@@ -64,6 +66,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
     }
 
+    /// <summary>
+    /// 进入编辑模式
+    /// </summary>
     private async void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
     {
         var dialog = new EditDataDialog(ListDetailsDetailControl_AccountNameText.Text, PlatformNameText.Text, ListDetailsDetailControl_PlatformUrlHyperLinkText.Text, ListDetailsDetailControl_PasswordBox.Password)
@@ -106,6 +111,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
         }
     }
 
+    /// <summary>
+    /// 删除数据
+    /// </summary>
     private async void ListDetailsDetailControl_DeleteButton_Click(object sender, RoutedEventArgs e)
     {
         //弹窗提示用户确认
@@ -149,6 +157,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
         }
     }
 
+    /// <summary>
+    /// 超链接按钮点击功能
+    /// </summary>
     private async void ListDetailsDetailControl_PlatformUrlHyperLink_Click(object sender, RoutedEventArgs e)
     {
         try

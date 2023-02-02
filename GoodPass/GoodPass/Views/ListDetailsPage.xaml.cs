@@ -31,6 +31,6 @@ public sealed partial class ListDetailsPage : Page
 
     private void ListDetailsViewControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        //this.ListDetailsViewControl.
+
     }
 }
