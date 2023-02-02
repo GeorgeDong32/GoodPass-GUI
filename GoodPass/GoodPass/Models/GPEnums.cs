@@ -1,5 +1,8 @@
 ﻿namespace GoodPass.Models;
 
+/// <summary>
+/// AddDataDialog的处理结果
+/// </summary>
 public enum AddDataResult
 {
     Success,
@@ -8,6 +11,9 @@ public enum AddDataResult
     Undetermined
 }
 
+/// <summary>
+/// EditDataDialog的处理结果
+/// </summary>
 public enum EditDataResult
 {
     Success,
