@@ -44,68 +44,23 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
 
     public void EnsureItemSelected()
     {
-        if (SlectedData == null)
-        {
-            SlectedData = DataItems.First();
-        }
+        SlectedData ??= DataItems.First(); //复合分配简化防null代码
     }
 
+    /// <summary>
+    /// 实现删除数据的实时响应
+    /// </summary>
+    /// <param name="targetItem">指定删除的数据</param>
     public bool DeleteDataItem(GPData targetItem)
     {
         return DataItems.Remove(targetItem);
     }
 
+    /// <summary>
+    /// 实现添加数据的实时响应
+    /// </summary>
     public void AddDataItem(GPData newData)
     {
         DataItems.Add(newData);
-    }
-
-    public bool ChangeItemPassword(GPData targetItem, string newPassword)
-    {
-        var index = DataItems.IndexOf(targetItem);
-        var item = DataItems[index];
-        var result = item.ChangePassword(newPassword);
-        return result switch
-        {
-            "Success" => true,
-            "SamePassword" => false,
-            "Empty" => false,
-            "Unknown Error" => false,
-            _ => false,
-        };
-    }
-
-    public bool ChangeItemUrl(GPData targetItem, string newUrl)
-    {
-        var index = DataItems.IndexOf(targetItem);
-        var item = DataItems[index];
-        return item.ChangeUrl(newUrl);
-    }
-
-    public bool ChangeItemAccountName(GPData targetItem, string newAccountName)
-    {
-        var index = DataItems.IndexOf(targetItem);
-        var item = DataItems[index];
-        return item.ChangeAccountName(newAccountName);
-    }
-
-    public bool ChangeItemPlatformName(GPData targetItem, string newPlatformName)
-    {
-        var index = DataItems.IndexOf(targetItem);
-        if (index != -1)
-        {
-            var item = DataItems[index];
-            var newItem = new GPData(newPlatformName, item.PlatformUrl, item.AccountName, item.EncPassword, DateTime.Now);
-            DataItems.Add(newItem);
-            index = DataItems.IndexOf(newItem);
-            if (index != -1)
-                return DataItems.Remove(item);
-            else
-                return false;
-        }
-        else
-        {
-            return false;
-        }
     }
 }
