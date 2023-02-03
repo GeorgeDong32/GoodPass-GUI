@@ -64,7 +64,7 @@ public static class GoodPassPWGService
     /// <summary>
     /// 生成GoodPass风格密码
     /// </summary>
-    public static string GPstylePassword(string platformName, string accountName) 
+    public static string GPstylePassword(string platformName, string accountName)
     {
         var random = new Random();
         //对平台名进行大小写处理

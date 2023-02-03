@@ -17,7 +17,7 @@ public sealed class GPPasswordBox : TextBox
         this.password = password;
         RevealText = string.Empty;
         var length = password.Length;
-        for(var i = 0; i < length; i++)
+        for (var i = 0; i < length; i++)
         {
             RevealText += '•';
         }
