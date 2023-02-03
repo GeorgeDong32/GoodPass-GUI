@@ -127,7 +127,7 @@ public sealed partial class MainPage : Page
     /// <summary>
     /// PasswordBox状态变化事件响应
     /// </summary>
-    private void Login_PssswordBox_PasswordChanging(PasswordBox sender, PasswordBoxPasswordChangingEventArgs args) => Login_InfoBar.IsOpen = false;
+    private void Login_PasswordBox_PasswordChanging(PasswordBox sender, PasswordBoxPasswordChangingEventArgs args) => Login_InfoBar.IsOpen = false;
 
     /// <summary>
     /// 回车解锁功能
