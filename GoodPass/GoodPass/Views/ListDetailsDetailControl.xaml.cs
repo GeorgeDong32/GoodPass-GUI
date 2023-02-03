@@ -59,11 +59,10 @@ public sealed partial class ListDetailsDetailControl : UserControl
     private void PasswordRevealButton_Click(object sender, RoutedEventArgs e)
     {
         var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
-        ListDetailsDetailControl_PasswordBox.Password = password;
         if (PasswordRevealButton.IsChecked == true)
-            ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
+            ListDetailsDetailControl_PasswordBox.Text = password;
         else
-            ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
+            ListDetailsDetailControl_PasswordBox.Text = "••••••••";
     }
 
     /// <summary>
@@ -71,7 +70,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
     /// </summary>
     private async void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new EditDataDialog(ListDetailsDetailControl_AccountNameText.Text, PlatformNameText.Text, ListDetailsDetailControl_PlatformUrlHyperLinkText.Text, ListDetailsDetailControl_PasswordBox.Password)
+        var dialog = new EditDataDialog(ListDetailsDetailControl_AccountNameText.Text, PlatformNameText.Text, ListDetailsDetailControl_PlatformUrlHyperLinkText.Text, App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword)
         {
             XamlRoot = this.XamlRoot,
             Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
@@ -91,7 +90,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
         else if (dialog.Result == EditDataResult.Success)
         {
             ListDetailsDetailControl_AccountNameText.Text = dialog.newAccountName;
-            ListDetailsDetailControl_PasswordBox.Password = dialog.newPassword;
+            ListDetailsDetailControl_PasswordBox.Text = dialog.newPassword;
             ListDetailsDetailControl_PlatformUrlHyperLinkText.Text = dialog.newPlatformUrl;
             ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = new Uri(dialog.newPlatformUrl);
             PlatformNameText.Text = dialog.newPlatformName;

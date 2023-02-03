@@ -81,14 +81,13 @@
                         Style="{StaticResource DetailSubTitleStyle}"
                         Text="Password" />
 
-                    <PasswordBox
+                    <TextBox
                         Name="ListDetailsDetailControl_PasswordBox"
                         Width="350"
                         Margin="{StaticResource ListDetailsDetailControlDetailMargin}"
-                        IsEnabled="False"
-                        Password="{x:Bind ListDetailsMenuItem.GetPassword}"
-                        PasswordRevealMode="Hidden"
-                        RelativePanel.Below="ListDetailsDetailControl_PasswordTitle" />
+                        IsReadOnly="True"
+                        RelativePanel.Below="ListDetailsDetailControl_PasswordTitle"
+                        Text="••••••••" />
                     <Button
                         x:Name="ListDetailsDetailControl_PasswordCopyButton"
                         x:Uid="ListDetailsDetailControl_PasswordCopyButton"
