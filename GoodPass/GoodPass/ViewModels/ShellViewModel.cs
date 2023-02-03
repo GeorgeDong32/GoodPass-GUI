@@ -67,13 +67,19 @@ public class ShellViewModel : ObservableRecipient
 
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
 
+    /// <summary>
+    /// 点击MenuBar中退出按钮的操作实现
+    /// </summary>
     private void OnMenuFileExit()
     {
-        //锁定保存并离开
+        //实现锁定并保存数据
         OnMenuFileLock();
         Application.Current.Exit();
     }
 
+    /// <summary>
+    /// 点击MenuBar设置按钮的事件处理
+    /// </summary>
     private void OnMenuSettings()
     {
         if (App.IsInSettingsPage())
@@ -87,10 +93,19 @@ public class ShellViewModel : ObservableRecipient
         }
     }
 
+    /// <summary>
+    /// Navigate to ListDetail page
+    /// </summary>
     private void OnMenuViewsListDetails() => NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
 
+    /// <summary>
+    /// Navigate to main(login) page
+    /// </summary>
     private void OnMenuViewsMain() => NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
 
+    /// <summary>
+    /// 点击MenuBar锁定的事件处理
+    /// </summary>
     private void OnMenuFileLock()
     {
         //保存到文件
@@ -103,6 +118,9 @@ public class ShellViewModel : ObservableRecipient
         NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
     }
 
+    /// <summary>
+    /// 导航返回的实现
+    /// </summary>
     public void GoBack()
     {
         if (!App.App_IsLock() && !App.IsInSettingsPage())

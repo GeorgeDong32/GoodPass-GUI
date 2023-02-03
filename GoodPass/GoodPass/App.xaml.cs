@@ -26,40 +26,72 @@ public partial class App : Application
         get;
     }
 
-    /*MasterKey加密数组*/
+    /// <summary>
+    /// 加密基数组
+    /// </summary>
     public static int[]? EncryptBase;
+    /// <summary>
+    /// 主密码基数组
+    /// </summary>
     public static int[]? MKBase;
-    /*End MasterKey加密数组*/
 
-    /*数据成员*/
+    /// <summary>
+    /// 数据管理成员
+    /// </summary>
     public static GPManager DataManager;
 
+    /// <summary>
+    /// 公共的ListDetailViewModel
+    /// </summary>
     public static ListDetailsViewModel ListDetailsVM;
-    /*End 数据成员*/
 
-    /*App状态区*/
+    /// <summary>
+    /// App锁定情况
+    /// </summary>
     private static bool LockConsition
     {
         get; set;
     }
 
+    /// <summary>
+    /// App设置页情况
+    /// </summary>
     private static bool InSettingsPage
     {
         get; set;
     }
 
-    public static bool App_IsLock() => LockConsition;//true为锁定状态，false为解锁状态
+    /// <summary>
+    /// 获取App锁定情况
+    /// </summary>
+    /// <returns>true为锁定状态，false为解锁状态</returns>
+    public static bool App_IsLock() => LockConsition;//
 
+    /// <summary>
+    /// 解锁App接口
+    /// </summary>
     public static void App_UnLock() => LockConsition = false;
 
+    /// <summary>
+    /// 锁定App接口
+    /// </summary>
     public static void App_Lock() => LockConsition = true;
 
+    /// <summary>
+    /// 获取App设置页情况
+    /// </summary>
+    /// <returns>true为在设置页，false为不在设置页</returns>
     public static bool IsInSettingsPage() => InSettingsPage;
 
+    /// <summary>
+    /// 进入设置页状态更改接口
+    /// </summary>
     public static void GoInSettingsPage() => InSettingsPage = true;
 
+    /// <summary>
+    /// 离开设置页状态更改接口
+    /// </summary>
     public static void LeftSettingsPage() => InSettingsPage = false;
-    /*App 状态区结束*/
 
     public static WindowEx MainWindow { get; } = new MainWindow();
 

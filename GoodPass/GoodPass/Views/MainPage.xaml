@@ -55,7 +55,7 @@
                     TextAlignment="Left" />
 
                 <PasswordBox
-                    x:Name="Login_PssswordBox"
+                    x:Name="Login_PasswordBox"
                     Width="400"
                     Height="34"
                     KeyDown="Login_PssswordBox_KeyDown"
