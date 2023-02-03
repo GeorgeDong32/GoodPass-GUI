@@ -114,6 +114,9 @@ public sealed partial class ShellPage : Page
         AnimatedIcon.SetState((UIElement)sender, "Normal");
     }
 
+    /// <summary>
+    /// 添加数据按钮的事件响应
+    /// </summary>
     private async void ShellMenuBarAddDataButton_Click(object sender, RoutedEventArgs e)
     {
         if (App.App_IsLock())

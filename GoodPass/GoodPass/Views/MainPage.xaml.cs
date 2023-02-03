@@ -28,9 +28,12 @@ public sealed partial class MainPage : Page
         InitializeComponent();
     }
 
+    /// <summary>
+    /// 点击解锁按钮的事件处理(已弃用)
+    /// </summary>
     private void Login_Check_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var passwordInput = Login_PssswordBox.Password;
+        var passwordInput = Login_PasswordBox.Password;
         var MKCheck_Result = MKS.CheckMasterKey(passwordInput);
         //添加解锁逻辑
         if (MKCheck_Result == "pass")
@@ -71,13 +74,19 @@ public sealed partial class MainPage : Page
         }
     }
 
+    /// <summary>
+    /// 点击解锁按钮的异步事件处理方法
+    /// </summary>
     private async void Login_Check_ClickAsync(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         UnlockProcess();
         await Task.CompletedTask;
     }
 
-    private async void ShowSetMKDialog()//密码设置弹窗
+    /// <summary>
+    /// 密码设置弹窗
+    /// </summary>
+    private async void ShowSetMKDialog()
     {
         SetMKDialog dialog = new()
         {
@@ -94,7 +103,10 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private async void ShowResetMKDialog()//重设密码弹窗
+    /// <summary>
+    /// 重设密码弹窗
+    /// </summary>
+    private async void ShowResetMKDialog()
     {
         SetMKDialog dialog = new()
         {
@@ -112,12 +124,15 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private void Login_PssswordBox_PasswordChanging(PasswordBox sender, PasswordBoxPasswordChangingEventArgs args)
-    {
-        Login_InfoBar.IsOpen = false;
-    }
+    /// <summary>
+    /// PasswordBox状态变化事件响应
+    /// </summary>
+    private void Login_PasswordBox_PasswordChanging(PasswordBox sender, PasswordBoxPasswordChangingEventArgs args) => Login_InfoBar.IsOpen = false;
 
-    private async void Login_PssswordBox_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+    /// <summary>
+    /// 回车解锁功能
+    /// </summary>
+    private async void Login_PasswordBox_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
     {
         if (e.Key == Windows.System.VirtualKey.Enter)
         {
@@ -126,9 +141,12 @@ public sealed partial class MainPage : Page
         }
     }
 
+    /// <summary>
+    /// (封装的)异步解锁操作
+    /// </summary>
     private async void UnlockProcess()
     {
-        var passwordInput = Login_PssswordBox.Password;
+        var passwordInput = Login_PasswordBox.Password;
         var MKCheck_Result = await MKS.CheckMasterKeyAsync(passwordInput);
         App.DataManager ??= new Models.GPManager(); //为null时才赋值
         //添加解锁逻辑
@@ -151,7 +169,6 @@ public sealed partial class MainPage : Page
             Login_InfoBar.IsOpen = true;
             Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
             Login_InfoBar.Message = "配置文件不存在！";
-            //To Do: 添加进入设置密码界面
             ShowSetMKDialog();
         }
         else if (MKCheck_Result == "error: data broken")
@@ -160,7 +177,6 @@ public sealed partial class MainPage : Page
             Login_InfoBar.IsOpen = true;
             Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
             Login_InfoBar.Message = "配置文件损坏，请修复！";
-            //To Do: 添加进入重设密码界面
             ShowResetMKDialog();
         }
         else

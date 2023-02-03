@@ -31,7 +31,6 @@
     <Page Remove="Converters\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Controls\ExpandableSettingControl.xaml" />
     <None Remove="Dialogs\EditDataDialog.xaml" />
     <None Remove="Images\ImageResoueces.xaml" />
     <None Remove="Views\AddDataDialog.xaml" />

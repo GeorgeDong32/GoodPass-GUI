@@ -1,25 +1,37 @@
 ﻿namespace GoodPass.Services;
 
-//提供GPSES服务，用于对数据进行加解密
+/// <summary>
+/// 提供GPSES服务，用于对数据进行加解密
+/// </summary>
 public class GoodPassCryptographicServices
 {
-    /*成员*/
+    /// <summary>
+    /// 加密基数组
+    /// </summary>
     private int[]? CryptBase
     {
         get; set;
     }
 
+    /// <summary>
+    /// 数字字符index数组
+    /// </summary>
     private int[] NumPos
     {
         get; set;
     }
 
+    /// <summary>
+    /// 特殊字符index数组
+    /// </summary>
     private int[] SpecPos
     {
         get; set;
     }
 
-    /*方法*/
+    /// <summary>
+    /// GoodPassCryptographicServices构造函数
+    /// </summary>
     public GoodPassCryptographicServices()
     {
         CryptBase = App.MKBase;
@@ -28,6 +40,12 @@ public class GoodPassCryptographicServices
         NumPos[0] = 0; SpecPos[0] = 0;
     }
 
+    /// <summary>
+    /// 解密输入的字符串
+    /// </summary>
+    /// <param name="input">待解密的字符串</param>
+    /// <returns>解密后字符串</returns>
+    /// <exception cref="ArgumentNullException">空输入异常</exception>
     public string DecryptStr(string input)
     {
         //确保CryptBase已经赋值
@@ -94,6 +112,11 @@ public class GoodPassCryptographicServices
         return decStr;
     }
 
+    /// <summary>
+    /// 加密输入的字符串
+    /// </summary>
+    /// <param name="input">待加密字符串</param>
+    /// <returns>加密后字符串</returns>
     public string EncryptStr(string input)//Todo：测试char-int是否按要求转换
     {
         //确保CryptBase已经赋值

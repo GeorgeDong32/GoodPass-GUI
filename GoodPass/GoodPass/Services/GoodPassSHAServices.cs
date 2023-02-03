@@ -2,18 +2,19 @@
 
 namespace GoodPass.Services;
 
-/*Descriptions*/
-//Provide SHA256 and GPHES hash service
-
+/// <summary>
+/// Provide SHA256 and GPHES hash service
+/// </summary>
 public static class GoodPassSHAServices
 {
+    /// <summary>
+    /// get SHA256 hash of the InputString
+    /// </summary>
     public static string getSHA256(string InputString)
     {
-        //get SHA256 hash of the InputString
         try
         {
             SHA256 SHA256temp = SHA256.Create();
-
             var bytValue = System.Text.Encoding.UTF8.GetBytes(InputString);
             var bytHash = SHA256temp.ComputeHash(bytValue);
             SHA256temp.Clear();
@@ -48,6 +49,9 @@ public static class GoodPassSHAServices
         }
     }
 
+    /// <summary>
+    /// Get GoodPassHash value of the input string
+    /// </summary>
     public static string getGPHES(string InputString)
     {
         try
