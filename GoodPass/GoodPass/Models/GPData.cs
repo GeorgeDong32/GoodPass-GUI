@@ -35,7 +35,7 @@ public class GPData
         get; set;
     }
 
-    public readonly string GetPassword;
+    public string GetPassword;
     /*End 数据*/
 
     /*方法*/
@@ -115,6 +115,7 @@ public class GPData
     {
         var GPCS = new GoodPassCryptographicServices();
         DecPassword = GPCS.DecryptStr(EncPassword);
+        GetPassword = DecPassword;
         return true;
     }
 
