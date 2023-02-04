@@ -1,6 +1,6 @@
 ﻿using GoodPass.Dialogs;
-using GoodPass.Helpers;
 using GoodPass.Models;
+using GoodPass.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
@@ -60,9 +60,15 @@ public sealed partial class ListDetailsDetailControl : UserControl
     {
         var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
         if (PasswordRevealButton.IsChecked == true)
-            ListDetailsDetailControl_PasswordBox.Text = password;
+        {
+            ListDetailsDetailControl_PasswordBox.Password = password;
+            ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
+        }
         else
-            ListDetailsDetailControl_PasswordBox.Text = "••••••••";
+        {
+            ListDetailsDetailControl_PasswordBox.Password = password;
+            ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
+        }
     }
 
     /// <summary>
@@ -90,9 +96,8 @@ public sealed partial class ListDetailsDetailControl : UserControl
         else if (dialog.Result == EditDataResult.Success)
         {
             ListDetailsDetailControl_AccountNameText.Text = dialog.newAccountName;
-            ListDetailsDetailControl_PasswordBox.Text = dialog.newPassword;
+            ListDetailsDetailControl_PasswordBox.Password = dialog.newPassword;
             ListDetailsDetailControl_PlatformUrlHyperLinkText.Text = dialog.newPlatformUrl;
-            ListDetailsDetailControl_PlatformUrlHyperLink.NavigateUri = new Uri(dialog.newPlatformUrl);
             PlatformNameText.Text = dialog.newPlatformName;
             ListDetailsDetailControl_LastmodifiedText.Text = dialog.newDateTime.ToString();
             App.DataManager.SaveToFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
