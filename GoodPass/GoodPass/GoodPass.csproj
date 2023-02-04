@@ -93,4 +93,8 @@
   <ItemGroup>
     <PRIResource Remove="Converters\**" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
 </Project>
