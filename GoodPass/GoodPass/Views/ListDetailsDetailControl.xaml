@@ -194,6 +194,17 @@
                         </RelativePanel>
                     </Button>
 
+                    <TeachingTip
+                        x:Name="OOBE_EditTip"
+                        x:Uid="OOBE_EditTip"
+                        Title="点击此处编辑数据"
+                        IsOpen="False"
+                        Target="{x:Bind ListDetailsDetailControl_EditButton}">
+                        <TeachingTip.IconSource>
+                            <FontIconSource FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE783;" />
+                        </TeachingTip.IconSource>
+                    </TeachingTip>
+
                     <Button
                         x:Name="ListDetailsDetailControl_DeleteButton"
                         x:Uid="ListDetailsDetailControl_DeleteButton"
@@ -213,6 +224,17 @@
                                 Text="删除" />
                         </RelativePanel>
                     </Button>
+
+                    <TeachingTip
+                        x:Name="OOBE_DeleteTip"
+                        x:Uid="OOBE_DeleteTip"
+                        Title="点击此处删除数据，该操作不可撤销"
+                        IsOpen="False"
+                        Target="{x:Bind ListDetailsDetailControl_DeleteButton}">
+                        <TeachingTip.IconSource>
+                            <FontIconSource FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE783;" />
+                        </TeachingTip.IconSource>
+                    </TeachingTip>
                 </RelativePanel>
 
             </StackPanel>

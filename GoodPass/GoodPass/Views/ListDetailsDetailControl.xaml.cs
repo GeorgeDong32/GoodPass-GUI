@@ -4,6 +4,7 @@ using GoodPass.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
+using System.Runtime.CompilerServices;
 
 namespace GoodPass.Views;
 
@@ -38,6 +39,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
         var passwordDatapackage = new DataPackage();
         passwordDatapackage.SetText(password);
         Clipboard.SetContent(passwordDatapackage);
+        CopiedTipforPasswordCopyButton.Title = App.UIStrings.ListDetailsDetailControl_CopiedTipforPasswordCopyButtonTitle;
         CopiedTipforPasswordCopyButton.IsOpen = true;
     }
 
@@ -50,6 +52,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
         var dataPackage = new DataPackage();
         dataPackage.SetText(accountName);
         Clipboard.SetContent(dataPackage);
+        CopiedTipforAcconutNameCopyButton.Title = App.UIStrings.ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
         CopiedTipforAcconutNameCopyButton.IsOpen = true;
     }
 
@@ -190,5 +193,15 @@ public sealed partial class ListDetailsDetailControl : UserControl
             warningDialog.Content = "链接为空，无法访问！";
             _ = await warningDialog.ShowAsync();
         }
+    }
+
+    public void ShowOOBETips()
+    {
+        this.OOBE_DeleteTip.IsOpen = true;
+        this.OOBE_EditTip.IsOpen = true;
+        this.CopiedTipforPasswordCopyButton.Title = "点击此按钮复制账号名";
+        this.CopiedTipforAcconutNameCopyButton.Title = "点击此按钮复制密码";
+        this.CopiedTipforAcconutNameCopyButton.IsOpen = true;
+        this.CopiedTipforPasswordCopyButton.IsOpen = true;
     }
 }

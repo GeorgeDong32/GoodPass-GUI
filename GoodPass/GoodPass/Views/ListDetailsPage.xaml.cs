@@ -27,8 +27,6 @@ public sealed partial class ListDetailsPage : Page
         }
     }
 
-    public ListDetailsViewModel GetDetailsViewModel() => ViewModel;
-
     private void ListDetailsViewControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
 
