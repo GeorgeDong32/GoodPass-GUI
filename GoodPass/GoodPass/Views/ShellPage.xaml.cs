@@ -21,6 +21,11 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         InitializeComponent();
+        if (App.OOBESituation == Models.OOBESituation.EnableOOBE)
+        {
+            OOBE_AddDataTip.IsOpen = true;
+            OOBE_SettingTip.IsOpen = true;
+        }
 
         ViewModel.NavigationService.Frame = NavigationFrame;
 
