@@ -26,7 +26,16 @@ public sealed partial class MainPage : Page
         ViewModel = App.GetService<MainViewModel>();
         MKS = App.GetService<MasterKeyService>();
         App.UIStrings = new Strings.UIStrings("zh-CN");
+        App.OOBESituation = App.GetService<OOBEServices>().GetOOBEStatusAsync().Result;
         InitializeComponent();
+        if (App.OOBESituation == Models.OOBESituation.EnableOOBE)
+        {
+            OOBE_LoginTip.IsOpen = true;
+        }
+        else
+        {
+            OOBE_LoginTip.IsOpen = false;
+        }
     }
 
     /// <summary>
