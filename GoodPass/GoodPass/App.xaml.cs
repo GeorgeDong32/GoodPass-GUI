@@ -65,7 +65,7 @@ public partial class App : Application
     /// <summary>
     /// OOBE状态
     /// </summary>
-    private static OOBESituation OOBESituation
+    public static OOBESituation OOBESituation
     {
         get; set;
     }
@@ -138,6 +138,7 @@ public partial class App : Application
             services.AddSingleton<GoodPassCryptographicServices>();
             services.AddSingleton<GoodPassDataService>();
             services.AddSingleton<OOBEServices>();
+            services.AddSingleton<ListDetailsViewModel>();
             services.AddSingleton<IFileService, FileService>();
 
             // Views and ViewModels
