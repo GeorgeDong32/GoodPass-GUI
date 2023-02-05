@@ -21,3 +21,9 @@ public enum EditDataResult
     UnknowError,
     Nochange
 }
+
+public enum OOBESituation
+{
+    OutOfBox,
+    NotOutOfBox
+}

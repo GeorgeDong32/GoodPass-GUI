@@ -4,6 +4,7 @@ using GoodPass.Dialogs;
 using GoodPass.Models;
 using GoodPass.Notifications;
 using GoodPass.Services;
+using GoodPass.Strings;
 using GoodPass.ViewModels;
 using GoodPass.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -57,6 +58,22 @@ public partial class App : Application
     /// App设置页情况
     /// </summary>
     private static bool InSettingsPage
+    {
+        get; set;
+    }
+
+    /// <summary>
+    /// OOBE状态
+    /// </summary>
+    private static OOBESituation OOBESituation
+    {
+        get; set;
+    }
+
+    /// <summary>
+    /// 多语言字符串资源
+    /// </summary>
+    public static UIStrings UIStrings
     {
         get; set;
     }
@@ -118,11 +135,10 @@ public partial class App : Application
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMaterKeyService, MasterKeyService>();
             services.AddSingleton<MasterKeyService>();
-            //services.AddSingleton<GoodPassSHAServices>();
             services.AddSingleton<GoodPassCryptographicServices>();
             services.AddSingleton<GoodPassDataService>();
+            services.AddSingleton<OOBEServices>();
             services.AddSingleton<IFileService, FileService>();
-            services.AddSingleton<ListDetailsViewModel>();
 
             // Views and ViewModels
             services.AddTransient<SettingsViewModel>();

@@ -25,6 +25,7 @@ public sealed partial class MainPage : Page
         App.App_Lock();
         ViewModel = App.GetService<MainViewModel>();
         MKS = App.GetService<MasterKeyService>();
+        App.UIStrings = new Strings.UIStrings("zh-CN");
         InitializeComponent();
     }
 
