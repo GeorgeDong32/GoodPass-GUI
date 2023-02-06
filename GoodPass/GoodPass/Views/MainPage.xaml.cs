@@ -154,6 +154,16 @@ public sealed partial class MainPage : Page
     /// </summary>
     private async void UnlockProcess()
     {
+        if (App.AgreementOOBE == Models.OOBESituation.EnableOOBE)
+        {
+            var dialog = new OOBEAgreementsDialog()
+            {
+                XamlRoot = this.XamlRoot,
+                Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = App.UIStrings.OOBEAgreementsDialogTitle,
+            };
+            _ = await dialog.ShowAsync();
+        }
         var passwordInput = Login_PasswordBox.Password;
         var MKCheck_Result = await MKS.CheckMasterKeyAsync(passwordInput);
         App.DataManager ??= new Models.GPManager(); //为null时才赋值

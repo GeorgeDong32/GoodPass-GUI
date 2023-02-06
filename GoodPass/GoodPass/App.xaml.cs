@@ -75,6 +75,11 @@ public partial class App : Application
         get; set;
     }
 
+    public static OOBESituation AgreementOOBE
+    {
+        get; set;
+    }
+
     /// <summary>
     /// 多语言字符串资源
     /// </summary>
