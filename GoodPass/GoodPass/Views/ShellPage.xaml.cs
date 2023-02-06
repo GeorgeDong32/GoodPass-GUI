@@ -24,8 +24,9 @@ public sealed partial class ShellPage : Page
         App.UIStrings = App.GetService<MultilingualStringsServices>().Getzh_CN();
         App.MainOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("MainOOBE").Result;
         App.ShellOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("ShellOOBE").Result;
+        App.AgreementOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("AgreementOOBE").Result;
         InitializeComponent();
-        if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
+        if (App.ShellOOBE == Models.OOBESituation.EnableOOBE)
         {
             OOBE_AddDataTip.IsOpen = true;
             OOBE_SettingTip.IsOpen = true;
