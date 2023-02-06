@@ -63,9 +63,14 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// OOBE状态
+    /// MainOOBE状态
     /// </summary>
-    public static OOBESituation OOBESituation
+    public static OOBESituation MainOOBE
+    {
+        get; set;
+    }
+
+    public static OOBESituation ShellOOBE
     {
         get; set;
     }
@@ -134,12 +139,13 @@ public partial class App : Application
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMaterKeyService, MasterKeyService>();
+            services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<MasterKeyService>();
             services.AddSingleton<GoodPassCryptographicServices>();
             services.AddSingleton<GoodPassDataService>();
             services.AddSingleton<OOBEServices>();
             services.AddSingleton<ListDetailsViewModel>();
-            services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<MultilingualStringsServices>();
 
             // Views and ViewModels
             services.AddTransient<SettingsViewModel>();
