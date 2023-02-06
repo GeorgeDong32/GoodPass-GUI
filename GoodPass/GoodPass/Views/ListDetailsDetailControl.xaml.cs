@@ -1,6 +1,6 @@
 ﻿using GoodPass.Dialogs;
-using GoodPass.Models;
 using GoodPass.Helpers;
+using GoodPass.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
@@ -47,7 +47,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
     /// </summary>
     private void ListDetailsDetailControl_PasswordCopyButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
+        var password = ListDetailsDetailControl_PasswordBox.Password;
         var passwordDatapackage = new DataPackage();
         passwordDatapackage.SetText(password);
         Clipboard.SetContent(passwordDatapackage);
@@ -73,15 +73,12 @@ public sealed partial class ListDetailsDetailControl : UserControl
     /// </summary>
     private void PasswordRevealButton_Click(object sender, RoutedEventArgs e)
     {
-        var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
         if (PasswordRevealButton.IsChecked == true)
         {
-            ListDetailsDetailControl_PasswordBox.Password = password;
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
         }
         else
         {
-            ListDetailsDetailControl_PasswordBox.Password = password;
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
         }
     }
@@ -91,7 +88,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
     /// </summary>
     private async void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new EditDataDialog(ListDetailsDetailControl_AccountNameText.Text, PlatformNameText.Text, ListDetailsDetailControl_PlatformUrlHyperLinkText.Text, App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword)
+        var dialog = new EditDataDialog(ListDetailsDetailControl_AccountNameText.Text, PlatformNameText.Text, ListDetailsDetailControl_PlatformUrlHyperLinkText.Text, ListDetailsDetailControl_PasswordBox.Password)
         {
             XamlRoot = this.XamlRoot,
             Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
@@ -99,14 +96,15 @@ public sealed partial class ListDetailsDetailControl : UserControl
         _ = await dialog.ShowAsync();
         if (dialog.Result == EditDataResult.Nochange)
         {
-            var warningdialog = new GPDialog2()
+            /*等待用户反馈是否需要添加*/
+            /*var warningdialog = new GPDialog2()
             {
                 XamlRoot = this.XamlRoot,
                 Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
                 Title = "提示",
                 Content = "数据没有任何修改！"
             };
-            _ = warningdialog.ShowAsync();
+            _ = warningdialog.ShowAsync();*/
         }
         else if (dialog.Result == EditDataResult.Success)
         {

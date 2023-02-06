@@ -69,6 +69,7 @@
                         x:Name="CopiedTipforAcconutNameCopyButton"
                         x:Uid="CopiedTipforAcconutNameCopyButton"
                         Title="AccountName has copied!"
+                        IsLightDismissEnabled="True"
                         Target="{x:Bind ListDetailsDetailControl_AcconutNameCopyButton}">
                         <TeachingTip.IconSource>
                             <SymbolIconSource Symbol="Accept" />
@@ -114,6 +115,7 @@
                         x:Name="CopiedTipforPasswordCopyButton"
                         x:Uid="CopiedTipforPasswordCopyButton"
                         Title="Password has copied!"
+                        IsLightDismissEnabled="True"
                         Target="{x:Bind ListDetailsDetailControl_PasswordCopyButton}">
                         <TeachingTip.IconSource>
                             <SymbolIconSource Symbol="Accept" />
