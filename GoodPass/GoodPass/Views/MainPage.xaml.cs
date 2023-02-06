@@ -25,10 +25,8 @@ public sealed partial class MainPage : Page
         App.App_Lock();
         ViewModel = App.GetService<MainViewModel>();
         MKS = App.GetService<MasterKeyService>();
-        App.UIStrings = new Strings.UIStrings("zh-CN");
-        App.OOBESituation = App.GetService<OOBEServices>().GetOOBEStatusAsync().Result;
         InitializeComponent();
-        if (App.OOBESituation == Models.OOBESituation.EnableOOBE)
+        if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
         {
             OOBE_LoginTip.IsOpen = true;
         }
@@ -196,5 +194,11 @@ public sealed partial class MainPage : Page
             Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
             Login_InfoBar.Message = "未知错误！";
         }
+    }
+
+    private async void OOBE_LoginTip_CloseButtonClick(TeachingTip sender, object args)
+    {
+        OOBE_LoginTip.IsOpen = false;
+        _ = await App.GetService<OOBEServices>().SetOOBEStatusAsync("MainOOBE", Models.OOBESituation.DIsableOOBE);
     }
 }

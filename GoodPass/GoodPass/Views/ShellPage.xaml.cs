@@ -1,6 +1,7 @@
 ﻿using GoodPass.Contracts.Services;
 using GoodPass.Dialogs;
 using GoodPass.Helpers;
+using GoodPass.Services;
 using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -20,8 +21,11 @@ public sealed partial class ShellPage : Page
     public ShellPage(ShellViewModel viewModel)
     {
         ViewModel = viewModel;
+        App.UIStrings = App.GetService<MultilingualStringsServices>().Getzh_CN();
+        App.MainOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("MainOOBE").Result;
+        App.ShellOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("ShellOOBE").Result;
         InitializeComponent();
-        if (App.OOBESituation == Models.OOBESituation.EnableOOBE)
+        if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
         {
             OOBE_AddDataTip.IsOpen = true;
             OOBE_SettingTip.IsOpen = true;
@@ -153,5 +157,11 @@ public sealed partial class ShellPage : Page
         {
             ShellMenuBarAddDataButton.Flyout.ShowAt(ShellMenuBarSettingsButton);
         }
+    }
+
+    private async void OOBE_AddDataTip_CloseButtonClick(TeachingTip sender, object args)
+    {
+        OOBE_AddDataTip.IsOpen = false;
+        _ = await App.GetService<OOBEServices>().SetOOBEStatusAsync("ShellOOBE", Models.OOBESituation.DIsableOOBE);
     }
 }

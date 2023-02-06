@@ -87,6 +87,7 @@
             <TeachingTip
                 x:Name="OOBE_AddDataTip"
                 x:Uid="OOBE_AddDataTip"
+                CloseButtonClick="OOBE_AddDataTip_CloseButtonClick"
                 IsOpen="False"
                 Target="{x:Bind ShellMenuBarAddDataButton}">
                 <TeachingTip.IconSource>

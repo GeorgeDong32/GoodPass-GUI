@@ -76,9 +76,10 @@
                 <TeachingTip
                     x:Name="OOBE_LoginTip"
                     x:Uid="OOBE_LoginTip"
+                    CloseButtonClick="OOBE_LoginTip_CloseButtonClick"
                     IsOpen="False"
-                    Target="{x:Bind Login_Check}"
-                    PreferredPlacement="Bottom">
+                    PreferredPlacement="Bottom"
+                    Target="{x:Bind Login_Check}">
                     <TeachingTip.IconSource>
                         <FontIconSource FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE783;" />
                     </TeachingTip.IconSource>
