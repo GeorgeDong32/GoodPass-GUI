@@ -20,6 +20,10 @@ public sealed partial class ListDetailsDetailControl : UserControl
     public ListDetailsDetailControl()
     {
         InitializeComponent();
+        ListDetailsDetailControl_AccountNameTitle.Text = App.UIStrings.ListDetailsDetailControl_AccountNameTitleText;
+        ListDetailsDetailControl_LastmodifiedTitle.Text = App.UIStrings.ListDetailsDetailControl_LastmodifiedTitleText;
+        ListDetailsDetailControl_PasswordTitle.Text = App.UIStrings.ListDetailsDetailControl_PasswordTitleText;
+        ListDetailsDetailControl_PlatformUrlTitle.Text = App.UIStrings.ListDetailsDetailControl_PlatformUrlTitleText;
     }
 
     private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
