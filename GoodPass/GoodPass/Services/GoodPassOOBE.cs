@@ -1,5 +1,7 @@
 ﻿using GoodPass.Contracts.Services;
+using GoodPass.Helpers;
 using GoodPass.Models;
+using Windows.Storage;
 
 namespace GoodPass.Services;
 
@@ -8,13 +10,11 @@ namespace GoodPass.Services;
 /// </summary>
 public class OOBEServices
 {
-    private const string oobeSettingKey = "OOBE";
-
     private readonly ILocalSettingsService _localSettingsService;
 
     private OOBESituation _OOBESituation
     {
-        get; set; 
+        get; set;
     }
 
     public OOBEServices(ILocalSettingsService localSettingsService)
@@ -22,15 +22,27 @@ public class OOBEServices
         _localSettingsService = localSettingsService;
     }
 
-    public async Task<OOBESituation> GetOOBEStatusAsync()
+    /// <summary>
+    /// 获取OOBE状态
+    /// </summary>
+    /// <param name="oobePosition">OOBE位置，如MainOOBE/AddDataOOBE</param>
+    public async Task<OOBESituation> GetOOBEStatusAsync(string oobePosition)
     {
-        var loaclstatus = await _localSettingsService.ReadSettingAsync<string>(oobeSettingKey);
+        var loaclstatus = "";
+        if (RuntimeHelper.IsMSIX)
+        {
+            if (ApplicationData.Current.LocalSettings.Values.TryGetValue(oobePosition, out var obj))
+            {
+                loaclstatus = (string)obj;
+                await Task.CompletedTask;
+            }
+        }
         switch (loaclstatus)
         {
-            case "Enable":
+            case "\"EnableOOBE\"":
                 _OOBESituation = OOBESituation.EnableOOBE;
                 break;
-            case "Disable":
+            case "\"DIsableOOBE\"":
                 _OOBESituation = OOBESituation.DIsableOOBE;
                 break;
             default:
@@ -40,16 +52,22 @@ public class OOBEServices
         return _OOBESituation;
     }
 
-    public async Task<bool> SetOOBEStatusAsync(OOBESituation oobeSituation)
+    public async Task<bool> SetOOBEStatusAsync(string oobePosition, OOBESituation oobeSituation)
     {
         _OOBESituation = oobeSituation;
         switch (oobeSituation)
         {
             case OOBESituation.EnableOOBE:
-                await _localSettingsService.SaveSettingAsync(oobeSettingKey, "Enable");
+                if (RuntimeHelper.IsMSIX)
+                {
+                    ApplicationData.Current.LocalSettings.Values[oobePosition] = await Json.StringifyAsync(oobeSituation.ToString());
+                }
                 return true;
             case OOBESituation.DIsableOOBE:
-                await _localSettingsService.SaveSettingAsync(oobeSettingKey, "Disable");
+                if (RuntimeHelper.IsMSIX)
+                {
+                    ApplicationData.Current.LocalSettings.Values[oobePosition] = await Json.StringifyAsync(oobeSituation.ToString());
+                }
                 return true;
             default:
                 return false;
