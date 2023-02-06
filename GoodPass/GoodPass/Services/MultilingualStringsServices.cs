@@ -10,7 +10,36 @@ public class MultilingualStringsServices
 
     public MultilingualStringsServices()
     {
-        UIStrings_zh_CN = new UIStrings("zh-CN");
-        UIStrings_en_US = new UIStrings("en-US");
+        UIStrings_zh_CN = new UIStrings("账号",
+                                        "账号名已复制！",
+                                        "密码",
+                                        "密码已复制！",
+                                        "平台网址",
+                                        "最后修改时间",
+                                        "编辑数据",
+                                        "删除数据",
+                                        "复制账号名",
+                                        "复制密码",
+                                        "显示密码",
+                                        "点击访问平台网址",
+                                        "请阅读并同意《用户协议》和《隐私政策》");
+
+        UIStrings_en_US = new UIStrings("Account",
+                                        "AccountName has copied!",
+                                        "Password",
+                                        "Password has copied!",
+                                        "Platform Url",
+                                        "Last modified",
+                                        "Edit Data",
+                                        "Delete Data",
+                                        "Copy AccountName",
+                                        "Copy Password",
+                                        "Reveal Password",
+                                        "Click to visit the platform URL",
+                                        "Please read and agree to the \"User Agreement\" and \"Privacy Policy\"");
     }
+
+    public UIStrings Getzh_CN() => UIStrings_zh_CN;
+
+    public UIStrings Geten_US() => UIStrings_en_US;
 }

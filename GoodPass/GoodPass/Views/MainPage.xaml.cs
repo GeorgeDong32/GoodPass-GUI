@@ -25,8 +25,15 @@ public sealed partial class MainPage : Page
         App.App_Lock();
         ViewModel = App.GetService<MainViewModel>();
         MKS = App.GetService<MasterKeyService>();
-        App.UIStrings = new Strings.UIStrings("zh-CN");
         InitializeComponent();
+        if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
+        {
+            OOBE_LoginTip.IsOpen = true;
+        }
+        else
+        {
+            OOBE_LoginTip.IsOpen = false;
+        }
     }
 
     /// <summary>
@@ -147,6 +154,16 @@ public sealed partial class MainPage : Page
     /// </summary>
     private async void UnlockProcess()
     {
+        if (App.AgreementOOBE == Models.OOBESituation.EnableOOBE)
+        {
+            var dialog = new OOBEAgreementsDialog()
+            {
+                XamlRoot = this.XamlRoot,
+                Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = App.UIStrings.OOBEAgreementsDialogTitle,
+            };
+            _ = await dialog.ShowAsync();
+        }
         var passwordInput = Login_PasswordBox.Password;
         var MKCheck_Result = await MKS.CheckMasterKeyAsync(passwordInput);
         App.DataManager ??= new Models.GPManager(); //为null时才赋值
@@ -187,5 +204,11 @@ public sealed partial class MainPage : Page
             Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
             Login_InfoBar.Message = "未知错误！";
         }
+    }
+
+    private async void OOBE_LoginTip_CloseButtonClick(TeachingTip sender, object args)
+    {
+        OOBE_LoginTip.IsOpen = false;
+        _ = await App.GetService<OOBEServices>().SetOOBEStatusAsync("MainOOBE", Models.OOBESituation.DIsableOOBE);
     }
 }

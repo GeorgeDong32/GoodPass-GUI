@@ -1,6 +1,6 @@
 ﻿using GoodPass.Dialogs;
-using GoodPass.Models;
 using GoodPass.Helpers;
+using GoodPass.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
@@ -16,9 +16,22 @@ public sealed partial class ListDetailsDetailControl : UserControl
     }
     public static readonly DependencyProperty ListDetailsMenuItemProperty = DependencyProperty.Register("ListDetailsMenuItem", typeof(GPData), typeof(ListDetailsDetailControl), new PropertyMetadata(null, OnListDetailsMenuItemPropertyChanged));
 
+    /// <summary>
+    /// 初始化控件并加载多语言资源
+    /// </summary>
     public ListDetailsDetailControl()
     {
         InitializeComponent();
+        ListDetailsDetailControl_AccountNameTitle.Text = App.UIStrings.ListDetailsDetailControl_AccountNameTitleText;
+        ListDetailsDetailControl_LastmodifiedTitle.Text = App.UIStrings.ListDetailsDetailControl_LastmodifiedTitleText;
+        ListDetailsDetailControl_PasswordTitle.Text = App.UIStrings.ListDetailsDetailControl_PasswordTitleText;
+        ListDetailsDetailControl_PlatformUrlTitle.Text = App.UIStrings.ListDetailsDetailControl_PlatformUrlTitleText;
+        EditButtonTip.Content = App.UIStrings.EditButtonTipText;
+        DeleteButtonTip.Content = App.UIStrings.DeleteButtonTipText;
+        PasswordCopyButtonTip.Content = App.UIStrings.PasswordCopyButtonTipText;
+        PasswordRevealButtonTip.Content = App.UIStrings.PasswordRevealButtonTipText;
+        AccountNameCopyButtonTip.Content = App.UIStrings.AccountNameCopyButtonTipText;
+        PlatformUrlButtonTip.Content = App.UIStrings.PlatformUrlButtonTipText;
     }
 
     private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -34,10 +47,11 @@ public sealed partial class ListDetailsDetailControl : UserControl
     /// </summary>
     private void ListDetailsDetailControl_PasswordCopyButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
+        var password = ListDetailsDetailControl_PasswordBox.Password;
         var passwordDatapackage = new DataPackage();
         passwordDatapackage.SetText(password);
         Clipboard.SetContent(passwordDatapackage);
+        CopiedTipforPasswordCopyButton.Title = App.UIStrings.ListDetailsDetailControl_CopiedTipforPasswordCopyButtonTitle;
         CopiedTipforPasswordCopyButton.IsOpen = true;
     }
 
@@ -50,6 +64,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
         var dataPackage = new DataPackage();
         dataPackage.SetText(accountName);
         Clipboard.SetContent(dataPackage);
+        CopiedTipforAcconutNameCopyButton.Title = App.UIStrings.ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
         CopiedTipforAcconutNameCopyButton.IsOpen = true;
     }
 
@@ -58,15 +73,12 @@ public sealed partial class ListDetailsDetailControl : UserControl
     /// </summary>
     private void PasswordRevealButton_Click(object sender, RoutedEventArgs e)
     {
-        var password = App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword;
         if (PasswordRevealButton.IsChecked == true)
         {
-            ListDetailsDetailControl_PasswordBox.Password = password;
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Visible;
         }
         else
         {
-            ListDetailsDetailControl_PasswordBox.Password = password;
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
         }
     }
@@ -76,7 +88,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
     /// </summary>
     private async void ListDetailsDetailControl_EditButton_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new EditDataDialog(ListDetailsDetailControl_AccountNameText.Text, PlatformNameText.Text, ListDetailsDetailControl_PlatformUrlHyperLinkText.Text, App.DataManager.GetData(PlatformNameText.Text, ListDetailsDetailControl_AccountNameText.Text).GetPassword)
+        var dialog = new EditDataDialog(ListDetailsDetailControl_AccountNameText.Text, PlatformNameText.Text, ListDetailsDetailControl_PlatformUrlHyperLinkText.Text, ListDetailsDetailControl_PasswordBox.Password)
         {
             XamlRoot = this.XamlRoot,
             Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
@@ -84,14 +96,15 @@ public sealed partial class ListDetailsDetailControl : UserControl
         _ = await dialog.ShowAsync();
         if (dialog.Result == EditDataResult.Nochange)
         {
-            var warningdialog = new GPDialog2()
+            /*等待用户反馈是否需要添加*/
+            /*var warningdialog = new GPDialog2()
             {
                 XamlRoot = this.XamlRoot,
                 Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
                 Title = "提示",
                 Content = "数据没有任何修改！"
             };
-            _ = warningdialog.ShowAsync();
+            _ = warningdialog.ShowAsync();*/
         }
         else if (dialog.Result == EditDataResult.Success)
         {
@@ -190,5 +203,18 @@ public sealed partial class ListDetailsDetailControl : UserControl
             warningDialog.Content = "链接为空，无法访问！";
             _ = await warningDialog.ShowAsync();
         }
+    }
+
+    /// <summary>
+    /// 显示OOBE提示
+    /// </summary>
+    public void ShowOOBETips()
+    {
+        this.OOBE_DeleteTip.IsOpen = true;
+        this.OOBE_EditTip.IsOpen = true;
+        this.CopiedTipforPasswordCopyButton.Title = "点击此按钮复制账号名";
+        this.CopiedTipforAcconutNameCopyButton.Title = "点击此按钮复制密码";
+        this.CopiedTipforAcconutNameCopyButton.IsOpen = true;
+        this.CopiedTipforPasswordCopyButton.IsOpen = true;
     }
 }

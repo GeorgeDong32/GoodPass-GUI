@@ -24,6 +24,6 @@ public enum EditDataResult
 
 public enum OOBESituation
 {
-    OutOfBox,
-    NotOutOfBox
+    EnableOOBE,
+    DIsableOOBE
 }

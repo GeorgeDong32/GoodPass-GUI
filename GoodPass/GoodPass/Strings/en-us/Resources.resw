@@ -334,4 +334,31 @@
   <data name="EditDataDialog_UrlCheckText.Text" xml:space="preserve">
     <value>Url为空，可选择添加链接</value>
   </data>
+  <data name="OOBE_LoginTip.Title" xml:space="preserve">
+    <value>点击此解锁按钮开始使用GoodPass</value>
+  </data>
+  <data name="OOBE_AddDataTip.Title" xml:space="preserve">
+    <value>解锁后点击此按钮添加数据</value>
+  </data>
+  <data name="OOBE_SettingTip.Title" xml:space="preserve">
+    <value>点击设置按钮进入设置</value>
+  </data>
+  <data name="ShellPage_AddDataButtonTip.Content" xml:space="preserve">
+    <value>添加数据</value>
+  </data>
+  <data name="ShellPage_SettingButtonTip.Content" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="PrivacytermsHyperButton.NavigateUri" xml:space="preserve">
+    <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Docs/Statements%26Agreements/Privacy%20Statement.md</value>
+  </data>
+  <data name="PrivacytermsHyperButtonText.Text" xml:space="preserve">
+    <value>隐私声明</value>
+  </data>
+  <data name="UserAgreementHyperButton.NavigateUri" xml:space="preserve">
+    <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Docs/Statements%26Agreements/User%20Agreement.md</value>
+  </data>
+  <data name="UserAgreementHyperButtonText.Text" xml:space="preserve">
+    <value>用户协议</value>
+  </data>
 </root>

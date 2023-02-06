@@ -72,6 +72,18 @@
                     Content="&#xE785;"
                     FontFamily="Segoe MDL2 Assets"
                     ToolTipService.ToolTip="解锁" />
+
+                <TeachingTip
+                    x:Name="OOBE_LoginTip"
+                    x:Uid="OOBE_LoginTip"
+                    CloseButtonClick="OOBE_LoginTip_CloseButtonClick"
+                    IsOpen="False"
+                    PreferredPlacement="Bottom"
+                    Target="{x:Bind Login_Check}">
+                    <TeachingTip.IconSource>
+                        <FontIconSource FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE783;" />
+                    </TeachingTip.IconSource>
+                </TeachingTip>
             </Grid>
         </Grid>
 
