@@ -349,4 +349,16 @@
   <data name="ShellPage_SettingButtonTip.Content" xml:space="preserve">
     <value>设置</value>
   </data>
+  <data name="PrivacytermsHyperButton.NavigateUri" xml:space="preserve">
+    <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Docs/Statements%26Agreements/Privacy%20Statement.md</value>
+  </data>
+  <data name="PrivacytermsHyperButtonText.Text" xml:space="preserve">
+    <value>隐私声明</value>
+  </data>
+  <data name="UserAgreementHyperButton.NavigateUri" xml:space="preserve">
+    <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Docs/Statements%26Agreements/User%20Agreement.md</value>
+  </data>
+  <data name="UserAgreementHyperButtonText.Text" xml:space="preserve">
+    <value>用户协议</value>
+  </data>
 </root>
