@@ -40,4 +40,4 @@ public class MultilingualStringsServices
     public UIStrings Getzh_CN() => UIStrings_zh_CN;
 
     public UIStrings Geten_US() => UIStrings_en_US;
- }
+}
