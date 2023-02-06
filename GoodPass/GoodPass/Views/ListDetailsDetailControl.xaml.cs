@@ -4,7 +4,6 @@ using GoodPass.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
-using System.Runtime.CompilerServices;
 
 namespace GoodPass.Views;
 
@@ -17,6 +16,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
     }
     public static readonly DependencyProperty ListDetailsMenuItemProperty = DependencyProperty.Register("ListDetailsMenuItem", typeof(GPData), typeof(ListDetailsDetailControl), new PropertyMetadata(null, OnListDetailsMenuItemPropertyChanged));
 
+    /// <summary>
+    /// 初始化控件并加载多语言资源
+    /// </summary>
     public ListDetailsDetailControl()
     {
         InitializeComponent();
@@ -24,6 +26,12 @@ public sealed partial class ListDetailsDetailControl : UserControl
         ListDetailsDetailControl_LastmodifiedTitle.Text = App.UIStrings.ListDetailsDetailControl_LastmodifiedTitleText;
         ListDetailsDetailControl_PasswordTitle.Text = App.UIStrings.ListDetailsDetailControl_PasswordTitleText;
         ListDetailsDetailControl_PlatformUrlTitle.Text = App.UIStrings.ListDetailsDetailControl_PlatformUrlTitleText;
+        EditButtonTip.Content = App.UIStrings.EditButtonTipText;
+        DeleteButtonTip.Content = App.UIStrings.DeleteButtonTipText;
+        PasswordCopyButtonTip.Content = App.UIStrings.PasswordCopyButtonTipText;
+        PasswordRevealButtonTip.Content = App.UIStrings.PasswordRevealButtonTipText;
+        AccountNameCopyButtonTip.Content = App.UIStrings.AccountNameCopyButtonTipText;
+        PlatformUrlButtonTip.Content = App.UIStrings.PlatformUrlButtonTipText;
     }
 
     private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -199,6 +207,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
         }
     }
 
+    /// <summary>
+    /// 显示OOBE提示
+    /// </summary>
     public void ShowOOBETips()
     {
         this.OOBE_DeleteTip.IsOpen = true;

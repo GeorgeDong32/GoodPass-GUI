@@ -60,6 +60,9 @@
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
                             FontSize="16"
                             Glyph="&#xE8C8;" />
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="AccountNameCopyButtonTip" />
+                        </ToolTipService.ToolTip>
                     </Button>
 
                     <TeachingTip
@@ -102,6 +105,9 @@
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
                             FontSize="16"
                             Glyph="&#xE8C8;" />
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="PasswordCopyButtonTip" />
+                        </ToolTipService.ToolTip>
                     </Button>
 
                     <TeachingTip
@@ -126,6 +132,9 @@
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
                             FontSize="16"
                             Glyph="&#xF78D;" />
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="PasswordRevealButtonTip" />
+                        </ToolTipService.ToolTip>
                     </ToggleButton>
                 </RelativePanel>
 
@@ -155,6 +164,9 @@
                                 Style="{StaticResource DetailBodyStyle}"
                                 Text="{x:Bind ListDetailsMenuItem.PlatformUrl, Mode=OneWay}" />
                         </RelativePanel>
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="PlatformUrlButtonTip" />
+                        </ToolTipService.ToolTip>
                     </HyperlinkButton>
                 </RelativePanel>
 
@@ -192,8 +204,12 @@
                                 RelativePanel.RightOf="ListDetailsDetailControl_EditButtonIcon"
                                 Text="编辑" />
                         </RelativePanel>
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="EditButtonTip" />
+                        </ToolTipService.ToolTip>
                     </Button>
 
+                    <!--  弃用，无法拉起  -->
                     <TeachingTip
                         x:Name="OOBE_EditTip"
                         x:Uid="OOBE_EditTip"
@@ -223,8 +239,12 @@
                                 RelativePanel.RightOf="ListDetailsDetailControl_DeleteButtonIcon"
                                 Text="删除" />
                         </RelativePanel>
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="DeleteButtonTip" />
+                        </ToolTipService.ToolTip>
                     </Button>
 
+                    <!--  弃用，无法拉起  -->
                     <TeachingTip
                         x:Name="OOBE_DeleteTip"
                         x:Uid="OOBE_DeleteTip"

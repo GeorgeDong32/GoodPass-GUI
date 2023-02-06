@@ -18,34 +18,45 @@ public class UIStrings
 
     public readonly string ListDetailsDetailControl_LastmodifiedTitleText;
 
-    public UIStrings(string language)
+    public readonly string EditButtonTipText;
+
+    public readonly string DeleteButtonTipText;
+
+    public readonly string AccountNameCopyButtonTipText;
+
+    public readonly string PasswordCopyButtonTipText;
+
+    public readonly string PasswordRevealButtonTipText;
+
+    public readonly string PlatformUrlButtonTipText;
+
+    /// <summary>
+    /// UIStrings构造函数
+    /// </summary>
+    public UIStrings(string listDetailsDetailControl_AccountNameTitleText,
+                     string listDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle,
+                     string listDetailsDetailControl_PasswordTitleText,
+                     string listDetailsDetailControl_CopiedTipforPasswordCopyButtonTitle,
+                     string listDetailsDetailControl_PlatformUrlTitleText,
+                     string listDetailsDetailControl_LastmodifiedTitleText,
+                     string editButtonTipText,
+                     string deleteButtonTipText,
+                     string accountNameCopyButtonTipText,
+                     string passwordCopyButtonTipText,
+                     string passwordRevealButtonTipText,
+                     string platformUrlButtonTipText)
     {
-        switch (language)
-        {
-            case "zh-CN":
-                ListDetailsDetailControl_AccountNameTitleText = "账号";
-                ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = "账号名已复制！";
-                ListDetailsDetailControl_PasswordTitleText = "密码";
-                ListDetailsDetailControl_CopiedTipforPasswordCopyButtonTitle = "密码已复制！";
-                ListDetailsDetailControl_PlatformUrlTitleText = "平台网址";
-                ListDetailsDetailControl_LastmodifiedTitleText = "最后修改时间";
-                break;
-            case "en-US":
-                ListDetailsDetailControl_AccountNameTitleText = "Account";
-                ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = "AccountName has copied!";
-                ListDetailsDetailControl_PasswordTitleText = "Password";
-                ListDetailsDetailControl_CopiedTipforPasswordCopyButtonTitle = "Password has copied!";
-                ListDetailsDetailControl_PlatformUrlTitleText = "Platform Url";
-                ListDetailsDetailControl_LastmodifiedTitleText = "Last modified";
-                break;
-            default:
-                ListDetailsDetailControl_AccountNameTitleText = "账号";
-                ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = "已复制";
-                ListDetailsDetailControl_PasswordTitleText = "密码";
-                ListDetailsDetailControl_CopiedTipforPasswordCopyButtonTitle = "已复制";
-                ListDetailsDetailControl_PlatformUrlTitleText = "平台网址";
-                ListDetailsDetailControl_LastmodifiedTitleText = "最后修改时间";
-                break;
-        }
+        ListDetailsDetailControl_AccountNameTitleText = listDetailsDetailControl_AccountNameTitleText;
+        ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = listDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
+        ListDetailsDetailControl_PasswordTitleText = listDetailsDetailControl_PasswordTitleText;
+        ListDetailsDetailControl_CopiedTipforPasswordCopyButtonTitle = listDetailsDetailControl_CopiedTipforPasswordCopyButtonTitle;
+        ListDetailsDetailControl_PlatformUrlTitleText = listDetailsDetailControl_PlatformUrlTitleText;
+        ListDetailsDetailControl_LastmodifiedTitleText = listDetailsDetailControl_LastmodifiedTitleText;
+        EditButtonTipText = editButtonTipText;
+        DeleteButtonTipText = deleteButtonTipText;
+        AccountNameCopyButtonTipText = accountNameCopyButtonTipText;
+        PasswordCopyButtonTipText = passwordCopyButtonTipText;
+        PasswordRevealButtonTipText = passwordRevealButtonTipText;
+        PlatformUrlButtonTipText = platformUrlButtonTipText;
     }
 }
