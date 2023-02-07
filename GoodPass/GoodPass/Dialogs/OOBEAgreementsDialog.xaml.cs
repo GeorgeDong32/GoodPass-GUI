@@ -1,19 +1,21 @@
-﻿using GoodPass.Services;
+﻿using GoodPass.Models;
+using GoodPass.Services;
 using Microsoft.UI.Xaml.Controls;
 
 namespace GoodPass.Dialogs;
 
 public sealed partial class OOBEAgreementsDialog : ContentDialog
 {
+    public AgreeStatus AgreeStatus
+    {
+        get; set;
+    }
+
     public OOBEAgreementsDialog()
     {
         this.InitializeComponent();
         IsPrimaryButtonEnabled = false;
-    }
-
-    private void OOBEAgreementsDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-    {
-        App.Current.Exit();
+        AgreeStatus = AgreeStatus.Agree;
     }
 
     private bool IsAgreeAllChecked()
@@ -38,5 +40,10 @@ public sealed partial class OOBEAgreementsDialog : ContentDialog
     private async void OOBEAgreementsDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
         _ = await App.GetService<OOBEServices>().SetOOBEStatusAsync("AgreementOOBE", Models.OOBESituation.DIsableOOBE);
+    }
+
+    private void OOBEAgreementsDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+    {
+        this.AgreeStatus = AgreeStatus.NotAgree;
     }
 }

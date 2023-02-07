@@ -32,6 +32,14 @@ public class UIStrings
 
     public readonly string OOBEAgreementsDialogTitle;
 
+    public readonly string WarningDialogTitle;
+
+    public readonly string ErrorDialogTitle;
+
+    public readonly string InfoDialogTitle;
+
+    public readonly string AgreementNotArgeeContent;
+
     /// <summary>
     /// UIStrings构造函数
     /// </summary>
@@ -47,7 +55,11 @@ public class UIStrings
                      string passwordCopyButtonTipText,
                      string passwordRevealButtonTipText,
                      string platformUrlButtonTipText,
-                     string oobeAgreementsDialogTitle)
+                     string oobeAgreementsDialogTitle,
+                     string warningDialogTitle,
+                     string errorDialogTitle,
+                     string infoDialogTitle,
+                     string agreementNotArgeeContent)
     {
         ListDetailsDetailControl_AccountNameTitleText = listDetailsDetailControl_AccountNameTitleText;
         ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = listDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
@@ -62,5 +74,9 @@ public class UIStrings
         PasswordRevealButtonTipText = passwordRevealButtonTipText;
         PlatformUrlButtonTipText = platformUrlButtonTipText;
         OOBEAgreementsDialogTitle = oobeAgreementsDialogTitle;
+        WarningDialogTitle = warningDialogTitle;
+        ErrorDialogTitle = errorDialogTitle;
+        InfoDialogTitle = infoDialogTitle;
+        AgreementNotArgeeContent = agreementNotArgeeContent;
     }
 }
