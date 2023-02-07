@@ -162,7 +162,23 @@ public sealed partial class MainPage : Page
                 Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
                 Title = App.UIStrings.OOBEAgreementsDialogTitle,
             };
-            _ = await dialog.ShowAsync();
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                await Task.Delay(200);
+            }
+            else if (dialog.AgreeStatus == Models.AgreeStatus.NotAgree)
+            {
+                var warningDialog = new GPDialog2()
+                {
+                    XamlRoot = this.XamlRoot,
+                    Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
+                    Title = App.UIStrings.WarningDialogTitle,
+                    Content = App.UIStrings.AgreementNotArgeeContent, 
+                };
+                _ = await warningDialog.ShowAsync();
+                return ;
+            }
         }
         var passwordInput = Login_PasswordBox.Password;
         var MKCheck_Result = await MKS.CheckMasterKeyAsync(passwordInput);

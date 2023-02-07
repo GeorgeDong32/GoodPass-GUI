@@ -27,3 +27,9 @@ public enum OOBESituation
     EnableOOBE,
     DIsableOOBE
 }
+
+public enum AgreeStatus
+{
+    Agree,
+    NotAgree
+}
