@@ -154,6 +154,7 @@ public sealed partial class MainPage : Page
     /// </summary>
     private async void UnlockProcess()
     {
+        App.AgreementOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("AgreementOOBE").Result;
         if (App.AgreementOOBE == Models.OOBESituation.EnableOOBE)
         {
             var dialog = new OOBEAgreementsDialog()
