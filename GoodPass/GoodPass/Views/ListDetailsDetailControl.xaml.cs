@@ -93,6 +93,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             XamlRoot = this.XamlRoot,
             Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
         };
+        ListDetailsDetailControl_EditButton.IsEnabled = false;
         _ = await dialog.ShowAsync();
         if (dialog.Result == EditDataResult.Nochange)
         {
@@ -114,6 +115,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             PlatformNameText.Text = dialog.newPlatformName;
             ListDetailsDetailControl_LastmodifiedText.Text = dialog.newDateTime.ToString();
             App.DataManager.SaveToFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
+            //await Task.Delay(200);
         }
         else if (dialog.Result == EditDataResult.Failure)
         {
@@ -126,6 +128,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
             };
             _ = warningdialog.ShowAsync();
         }
+        ListDetailsDetailControl_EditButton.IsEnabled = true;
     }
 
     /// <summary>
@@ -134,11 +137,14 @@ public sealed partial class ListDetailsDetailControl : UserControl
     private async void ListDetailsDetailControl_DeleteButton_Click(object sender, RoutedEventArgs e)
     {
         //弹窗提示用户确认
-        var dialog = new GPDialog2();
-        dialog.XamlRoot = this.XamlRoot;
-        dialog.Style = App.Current.Resources["DefaultContentDialogStyle"] as Style;
-        dialog.Title = "删除确认";
-        dialog.Content = "您确定要删除这个数据吗？该操作不可撤销！";
+        var dialog = new GPDialog2()
+        {
+            XamlRoot = this.XamlRoot,
+            Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "删除确认",
+            Content = "您确定要删除这个数据吗？该操作不可撤销！",
+        };
+        ListDetailsDetailControl_DeleteButton.IsEnabled = false;
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
@@ -152,6 +158,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
                     throw new GPObjectNotFoundException("Data Not Found!");
                 else
                     App.DataManager.SaveToFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
+                ListDetailsDetailControl_DeleteButton.IsEnabled = true;
             }
             catch (System.ArgumentOutOfRangeException)
             {
@@ -172,6 +179,10 @@ public sealed partial class ListDetailsDetailControl : UserControl
                 _ = await warningDialog.ShowAsync();
             }
         }
+        else
+        {
+            ListDetailsDetailControl_DeleteButton.IsEnabled = true;
+        }    
     }
 
     /// <summary>
