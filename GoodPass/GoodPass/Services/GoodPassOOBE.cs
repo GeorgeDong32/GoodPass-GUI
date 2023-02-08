@@ -39,10 +39,10 @@ public class OOBEServices
         }
         switch (loaclstatus)
         {
-            case "\"EnableOOBE\"":
+            case "EnableOOBE":
                 _OOBESituation = OOBESituation.EnableOOBE;
                 break;
-            case "\"DIsableOOBE\"":
+            case "DIsableOOBE":
                 _OOBESituation = OOBESituation.DIsableOOBE;
                 break;
             default:
@@ -60,13 +60,15 @@ public class OOBEServices
             case OOBESituation.EnableOOBE:
                 if (RuntimeHelper.IsMSIX)
                 {
-                    ApplicationData.Current.LocalSettings.Values[oobePosition] = await Json.StringifyAsync(oobeSituation.ToString());
+                    ApplicationData.Current.LocalSettings.Values[oobePosition] = oobeSituation.ToString();
+                    await Task.CompletedTask;
                 }
                 return true;
             case OOBESituation.DIsableOOBE:
                 if (RuntimeHelper.IsMSIX)
                 {
-                    ApplicationData.Current.LocalSettings.Values[oobePosition] = await Json.StringifyAsync(oobeSituation.ToString());
+                    ApplicationData.Current.LocalSettings.Values[oobePosition] = oobeSituation.ToString();
+                    await Task.CompletedTask;
                 }
                 return true;
             default:
