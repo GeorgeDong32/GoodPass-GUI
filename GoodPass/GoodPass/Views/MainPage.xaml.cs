@@ -175,10 +175,10 @@ public sealed partial class MainPage : Page
                     XamlRoot = this.XamlRoot,
                     Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
                     Title = App.UIStrings.WarningDialogTitle,
-                    Content = App.UIStrings.AgreementNotArgeeContent, 
+                    Content = App.UIStrings.AgreementNotArgeeContent,
                 };
                 _ = await warningDialog.ShowAsync();
-                return ;
+                return;
             }
         }
         var passwordInput = Login_PasswordBox.Password;

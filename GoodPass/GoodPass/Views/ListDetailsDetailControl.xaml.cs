@@ -182,7 +182,7 @@ public sealed partial class ListDetailsDetailControl : UserControl
         else
         {
             ListDetailsDetailControl_DeleteButton.IsEnabled = true;
-        }    
+        }
     }
 
     /// <summary>
