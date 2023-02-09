@@ -1,13 +1,21 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using GoodPass.Models;
 using GoodPass.Services;
+using Microsoft.UI.Xaml.Controls;
 
-namespace GoodPass.Views;
+namespace GoodPass.Dialogs;
 
 public sealed partial class AddDataDialog : ContentDialog
 {
+    public AddDataResult Result
+    {
+        get; set;
+    }
+
     public AddDataDialog()
     {
         this.InitializeComponent();
+        IsPrimaryButtonEnabled = false;
+        Result = AddDataResult.Undetermined;
     }
 
     private void AddDataDialog_PasswordMode_RandomNoSpec_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -139,11 +147,20 @@ public sealed partial class AddDataDialog : ContentDialog
         {
             AddDataDialog_PlatformCheckIcon.Glyph = "\xE73E";
             AddDataDialog_PlatformCheckText.Text = "平台名合法";
+            if (AddDataCheck())
+            {
+                IsPrimaryButtonEnabled = true;
+            }
+            else
+            {
+                IsPrimaryButtonEnabled = false;
+            }
         }
         else
         {
             AddDataDialog_PlatformCheckIcon.Glyph = "\xE711";
             AddDataDialog_PlatformCheckText.Text = "平台名不能为空";
+            IsPrimaryButtonEnabled = false;
         }
     }
 
@@ -153,11 +170,39 @@ public sealed partial class AddDataDialog : ContentDialog
         {
             AddDataDialog_AccountCheckIcon.Glyph = "\xE73E";
             AddDataDialog_AccountCheckText.Text = "平台名合法";
+            if (AddDataCheck())
+            {
+                IsPrimaryButtonEnabled = true;
+            }
+            else
+            {
+                IsPrimaryButtonEnabled = false;
+            }
         }
         else
         {
             AddDataDialog_AccountCheckIcon.Glyph = "\xE711";
             AddDataDialog_AccountCheckText.Text = "平台名不能为空";
+            IsPrimaryButtonEnabled = false;
+        }
+    }
+
+    private void AddDataDialog_PasswordBox_PasswordChanged(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if (AddDataDialog_PasswordBox.Password != String.Empty)
+        {
+            if (AddDataCheck())
+            {
+                IsPrimaryButtonEnabled = true;
+            }
+            else
+            {
+                IsPrimaryButtonEnabled = false;
+            }
+        }
+        else
+        {
+            IsPrimaryButtonEnabled = false;
         }
     }
 
@@ -178,22 +223,67 @@ public sealed partial class AddDataDialog : ContentDialog
             {
                 AddDataDialog_UrlCheckIcon.Glyph = "\xE73E";
                 AddDataDialog_UrlCheckText.Text = "平台Url合法";
+                if (AddDataCheck())
+                {
+                    IsPrimaryButtonEnabled = true;
+                }
+                else
+                {
+                    IsPrimaryButtonEnabled = false;
+                }
             }
             else
             {
                 AddDataDialog_UrlCheckIcon.Glyph = "\xE711";
                 AddDataDialog_UrlCheckText.Text = "请使用http开头的完整Url格式";
+                IsPrimaryButtonEnabled = false;
             }
         }
         else
         {
             AddDataDialog_UrlCheckIcon.Glyph = "\xE946";
             AddDataDialog_UrlCheckText.Text = "Url为空，可选择添加链接";
+            if (AddDataCheck())
+            {
+                IsPrimaryButtonEnabled = true;
+            }
+            else
+            {
+                IsPrimaryButtonEnabled = false;
+            }
         }
     }
 
     private void AddDataDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
+        var result = App.DataManager.AddData(AddDataDialog_PlatformBox.Text, AddDataDialog_PlatformUrlBox.Text, AddDataDialog_AccountBox.Text, AddDataDialog_PasswordBox.Password);
+        if (result == true)
+        {
+            App.ListDetailsVM.AddDataItem(App.DataManager.GetData(AddDataDialog_PlatformBox.Text, AddDataDialog_AccountBox.Text));
+            this.Result = AddDataResult.Success;
+        }
+        else
+        {
+            this.Result = AddDataResult.Failure_Duplicate;
+        }
+    }
 
+    private bool AddDataCheck()
+    {
+        if (AddDataDialog_PlatformBox.Text != String.Empty && AddDataDialog_AccountBox.Text != String.Empty && AddDataDialog_PasswordBox.Password != String.Empty)
+        {
+            if (AddDataDialog_UrlCheckText.Text == "平台Url合法" || AddDataDialog_UrlCheckText.Text == "Url为空，可选择添加链接")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 }

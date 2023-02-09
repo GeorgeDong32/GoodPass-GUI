@@ -1,5 +1,5 @@
 ﻿<ContentDialog
-    x:Class="GoodPass.Views.AddDataDialog"
+    x:Class="GoodPass.Dialogs.AddDataDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -69,7 +69,8 @@
                 x:Name="AddDataDialog_PasswordBox"
                 x:Uid="AddDataDialog_PasswordBox"
                 Width="200"
-                Margin="0,0,8,0" />
+                Margin="0,0,8,0"
+                PasswordChanged="AddDataDialog_PasswordBox_PasswordChanged" />
             <ToggleButton
                 x:Name="Add_PasswordRevealButton"
                 Height="31.5"
@@ -118,7 +119,7 @@
             <TextBox
                 x:Name="AddDataDialog_PasswordLengthBox"
                 x:Uid="AddDataDialog_PasswordLengthBox"
-                Width="32"
+                Width="Auto"
                 Margin="8,0,0,0"
                 RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.RightOf="AddDataDialog_PasswordMode"
