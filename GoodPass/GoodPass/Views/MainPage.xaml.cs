@@ -1,4 +1,5 @@
 ﻿using GoodPass.Dialogs;
+using GoodPass.Helpers;
 using GoodPass.Services;
 using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
@@ -26,13 +27,16 @@ public sealed partial class MainPage : Page
         ViewModel = App.GetService<MainViewModel>();
         MKS = App.GetService<MasterKeyService>();
         InitializeComponent();
+        App.MainOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("MainOOBE").Result;
         if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
         {
             OOBE_LoginTip.IsOpen = true;
+            OOBE_LoginBoxTip.IsOpen = true;
         }
         else
         {
             OOBE_LoginTip.IsOpen = false;
+            OOBE_LoginBoxTip.IsOpen = false;
         }
     }
 
@@ -182,7 +186,15 @@ public sealed partial class MainPage : Page
             }
         }
         var passwordInput = Login_PasswordBox.Password;
-        var MKCheck_Result = await MKS.CheckMasterKeyAsync(passwordInput);
+        string MKCheck_Result;
+        if (RuntimeHelper.IsMSIX)
+        {
+            MKCheck_Result = await MKS.CheckMasterKeyAsync_MSIX(passwordInput);
+        }
+        else
+        {
+            MKCheck_Result = await MKS.CheckMasterKeyAsync(passwordInput);
+        }
         App.DataManager ??= new Models.GPManager(); //为null时才赋值
         //添加解锁逻辑
         if (MKCheck_Result == "pass")
