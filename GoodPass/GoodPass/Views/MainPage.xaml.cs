@@ -27,13 +27,16 @@ public sealed partial class MainPage : Page
         ViewModel = App.GetService<MainViewModel>();
         MKS = App.GetService<MasterKeyService>();
         InitializeComponent();
+        App.MainOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("MainOOBE").Result;
         if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
         {
             OOBE_LoginTip.IsOpen = true;
+            OOBE_LoginBoxTip.IsOpen = true;
         }
         else
         {
             OOBE_LoginTip.IsOpen = false;
+            OOBE_LoginBoxTip.IsOpen = false;
         }
     }
 

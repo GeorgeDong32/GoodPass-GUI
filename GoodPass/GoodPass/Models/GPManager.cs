@@ -1,4 +1,5 @@
 ﻿using GoodPass.Services;
+using Windows.Storage;
 
 namespace GoodPass.Models;
 
@@ -240,6 +241,9 @@ public class GPManager
     /// <returns>加载结果</returns>
     public bool LoadFormFile(string filePath)//从文件导入数据
     {
+        var userName = Environment.UserName;
+        var appdataPath = $"C:\\Users\\{userName}\\AppData\\Local";
+        var gpFolderPath = Path.Combine(appdataPath, "GoodPass");
         if (File.Exists(filePath))
         {
             if (GPDatas.Count != 0)
@@ -255,8 +259,31 @@ public class GPManager
         }
         else
         {
-            File.Create(filePath);
-            return false;
+            if (Directory.Exists(gpFolderPath))
+            {
+                File.Create(filePath).Close();
+                return true;
+            }
+            else
+            {
+                Directory.CreateDirectory(gpFolderPath);
+                if (System.IO.Directory.Exists(gpFolderPath))
+                {
+                    System.IO.File.Create(filePath).Close();
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        throw new Exception("Failed to create config file!");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Failed to create config file!");
+                }
+            }
         }
     }
 
