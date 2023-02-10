@@ -265,25 +265,24 @@ public class GPManager
     /// </summary>
     /// <param name="filePath">文件路径</param>
     /// <returns>保存结果</returns>
-    public bool SaveToFile(string filePath)//保存数据到文件
+    public async Task<bool> SaveToFileAsync(string filePath)//保存数据到文件
     {
-        //Todo:出现文件被GoodPass某一进程占用情况（在沙盒中） 若自行创建文件夹则不会
         if (File.Exists(filePath))
         {
-            File.WriteAllText(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime\n");
+            await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime\n", System.Text.Encoding.UTF8);
             foreach (var data in GPDatas)
             {
-                File.AppendAllText(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.EncPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
+                await File.AppendAllTextAsync(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.EncPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
             }
             return true;
         }
         else
         {
             File.Create(filePath);
-            File.WriteAllText(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime\n");
+            await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime\n", System.Text.Encoding.UTF8);
             foreach (var data in GPDatas)
             {
-                File.AppendAllText(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.EncPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
+                await File.AppendAllTextAsync(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.EncPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
             }
             return true;
         }
@@ -314,7 +313,7 @@ public class GPManager
     /// </summary>
     /// <param name="index">目标index</param>
     /// <returns>指定数据</returns>
-    public GPData GetData(int index)
+    public GPData? GetData(int index)
     {
         if (index == -1 || index > GPDatas.Count)
             return null;
@@ -328,7 +327,7 @@ public class GPManager
     /// <param name="platformName">目标平台名</param>
     /// <param name="accountName">目标账号名</param>
     /// <returns>指定数据</returns>
-    public GPData GetData(string platformName, string accountName)
+    public GPData? GetData(string platformName, string accountName)
     {
         var targetIndex = AccurateSearch(platformName, accountName);
         if (targetIndex == -1 || targetIndex > GPDatas.Count)
