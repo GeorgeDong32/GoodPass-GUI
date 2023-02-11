@@ -16,16 +16,10 @@ public sealed partial class MainPage : Page
         get;
     }
 
-    public MasterKeyService MKS
-    {
-        get;
-    }
-
     public MainPage()
     {
         App.App_Lock();
         ViewModel = App.GetService<MainViewModel>();
-        MKS = App.GetService<MasterKeyService>();
         InitializeComponent();
         App.MainOOBE = OOBEServices.GetOOBEStatusAsync("MainOOBE").Result;
         if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
@@ -46,7 +40,7 @@ public sealed partial class MainPage : Page
     private void Login_Check_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         var passwordInput = Login_PasswordBox.Password;
-        var MKCheck_Result = MKS.CheckMasterKey(passwordInput);
+        var MKCheck_Result = MasterKeyService.CheckMasterKey(passwordInput);
         //添加解锁逻辑
         if (MKCheck_Result == "pass")
         {
@@ -189,11 +183,11 @@ public sealed partial class MainPage : Page
         string MKCheck_Result;
         if (RuntimeHelper.IsMSIX)
         {
-            MKCheck_Result = await MKS.CheckMasterKeyAsync_MSIX(passwordInput);
+            MKCheck_Result = await MasterKeyService.CheckMasterKeyAsync_MSIX(passwordInput);
         }
         else
         {
-            MKCheck_Result = await MKS.CheckMasterKeyAsync(passwordInput);
+            MKCheck_Result = await MasterKeyService.CheckMasterKeyAsync(passwordInput);
         }
         App.DataManager ??= new Models.GPManager(); //为null时才赋值
         //添加解锁逻辑
