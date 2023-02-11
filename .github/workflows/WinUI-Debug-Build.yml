@@ -1,0 +1,45 @@
+name: WinUI-Debug-Build
+# Only for build test
+
+on:
+#   push:
+#     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  Debug-x64:
+
+    runs-on: windows-latest
+
+    # TODO: Update environment variables.
+    env:
+      Solution_Name: GoodPass
+      Project_Name: GoodPass
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+  
+    - name: Restore
+      run: dotnet restore $env:Solution_Name
+  
+    - name: Build
+      run: msbuild $env:Solution_Name /p:Configuration=Debug /p:Platform=x64 /p:AppxPackageDir=C:\Package\x64
+      env:
+        BuildMode: SideloadOnly
+
+    # - name: Test
+    #   run: '& "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" ${env:Test_Project_Name}\bin\${{ matrix.platform }}\${{ matrix.configuration }}\**\${env:Test_Project_Name}.dll'
