@@ -22,9 +22,9 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         App.UIStrings = App.GetService<MultilingualStringsServices>().Getzh_CN();
-        App.MainOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("MainOOBE").Result;
-        App.ShellOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("ShellOOBE").Result;
-        App.AgreementOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("AgreementOOBE").Result;
+        App.MainOOBE = OOBEServices.GetOOBEStatusAsync("MainOOBE").Result;
+        App.ShellOOBE = OOBEServices.GetOOBEStatusAsync("ShellOOBE").Result;
+        App.AgreementOOBE = OOBEServices.GetOOBEStatusAsync("AgreementOOBE").Result;
         InitializeComponent();
         if (App.ShellOOBE == Models.OOBESituation.EnableOOBE)
         {
@@ -164,6 +164,6 @@ public sealed partial class ShellPage : Page
     private async void OOBE_AddDataTip_CloseButtonClick(TeachingTip sender, object args)
     {
         OOBE_AddDataTip.IsOpen = false;
-        _ = await App.GetService<OOBEServices>().SetOOBEStatusAsync("ShellOOBE", Models.OOBESituation.DIsableOOBE);
+        _ = await OOBEServices.SetOOBEStatusAsync("ShellOOBE", Models.OOBESituation.DIsableOOBE);
     }
 }

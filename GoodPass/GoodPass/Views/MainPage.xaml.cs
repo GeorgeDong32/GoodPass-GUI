@@ -27,7 +27,7 @@ public sealed partial class MainPage : Page
         ViewModel = App.GetService<MainViewModel>();
         MKS = App.GetService<MasterKeyService>();
         InitializeComponent();
-        App.MainOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("MainOOBE").Result;
+        App.MainOOBE = OOBEServices.GetOOBEStatusAsync("MainOOBE").Result;
         if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
         {
             OOBE_LoginTip.IsOpen = true;
@@ -158,7 +158,7 @@ public sealed partial class MainPage : Page
     /// </summary>
     private async void UnlockProcess()
     {
-        App.AgreementOOBE = App.GetService<OOBEServices>().GetOOBEStatusAsync("AgreementOOBE").Result;
+        App.AgreementOOBE = OOBEServices.GetOOBEStatusAsync("AgreementOOBE").Result;
         if (App.AgreementOOBE == Models.OOBESituation.EnableOOBE)
         {
             var dialog = new OOBEAgreementsDialog()
@@ -238,6 +238,6 @@ public sealed partial class MainPage : Page
     private async void OOBE_LoginTip_CloseButtonClick(TeachingTip sender, object args)
     {
         OOBE_LoginTip.IsOpen = false;
-        _ = await App.GetService<OOBEServices>().SetOOBEStatusAsync("MainOOBE", Models.OOBESituation.DIsableOOBE);
+        _ = await OOBEServices.SetOOBEStatusAsync("MainOOBE", Models.OOBESituation.DIsableOOBE);
     }
 }

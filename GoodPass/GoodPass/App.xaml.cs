@@ -148,7 +148,6 @@ public partial class App : Application
             services.AddSingleton<MasterKeyService>();
             services.AddSingleton<GoodPassCryptographicServices>();
             services.AddSingleton<GoodPassDataService>();
-            services.AddSingleton<OOBEServices>();
             services.AddSingleton<ListDetailsViewModel>();
             services.AddSingleton<MultilingualStringsServices>();
 
