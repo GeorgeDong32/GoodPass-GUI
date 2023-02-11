@@ -60,7 +60,7 @@ public class GPManager
     /// 添加数据1(自带去重)
     /// </summary>
     /// <returns>添加结果</returns>
-    public bool AddData(string platformName, string platformUrl, string accountName, string password)
+    public bool AddData(string platformName, string? platformUrl, string accountName, string password)
     {
         var indexArray = FuzzySearch(platformName);
         foreach (var index in indexArray)
