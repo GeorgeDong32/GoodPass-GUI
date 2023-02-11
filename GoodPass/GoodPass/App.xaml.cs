@@ -145,7 +145,6 @@ public partial class App : Application
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<GoodPassCryptographicServices>();
-            services.AddSingleton<GoodPassDataService>();
             services.AddSingleton<ListDetailsViewModel>();
             services.AddSingleton<MultilingualStringsServices>();
 
