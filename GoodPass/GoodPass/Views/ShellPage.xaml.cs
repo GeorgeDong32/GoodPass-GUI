@@ -154,6 +154,11 @@ public sealed partial class ShellPage : Page
                 warningdialog.Content = "数据重复，请前往修改已存在的数据";
                 _ = await warningdialog.ShowAsync();
             }
+            else if (addDataDialog.Result == Models.AddDataResult.Success)
+            {
+                await App.DataManager.SaveToFileAsync($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
+            }
+                
         }
         else
         {
