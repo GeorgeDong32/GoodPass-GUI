@@ -75,7 +75,15 @@
                 x:Uid="ShellMenuSearchButton"
                 Grid.Column="2"
                 Click="ShellMenuSearchButton_Click"
-                Icon="Find" />
+                PointerPressed="ShellMenuSearchButton_PointerPressed"
+                PointerReleased="ShellMenuSearchButton_PointerReleased">
+                <AnimatedIcon x:Name="ShellMenuBarSearchIcon">
+                    <animatedvisuals:AnimatedFindVisualSource />
+                    <AnimatedIcon.FallbackIconSource>
+                        <SymbolIconSource Symbol="Find" />
+                    </AnimatedIcon.FallbackIconSource>
+                </AnimatedIcon>
+            </AppBarButton>
             <TeachingTip
                 x:Name="ShellMenuSearchTip"
                 IsLightDismissEnabled="True"

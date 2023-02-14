@@ -55,6 +55,8 @@ public sealed partial class ShellPage : Page
         ShellMenuBarSettingsButton.AddHandler(UIElement.PointerReleasedEvent, new PointerEventHandler(ShellMenuBarSettingsButton_PointerReleased), true);
         ShellMenuBarItem_Back.AddHandler(UIElement.PointerPressedEvent, new PointerEventHandler(ShellMenuBarItem_Back_PointerPressed), true);
         ShellMenuBarItem_Back.AddHandler(UIElement.PointerReleasedEvent, new PointerEventHandler(ShellMenuBarItem_Back_PointerReleased), true);
+        ShellMenuSearchButton.AddHandler(UIElement.PointerPressedEvent, new PointerEventHandler(ShellMenuSearchButton_PointerPressed), true);
+        ShellMenuSearchButton.AddHandler(UIElement.PointerReleasedEvent, new PointerEventHandler(ShellMenuSearchButton_PointerReleased), true);
     }
 
     private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
@@ -70,6 +72,8 @@ public sealed partial class ShellPage : Page
         ShellMenuBarSettingsButton.RemoveHandler(UIElement.PointerReleasedEvent, (PointerEventHandler)ShellMenuBarSettingsButton_PointerReleased);
         ShellMenuBarItem_Back.RemoveHandler(UIElement.PointerReleasedEvent, (PointerEventHandler)ShellMenuBarItem_Back_PointerPressed);
         ShellMenuBarItem_Back.RemoveHandler(UIElement.PointerPressedEvent, (PointerEventHandler)ShellMenuBarItem_Back_PointerPressed);
+        ShellMenuSearchButton.RemoveHandler(UIElement.PointerPressedEvent, (PointerEventHandler)ShellMenuSearchButton_PointerPressed);
+        ShellMenuSearchButton.RemoveHandler(UIElement.PointerReleasedEvent, (PointerEventHandler)ShellMenuSearchButton_PointerReleased);
     }
 
     private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)
@@ -125,6 +129,16 @@ public sealed partial class ShellPage : Page
         AnimatedIcon.SetState((UIElement)sender, "Normal");
     }
 
+    private void ShellMenuSearchButton_PointerPressed(object sender, PointerRoutedEventArgs e)
+    {
+        AnimatedIcon.SetState((UIElement)sender, "Pressed");
+    }
+
+    private void ShellMenuSearchButton_PointerReleased(object sender, PointerRoutedEventArgs e)
+    {
+        AnimatedIcon.SetState((UIElement)sender, "Normal");
+    }
+
     /// <summary>
     /// 添加数据按钮的事件响应
     /// </summary>
@@ -174,6 +188,8 @@ public sealed partial class ShellPage : Page
 
     private void ShellMenuSearchButton_Click(object sender, RoutedEventArgs e)
     {
-        ShellMenuSearchBox.IsOpen = true;
+        ShellMenuSearchTip.IsOpen = true;
     }
+
+    
 }
