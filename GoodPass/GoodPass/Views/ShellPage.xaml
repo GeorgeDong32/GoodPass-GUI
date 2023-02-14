@@ -32,6 +32,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -66,21 +67,30 @@
             <MenuBar Grid.Column="1">
                 <MenuBarItem x:Uid="ShellMenuBarItem_File">
                     <MenuFlyoutItem x:Uid="ShellMenuItem_File_Exit" Command="{x:Bind ViewModel.MenuFileExitCommand}" />
-                    <!--  ToDo：应该替换为Command：MenuLock（保存文件+回到登录界面）  -->
                     <MenuFlyoutItem x:Uid="ShellMenuItem_File_Lock" Command="{x:Bind ViewModel.MenuFileLockCommand}" />
                 </MenuBarItem>
             </MenuBar>
-            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+            <AppBarButton
+                x:Name="ShellMenuSearchButton"
+                x:Uid="ShellMenuSearchButton"
+                Grid.Column="2"
+                Click="ShellMenuSearchButton_Click"
+                Icon="Find" />
+            <TeachingTip
+                x:Name="ShellMenuSearchTip"
+                IsLightDismissEnabled="True"
+                PreferredPlacement="Bottom"
+                Target="{x:Bind ShellMenuSearchButton}">
                 <AutoSuggestBox
-                    x:Name="ShellMenuBarSuggestBox"
-                    x:Uid="ShellMenuBarSuggestBox"
-                    Width="350"
-                    CornerRadius="15" />
-            </StackPanel>
+                    x:Name="ShellMenuSearchBox"
+                    x:Uid="ShellMenuSearchBox"
+                    Width="250"
+                    IsEnabled="True" />
+            </TeachingTip>
+            <StackPanel Grid.Column="3" VerticalAlignment="Center" />
             <AppBarButton
                 x:Name="ShellMenuBarAddDataButton"
-                Grid.Column="3"
-                Height="12"
+                Grid.Column="4"
                 Click="ShellMenuBarAddDataButton_Click">
                 <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <FontIcon
@@ -118,7 +128,7 @@
             <AppBarButton
                 x:Name="ShellMenuBarSettingsButton"
                 x:Uid="ShellMenuBarSettingsButton"
-                Grid.Column="4"
+                Grid.Column="5"
                 AnimatedIcon.State="Normal"
                 Command="{x:Bind ViewModel.MenuSettingsCommand}"
                 PointerEntered="ShellMenuBarSettingsButton_PointerEntered"

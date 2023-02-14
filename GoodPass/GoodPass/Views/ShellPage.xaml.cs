@@ -171,4 +171,9 @@ public sealed partial class ShellPage : Page
         OOBE_AddDataTip.IsOpen = false;
         _ = await OOBEServices.SetOOBEStatusAsync("ShellOOBE", Models.OOBESituation.DIsableOOBE);
     }
+
+    private void ShellMenuSearchButton_Click(object sender, RoutedEventArgs e)
+    {
+        ShellMenuSearchBox.IsOpen = true;
+    }
 }
