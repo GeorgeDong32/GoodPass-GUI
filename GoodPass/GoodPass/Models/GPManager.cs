@@ -1,5 +1,4 @@
 ﻿using GoodPass.Services;
-
 namespace GoodPass.Models;
 
 public class GPManager
@@ -54,6 +53,20 @@ public class GPManager
             }
         }
         return -1;
+    }
+
+    /// <summary>
+    /// 搜索框搜索接口
+    /// </summary>
+    /// <param name="searchText"></param>
+    /// <returns></returns>
+    public List<GPData> SuggestSearch(string searchText)
+    {
+        var matchString = searchText.ToLower();
+        var query = from GPData data in GPDatas
+                    where data.PlatformName.ToLower().Contains(matchString) || data.AccountName.ToLower().Contains(matchString)
+                    select data;
+        return query.ToList();
     }
 
     /// <summary>

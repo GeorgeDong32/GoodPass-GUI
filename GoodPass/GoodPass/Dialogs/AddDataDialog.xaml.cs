@@ -269,7 +269,7 @@ public sealed partial class AddDataDialog : ContentDialog
             {
                 this.Result = AddDataResult.Failure_Duplicate;
             }
-            
+
         }
         else
         {
