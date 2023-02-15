@@ -63,24 +63,6 @@ public partial class App : Application
     }
 
     /// <summary>
-    /// MainOOBE状态
-    /// </summary>
-    public static OOBESituation MainOOBE
-    {
-        get; set;
-    }
-
-    public static OOBESituation ShellOOBE
-    {
-        get; set;
-    }
-
-    public static OOBESituation AgreementOOBE
-    {
-        get; set;
-    }
-
-    /// <summary>
     /// 多语言字符串资源
     /// </summary>
     public static UIStrings UIStrings

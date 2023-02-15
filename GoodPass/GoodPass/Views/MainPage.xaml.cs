@@ -21,8 +21,7 @@ public sealed partial class MainPage : Page
         App.App_Lock();
         ViewModel = App.GetService<MainViewModel>();
         InitializeComponent();
-        App.MainOOBE = OOBEServices.GetOOBEStatusAsync("MainOOBE").Result;
-        if (App.MainOOBE == Models.OOBESituation.EnableOOBE)
+        if (OOBEServices.GetOOBEStatusAsync("MainOOBE").Result == Models.OOBESituation.EnableOOBE)
         {
             OOBE_LoginTip.IsOpen = true;
             OOBE_LoginBoxTip.IsOpen = true;
@@ -152,8 +151,7 @@ public sealed partial class MainPage : Page
     /// </summary>
     private async void UnlockProcess()
     {
-        App.AgreementOOBE = OOBEServices.GetOOBEStatusAsync("AgreementOOBE").Result;
-        if (App.AgreementOOBE == Models.OOBESituation.EnableOOBE)
+        if (OOBEServices.GetOOBEStatusAsync("AgreementOOBE").Result == Models.OOBESituation.EnableOOBE)
         {
             var dialog = new OOBEAgreementsDialog()
             {
