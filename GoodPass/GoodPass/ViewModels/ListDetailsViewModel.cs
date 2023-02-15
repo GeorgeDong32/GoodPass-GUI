@@ -60,8 +60,13 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
         DataItems.Add(newData);
     }
 
-    public void TGoToData()
+    public void GoToData(int index)
     {
-        SlectedData = DataItems[3];
+        if (DataItems == null)
+            throw new ArgumentNullException("GoToData: DataItems is null");
+        if (DataItems.Count > index)
+        {
+            SlectedData = DataItems[index];
+        }
     }
 }

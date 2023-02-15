@@ -22,17 +22,17 @@ public sealed partial class ShellPage : Page
     {
         ViewModel = viewModel;
         App.UIStrings = App.GetService<MultilingualStringsServices>().Getzh_CN();
-        App.MainOOBE = OOBEServices.GetOOBEStatusAsync("MainOOBE").Result;
-        App.ShellOOBE = OOBEServices.GetOOBEStatusAsync("ShellOOBE").Result;
-        App.AgreementOOBE = OOBEServices.GetOOBEStatusAsync("AgreementOOBE").Result;
         InitializeComponent();
-        if (App.ShellOOBE == Models.OOBESituation.EnableOOBE)
+        if (OOBEServices.GetOOBEStatusAsync("ShellOOBE").Result == Models.OOBESituation.EnableOOBE)
         {
             OOBE_GoBackTip.IsOpen = true;
             OOBE_AddDataTip.IsOpen = true;
             OOBE_SettingTip.IsOpen = true;
         }
-
+        if (OOBEServices.GetOOBEStatusAsync("SearchOOBE").Result == Models.OOBESituation.EnableOOBE)
+        {
+            OOBE_SearchTip.IsOpen = true;
+        }
         ViewModel.NavigationService.Frame = NavigationFrame;
 
         // TODO: Set the title bar icon by updating /Assets/WindowIcon.ico.
@@ -52,7 +52,7 @@ public sealed partial class ShellPage : Page
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
 
         ShellMenuBarSettingsButton.AddHandler(UIElement.PointerPressedEvent, new PointerEventHandler(ShellAnimatedIcon_PointerPressed), true);
-        ShellMenuBarSettingsButton.AddHandler(UIElement.PointerReleasedEvent, new PointerEventHandler(ShellAnimatedIcon_PointerReleased), true); 
+        ShellMenuBarSettingsButton.AddHandler(UIElement.PointerReleasedEvent, new PointerEventHandler(ShellAnimatedIcon_PointerReleased), true);
         ShellMenuBarItem_Back.AddHandler(UIElement.PointerPressedEvent, new PointerEventHandler(ShellAnimatedIcon_PointerPressed), true);
         ShellMenuBarItem_Back.AddHandler(UIElement.PointerReleasedEvent, new PointerEventHandler(ShellAnimatedIcon_PointerReleased), true);
         ShellMenuSearchButton.AddHandler(UIElement.PointerEnteredEvent, new PointerEventHandler(ShellAnimatedIcon_PointerEntered), true);
@@ -156,7 +156,7 @@ public sealed partial class ShellPage : Page
             {
                 await App.DataManager.SaveToFileAsync($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
             }
-                
+
         }
         else
         {
@@ -176,6 +176,9 @@ public sealed partial class ShellPage : Page
         {
             ShellMenuSearchTip.IsOpen = true;
         }
+        else
+        {
+        }
     }
 
     // Handle text change and present suitable items
@@ -186,18 +189,12 @@ public sealed partial class ShellPage : Page
         if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
         {
             var suitableItems = new List<string>();
-            var splitText = sender.Text.ToLower().Split(" ");
-            /*foreach (var cat in Cats)
+            var text = sender.Text;
+            var matchDatas = App.DataManager.SuggestSearch(text);
+            foreach (var data in matchDatas)
             {
-                var found = splitText.All((key) =>
-                {
-                    return cat.ToLower().Contains(key);
-                });
-                if (found)
-                {
-                    suitableItems.Add(cat);
-                }
-            }*/
+                suitableItems.Add($"{data.PlatformName} - {data.AccountName}");
+            }
             if (suitableItems.Count == 0)
             {
                 suitableItems.Add("No results found");
@@ -213,6 +210,29 @@ public sealed partial class ShellPage : Page
     /// <param name="args"></param>
     private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
     {
-        
+        var slectedItem = args.SelectedItem;
+        if (slectedItem != null)
+        {
+            if (slectedItem.ToString() == "No results found")
+            {
+            }
+            else
+            {
+                var splitText = slectedItem.ToString().Split(" - ");
+                var platformName = splitText[0];
+                var accountName = splitText[1];
+                var index = App.DataManager.AccurateSearch(platformName, accountName);
+                App.ListDetailsVM.GoToData(index);
+            }
+        }
+        else
+        {
+            throw new ArgumentNullException("AutoSuggestBox_SuggestionChosen: SelectedItem is null");
+        }
+    }
+
+    private async void OOBE_SearchTip_CloseButtonClick(TeachingTip sender, object args)
+    {
+        await OOBEServices.SetOOBEStatusAsync("SearchOOBE", Models.OOBESituation.DIsableOOBE);
     }
 }

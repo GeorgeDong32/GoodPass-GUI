@@ -5,23 +5,9 @@
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:GoodPass.Models"
     Loaded="OnLoaded"
     Unloaded="OnUnloaded"
     mc:Ignorable="d">
-    <Page.Resources>
-        <DataTemplate x:Key="ItemTemplate" x:DataType="models:GPData">
-            <Grid>
-                <StackPanel
-                    Grid.Column="1"
-                    Margin="{StaticResource SmallLeftMargin}"
-                    VerticalAlignment="Center">
-                    <TextBlock Style="{StaticResource ListTitleStyle}" Text="{x:Bind PlatformName}" />
-                    <TextBlock Style="{StaticResource ListSubTitleStyle}" Text="{x:Bind AccountName}" />
-                </StackPanel>
-            </Grid>
-        </DataTemplate>
-    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />
@@ -103,15 +89,30 @@
             </AppBarButton>
             <TeachingTip
                 x:Name="ShellMenuSearchTip"
+                x:Uid="ShellMenuSearchTip"
+                CornerRadius="10"
                 IsLightDismissEnabled="True"
                 PreferredPlacement="Bottom"
                 Target="{x:Bind ShellMenuSearchButton}">
-                <AutoSuggestBox
-                    x:Name="ShellMenuSearchBox"
-                    x:Uid="ShellMenuSearchBox"
-                    Width="250"
-                    IsEnabled="True"
-                    ItemTemplate="{StaticResource ItemTemplate}" />
+                <StackPanel>
+                    <AutoSuggestBox
+                        x:Name="ShellMenuSearchBox"
+                        x:Uid="ShellMenuSearchBox"
+                        Width="300"
+                        IsEnabled="True"
+                        SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                        TextChanged="AutoSuggestBox_TextChanged" />
+                </StackPanel>
+            </TeachingTip>
+            <TeachingTip
+                x:Name="OOBE_SearchTip"
+                x:Uid="OOBE_SearchTip"
+                CloseButtonClick="OOBE_SearchTip_CloseButtonClick"
+                IsOpen="False"
+                Target="{x:Bind ShellMenuSearchButton}">
+                <TeachingTip.IconSource>
+                    <FontIconSource FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE783;" />
+                </TeachingTip.IconSource>
             </TeachingTip>
             <StackPanel Grid.Column="3" VerticalAlignment="Center" />
             <AppBarButton

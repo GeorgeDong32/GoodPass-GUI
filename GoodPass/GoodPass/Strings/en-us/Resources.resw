@@ -373,4 +373,10 @@
   <data name="OOBE_LoginBoxTip.Title" xml:space="preserve">
     <value>在密码框内按下回车也可以解锁应用</value>
   </data>
+  <data name="OOBE_SearchTip.Title" xml:space="preserve">
+    <value>解锁后点击此按钮搜索数据</value>
+  </data>
+  <data name="ShellMenuSearchBox.PlaceholderText" xml:space="preserve">
+    <value>请输入账号名或平台名进行搜索</value>
+  </data>
 </root>
