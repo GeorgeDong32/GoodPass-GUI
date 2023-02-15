@@ -43,8 +43,8 @@
                 HorizontalAlignment="Left"
                 AnimatedIcon.State="Normal"
                 Command="{x:Bind ViewModel.GoBackCommand}"
-                PointerPressed="ShellMenuBarItem_Back_PointerPressed"
-                PointerReleased="ShellMenuBarItem_Back_PointerReleased">
+                PointerPressed="ShellAnimatedIcon_PointerPressed"
+                PointerReleased="ShellAnimatedIcon_PointerReleased">
                 <AnimatedIcon x:Name="ShellMenuBarGoBackIcon">
                     <animatedvisuals:AnimatedBackVisualSource />
                     <AnimatedIcon.FallbackIconSource>
@@ -74,11 +74,13 @@
                 x:Name="ShellMenuSearchButton"
                 x:Uid="ShellMenuSearchButton"
                 Grid.Column="2"
-                Click="ShellMenuSearchButton_Click"
-                PointerPressed="ShellMenuSearchButton_PointerPressed"
-                PointerReleased="ShellMenuSearchButton_PointerReleased">
+                AnimatedIcon.State="Normal"
+                PointerEntered="ShellAnimatedIcon_PointerEntered"
+                PointerExited="ShellAnimatedIcon_PointerExited">
                 <AnimatedIcon x:Name="ShellMenuBarSearchIcon">
-                    <animatedvisuals:AnimatedFindVisualSource />
+                    <AnimatedIcon.Source>
+                        <animatedvisuals:AnimatedFindVisualSource />
+                    </AnimatedIcon.Source>
                     <AnimatedIcon.FallbackIconSource>
                         <SymbolIconSource Symbol="Find" />
                     </AnimatedIcon.FallbackIconSource>
@@ -139,8 +141,8 @@
                 Grid.Column="5"
                 AnimatedIcon.State="Normal"
                 Command="{x:Bind ViewModel.MenuSettingsCommand}"
-                PointerEntered="ShellMenuBarSettingsButton_PointerEntered"
-                PointerExited="ShellMenuBarSettingsButton_PointerExited">
+                PointerEntered="ShellAnimatedIcon_PointerEntered"
+                PointerExited="ShellAnimatedIcon_PointerExited">
                 <AnimatedIcon x:Name="ShellMenuBarSettingsButtonIcon">
                     <AnimatedIcon.Source>
                         <animatedvisuals:AnimatedSettingsVisualSource />
