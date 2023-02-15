@@ -59,4 +59,9 @@ public class ListDetailsViewModel : ObservableRecipient, INavigationAware
     {
         DataItems.Add(newData);
     }
+
+    public void TGoToData()
+    {
+        SlectedData = DataItems[3];
+    }
 }
