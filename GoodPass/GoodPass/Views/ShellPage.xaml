@@ -5,9 +5,23 @@
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:GoodPass.Models"
     Loaded="OnLoaded"
     Unloaded="OnUnloaded"
     mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="ItemTemplate" x:DataType="models:GPData">
+            <Grid>
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="{StaticResource SmallLeftMargin}"
+                    VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource ListTitleStyle}" Text="{x:Bind PlatformName}" />
+                    <TextBlock Style="{StaticResource ListSubTitleStyle}" Text="{x:Bind AccountName}" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />
@@ -75,6 +89,7 @@
                 x:Uid="ShellMenuSearchButton"
                 Grid.Column="2"
                 AnimatedIcon.State="Normal"
+                Click="ShellMenuSearchButton_Click"
                 PointerEntered="ShellAnimatedIcon_PointerEntered"
                 PointerExited="ShellAnimatedIcon_PointerExited">
                 <AnimatedIcon x:Name="ShellMenuBarSearchIcon">
@@ -95,7 +110,8 @@
                     x:Name="ShellMenuSearchBox"
                     x:Uid="ShellMenuSearchBox"
                     Width="250"
-                    IsEnabled="True" />
+                    IsEnabled="True"
+                    ItemTemplate="{StaticResource ItemTemplate}" />
             </TeachingTip>
             <StackPanel Grid.Column="3" VerticalAlignment="Center" />
             <AppBarButton

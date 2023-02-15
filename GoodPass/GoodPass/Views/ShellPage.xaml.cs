@@ -172,8 +172,47 @@ public sealed partial class ShellPage : Page
 
     private void ShellMenuSearchButton_Click(object sender, RoutedEventArgs e)
     {
-        //ShellMenuSearchTip.IsOpen = true;
+        if (!App.App_IsLock())
+        {
+            ShellMenuSearchTip.IsOpen = true;
+        }
     }
 
-    
+    // Handle text change and present suitable items
+    private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        // Since selecting an item will also change the text,
+        // only listen to changes caused by user entering text.
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            var suitableItems = new List<string>();
+            var splitText = sender.Text.ToLower().Split(" ");
+            /*foreach (var cat in Cats)
+            {
+                var found = splitText.All((key) =>
+                {
+                    return cat.ToLower().Contains(key);
+                });
+                if (found)
+                {
+                    suitableItems.Add(cat);
+                }
+            }*/
+            if (suitableItems.Count == 0)
+            {
+                suitableItems.Add("No results found");
+            }
+            sender.ItemsSource = suitableItems;
+        }
+    }
+
+    /// <summary>
+    /// 处理用户选择的结果
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+    {
+        
+    }
 }
