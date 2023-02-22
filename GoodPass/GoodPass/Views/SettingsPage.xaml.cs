@@ -1,7 +1,9 @@
 ﻿using GoodPass.Dialogs;
+using GoodPass.Services;
 using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 
 namespace GoodPass.Views;
 
@@ -20,12 +22,14 @@ public sealed partial class SettingsPage : Page
 
     private async void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var dialog = new OOBEAgreementsDialog()
+        // Check Microsoft Passport is setup and available on this machine
+        if (await MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync())
         {
-            XamlRoot = this.XamlRoot,
-            Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = App.UIStrings.OOBEAgreementsDialogTitle,
-        };
-        _ = await dialog.ShowAsync();
+            TestButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(100, 98, 255, 223));
+        }
+        else
+        {
+            TestButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(200, 255, 0, 0));
+        }
     }
 }

@@ -149,7 +149,11 @@
         </StackPanel>
 
         <StackPanel x:Name="testpanel" Grid.Row="4">
-            <!--  Button Click="Button_Click" Content="Test" /  -->
+            <!--  Test Windows Hello  -->
+            <Button
+                x:Name="TestButton"
+                Click="Button_Click"
+                Content="Test" />
         </StackPanel>
     </Grid>
 </Page>
