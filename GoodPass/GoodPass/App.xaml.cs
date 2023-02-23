@@ -126,7 +126,6 @@ public partial class App : Application
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IFileService, FileService>();
-            services.AddSingleton<GoodPassCryptographicServices>();
             services.AddSingleton<ListDetailsViewModel>();
             services.AddSingleton<MultilingualStringsServices>();
 

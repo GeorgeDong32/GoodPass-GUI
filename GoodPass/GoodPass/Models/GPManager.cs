@@ -87,8 +87,7 @@ public class GPManager
                 return false;
             }
         }
-        var cryptService = App.GetService<GoodPassCryptographicServices>();
-        var encPassword = cryptService.EncryptStr(password);
+        var encPassword = GoodPassCryptographicServices.EncryptStr(password);
         var datatemp = new GPData(platformName, platformUrl, accountName, encPassword, DateTime.Now);
         GPDatas.Add(datatemp);
         return true;
