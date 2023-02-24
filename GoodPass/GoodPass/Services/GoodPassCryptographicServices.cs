@@ -125,8 +125,8 @@ public static class GoodPassCryptographicServices
         //初始化数组
         var NumPos = new int[41];
         var SpecPos = new int[41];
-        Array.Fill(NumPos, -1);
-        Array.Fill(SpecPos, -1);
+        Array.Fill(NumPos, 0);
+        Array.Fill(SpecPos, 0);
         //找数字位置
         var Strlength = input.Length;
         var npCount = 1;
