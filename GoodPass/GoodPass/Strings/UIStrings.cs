@@ -40,6 +40,10 @@ public class UIStrings
 
     public readonly string AgreementNotArgeeContent;
 
+    public readonly string MicrosoftPassportButtonText1;
+
+    public readonly string MicrosoftPassportButtonText2;
+
     /// <summary>
     /// UIStrings构造函数
     /// </summary>
@@ -59,7 +63,9 @@ public class UIStrings
                      string warningDialogTitle,
                      string errorDialogTitle,
                      string infoDialogTitle,
-                     string agreementNotArgeeContent)
+                     string agreementNotArgeeContent,
+                     string microsoftPassportButtonText1,
+                     string microsoftPassportButtonText2)
     {
         ListDetailsDetailControl_AccountNameTitleText = listDetailsDetailControl_AccountNameTitleText;
         ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = listDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
@@ -78,5 +84,7 @@ public class UIStrings
         ErrorDialogTitle = errorDialogTitle;
         InfoDialogTitle = infoDialogTitle;
         AgreementNotArgeeContent = agreementNotArgeeContent;
+        MicrosoftPassportButtonText1 = microsoftPassportButtonText1;
+        MicrosoftPassportButtonText2 = microsoftPassportButtonText2;
     }
 }

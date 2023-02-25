@@ -17,21 +17,23 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="36" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock
             x:Uid="Settings_Title"
             Grid.Row="0"
             Style="{StaticResource PageTitleStyle}" />
-        <StackPanel x:Name="ContentArea" Grid.Row="1">
+
+        <StackPanel x:Name="Settings_ThemeArea" Grid.Row="1">
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                 <TextBlock x:Uid="Settings_Theme" />
 
-                <StackPanel Margin="{StaticResource XSmallTopMargin}">
+                <StackPanel Margin="{StaticResource XSmallTopMargin}" Orientation="Horizontal">
                     <RadioButton
                         x:Uid="Settings_Theme_Light"
                         Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -64,7 +66,26 @@
                     </RadioButton>
                 </StackPanel>
             </StackPanel>
+        </StackPanel>
 
+        <StackPanel
+            x:Name="Settings_SecureArea"
+            Grid.Row="2"
+            Margin="0,4,0,4">
+            <TextBlock
+                x:Uid="Settings_SecureTitle"
+                Margin="{ThemeResource ContentDialogTitleMargin}"
+                Style="{ThemeResource SubtitleTextBlockStyle}" />
+            <RelativePanel>
+                <ToggleButton
+                    x:Name="MicrosoftPassportButton"
+                    x:Uid="MicrosoftPassportButton"
+                    Click="MicrosoftPassportButton_Click"
+                    RelativePanel.AlignLeftWithPanel="True" />
+            </RelativePanel>
+        </StackPanel>
+
+        <StackPanel x:Name="Settings_AboutArea" Grid.Row="3">
             <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
 
             <StackPanel Margin="{StaticResource XSmallTopMargin}">
@@ -75,29 +96,29 @@
                     Margin="{StaticResource XSmallTopMargin}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
             </StackPanel>
+
+            <HyperlinkButton
+                x:Uid="GoToGithub_Button"
+                Margin="-12,8,0,0"
+                VerticalContentAlignment="Center">
+                <RelativePanel>
+                    <ImageIcon
+                        x:Name="GoToGithub_Button_Icon"
+                        Height="20"
+                        x:FieldModifier="public"
+                        Source="/Assets/GitHub-Mark-64px.png" />
+                    <TextBlock
+                        x:Uid="GoToGithub_Button_Text"
+                        Margin="8,0,0,0"
+                        RelativePanel.RightOf="GoToGithub_Button_Icon" />
+                </RelativePanel>
+            </HyperlinkButton>
         </StackPanel>
 
-        <HyperlinkButton
-            x:Uid="GoToGithub_Button"
-            Grid.Row="2"
-            Margin="-12,8,0,0"
-            VerticalContentAlignment="Center">
-            <RelativePanel>
-                <ImageIcon
-                    x:Name="GoToGithub_Button_Icon"
-                    Height="20"
-                    x:FieldModifier="public"
-                    Source="/Assets/GitHub-Mark-64px.png" />
-                <TextBlock
-                    x:Uid="GoToGithub_Button_Text"
-                    Margin="8,0,0,0"
-                    RelativePanel.RightOf="GoToGithub_Button_Icon" />
-            </RelativePanel>
-        </HyperlinkButton>
-
         <StackPanel
-            x:Name="Settings_Agreements"
-            Grid.Row="3"
+            x:Name="Settings_AgreementsArea"
+            Grid.Row="4"
+            Margin="0,0,0,8"
             Orientation="Horizontal">
             <HyperlinkButton
                 x:Uid="SettingsPage_PrivacyTermsLink"
@@ -148,7 +169,10 @@
             </HyperlinkButton>
         </StackPanel>
 
-        <StackPanel x:Name="testpanel" Grid.Row="4">
+        <StackPanel
+            x:Name="testpanel"
+            Grid.Row="5"
+            Margin="8,0,0,0">
             <!--  Test Windows Hello  -->
             <Button
                 x:Name="TestButton"
