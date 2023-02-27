@@ -26,7 +26,9 @@ public class MultilingualStringsServices
                                         "警告",
                                         "出错了",
                                         "提示",
-                                        "您需要同意《用户协议》和《隐私政策》后方可使用本软件！");
+                                        "您需要同意《用户协议》和《隐私政策》后方可使用本软件！",
+                                        "启用Microsoft Passport",
+                                        "关闭Microsoft Passport");
 
         UIStrings_en_US = new UIStrings("Account",
                                         "AccountName has copied!",
@@ -44,7 +46,9 @@ public class MultilingualStringsServices
                                         "Warning",
                                         "Error",
                                         "Info",
-                                        "You need to agree to the User Agreement and Privacy Policy before you can use the software!");
+                                        "You need to agree to the User Agreement and Privacy Policy before you can use the software!",
+                                        "Enable Microsoft Passport",
+                                        "Disable Microsoft Passport");
     }
 
     public UIStrings Getzh_CN() => UIStrings_zh_CN;
