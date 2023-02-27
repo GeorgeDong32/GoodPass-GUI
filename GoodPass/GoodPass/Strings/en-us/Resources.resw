@@ -379,4 +379,7 @@
   <data name="ShellMenuSearchBox.PlaceholderText" xml:space="preserve">
     <value>请输入账号名或平台名进行搜索</value>
   </data>
+  <data name="ShellMenuItem_File_Export.Text" xml:space="preserve">
+    <value>导出数据</value>
+  </data>
 </root>
