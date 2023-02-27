@@ -21,8 +21,13 @@ public sealed partial class SettingsPage : Page
     {
         ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
-        MicrosoftPassportButton.Content = App.UIStrings.MicrosoftPassportButtonText1;
-        switch (SecurityStatusHelper.GetMSPassportStatus().Result)
+        if (App.App_IsLock())
+        {
+            MicrosoftPassportButton.IsEnabled = false;
+            DataInsertButton.IsEnabled = false;
+            AESButton.IsEnabled = false;
+        }
+        switch (SecurityStatusHelper.GetMSPassportStatusAsync().Result)
         {
             case true:
                 MicrosoftPassportButton.IsChecked = true;
@@ -33,6 +38,32 @@ public sealed partial class SettingsPage : Page
                 MicrosoftPassportButton.IsChecked = false;
                 MicrosoftPassportSituationIcon.Glyph = "\xE711";
                 MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText2;
+                break;
+        }
+        switch (SecurityStatusHelper.GetDataInsetStatusAsync().Result)
+        {
+            case true:
+                DataInsertButton.IsChecked = true;
+                DataInsertSituationIcon.Glyph = "\xE73E";
+                DataInsertSituationText.Text = App.UIStrings.DataInsertSituationText1;
+                break;
+            case false:
+                DataInsertButton.IsChecked = false;
+                DataInsertSituationIcon.Glyph = "\xE711";
+                DataInsertSituationText.Text = App.UIStrings.DataInsertSituationText2;
+                break;
+        }
+        switch(SecurityStatusHelper.GetAESStatusAsync().Result)
+        {
+            case true:
+                AESButton.IsChecked = true;
+                AESSituationIcon.Glyph = "\xE73E";
+                AESSituationText.Text = App.UIStrings.AESSituationText1;
+                break;
+            case false:
+                AESButton.IsChecked = false;
+                AESSituationIcon.Glyph = "\xE711";
+                AESSituationText.Text = App.UIStrings.AESSituationText2;
                 break;
         }
     }
@@ -74,25 +105,53 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    private void MicrosoftPassportButton_Click(object sender, RoutedEventArgs e)
+    private async void MicrosoftPassportButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is ToggleButton tb)
         {
+            //TODO: 在完成功能后删除
+            tb.ContextFlyout.ShowAt(tb);
+            tb.IsChecked = false;
+            return;
             switch(tb.IsChecked)
             {
                 case true:
-                    MicrosoftPassportButton.Content = App.UIStrings.MicrosoftPassportButtonText2;
                     //TODO: 取消Microsoft Passport关联
                     MicrosoftPassportSituationIcon.Glyph = "\xE73E";
                     MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText1;
+                    _ = await SecurityStatusHelper.SetMSPassportStatusAsync(false);
                     break;
                 case false:
-                    MicrosoftPassportButton.Content = App.UIStrings.MicrosoftPassportButtonText1;
                     //TODO: 关联Microsoft Passport
                     MicrosoftPassportSituationIcon.Glyph = "\xE711";
                     MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText2;
+                    _ = await SecurityStatusHelper.SetMSPassportStatusAsync(true);
                     break;
             }
+        }
+    }
+
+    private void DataInsertButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is ToggleButton tb)
+        {
+            //TODO: 在完成功能后删除
+            tb.ContextFlyout.ShowAt(tb);
+            tb.IsChecked = false;
+            return;
+            //TODO: 启用/关闭数据内嵌功能
+        }
+    }
+
+    private void AESButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is ToggleButton tb)
+        {
+            //TODO: 在完成功能后删除
+            tb.ContextFlyout.ShowAt(tb);
+            tb.IsChecked = false;
+            return;
+            //TODO: 启用/关闭AES加密
         }
     }
 }

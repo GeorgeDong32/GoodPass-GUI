@@ -40,13 +40,17 @@ public class UIStrings
 
     public readonly string AgreementNotArgeeContent;
 
-    public readonly string MicrosoftPassportButtonText1;
-
-    public readonly string MicrosoftPassportButtonText2;
-
     public readonly string MicrosoftPassportSituatoinText1;
 
     public readonly string MicrosoftPassportSituatoinText2;
+
+    public readonly string DataInsertSituationText1;
+
+    public readonly string DataInsertSituationText2;
+
+    public readonly string AESSituationText1;
+
+    public readonly string AESSituationText2;
 
     /// <summary>
     /// UIStrings构造函数
@@ -68,10 +72,12 @@ public class UIStrings
                      string errorDialogTitle,
                      string infoDialogTitle,
                      string agreementNotArgeeContent,
-                     string microsoftPassportButtonText1,
-                     string microsoftPassportButtonText2,
                      string microsoftPassportSituatoinText1,
-                     string microsoftPassportSituatoinText2)
+                     string microsoftPassportSituatoinText2,
+                     string dataInsertSituationText1,
+                     string dataInsertSituationText2,
+                     string aESSituationText1,
+                     string aESSituationText2)
     {
         ListDetailsDetailControl_AccountNameTitleText = listDetailsDetailControl_AccountNameTitleText;
         ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = listDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
@@ -90,9 +96,11 @@ public class UIStrings
         ErrorDialogTitle = errorDialogTitle;
         InfoDialogTitle = infoDialogTitle;
         AgreementNotArgeeContent = agreementNotArgeeContent;
-        MicrosoftPassportButtonText1 = microsoftPassportButtonText1;
-        MicrosoftPassportButtonText2 = microsoftPassportButtonText2;
         MicrosoftPassportSituatoinText1 = microsoftPassportSituatoinText1;
         MicrosoftPassportSituatoinText2 = microsoftPassportSituatoinText2;
+        DataInsertSituationText1 = dataInsertSituationText1;
+        DataInsertSituationText2 = dataInsertSituationText2;
+        AESSituationText1 = aESSituationText1;
+        AESSituationText2 = aESSituationText2;
     }
 }
