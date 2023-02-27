@@ -68,7 +68,7 @@
             <StackPanel
                 x:Name="Settings_SecureArea"
                 Grid.Row="2"
-                Margin="0,4,0,4">
+                Margin="0,4,0,14">
                 <TextBlock
                     x:Uid="Settings_SecureTitle"
                     Margin="{ThemeResource ContentDialogTitleMargin}"
@@ -79,6 +79,23 @@
                         x:Uid="MicrosoftPassportButton"
                         Click="MicrosoftPassportButton_Click"
                         RelativePanel.AlignLeftWithPanel="True" />
+                    <RelativePanel
+                        x:Name="MicrosoftPassportSituation"
+                        RelativePanel.AlignBottomWithPanel="True"
+                        RelativePanel.RightOf="MicrosoftPassportButton">
+                        <FontIcon
+                            x:Name="MicrosoftPassportSituationIcon"
+                            Margin="8,2,0,8"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="14"
+                            Glyph="&#xE711;" />
+                        <!--  E711 叉图标，E73E 勾图标  -->
+                        <TextBlock
+                            x:Name="MicrosoftPassportSituationText"
+                            x:Uid="MicrosoftPassportSituationText"
+                            Margin="4,0,0,0"
+                            RelativePanel.RightOf="MicrosoftPassportSituationIcon" />
+                    </RelativePanel>
                 </RelativePanel>
             </StackPanel>
 

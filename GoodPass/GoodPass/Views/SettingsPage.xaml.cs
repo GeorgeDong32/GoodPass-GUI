@@ -1,4 +1,5 @@
 ﻿using GoodPass.Dialogs;
+using GoodPass.Helpers;
 using GoodPass.Services;
 using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
@@ -21,6 +22,19 @@ public sealed partial class SettingsPage : Page
         ViewModel = App.GetService<SettingsViewModel>();
         InitializeComponent();
         MicrosoftPassportButton.Content = App.UIStrings.MicrosoftPassportButtonText1;
+        switch (SecurityStatusHelper.GetMSPassportStatus().Result)
+        {
+            case true:
+                MicrosoftPassportButton.IsChecked = true;
+                MicrosoftPassportSituationIcon.Glyph = "\xE73E";
+                MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText1;
+                break;
+            case false:
+                MicrosoftPassportButton.IsChecked = false;
+                MicrosoftPassportSituationIcon.Glyph = "\xE711";
+                MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText2;
+                break;
+        }
     }
 
     private async void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -69,10 +83,14 @@ public sealed partial class SettingsPage : Page
                 case true:
                     MicrosoftPassportButton.Content = App.UIStrings.MicrosoftPassportButtonText2;
                     //TODO: 取消Microsoft Passport关联
+                    MicrosoftPassportSituationIcon.Glyph = "\xE73E";
+                    MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText1;
                     break;
                 case false:
                     MicrosoftPassportButton.Content = App.UIStrings.MicrosoftPassportButtonText1;
                     //TODO: 关联Microsoft Passport
+                    MicrosoftPassportSituationIcon.Glyph = "\xE711";
+                    MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText2;
                     break;
             }
         }

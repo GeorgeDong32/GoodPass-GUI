@@ -28,7 +28,9 @@ public class MultilingualStringsServices
                                         "提示",
                                         "您需要同意《用户协议》和《隐私政策》后方可使用本软件！",
                                         "启用Microsoft Passport",
-                                        "关闭Microsoft Passport");
+                                        "关闭Microsoft Passport",
+                                        "已启用Microsoft Passport",
+                                        "未启用Microsoft Passport");
 
         UIStrings_en_US = new UIStrings("Account",
                                         "AccountName has copied!",
@@ -48,7 +50,9 @@ public class MultilingualStringsServices
                                         "Info",
                                         "You need to agree to the User Agreement and Privacy Policy before you can use the software!",
                                         "Enable Microsoft Passport",
-                                        "Disable Microsoft Passport");
+                                        "Disable Microsoft Passport",
+                                        "Microsoft Passport is enabled",
+                                        "Microsoft Passport is not enabled");
     }
 
     public UIStrings Getzh_CN() => UIStrings_zh_CN;
