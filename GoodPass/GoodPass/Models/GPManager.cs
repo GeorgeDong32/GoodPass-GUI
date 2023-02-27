@@ -316,7 +316,7 @@ public class GPManager
         }
         else
         {
-            File.Create(filePath);
+            File.Create(filePath).Close();
             await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime\n", System.Text.Encoding.UTF8);
             foreach (var data in GPDatas)
             {
