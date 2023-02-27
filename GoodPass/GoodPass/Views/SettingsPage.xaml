@@ -28,12 +28,11 @@
                 x:Uid="Settings_Title"
                 Grid.Row="0"
                 Style="{StaticResource PageTitleStyle}" />
-
+                
             <StackPanel x:Name="Settings_ThemeArea" Grid.Row="1">
                 <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
                 <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                     <TextBlock x:Uid="Settings_Theme" />
-
                     <StackPanel Margin="{StaticResource XSmallTopMargin}" Orientation="Horizontal">
                         <RadioButton
                             x:Uid="Settings_Theme_Light"
@@ -67,7 +66,6 @@
                         </RadioButton>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
 
             <StackPanel
                 x:Name="Settings_SecureArea"
@@ -152,7 +150,6 @@
                             RelativePanel.RightOf="SettingsPage_UserAgreementLink_Icon" />
                     </RelativePanel>
                 </HyperlinkButton>
-
                 <HyperlinkButton
                     x:Uid="SettingsPage_OpenSourceLicense"
                     Height="36"

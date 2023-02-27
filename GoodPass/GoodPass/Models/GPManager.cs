@@ -87,8 +87,7 @@ public class GPManager
                 return false;
             }
         }
-        var cryptService = App.GetService<GoodPassCryptographicServices>();
-        var encPassword = cryptService.EncryptStr(password);
+        var encPassword = GoodPassCryptographicServices.EncryptStr(password);
         var datatemp = new GPData(platformName, platformUrl, accountName, encPassword, DateTime.Now);
         GPDatas.Add(datatemp);
         return true;
@@ -317,7 +316,7 @@ public class GPManager
         }
         else
         {
-            File.Create(filePath);
+            File.Create(filePath).Close();
             await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,EncPassword,LatestUpdateTime\n", System.Text.Encoding.UTF8);
             foreach (var data in GPDatas)
             {
