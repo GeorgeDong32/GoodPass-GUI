@@ -9,9 +9,6 @@
     mc:Ignorable="d">
     <Page.Resources>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
-        <!--
-        <ImageIconSource ImageSource="/Assets/GitHub-Mark-Light-64px.png" x:Key="GH-Mark-Light" />
-        <ImageIconSource ImageSource="/Assets/GitHub-Mark-64px.png" x:Key="GH-Mark-Dark"  />-->
     </Page.Resources>
     <ScrollViewer>
         <Grid>
@@ -28,7 +25,7 @@
                 x:Uid="Settings_Title"
                 Grid.Row="0"
                 Style="{StaticResource PageTitleStyle}" />
-                
+
             <StackPanel x:Name="Settings_ThemeArea" Grid.Row="1">
                 <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />
                 <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
@@ -66,6 +63,7 @@
                         </RadioButton>
                     </StackPanel>
                 </StackPanel>
+            </StackPanel>
 
             <StackPanel
                 x:Name="Settings_SecureArea"
