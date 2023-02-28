@@ -172,16 +172,15 @@ public sealed partial class ShellPage : Page
 
     private void ShellMenuSearchButton_Click(object sender, RoutedEventArgs e)
     {
-        if (!App.App_IsLock())
+        if (!App.App_IsLock() && !App.IsInSettingsPage())
         {
             ShellMenuSearchTip.IsOpen = true;
         }
-        else
-        {
-        }
     }
 
-    // Handle text change and present suitable items
+    /// <summary>
+    /// Handle text change and present suitable items
+    /// </summary>
     private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
         // Since selecting an item will also change the text,
