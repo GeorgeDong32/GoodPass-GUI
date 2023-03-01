@@ -379,4 +379,19 @@
   <data name="ShellMenuSearchBox.PlaceholderText" xml:space="preserve">
     <value>请输入账号名或平台名进行搜索</value>
   </data>
+  <data name="Settings_SecureTitle.Text" xml:space="preserve">
+    <value>安全性</value>
+  </data>
+  <data name="ShellMenuItem_File_Export.Text" xml:space="preserve">
+    <value>导出数据</value>
+  </data>
+  <data name="AESButton.Content" xml:space="preserve">
+    <value>启用AES加密</value>
+  </data>
+  <data name="DataInsertButton.Content" xml:space="preserve">
+    <value>启用数据内嵌</value>
+  </data>
+  <data name="MicrosoftPassportButton.Content" xml:space="preserve">
+    <value>启用Microsoft Passport</value>
+  </data>
 </root>
