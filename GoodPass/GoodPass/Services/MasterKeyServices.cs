@@ -280,7 +280,6 @@ public static class MasterKeyService
                 }
                 else if (inputKeyHash == localHash)
                 {
-                    SecurityStatusHelper.SetAESStatusAsync(false);
                     App.AESIV = GPAESServices.GetLocalIV();
                     App.AESKey = GPAESServices.GenerateKey(inputKey, App.AESIV);
                     ProcessMKArray(inputKey);

@@ -159,7 +159,7 @@ public sealed partial class SettingsPage : Page
                     AESSituationIcon.Glyph = "\xE73E";
                     AESSituationText.Text = App.UIStrings.AESSituationText1;
                     _ = await SecurityStatusHelper.SetAESStatusAsync(true);
-
+                    App.DataManager.EncryptAllDatas();
                     break;
                 case false:
                     //TODO: 关联Microsoft Passport
