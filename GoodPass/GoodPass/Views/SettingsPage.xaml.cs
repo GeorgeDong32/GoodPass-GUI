@@ -73,7 +73,7 @@ public sealed partial class SettingsPage : Page
         // Check Microsoft Passport is setup and available on this machine
         if (await MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync())
         {
-            TestButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(100, 98, 255, 223));
+            //TestButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(100, 98, 255, 223));
             var openKeyResult = await KeyCredentialManager.OpenAsync("2572593789@qq.com");
 
             if (openKeyResult.Status == KeyCredentialStatus.Success)
@@ -101,7 +101,7 @@ public sealed partial class SettingsPage : Page
         }
         else
         {
-            TestButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(200, 255, 0, 0));
+            //TestButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(200, 255, 0, 0));
         }
     }
 

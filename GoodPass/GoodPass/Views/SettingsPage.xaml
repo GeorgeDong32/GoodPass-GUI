@@ -260,10 +260,7 @@
                 Grid.Row="5"
                 Margin="8,0,0,0">
                 <!--  Test Windows Hello  -->
-                <Button
-                    x:Name="TestButton"
-                    Click="Button_Click"
-                    Content="Test" />
+
             </StackPanel>
         </Grid>
     </ScrollViewer>
