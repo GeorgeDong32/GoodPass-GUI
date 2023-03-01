@@ -116,6 +116,14 @@ public class GPData
         return true;
     }
 
+    public bool DataEncrypt()
+    {
+        EncPassword = GoodPassCryptographicServices.EncryptStr(DecPassword);
+        DecPassword = "";
+        GetPassword = "";
+        return true;
+    }
+
     /// <summary>
     /// 更改密码
     /// </summary>

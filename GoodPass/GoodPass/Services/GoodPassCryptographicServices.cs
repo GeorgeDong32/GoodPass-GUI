@@ -1,4 +1,6 @@
-﻿namespace GoodPass.Services;
+﻿using GoodPass.Helpers;
+
+namespace GoodPass.Services;
 
 /// <summary>
 /// 提供GPSES服务，用于对数据进行加解密
@@ -30,6 +32,10 @@ public static class GoodPassCryptographicServices
         if (input == null || input == string.Empty)
         {
             throw new ArgumentNullException("DecryptStr: input is null or empty");
+        }
+        if (SecurityStatusHelper.GetAESStatusAsync().Result)
+        {
+            input = GPAESServices.DecryptFromBase64(input, App.AESKey, App.AESIV);
         }
         var decStr = "";
         var baseStr = "";
@@ -203,6 +209,10 @@ public static class GoodPassCryptographicServices
         }
         tail += (char)(SpecPos[0] + 65);
         output = head + output + tail;
+        if (SecurityStatusHelper.GetAESStatusAsync().Result)
+        {
+            output = GPAESServices.EncryptToBase64(output, App.AESKey, App.AESIV);
+        }
         return output;
     }
 }

@@ -53,7 +53,7 @@ public sealed partial class SettingsPage : Page
                 DataInsertSituationText.Text = App.UIStrings.DataInsertSituationText2;
                 break;
         }
-        switch(SecurityStatusHelper.GetAESStatusAsync().Result)
+        switch (SecurityStatusHelper.GetAESStatusAsync().Result)
         {
             case true:
                 AESButton.IsChecked = true;
@@ -113,7 +113,7 @@ public sealed partial class SettingsPage : Page
             tb.ContextFlyout.ShowAt(tb);
             tb.IsChecked = false;
             return;
-            switch(tb.IsChecked)
+            switch (tb.IsChecked)
             {
                 case true:
                     //TODO: 取消Microsoft Passport关联
@@ -143,15 +143,32 @@ public sealed partial class SettingsPage : Page
         }
     }
 
-    private void AESButton_Click(object sender, RoutedEventArgs e)
+    private async void AESButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is ToggleButton tb)
         {
-            //TODO: 在完成功能后删除
+            /*TODO: 在完成功能后删除
             tb.ContextFlyout.ShowAt(tb);
             tb.IsChecked = false;
-            return;
+            return;*/
             //TODO: 启用/关闭AES加密
+            switch (tb.IsChecked)
+            {
+                case true:
+                    //TODO: 取消Microsoft Passport关联
+                    AESSituationIcon.Glyph = "\xE73E";
+                    AESSituationText.Text = App.UIStrings.AESSituationText1;
+                    _ = await SecurityStatusHelper.SetAESStatusAsync(true);
+
+                    break;
+                case false:
+                    //TODO: 关联Microsoft Passport
+                    AESSituationIcon.Glyph = "\xE711";
+                    AESSituationText.Text = App.UIStrings.AESSituationText2;
+                    _ = await SecurityStatusHelper.SetAESStatusAsync(false);
+                    App.DataManager.EncryptAllDatas();
+                    break;
+            }
         }
     }
 }

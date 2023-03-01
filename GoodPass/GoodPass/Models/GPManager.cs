@@ -346,6 +346,14 @@ public class GPManager
         }
     }
 
+    public void EncryptAllDatas()
+    {
+        foreach (var data in GPDatas)
+        {
+            data.DataEncrypt();
+        }
+    }
+
     /// <summary>
     /// 获取指定数据
     /// </summary>

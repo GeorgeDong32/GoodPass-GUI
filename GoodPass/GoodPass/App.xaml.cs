@@ -36,6 +36,10 @@ public partial class App : Application
     /// </summary>
     public static int[]? MKBase;
 
+    public static byte[] AESKey;
+
+    public static byte[] AESIV;
+
     /// <summary>
     /// 数据管理成员
     /// </summary>
