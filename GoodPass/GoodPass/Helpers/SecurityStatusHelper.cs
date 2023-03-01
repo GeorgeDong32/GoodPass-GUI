@@ -11,15 +11,19 @@ public static class SecurityStatusHelper
             bool MSPS;
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue("MSPassport", out var obj))
             {
-                MSPS = (bool)obj;
-                await Task.CompletedTask;
-                return MSPS;
+                MSPS = (string)obj switch
+                {
+                    "True" => true,
+                    "False" => false,
+                    _ => false,
+                };
             }
             else
             {
                 MSPS = false;
-                return MSPS;
             }
+            await Task.CompletedTask;
+            return MSPS;
         }
         else
         {
@@ -48,15 +52,19 @@ public static class SecurityStatusHelper
             bool DIS;
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue("DataInsert", out var obj))
             {
-                DIS = (bool)obj;
-                await Task.CompletedTask;
-                return DIS;
+                DIS = (string)obj switch
+                {
+                    "True" => true,
+                    "False" => false,
+                    _ => false,
+                };
             }
             else
             {
                 DIS = false;
-                return DIS;
             }
+            await Task.CompletedTask;
+            return DIS;
         }
         else
         {
@@ -85,15 +93,19 @@ public static class SecurityStatusHelper
             bool AESS;
             if (ApplicationData.Current.LocalSettings.Values.TryGetValue("AESStatus", out var obj))
             {
-                AESS = (bool)obj;
-                await Task.CompletedTask;
-                return AESS;
+                AESS = (string)obj switch
+                {
+                    "True" => true,
+                    "False" => false,
+                    _ => false,
+                };
             }
             else
             {
                 AESS = false;
-                return AESS;
             }
+            await Task.CompletedTask;
+            return AESS;
         }
         else
         {
