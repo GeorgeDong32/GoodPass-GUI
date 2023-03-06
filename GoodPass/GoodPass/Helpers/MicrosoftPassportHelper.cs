@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using GoodPass.Models;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 
@@ -76,9 +77,20 @@ public static class MicrosoftPassportHelper
         return false;
     }
 
-    public static async Task<UserConsentVerificationResult> PassportSignInAsync()
+    public static async Task<PassportSignInResult> PassportSignInAsync()
     {
         //TODO:多语言
-        return await UserConsentVerifier.RequestVerificationAsync("登录到GoodPass");
+        var result = await UserConsentVerifier.RequestVerificationAsync("登录到GoodPass");
+        return result switch
+        {
+            UserConsentVerificationResult.Verified => PassportSignInResult.Verified,
+            UserConsentVerificationResult.DeviceBusy => PassportSignInResult.Busy,
+            UserConsentVerificationResult.DeviceNotPresent => PassportSignInResult.NotUseable,
+            UserConsentVerificationResult.DisabledByPolicy => PassportSignInResult.Disabled,
+            UserConsentVerificationResult.RetriesExhausted => PassportSignInResult.Failed,
+            UserConsentVerificationResult.Canceled => PassportSignInResult.Cancel,
+            UserConsentVerificationResult.NotConfiguredForUser => PassportSignInResult.NotUseable,
+            _ => PassportSignInResult.NotUseable,
+        };
     }
 }
