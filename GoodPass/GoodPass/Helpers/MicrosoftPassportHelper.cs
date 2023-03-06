@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 
