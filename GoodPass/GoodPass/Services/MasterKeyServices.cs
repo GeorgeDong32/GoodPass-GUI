@@ -304,4 +304,40 @@ public static class MasterKeyService
             throw new GPRuntimeException("CheckMasterKeyAsync_MSIX: Not Run in MSIX");
         }
     }
+
+    public static string CheckMasterKey_NP(string inputKey)
+    {
+        var inputKeyHash = GoodPassSHAServices.getGPHES(inputKey);
+        if (RuntimeHelper.IsMSIX)
+        {
+            if (ApplicationData.Current.LocalSettings.Values.TryGetValue("LocalMKHash", out var obj))
+            {
+                var localHash = (string)obj;
+                if (localHash == String.Empty)
+                {
+                    return "error: data broken";
+                }
+                else if (inputKeyHash == localHash)
+                {
+                    return "pass";
+                }
+                else if (inputKeyHash != localHash)
+                {
+                    return "npass";
+                }
+                else
+                {
+                    return "Unknown Error";
+                }
+            }
+            else
+            {
+                return "error: not found";
+            }
+        }
+        else
+        {
+            throw new GPRuntimeException("CheckMasterKeyAsync_MSIX: Not Run in MSIX");
+        }
+    }
 }
