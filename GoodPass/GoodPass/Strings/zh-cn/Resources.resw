@@ -394,4 +394,13 @@
   <data name="MicrosoftPassportButton.Content" xml:space="preserve">
     <value>启用Microsoft Passport</value>
   </data>
+  <data name="MPD_IntroText.Text" xml:space="preserve">
+    <value>Microsoft Passport是使用Windows Hello的生物识别验证体系</value>
+  </data>
+  <data name="MPD_PasswordBox.Header" xml:space="preserve">
+    <value>验证主密码</value>
+  </data>
+  <data name="MPD_PasswordBox.PlaceholderText" xml:space="preserve">
+    <value>请输入主密码以验证</value>
+  </data>
 </root>
