@@ -5,6 +5,7 @@ using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.Win32.SafeHandles;
 using Windows.UI;
 
 namespace GoodPass.Views;
@@ -177,53 +178,134 @@ public sealed partial class MainPage : Page
                 return;
             }
         }
-        var passwordInput = Login_PasswordBox.Password;
-        string MKCheck_Result;
-        if (RuntimeHelper.IsMSIX)
+        if (SecurityStatusHelper.GetMSPassportStatusAsync().Result)
         {
-            MKCheck_Result = await MasterKeyService.CheckMasterKeyAsync_MSIX(passwordInput);
+            string masterKey = String.Empty;
+            var signinResult = true;
+            try
+            {
+                masterKey = await MicrosoftPassportService.SignInMicrosoftPassportAsync(await SecurityStatusHelper.GetVaultUsername());
+            }
+            catch(Exception ex)
+            {
+                signinResult = false;
+                var warningdialog = new GPDialog2()
+                {
+                    XamlRoot = this.XamlRoot,
+                    Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
+                    Title = App.UIStrings.WarningDialogTitle,
+                    Content = ex.Message,
+                };
+                _ = warningdialog.ShowAsync();
+            }
+            if (signinResult)
+            {
+                string MKCheck_Result;
+                if (RuntimeHelper.IsMSIX)
+                {
+                    MKCheck_Result = await MasterKeyService.CheckMasterKeyAsync_MSIX(masterKey);
+                }
+                else
+                {
+                    MKCheck_Result = await MasterKeyService.CheckMasterKeyAsync(masterKey);
+                }
+                App.DataManager ??= new Models.GPManager(); //为null时才赋值
+                                                            //添加解锁逻辑
+                if (MKCheck_Result == "pass")
+                {
+                    App.App_UnLock();
+                    App.DataManager.LoadFormFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
+                    App.DataManager.DecryptAllDatas();
+                    ViewModel.Login_UnLock();
+                }
+                else if (MKCheck_Result == "npass")
+                {
+                    Login_InfoBar.IsOpen = true;
+                    Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));//设置提示为红色
+                    Login_InfoBar.Message = "密码错误，请检查后重试！";//底部横幅提示
+                }
+                else if (MKCheck_Result == "error: not found")
+                {
+                    //报错：MKConfig路径不存在
+                    Login_InfoBar.IsOpen = true;
+                    Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
+                    Login_InfoBar.Message = "配置文件不存在！";
+                    ShowSetMKDialog();
+                }
+                else if (MKCheck_Result == "error: data broken")
+                {
+                    //报错：MKConfig数据损坏
+                    Login_InfoBar.IsOpen = true;
+                    Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
+                    Login_InfoBar.Message = "配置文件损坏，请修复！";
+                    ShowResetMKDialog();
+                }
+                else
+                {
+                    //报错：未知错误
+                    Login_InfoBar.IsOpen = true;
+                    Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
+                    Login_InfoBar.Message = "未知错误！";
+                }
+            }
+            else
+            {
+                //报错：未知错误
+                Login_InfoBar.IsOpen = true;
+                Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
+                Login_InfoBar.Message = "未知错误！";
+            }
         }
         else
         {
-            MKCheck_Result = await MasterKeyService.CheckMasterKeyAsync(passwordInput);
-        }
-        App.DataManager ??= new Models.GPManager(); //为null时才赋值
-        //添加解锁逻辑
-        if (MKCheck_Result == "pass")
-        {
-            App.App_UnLock();
-            App.DataManager.LoadFormFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
-            App.DataManager.DecryptAllDatas();
-            ViewModel.Login_UnLock();
-        }
-        else if (MKCheck_Result == "npass")
-        {
-            Login_InfoBar.IsOpen = true;
-            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));//设置提示为红色
-            Login_InfoBar.Message = "密码错误，请检查后重试！";//底部横幅提示
-        }
-        else if (MKCheck_Result == "error: not found")
-        {
-            //报错：MKConfig路径不存在
-            Login_InfoBar.IsOpen = true;
-            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
-            Login_InfoBar.Message = "配置文件不存在！";
-            ShowSetMKDialog();
-        }
-        else if (MKCheck_Result == "error: data broken")
-        {
-            //报错：MKConfig数据损坏
-            Login_InfoBar.IsOpen = true;
-            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
-            Login_InfoBar.Message = "配置文件损坏，请修复！";
-            ShowResetMKDialog();
-        }
-        else
-        {
-            //报错：未知错误
-            Login_InfoBar.IsOpen = true;
-            Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
-            Login_InfoBar.Message = "未知错误！";
+            var passwordInput = Login_PasswordBox.Password;
+            string MKCheck_Result;
+            if (RuntimeHelper.IsMSIX)
+            {
+                MKCheck_Result = await MasterKeyService.CheckMasterKeyAsync_MSIX(passwordInput);
+            }
+            else
+            {
+                MKCheck_Result = await MasterKeyService.CheckMasterKeyAsync(passwordInput);
+            }
+            App.DataManager ??= new Models.GPManager(); //为null时才赋值
+                                                        //添加解锁逻辑
+            if (MKCheck_Result == "pass")
+            {
+                App.App_UnLock();
+                App.DataManager.LoadFormFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
+                App.DataManager.DecryptAllDatas();
+                ViewModel.Login_UnLock();
+            }
+            else if (MKCheck_Result == "npass")
+            {
+                Login_InfoBar.IsOpen = true;
+                Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));//设置提示为红色
+                Login_InfoBar.Message = "密码错误，请检查后重试！";//底部横幅提示
+            }
+            else if (MKCheck_Result == "error: not found")
+            {
+                //报错：MKConfig路径不存在
+                Login_InfoBar.IsOpen = true;
+                Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
+                Login_InfoBar.Message = "配置文件不存在！";
+                ShowSetMKDialog();
+            }
+            else if (MKCheck_Result == "error: data broken")
+            {
+                //报错：MKConfig数据损坏
+                Login_InfoBar.IsOpen = true;
+                Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
+                Login_InfoBar.Message = "配置文件损坏，请修复！";
+                ShowResetMKDialog();
+            }
+            else
+            {
+                //报错：未知错误
+                Login_InfoBar.IsOpen = true;
+                Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
+                Login_InfoBar.Message = "未知错误！";
+            }
         }
     }
 
