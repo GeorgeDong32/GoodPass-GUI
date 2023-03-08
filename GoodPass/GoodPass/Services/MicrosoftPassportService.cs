@@ -14,10 +14,10 @@ public static class MicrosoftPassportService
     /// <returns></returns>
     public static async Task<bool> SetMicrosoftPassportAsync(string username, string masterkey)
     {
-        if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
+        /*if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
         {
             return false;
-        }
+        }*/
         var createResult = await Helpers.MicrosoftPassportHelper.CreatePassportKeyAsync("GoodPass");
         if (!createResult)
         {
@@ -37,10 +37,10 @@ public static class MicrosoftPassportService
     /// <exception cref="Exception"></exception>
     public static async Task<string> SignInMicrosoftPassportAsync(string username)
     {
-        if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
+        /*if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
         {
             throw new Exception("SignInMicrosoftPassportAsync: MicrosoftPassport is not available!");
-        }
+        }*/
         var signinResult = await MicrosoftPassportHelper.PassportSignInAsync();
         switch (signinResult)
         {
@@ -65,12 +65,12 @@ public static class MicrosoftPassportService
 
     public static async Task<bool> RemoveMicrosoftPassportAsync(string username, string masterkey)
     {
-        if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
+        /*if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
         {
             return false;
-        }
-        var createResult = await Helpers.MicrosoftPassportHelper.RemovePassportKeyAsync("GoodPass");
-        if (!createResult)
+        }*/
+        var removeResult = await Helpers.MicrosoftPassportHelper.RemovePassportKeyAsync("GoodPass");
+        if (!removeResult)
         {
             return false;
         }
