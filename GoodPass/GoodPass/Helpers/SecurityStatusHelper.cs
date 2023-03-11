@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using Windows.Storage;
+﻿using Windows.Storage;
 
 namespace GoodPass.Helpers;
 

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using GoodPass.Models;
+﻿using GoodPass.Models;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 
