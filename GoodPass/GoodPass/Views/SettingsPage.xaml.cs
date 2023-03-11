@@ -6,7 +6,6 @@ using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
-using Windows.Security.Credentials;
 
 namespace GoodPass.Views;
 
@@ -65,43 +64,6 @@ public sealed partial class SettingsPage : Page
                 AESSituationIcon.Glyph = "\xE711";
                 AESSituationText.Text = App.UIStrings.AESSituationText2;
                 break;
-        }
-    }
-
-    private async void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-    {
-        // Check Microsoft Passport is setup and available on this machine
-        if (await MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync())
-        {
-            //TestButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(100, 98, 255, 223));
-            var openKeyResult = await KeyCredentialManager.OpenAsync("2572593789@qq.com");
-
-            if (openKeyResult.Status == KeyCredentialStatus.Success)
-            {
-                var userKey = openKeyResult.Credential;
-                var publicKey = userKey.RetrievePublicKey();
-                var signResult = await KeyCredentialManager.OpenAsync("2572593789@qq.com");
-
-                if (signResult.Status == KeyCredentialStatus.Success)
-                {
-                    var dialog = new GPDialog2()
-                    {
-                        XamlRoot = this.XamlRoot,
-                        Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
-                    };
-                    dialog.Content = "验证成功";
-                    dialog.Title = "Test";
-                    _ = await dialog.ShowAsync();
-                }
-                else if (signResult.Status == KeyCredentialStatus.UserPrefersPassword)
-                {
-
-                }
-            }
-        }
-        else
-        {
-            //TestButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(200, 255, 0, 0));
         }
     }
 
