@@ -70,6 +70,48 @@ public sealed partial class MainPage : Page
     }
 
     /// <summary>
+    /// 回车解锁功能
+    /// </summary>
+    private async void Login_PasswordBox_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+    {
+        if (e.Key == Windows.System.VirtualKey.Enter)
+        {
+            if (_PasswordFirst)
+            {
+                UnlockWithPassword(Login_PasswordBox.Password);
+                return;
+            }
+            if (Login_PasswordBox.Password != String.Empty && Login_PasswordBox.Password != null)
+            {
+                UnlockWithPassword(Login_PasswordBox.Password);
+                await Task.Delay(100);
+            }
+            else
+            {
+                if (await SecurityStatusHelper.GetMSPassportStatusAsync())
+                {
+                    if (_MSPVerifyTimes <= 2)
+                    {
+                        UnlockWithMSP();
+                        await Task.Delay(100);
+                    }
+                    else
+                    {
+                        Login_InfoBar.IsOpen = true;
+                        Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
+                        Login_InfoBar.Message = "检测到Microsoft Passport登录多次失败，请使用主密码登录";
+                        _PasswordFirst = true;
+                    }
+                }
+                else
+                {
+                    UnlockWithPassword(Login_PasswordBox.Password);
+                }
+            }
+        }
+    }
+
+    /// <summary>
     /// 密码设置弹窗
     /// </summary>
     private async void ShowSetMKDialog()
@@ -114,48 +156,6 @@ public sealed partial class MainPage : Page
     /// PasswordBox状态变化事件响应
     /// </summary>
     private void Login_PasswordBox_PasswordChanging(PasswordBox sender, PasswordBoxPasswordChangingEventArgs args) => Login_InfoBar.IsOpen = false;
-
-    /// <summary>
-    /// 回车解锁功能
-    /// </summary>
-    private async void Login_PasswordBox_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
-    {
-        if (e.Key == Windows.System.VirtualKey.Enter)
-        {
-            if (_PasswordFirst)
-            {
-                UnlockWithPassword(Login_PasswordBox.Password);
-                return;
-            }
-            if (Login_PasswordBox.Password != String.Empty && Login_PasswordBox.Password != null)
-            {
-                UnlockWithPassword(Login_PasswordBox.Password);
-                await Task.Delay(100);
-            }
-            else
-            {
-                if (await SecurityStatusHelper.GetMSPassportStatusAsync())
-                {
-                    if (_MSPVerifyTimes <= 2)
-                    {
-                        UnlockWithMSP();
-                        await Task.Delay(100);
-                    }
-                    else
-                    {
-                        Login_InfoBar.IsOpen = true;
-                        Login_InfoBar.Background = new SolidColorBrush(Color.FromArgb(120, 255, 0, 0));
-                        Login_InfoBar.Message = "检测到Microsoft Passport登录多次失败，请使用主密码登录";
-                        _PasswordFirst = true;
-                    }
-                }
-                else
-                {
-                    UnlockWithPassword(Login_PasswordBox.Password);
-                }
-            }
-        }
-    }
 
     /// <summary>
     /// (封装的)异步解锁操作
