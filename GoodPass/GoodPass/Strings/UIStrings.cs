@@ -52,6 +52,10 @@ public class UIStrings
 
     public readonly string AESSituationText2;
 
+    public readonly string MPD_PasswordCheckSuccess;
+
+    public readonly string MPD_PasswordCheckFailed;
+
     /// <summary>
     /// UIStrings构造函数
     /// </summary>
@@ -77,7 +81,9 @@ public class UIStrings
                      string dataInsertSituationText1,
                      string dataInsertSituationText2,
                      string aESSituationText1,
-                     string aESSituationText2)
+                     string aESSituationText2,
+                     string mpd_PasswordCheckSuccess,
+                     string mpd_PasswordCheckFailed)
     {
         ListDetailsDetailControl_AccountNameTitleText = listDetailsDetailControl_AccountNameTitleText;
         ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = listDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
@@ -102,5 +108,7 @@ public class UIStrings
         DataInsertSituationText2 = dataInsertSituationText2;
         AESSituationText1 = aESSituationText1;
         AESSituationText2 = aESSituationText2;
+        MPD_PasswordCheckSuccess = mpd_PasswordCheckSuccess;
+        MPD_PasswordCheckFailed = mpd_PasswordCheckFailed;
     }
 }

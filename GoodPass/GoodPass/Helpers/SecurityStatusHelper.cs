@@ -126,4 +126,38 @@ public static class SecurityStatusHelper
             return false;
         }
     }
+
+    public static async Task<bool> SetVaultUsername(string username)
+    {
+        if (RuntimeHelper.IsMSIX)
+        {
+            ApplicationData.Current.LocalSettings.Values["VaultUsername"] = username;
+            await Task.CompletedTask;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static async Task<string> GetVaultUsername()
+    {
+        if (RuntimeHelper.IsMSIX)
+        {
+            if (ApplicationData.Current.LocalSettings.Values.TryGetValue("VaultUsername", out var obj))
+            {
+                await Task.CompletedTask;
+                return (string)obj;
+            }
+            else
+            {
+                throw new Exception("GetVaultUsername: No Vault Username");
+            }
+        }
+        else
+        {
+            throw new GPRuntimeException("GetVaultUsername: Not in MSIX");
+        }
+    }
 }

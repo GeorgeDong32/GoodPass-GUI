@@ -90,13 +90,14 @@ public static class GPAESServices
         return plaintext;
     }
 
-    public static byte[] GenerateIV()
+    public static byte[] GenerateIV(string masterKey)
     {
-        using var aes = Aes.Create();
-        return aes.IV;
+        var salt = System.Text.Encoding.Default.GetBytes("GoodPass");
+        var rfc2898DeriveBytes = new Rfc2898DeriveBytes(masterKey, salt);
+        return rfc2898DeriveBytes.GetBytes(16);
     }
 
-    public static byte[] GetLocalIV()
+    public static byte[] GetLocalIV(string masterKey)
     {
         if (RuntimeHelper.IsMSIX)
         {
@@ -107,7 +108,7 @@ public static class GPAESServices
                 localIVStr = (string)obj;
                 if (localIVStr == String.Empty || localIVStr == null)
                 {
-                    localIV = GenerateIV();
+                    localIV = GenerateIV(masterKey);
                     SetLocalIV(localIV);
                 }
                 else
@@ -117,7 +118,7 @@ public static class GPAESServices
             }
             else
             {
-                localIV = GenerateIV();
+                localIV = GenerateIV(masterKey);
                 SetLocalIV(localIV);
             }
             return localIV;

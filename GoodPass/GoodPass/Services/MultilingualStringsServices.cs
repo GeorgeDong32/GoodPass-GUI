@@ -32,7 +32,9 @@ public class MultilingualStringsServices
                                         "已启用数据内嵌",
                                         "未启用数据内嵌",
                                         "已启用AES加密数据",
-                                        "未启用AES加密数据");
+                                        "未启用AES加密数据",
+                                        "主密码正确",
+                                        "主密码错误");
 
         UIStrings_en_US = new UIStrings("Account",
                                         "AccountName has copied!",
@@ -56,7 +58,9 @@ public class MultilingualStringsServices
                                         "MSIX data embedding is enabled",
                                         "MSIX data embedding is not enabled",
                                         "AES encryption is enabled",
-                                        "AES encryption is not enabled");
+                                        "AES encryption is not enabled",
+                                        "The master password is correct",
+                                        "The master password is incorrect");
     }
 
     public UIStrings Getzh_CN() => UIStrings_zh_CN;
