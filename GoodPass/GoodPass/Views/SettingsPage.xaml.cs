@@ -143,11 +143,6 @@ public sealed partial class SettingsPage : Page
     {
         if (sender is ToggleButton tb)
         {
-            /*TODO: 在完成功能后删除
-            tb.ContextFlyout.ShowAt(tb);
-            tb.IsChecked = false;
-            return;*/
-            //TODO: 启用/关闭AES加密
             switch (tb.IsChecked)
             {
                 case true:
