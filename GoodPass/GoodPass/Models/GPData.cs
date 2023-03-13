@@ -77,8 +77,7 @@ public class GPData
         PlatformUrl = null;
         AccountName = accountName;
         EncPassword = encPassword;
-        var GPCS = App.GetService<GoodPassCryptographicServices>();
-        DecPassword = GPCS.DecryptStr(EncPassword);
+        DecPassword = GoodPassCryptographicServices.DecryptStr(EncPassword);
         GetPassword = DecPassword;
         LatestUpdateTime = latestUpdateTime;
     }
@@ -86,14 +85,13 @@ public class GPData
     /// <summary>
     /// GPData的含时间的构造函数
     /// </summary>
-    public GPData(string platformName, string platformUrl, string accountName, string encPassword, DateTime latestUpdateTime)
+    public GPData(string platformName, string? platformUrl, string accountName, string encPassword, DateTime latestUpdateTime)
     {
         PlatformName = platformName;
         PlatformUrl = platformUrl;
         AccountName = accountName;
         EncPassword = encPassword;
-        var GPCS = App.GetService<GoodPassCryptographicServices>();
-        DecPassword = GPCS.DecryptStr(EncPassword);
+        DecPassword = GoodPassCryptographicServices.DecryptStr(EncPassword);
         GetPassword = DecPassword;
         LatestUpdateTime = latestUpdateTime;
     }
@@ -113,9 +111,16 @@ public class GPData
     /// <returns>数据解密是否成功</returns>
     public bool DataDecrypt()
     {
-        var GPCS = App.GetService<GoodPassCryptographicServices>();
-        DecPassword = GPCS.DecryptStr(EncPassword);
+        DecPassword = GoodPassCryptographicServices.DecryptStr(EncPassword);
         GetPassword = DecPassword;
+        return true;
+    }
+
+    public bool DataEncrypt()
+    {
+        EncPassword = GoodPassCryptographicServices.EncryptStr(DecPassword);
+        DecPassword = "";
+        GetPassword = "";
         return true;
     }
 
@@ -129,9 +134,8 @@ public class GPData
         DataDecrypt();
         if (newPassword != DecPassword && newPassword != string.Empty && newPassword != null)
         {
-            var GPCS = App.GetService<GoodPassCryptographicServices>();
             DecPassword = newPassword;
-            EncPassword = GPCS.EncryptStr(newPassword);
+            EncPassword = GoodPassCryptographicServices.EncryptStr(newPassword);
             LatestUpdateTime = DateTime.Now;
             return "Success";
         }
@@ -154,7 +158,7 @@ public class GPData
     /// </summary>
     /// <param name="newUrl">新的Url</param>
     /// <returns>修改结果</returns>
-    public bool ChangeUrl(string newUrl)
+    public bool ChangeUrl(string? newUrl)
     {
         if (newUrl == this.PlatformUrl)
         {

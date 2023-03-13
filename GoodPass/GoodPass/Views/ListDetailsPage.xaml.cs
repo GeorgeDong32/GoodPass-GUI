@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.WinUI.UI.Controls;
-using GoodPass.Services;
 using GoodPass.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
@@ -14,7 +13,7 @@ public sealed partial class ListDetailsPage : Page
 
     public ListDetailsPage()
     {
-        App.ListDetailsVM = new ListDetailsViewModel(App.GetService<GoodPassDataService>());
+        App.ListDetailsVM = new ListDetailsViewModel();
         ViewModel = App.ListDetailsVM;
         InitializeComponent();
     }

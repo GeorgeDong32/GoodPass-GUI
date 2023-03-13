@@ -2,7 +2,7 @@
 
 namespace GoodPass.Services;
 
-public class GoodPassDataService
+public static class GoodPassDataService
 {
     /// <summary>
     /// 从DataManager获取IEnumerable形式的所有数据或初始化示例数据
@@ -21,12 +21,10 @@ public class GoodPassDataService
         {
             datas = new List<GPData>()
             {
-                //常规代码
-                //new GPData("Sample", "https://github.com/GeorgeDong32/GoodPass", "SampleAccount", App.GetService<GoodPassCryptographicServices>().EncryptStr("SamplePassword"), DateTime.Now)
-                //测试代码2023.1.13
-                new GPData("Test", "https://github.com/GeorgeDong32/GoodPass-v3", "001", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now),
-                new GPData("Test", "https://github.com/GeorgeDong32/GoodPass", "002", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now),
-                new GPData("Test", String.Empty ,"003", App.GetService<GoodPassCryptographicServices>().EncryptStr("Test"), DateTime.Now)
+                //生成示例
+                new GPData("Example", "https://github.com/GeorgeDong32/GoodPass", "example1@example.com", GoodPassCryptographicServices.EncryptStr("ExamplePassword"), DateTime.Now),
+                new GPData("Example", "https://example.com", "example2", GoodPassCryptographicServices.EncryptStr("ExamplePassword"), DateTime.Now),
+                new GPData("Example", String.Empty ,"404871381511007", GoodPassCryptographicServices.EncryptStr("ExamplePassword"), DateTime.Now)
             };
             foreach (var data in datas)
             {
@@ -41,7 +39,7 @@ public class GoodPassDataService
     /// 异步获取IEnumerable形式的所有数据或初始化示例数据
     /// </summary>
     /// <returns>异步的IEnumerable形式的数据列表</returns>
-    public async Task<IEnumerable<GPData>> GetListDetailsDataAsync()
+    public static async Task<IEnumerable<GPData>> GetListDetailsDataAsync()
     {
         var _allDatas = new List<GPData>(AllDatas());
         await Task.CompletedTask;
