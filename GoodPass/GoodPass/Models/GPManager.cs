@@ -326,6 +326,30 @@ public class GPManager
         }
     }
 
+    public async Task<bool> SavePlaintextToFile(string filePath)
+    {
+        this.DecryptAllDatas();
+        if (File.Exists(filePath))
+        {
+            await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,Password,LatestUpdateTime\n", System.Text.Encoding.UTF8);
+            foreach (var data in GPDatas)
+            {
+                await File.AppendAllTextAsync(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.GetPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
+            }
+            return true;
+        }
+        else
+        {
+            File.Create(filePath).Close();
+            await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,Password,LatestUpdateTime\n", System.Text.Encoding.UTF8);
+            foreach (var data in GPDatas)
+            {
+                await File.AppendAllTextAsync(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.GetPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
+            }
+            return true;
+        }
+    }
+
     /// <summary>
     /// 获取所有数据
     /// </summary>

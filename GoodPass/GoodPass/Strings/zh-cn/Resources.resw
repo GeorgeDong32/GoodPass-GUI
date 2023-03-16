@@ -403,4 +403,10 @@
   <data name="MPD_PasswordBox.PlaceholderText" xml:space="preserve">
     <value>请输入主密码以验证</value>
   </data>
+  <data name="ShellMenuItem_File_ExportCiphertext.Text" xml:space="preserve">
+    <value>导出加密数据</value>
+  </data>
+  <data name="ShellMenuItem_File_ExportPlaintext.Text" xml:space="preserve">
+    <value>导出未加密数据</value>
+  </data>
 </root>
