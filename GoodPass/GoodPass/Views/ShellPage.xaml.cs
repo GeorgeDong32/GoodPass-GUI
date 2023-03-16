@@ -236,39 +236,6 @@ public sealed partial class ShellPage : Page
     }
 
     /// <summary>
-    /// 导出数据
-    /// </summary>
-    private async void Export_Click(object sender, RoutedEventArgs e)
-    {
-        if (App.App_IsLock() == false)
-        {
-            GPDialog2 confirmDialog = new()
-            {
-                XamlRoot = this.XamlRoot,
-                Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
-            };
-            confirmDialog.Title = "导出数据？";
-            confirmDialog.Content = "点击确定即可导出数据";
-            var result = await confirmDialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                var saveResult = await App.DataManager.SaveToFileAsync($"C:\\Users\\{Environment.UserName}\\Downloads\\GoodPassData.csv");
-                if (saveResult == true)
-                {
-                    var infoDialog = new GPDialog2
-                    {
-                        XamlRoot = this.XamlRoot,
-                        Style = App.Current.Resources["DefaultContentDialogStyle"] as Style,
-                        Title = "导出数据",
-                        Content = "导出成功，请前往下载文件夹查看"
-                    };
-                    _ = await infoDialog.ShowAsync();
-                }
-            }
-        }
-    }
-
-    /// <summary>
     /// 导出加密数据
     /// </summary>
     private async void ShellMenuItem_File_ExportCiphertext_Click(object sender, RoutedEventArgs e)
@@ -301,6 +268,9 @@ public sealed partial class ShellPage : Page
         }
     }
 
+    /// <summary>
+    /// 导出未加密数据
+    /// </summary>
     private async void ShellMenuItem_File_ExportPlaintext_Click(object sender, RoutedEventArgs e)
     {
         if (App.App_IsLock() == false)

@@ -331,7 +331,7 @@ public class GPManager
         this.DecryptAllDatas();
         if (File.Exists(filePath))
         {
-            await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,DecPassword,LatestUpdateTime\n", System.Text.Encoding.UTF8);
+            await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,Password,LatestUpdateTime\n", System.Text.Encoding.UTF8);
             foreach (var data in GPDatas)
             {
                 await File.AppendAllTextAsync(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.GetPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
@@ -341,7 +341,7 @@ public class GPManager
         else
         {
             File.Create(filePath).Close();
-            await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,DecPassword,LatestUpdateTime\n", System.Text.Encoding.UTF8);
+            await File.WriteAllTextAsync(filePath, "PlatformName,PlatformUrl,AccountName,Password,LatestUpdateTime\n", System.Text.Encoding.UTF8);
             foreach (var data in GPDatas)
             {
                 await File.AppendAllTextAsync(filePath, $"{data.PlatformName},{data.PlatformUrl},{data.AccountName},{data.GetPassword},{data.LatestUpdateTime}\n", System.Text.Encoding.UTF8);
