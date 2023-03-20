@@ -338,7 +338,7 @@ public sealed partial class MainPage : Page
         if (MKCheck_Result == "pass")
         {
             App.App_UnLock();
-            if(_PasswordFirst)
+            if (_PasswordFirst)
                 _PasswordFirst = false;
             _MSPVerifyTimes = 0;
             App.DataManager.LoadFormFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
