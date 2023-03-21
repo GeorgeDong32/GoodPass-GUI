@@ -4,7 +4,10 @@ using Windows.Storage;
 
 namespace GoodPass.Services;
 
-public static class GPAESServices
+/// <summary>
+/// 提供AES加密服务
+/// </summary>
+public static class GoodPassAESServices
 {
     public static string EncryptToBase64(string plainText, byte[] Key, byte[] IV)
     {
@@ -86,10 +89,12 @@ public static class GPAESServices
                 }
             }
         }
-
         return plaintext;
     }
 
+    /// <summary>
+    /// 生成AES初始化向量
+    /// </summary>
     public static byte[] GenerateIV(string masterKey)
     {
         var salt = System.Text.Encoding.Default.GetBytes("GoodPass");
@@ -145,12 +150,6 @@ public static class GPAESServices
         {
             throw new GPRuntimeException("GetLocalIV: Not in MSIX");
         }
-    }
-
-    public static byte[] GenerateKey()
-    {
-        using var aes = Aes.Create();
-        return aes.Key;
     }
 
     public static byte[] GenerateKey(string password, byte[] salt)
