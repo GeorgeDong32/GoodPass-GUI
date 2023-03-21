@@ -4,7 +4,7 @@ using Windows.Storage;
 
 namespace GoodPass.Services;
 
-public static class GPAESServices
+public static class GoodPassAESServices
 {
     public static string EncryptToBase64(string plainText, byte[] Key, byte[] IV)
     {

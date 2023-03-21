@@ -102,8 +102,8 @@ public static class MasterKeyService
         var localMKHash = GetLocalMKHash();
         if (InputKeyHash == localMKHash)
         {
-            App.AESIV = GPAESServices.GetLocalIV(inputKey);
-            App.AESKey = GPAESServices.GenerateKey(inputKey, App.AESIV);
+            App.AESIV = GoodPassAESServices.GetLocalIV(inputKey);
+            App.AESKey = GoodPassAESServices.GenerateKey(inputKey, App.AESIV);
             ProcessMKArray(inputKey);
             return "pass";
         }
@@ -205,8 +205,8 @@ public static class MasterKeyService
         var LocalMKHash = await GetLocalMKHashAsync();
         if (InputKeyHash == LocalMKHash)
         {
-            App.AESIV = GPAESServices.GetLocalIV(inputKey);
-            App.AESKey = GPAESServices.GenerateKey(inputKey, App.AESIV);
+            App.AESIV = GoodPassAESServices.GetLocalIV(inputKey);
+            App.AESKey = GoodPassAESServices.GenerateKey(inputKey, App.AESIV);
             ProcessMKArray(inputKey);
             return "pass";
         }
@@ -280,8 +280,8 @@ public static class MasterKeyService
                 }
                 else if (inputKeyHash == localHash)
                 {
-                    App.AESIV = GPAESServices.GetLocalIV(inputKey);
-                    App.AESKey = GPAESServices.GenerateKey(inputKey, App.AESIV);
+                    App.AESIV = GoodPassAESServices.GetLocalIV(inputKey);
+                    App.AESKey = GoodPassAESServices.GenerateKey(inputKey, App.AESIV);
                     ProcessMKArray(inputKey);
                     return "pass";
                 }
