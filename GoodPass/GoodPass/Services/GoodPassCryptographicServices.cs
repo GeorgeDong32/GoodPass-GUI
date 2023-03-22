@@ -44,6 +44,7 @@ public static class GoodPassCryptographicServices
         var SpecPos = new int[41];
         Array.Fill(NumPos, -1);
         Array.Fill(SpecPos, -1);
+        input = input.Trim('*').Trim('1').Trim('#');
         //找数字位置
         NumPos[0] = (int)input[0] - 'A';
         for (var i = 1; i <= NumPos[0]; i++)
@@ -209,6 +210,7 @@ public static class GoodPassCryptographicServices
         }
         tail += (char)(SpecPos[0] + 65);
         output = head + output + tail;
+        output = "*1#" + output + "#1*";
         if (SecurityStatusHelper.GetAESStatusAsync().Result)
         {
             output = GoodPassAESServices.EncryptToBase64(output, App.AESKey, App.AESIV);

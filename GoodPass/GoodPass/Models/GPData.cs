@@ -1,4 +1,5 @@
-﻿using GoodPass.Services;
+﻿using GoodPass.Helpers;
+using GoodPass.Services;
 
 namespace GoodPass.Models;
 
@@ -102,7 +103,10 @@ public class GPData
     public void SelfUpdate() //预留接口
     {
         /*Todo:添加数据自升级的相应代码*/
-        LatestUpdateTime = DateTime.Now;
+        /*2023.3.23*/
+        DataDecrypt();
+        var temp = DecPassword;
+        EncPassword = GoodPassCryptographicServices.EncryptStr(temp);
     }
 
     /// <summary>
