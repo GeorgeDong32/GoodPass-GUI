@@ -103,10 +103,6 @@ public class GPData
     public void SelfUpdate() //预留接口
     {
         /*Todo:添加数据自升级的相应代码*/
-        /*2023.3.23*/
-        DataDecrypt();
-        var temp = DecPassword;
-        EncPassword = GoodPassCryptographicServices.EncryptStr(temp);
     }
 
     /// <summary>

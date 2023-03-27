@@ -151,8 +151,12 @@ public static class MasterKeyService
     /// </summary>
     /// <param name="inputKey">输入的主密码</param>
     /// <returns>校验结果</returns>
-    public static async Task<string> CheckMasterKeyAsync(string inputKey)
+    public static async Task<string> CheckMasterKeyAsync(string? inputKey)
     {
+        if (string.IsNullOrEmpty(inputKey))
+        {
+            return "npass";
+        }
         var InputKeyHash = GoodPassSHAServices.getGPHES(inputKey);
         var LocalMKHash = await GetLocalMKHashAsync();
         if (InputKeyHash == LocalMKHash)
@@ -216,8 +220,12 @@ public static class MasterKeyService
     /// MSIX打包应用使用的主密码校验方法
     /// </summary>
     /// <exception cref="GPRuntimeException">未在MSIX环境中运行</exception>
-    public static async Task<string> CheckMasterKeyAsync_MSIX(string inputKey)
+    public static async Task<string> CheckMasterKeyAsync_MSIX(string? inputKey)
     {
+        if (string.IsNullOrEmpty(inputKey))
+        {
+            return "npass";
+        }
         var inputKeyHash = GoodPassSHAServices.getGPHES(inputKey);
         if (RuntimeHelper.IsMSIX)
         {
