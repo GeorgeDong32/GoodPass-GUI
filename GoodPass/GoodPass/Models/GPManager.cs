@@ -171,6 +171,14 @@ public class GPManager
         return GPDatas[targetIndex].ChangePassword(newPassword);
     }
 
+    public void SelfUpdate()
+    {
+        foreach (var data in GPDatas)
+        {
+            data.SelfUpdate();
+        }
+    }
+
     /// <summary>
     /// 更改平台Url
     /// </summary>
