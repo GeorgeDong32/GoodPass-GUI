@@ -388,9 +388,6 @@
   <data name="AESButton.Content" xml:space="preserve">
     <value>启用AES加密</value>
   </data>
-  <data name="DataInsertButton.Content" xml:space="preserve">
-    <value>启用数据内嵌</value>
-  </data>
   <data name="MicrosoftPassportButton.Content" xml:space="preserve">
     <value>启用Microsoft Passport</value>
   </data>
