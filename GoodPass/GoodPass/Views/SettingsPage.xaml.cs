@@ -23,11 +23,9 @@ public sealed partial class SettingsPage : Page
         if (App.App_IsLock())
         {
             MicrosoftPassportButton.IsEnabled = false;
-            AESButton.IsEnabled = false;
         }
         else
         {
-            AESButton.IsEnabled = true;
             MicrosoftPassportButton.IsEnabled = true;
         }
         switch (SecurityStatusHelper.GetMSPassportStatusAsync().Result)
@@ -41,19 +39,6 @@ public sealed partial class SettingsPage : Page
                 MicrosoftPassportButton.IsChecked = false;
                 MicrosoftPassportSituationIcon.Glyph = "\xE711";
                 MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText2;
-                break;
-        }
-        switch (SecurityStatusHelper.GetAESStatusAsync().Result)
-        {
-            case true:
-                AESButton.IsChecked = true;
-                AESSituationIcon.Glyph = "\xE73E";
-                AESSituationText.Text = App.UIStrings.AESSituationText1;
-                break;
-            case false:
-                AESButton.IsChecked = false;
-                AESSituationIcon.Glyph = "\xE711";
-                AESSituationText.Text = App.UIStrings.AESSituationText2;
                 break;
         }
     }
@@ -103,7 +88,7 @@ public sealed partial class SettingsPage : Page
                     {
                         var masterKey = dialog1.MasterKey;
                         var username = await SecurityStatusHelper.GetVaultUsername();
-                        var mpResult = await MicrosoftPassportService.RemoveMicrosoftPassportAsync(username, masterKey);
+                        _ = await MicrosoftPassportService.RemoveMicrosoftPassportAsync(username, masterKey);
                     }
                     else
                     {
@@ -113,29 +98,6 @@ public sealed partial class SettingsPage : Page
                     MicrosoftPassportSituationIcon.Glyph = "\xE711";
                     MicrosoftPassportSituationText.Text = App.UIStrings.MicrosoftPassportSituatoinText2;
                     _ = await SecurityStatusHelper.SetMSPassportStatusAsync(false);
-                    break;
-            }
-        }
-    }
-
-    private async void AESButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (sender is ToggleButton tb)
-        {
-            tb.IsEnabled = false;
-            switch (tb.IsChecked)
-            {
-                case true:
-                    AESSituationIcon.Glyph = "\xE73E";
-                    AESSituationText.Text = App.UIStrings.AESSituationText1;
-                    _ = await SecurityStatusHelper.SetAESStatusAsync(true);
-                    App.DataManager.EncryptAllDatas();
-                    break;
-                case false:
-                    AESSituationIcon.Glyph = "\xE711";
-                    AESSituationText.Text = App.UIStrings.AESSituationText2;
-                    _ = await SecurityStatusHelper.SetAESStatusAsync(false);
-                    App.DataManager.EncryptAllDatas();
                     break;
             }
         }
