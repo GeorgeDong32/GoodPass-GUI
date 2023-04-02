@@ -99,9 +99,10 @@ public class GPData
     /// <summary>
     /// 数据自更新，预留接口
     /// </summary>
-    public void SelfUpdate() //预留接口
+    public async void SelfUpdate() //预留接口
     {
         /*Todo:添加数据自升级的相应代码*/
+        await Task.CompletedTask;
     }
 
     /// <summary>

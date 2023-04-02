@@ -181,7 +181,7 @@ public sealed partial class MainPage : Page
             _MSPVerifyTimes = 0;
             App.DataManager.LoadFormFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
             App.DataManager.DecryptAllDatas();
-            //App.DataManager.SelfUpdate();
+            App.DataManager.SelfUpdate();
             ViewModel.Login_UnLock();
         }
         else if (MKCheck_Result == "npass")
@@ -258,7 +258,7 @@ public sealed partial class MainPage : Page
                 App.App_UnLock();
                 App.DataManager.LoadFormFile($"C:\\Users\\{Environment.UserName}\\AppData\\Local\\GoodPass\\GoodPassData.csv");
                 App.DataManager.DecryptAllDatas();
-                //App.DataManager.SelfUpdate();
+                App.DataManager.SelfUpdate();
                 ViewModel.Login_UnLock();
             }
             else if (MKCheck_Result == "npass")
