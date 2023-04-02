@@ -1,4 +1,5 @@
-﻿using GoodPass.Services;
+﻿using System.Data.Common;
+using GoodPass.Services;
 namespace GoodPass.Models;
 
 public class GPManager
@@ -171,11 +172,15 @@ public class GPManager
         return GPDatas[targetIndex].ChangePassword(newPassword);
     }
 
-    public void SelfUpdate()
+    public async void SelfUpdate()
     {
-        foreach (var data in GPDatas)
+        if (!await GoodPass.Helpers.SecurityStatusHelper.GetAESStatusAsync())
         {
-            data.SelfUpdate();
+            await GoodPass.Helpers.SecurityStatusHelper.SetAESStatusAsync(true);
+            EncryptAllDatas();
+            var dataPath = Path.Combine($"C:\\Users\\{Environment.UserName}\\AppData\\Local", "GoodPass", "GoodPassData.csv");
+            await SaveToFileAsync(dataPath);
+            DecryptAllDatas();
         }
     }
 
