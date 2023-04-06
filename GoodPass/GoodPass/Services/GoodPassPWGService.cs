@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using System.Net.Http.Headers;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace GoodPass.Services;
+﻿namespace GoodPass.Services;
 
 /// <summary>
 /// GoodPass密码生成服务
@@ -151,7 +147,7 @@ public static class GoodPassPWGService
             if (username.Contains('@'))
             {
                 output = username[0..3];
-                var domainname = username.Substring(username.IndexOf('@')+1, 10);
+                var domainname = username.Substring((username.IndexOf('@') + 1), Math.Min(10, username.Length - username.IndexOf('@') - 1));
                 if (domainname.StartsWith("outlook"))
                 {
                     output += "out";
@@ -167,6 +163,10 @@ public static class GoodPassPWGService
                 else if (domainname.StartsWith("foxmail"))
                 {
                     output += "fm";
+                }
+                else
+                {
+                    output += domainname[0..2];
                 }
                 return output;
             }
