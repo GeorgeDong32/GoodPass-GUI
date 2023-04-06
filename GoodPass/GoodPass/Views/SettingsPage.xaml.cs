@@ -11,11 +11,15 @@ namespace GoodPass.Views;
 
 public sealed partial class SettingsPage : Page
 {
+    #region Properties
     public SettingsViewModel ViewModel
     {
         get;
     }
 
+    #endregion
+
+    #region Methods
     public SettingsPage()
     {
         ViewModel = App.GetService<SettingsViewModel>();
@@ -102,4 +106,6 @@ public sealed partial class SettingsPage : Page
             }
         }
     }
+
+    #endregion
 }
