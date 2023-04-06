@@ -169,7 +169,7 @@ public sealed partial class ShellPage : Page
         }
     }
 
-    
+
     #endregion
 
     #region SearchButton Functions 
