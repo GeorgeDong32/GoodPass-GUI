@@ -5,6 +5,7 @@
 /// </summary>
 public static class GoodPassPWGService
 {
+    #region Password Generate Functions
     /// <summary>
     /// 生成不含特殊字符的随机密码
     /// </summary>
@@ -67,7 +68,7 @@ public static class GoodPassPWGService
     public static string GPstylePassword(string platformName, string accountName)
     {
         var random = new Random();
-        //对平台名进行大小写处理
+        #region 平台名处理
         var PNLength = platformName.Length;
         int temp; char upcaseTemp;
         var platn = platformName;
@@ -98,24 +99,83 @@ public static class GoodPassPWGService
                 platn = platn.Insert(temp, upcaseTemp.ToString());
             }
         }
-        //处理账号名
-        var accn = "";
+        #endregion
+
+        #region 账号名处理
+        string accn;
         if (accountName.StartsWith("@"))
         {
-            accn = accountName[..4];
+            accn = ProcessUsername(accountName[1..]);
         }
         else
         {
             accn = "@";
-            accn += accountName[..3];
+            accn += ProcessUsername(accountName);
         }
-        //处理时间戳补强串
+        #endregion
+
+        #region Time Patch
         var time = DateTime.Now;
         var timePatch1 = (char)(48 + time.Month + time.Minute);
         var timePatch2 = (char)(48 + time.Hour + time.Day);
-        var timePatch = timePatch1.ToString() + timePatch2.ToString();
+        var choosetime = random.Next(1, 5);
+        var timePatch3 = choosetime switch
+        {
+            1 => time.Month,
+            2 => time.Hour,
+            3 => time.Minute,
+            4 => time.Second,
+            _ => 32,
+        };
+        var timePatch = timePatch3.ToString() + timePatch1.ToString() + timePatch2.ToString();
+        #endregion
+
         //整合
         var gpPassword = platn + accn + timePatch;
         return gpPassword;
     }
+
+    public static string ProcessUsername(string username)
+    {
+        if (username == string.Empty || username is null)
+        {
+            throw new ArgumentNullException("ProcessUsername: username is null or empty");
+        }
+        else
+        {
+            string output;
+            if (username.Contains('@'))
+            {
+                output = username[0..3];
+                var domainname = username.Substring((username.IndexOf('@') + 1), Math.Min(10, username.Length - username.IndexOf('@') - 1));
+                if (domainname.StartsWith("outlook"))
+                {
+                    output += "out";
+                }
+                else if (domainname.StartsWith("gmail"))
+                {
+                    output += "gm";
+                }
+                else if (domainname.StartsWith("qq"))
+                {
+                    output += "qq";
+                }
+                else if (domainname.StartsWith("foxmail"))
+                {
+                    output += "fm";
+                }
+                else
+                {
+                    output += domainname[0..2];
+                }
+                return output;
+            }
+            else
+            {
+                output = username[0..5];
+                return output;
+            }
+        }
+    }
+    #endregion
 }

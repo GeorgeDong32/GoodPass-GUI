@@ -9,13 +9,16 @@ namespace GoodPass.Views;
 
 public sealed partial class ListDetailsDetailControl : UserControl
 {
+    #region Properties
     public GPData? ListDetailsMenuItem
     {
         get => GetValue(ListDetailsMenuItemProperty) as GPData;
         set => SetValue(ListDetailsMenuItemProperty, value);
     }
     public static readonly DependencyProperty ListDetailsMenuItemProperty = DependencyProperty.Register("ListDetailsMenuItem", typeof(GPData), typeof(ListDetailsDetailControl), new PropertyMetadata(null, OnListDetailsMenuItemPropertyChanged));
+    #endregion
 
+    #region Constructor and Basic Handler
     /// <summary>
     /// 初始化控件并加载多语言资源
     /// </summary>
@@ -41,7 +44,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
             control.ForegroundElement.ChangeView(0, 0, 1);
         }
     }
+    #endregion
 
+    #region CopyButton Functions
     /// <summary>
     /// 复制密码到Windows剪贴板
     /// </summary>
@@ -67,7 +72,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
         CopiedTipforAcconutNameCopyButton.Title = App.UIStrings.ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
         CopiedTipforAcconutNameCopyButton.IsOpen = true;
     }
+    #endregion
 
+    #region RevealButton Function
     /// <summary>
     /// 显示PasswordBox中的密码
     /// </summary>
@@ -82,7 +89,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
             ListDetailsDetailControl_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
         }
     }
+    #endregion
 
+    #region Data Edit and Delete Functions
     /// <summary>
     /// 进入编辑模式
     /// </summary>
@@ -183,7 +192,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
             ListDetailsDetailControl_DeleteButton.IsEnabled = true;
         }
     }
+    #endregion
 
+    #region HyperLink Functions
     /// <summary>
     /// 超链接按钮点击功能
     /// </summary>
@@ -214,7 +225,9 @@ public sealed partial class ListDetailsDetailControl : UserControl
             _ = await warningDialog.ShowAsync();
         }
     }
+    #endregion
 
+    #region OOBE Functions
     /// <summary>
     /// 显示OOBE提示
     /// </summary>
@@ -227,4 +240,5 @@ public sealed partial class ListDetailsDetailControl : UserControl
         this.CopiedTipforAcconutNameCopyButton.IsOpen = true;
         this.CopiedTipforPasswordCopyButton.IsOpen = true;
     }
+    #endregion
 }

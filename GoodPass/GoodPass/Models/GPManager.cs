@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using GoodPass.Services;
+﻿using GoodPass.Services;
 namespace GoodPass.Models;
 
 public class GPManager

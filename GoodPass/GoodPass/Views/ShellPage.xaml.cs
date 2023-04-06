@@ -13,11 +13,14 @@ namespace GoodPass.Views;
 
 public sealed partial class ShellPage : Page
 {
+    #region Properties
     public ShellViewModel ViewModel
     {
         get;
     }
+    #endregion
 
+    #region Constructor and Basic Handlers
     public ShellPage(ShellViewModel viewModel)
     {
         ViewModel = viewModel;
@@ -122,7 +125,9 @@ public sealed partial class ShellPage : Page
     {
         AnimatedIcon.SetState((UIElement)sender, "Normal");
     }
+    #endregion
 
+    #region AddDataButton Functions
     /// <summary>
     /// 添加数据按钮的事件响应
     /// </summary>
@@ -140,7 +145,7 @@ public sealed partial class ShellPage : Page
                 XamlRoot = this.XamlRoot,
                 Style = App.Current.Resources["DefaultContentDialogStyle"] as Style
             };
-            var result = await addDataDialog.ShowAsync();
+            _ = await addDataDialog.ShowAsync();
             if (addDataDialog.Result == Models.AddDataResult.Failure_Duplicate)
             {
                 GPDialog2 warningdialog = new()
@@ -164,12 +169,10 @@ public sealed partial class ShellPage : Page
         }
     }
 
-    private async void OOBE_AddDataTip_CloseButtonClick(TeachingTip sender, object args)
-    {
-        OOBE_AddDataTip.IsOpen = false;
-        _ = await OOBEServices.SetOOBEStatusAsync("ShellOOBE", Models.OOBESituation.DIsableOOBE);
-    }
 
+    #endregion
+
+    #region SearchButton Functions 
     private void ShellMenuSearchButton_Click(object sender, RoutedEventArgs e)
     {
         if (!App.App_IsLock() && !App.IsInSettingsPage())
@@ -210,7 +213,7 @@ public sealed partial class ShellPage : Page
     private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
     {
         var slectedItem = args.SelectedItem;
-        if (slectedItem != null)
+        if (slectedItem is not null)
         {
             if (slectedItem.ToString() == "No results found")
             {
@@ -229,12 +232,9 @@ public sealed partial class ShellPage : Page
             throw new ArgumentNullException("AutoSuggestBox_SuggestionChosen: SelectedItem is null");
         }
     }
+    #endregion
 
-    private async void OOBE_SearchTip_CloseButtonClick(TeachingTip sender, object args)
-    {
-        await OOBEServices.SetOOBEStatusAsync("SearchOOBE", Models.OOBESituation.DIsableOOBE);
-    }
-
+    #region ExportButton Functions
     /// <summary>
     /// 导出加密数据
     /// </summary>
@@ -300,4 +300,18 @@ public sealed partial class ShellPage : Page
             }
         }
     }
+    #endregion
+
+    #region TeachingTip Functions
+    private async void OOBE_AddDataTip_CloseButtonClick(TeachingTip sender, object args)
+    {
+        OOBE_AddDataTip.IsOpen = false;
+        _ = await OOBEServices.SetOOBEStatusAsync("ShellOOBE", Models.OOBESituation.DIsableOOBE);
+    }
+
+    private async void OOBE_SearchTip_CloseButtonClick(TeachingTip sender, object args)
+    {
+        await OOBEServices.SetOOBEStatusAsync("SearchOOBE", Models.OOBESituation.DIsableOOBE);
+    }
+    #endregion
 }
