@@ -9,6 +9,7 @@ namespace GoodPass.ViewModels;
 
 public class ShellViewModel : ObservableRecipient
 {
+    #region Properties and Commands
     private bool _isBackEnabled;
 
     public ICommand MenuFileExitCommand
@@ -51,7 +52,9 @@ public class ShellViewModel : ObservableRecipient
         get => _isBackEnabled;
         set => SetProperty(ref _isBackEnabled, value);
     }
+    #endregion
 
+    #region Constructor and Basic Handlers
     public ShellViewModel(INavigationService navigationService)
     {
         NavigationService = navigationService;
@@ -66,7 +69,9 @@ public class ShellViewModel : ObservableRecipient
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
+    #endregion
 
+    #region MenuButton On Commands
     /// <summary>
     /// 点击MenuBar中退出按钮的操作实现
     /// </summary>
@@ -123,7 +128,9 @@ public class ShellViewModel : ObservableRecipient
         App.LeftSettingsPage();
         NavigationService.NavigateTo(typeof(MainViewModel).FullName!);
     }
+    #endregion
 
+    #region Navigation Functions
     /// <summary>
     /// 导航返回的实现
     /// </summary>
@@ -139,4 +146,5 @@ public class ShellViewModel : ObservableRecipient
             NavigationService.GoBack();
         }
     }
+    #endregion
 }

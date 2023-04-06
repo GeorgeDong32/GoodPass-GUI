@@ -13,6 +13,7 @@ namespace GoodPass.ViewModels;
 
 public class SettingsViewModel : ObservableRecipient
 {
+    #region Properties and Commands
     private readonly IThemeSelectorService _themeSelectorService;
     private ElementTheme _elementTheme;
     private string _versionDescription;
@@ -33,7 +34,9 @@ public class SettingsViewModel : ObservableRecipient
     {
         get;
     }
+    #endregion
 
+    #region Constructor
     public SettingsViewModel(IThemeSelectorService themeSelectorService)
     {
         _themeSelectorService = themeSelectorService;
@@ -50,10 +53,11 @@ public class SettingsViewModel : ObservableRecipient
                 }
             })
         {
-
         };
     }
+    #endregion
 
+    #region Methods
     private static string GetVersionDescription()
     {
         Version version;
@@ -71,4 +75,5 @@ public class SettingsViewModel : ObservableRecipient
 
         return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
     }
+    #endregion
 }
