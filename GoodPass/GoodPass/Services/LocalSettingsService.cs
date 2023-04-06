@@ -9,6 +9,7 @@ namespace GoodPass.Services;
 
 public class LocalSettingsService : ILocalSettingsService
 {
+    #region Properties
     private const string _defaultApplicationDataFolder = "GoodPass/ApplicationData";
     private const string _defaultLocalSettingsFile = "LocalSettings.json";
 
@@ -22,7 +23,9 @@ public class LocalSettingsService : ILocalSettingsService
     private IDictionary<string, object> _settings;
 
     private bool _isInitialized;
+    #endregion
 
+    #region Constructor and Initialization
     public LocalSettingsService(IFileService fileService, IOptions<LocalSettingsOptions> options)
     {
         _fileService = fileService;
@@ -43,7 +46,9 @@ public class LocalSettingsService : ILocalSettingsService
             _isInitialized = true;
         }
     }
+    #endregion
 
+    #region Basic Functions
     public async Task<T?> ReadSettingAsync<T>(string key)
     {
         if (RuntimeHelper.IsMSIX)
@@ -81,4 +86,5 @@ public class LocalSettingsService : ILocalSettingsService
             await Task.Run(() => _fileService.Save(_applicationDataFolder, _localsettingsFile, _settings));
         }
     }
+    #endregion
 }

@@ -10,8 +10,11 @@ namespace GoodPass.Services;
 
 public class PageService : IPageService
 {
+    #region Properties
     private readonly Dictionary<string, Type> _pages = new();
+    #endregion
 
+    #region Constructor and Basic Functions
     public PageService()
     {
         Configure<MainViewModel, MainPage>();
@@ -54,4 +57,5 @@ public class PageService : IPageService
             _pages.Add(key, type);
         }
     }
+    #endregion
 }

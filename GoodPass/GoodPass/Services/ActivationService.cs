@@ -9,11 +9,14 @@ namespace GoodPass.Services;
 
 public class ActivationService : IActivationService
 {
+    #region Properties
     private readonly ActivationHandler<LaunchActivatedEventArgs> _defaultHandler;
     private readonly IEnumerable<IActivationHandler> _activationHandlers;
     private readonly IThemeSelectorService _themeSelectorService;
     private UIElement? _shell = null;
+    #endregion
 
+    #region Constructor and Basic Methods
     public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService)
     {
         _defaultHandler = defaultHandler;
@@ -69,4 +72,5 @@ public class ActivationService : IActivationService
         await _themeSelectorService.SetRequestedThemeAsync();
         await Task.CompletedTask;
     }
+    #endregion
 }

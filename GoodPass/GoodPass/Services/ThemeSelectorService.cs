@@ -7,12 +7,15 @@ namespace GoodPass.Services;
 
 public class ThemeSelectorService : IThemeSelectorService
 {
+    #region Properties
     private const string SettingsKey = "AppBackgroundRequestedTheme";
 
     public ElementTheme Theme { get; set; } = ElementTheme.Default;
 
     private readonly ILocalSettingsService _localSettingsService;
+    #endregion
 
+    #region Constructor and Basic Functions
     public ThemeSelectorService(ILocalSettingsService localSettingsService)
     {
         _localSettingsService = localSettingsService;
@@ -60,4 +63,5 @@ public class ThemeSelectorService : IThemeSelectorService
     {
         await _localSettingsService.SaveSettingAsync(SettingsKey, theme.ToString());
     }
+    #endregion
 }

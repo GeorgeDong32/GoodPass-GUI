@@ -8,6 +8,7 @@ namespace GoodPass.Services;
 
 public class FileService : IFileService
 {
+    #region Basic Functions
     public T Read<T>(string folderPath, string fileName)
     {
         var path = Path.Combine(folderPath, fileName);
@@ -38,4 +39,5 @@ public class FileService : IFileService
             File.Delete(Path.Combine(folderPath, fileName));
         }
     }
+    #endregion
 }
