@@ -4,10 +4,13 @@ namespace GoodPass.Services;
 
 public class MultilingualStringsServices
 {
+    #region Properties
     private readonly UIStrings UIStrings_zh_CN;
 
     private readonly UIStrings UIStrings_en_US;
+    #endregion
 
+    #region Constructor
     public MultilingualStringsServices()
     {
         UIStrings_zh_CN = new UIStrings("账号",
@@ -55,7 +58,12 @@ public class MultilingualStringsServices
                                         "The master password is incorrect");
     }
 
+    #endregion
+
+    #region Get Language Strings
     public UIStrings Getzh_CN() => UIStrings_zh_CN;
 
     public UIStrings Geten_US() => UIStrings_en_US;
+
+    #endregion
 }

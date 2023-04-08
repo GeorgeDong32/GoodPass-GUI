@@ -9,6 +9,7 @@ namespace GoodPass.Services;
 /// </summary>
 public static class OOBEServices
 {
+    #region Get/Set OOBE Status
     /// <summary>
     /// 获取OOBE状态
     /// </summary>
@@ -48,4 +49,5 @@ public static class OOBEServices
             throw new GPRuntimeException("SetOOBEStatusAsync: Not in MSIX");
         }
     }
+    #endregion
 }

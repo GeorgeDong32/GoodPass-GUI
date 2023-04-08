@@ -8,6 +8,7 @@ namespace GoodPass.Services;
 /// </summary>
 public static class MasterKeyService
 {
+    #region Get/Set/Check Masterkey
     /// <summary>
     /// 设置本地哈希校验值
     /// </summary>
@@ -65,54 +66,6 @@ public static class MasterKeyService
         else
         {
             return true;
-        }
-    }
-
-    /// <summary>
-    /// 生成App的加密基和主密码基
-    /// </summary>
-    public static void ProcessMKArray(string inputKey)
-    {
-        App.EncryptBase = new int[40] { 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1 };
-        App.MKBase = App.EncryptBase;
-        var MaxLength = Math.Min(40, inputKey.Length);
-        for (var i = 0; i < MaxLength; i++)
-        {
-            var key = inputKey[i];
-            if (key >= 'a' && key <= 'z')
-            {
-                var temp = key - 'a';
-                while (temp >= 10)
-                {
-                    App.MKBase[i] = temp / 10;
-                    i++;
-                    temp %= 10;
-                }
-                App.MKBase[i] = temp;
-            }
-            else if (key >= 'A' && key <= 'Z')
-            {
-                var temp = key - 'A';
-                while (temp >= 10)
-                {
-                    App.MKBase[i] = temp / 10;
-                    i++;
-                    temp %= 10;
-                }
-                App.MKBase[i] = temp;
-            }
-            else if (key >= '0' && key <= '9')
-            {
-                App.MKBase[i] = key - '0';
-            }
-            else
-            {
-                App.MKBase[i] = App.EncryptBase[i];
-            }
-            if (i >= 40)//防止溢出
-            {
-                break;
-            }
         }
     }
 
@@ -175,6 +128,59 @@ public static class MasterKeyService
         else return "Unknown Error";
     }
 
+    #endregion
+
+    #region Process Masterkey Array
+    /// <summary>
+    /// 生成App的加密基和主密码基
+    /// </summary>
+    public static void ProcessMKArray(string inputKey)
+    {
+        App.EncryptBase = new int[40] { 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3, 8, 4, 6, 2, 6, 4, 3, 3, 8, 3, 2, 7, 9, 5, 0, 2, 8, 8, 4, 1, 9, 7, 1 };
+        App.MKBase = App.EncryptBase;
+        var MaxLength = Math.Min(40, inputKey.Length);
+        for (var i = 0; i < MaxLength; i++)
+        {
+            var key = inputKey[i];
+            if (key >= 'a' && key <= 'z')
+            {
+                var temp = key - 'a';
+                while (temp >= 10)
+                {
+                    App.MKBase[i] = temp / 10;
+                    i++;
+                    temp %= 10;
+                }
+                App.MKBase[i] = temp;
+            }
+            else if (key >= 'A' && key <= 'Z')
+            {
+                var temp = key - 'A';
+                while (temp >= 10)
+                {
+                    App.MKBase[i] = temp / 10;
+                    i++;
+                    temp %= 10;
+                }
+                App.MKBase[i] = temp;
+            }
+            else if (key >= '0' && key <= '9')
+            {
+                App.MKBase[i] = key - '0';
+            }
+            else
+            {
+                App.MKBase[i] = App.EncryptBase[i];
+            }
+            if (i >= 40)//防止溢出
+            {
+                break;
+            }
+        }
+    }
+    #endregion
+
+    #region Get/Set/Check Masterkey in MSIX
     /// <summary>
     /// MSIX打包应用的设置主密码方法
     /// </summary>
@@ -264,6 +270,9 @@ public static class MasterKeyService
         }
     }
 
+    #endregion
+
+    #region Check Masterkey Only
     public static string CheckMasterKey_NP(string inputKey)
     {
         var inputKeyHash = GoodPassSHAServices.getGPHES(inputKey);
@@ -299,4 +308,6 @@ public static class MasterKeyService
             throw new GPRuntimeException("CheckMasterKeyAsync_MSIX: Not Run in MSIX");
         }
     }
+
+    #endregion
 }

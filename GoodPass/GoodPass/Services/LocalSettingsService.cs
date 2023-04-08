@@ -73,6 +73,10 @@ public class LocalSettingsService : ILocalSettingsService
 
     public async Task SaveSettingAsync<T>(string key, T value)
     {
+        if (value is null)
+        {
+            throw new ArgumentNullException("SaveSettingAsync<T>:value is null");
+        }
         if (RuntimeHelper.IsMSIX)
         {
             ApplicationData.Current.LocalSettings.Values[key] = await Json.StringifyAsync(value);
