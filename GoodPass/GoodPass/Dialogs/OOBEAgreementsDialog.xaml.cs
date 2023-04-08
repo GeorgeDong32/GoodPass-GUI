@@ -6,26 +6,23 @@ namespace GoodPass.Dialogs;
 
 public sealed partial class OOBEAgreementsDialog : ContentDialog
 {
+    #region Properties
     public AgreeStatus AgreeStatus
     {
         get; set;
     }
+    #endregion
 
+    #region Constructor
     public OOBEAgreementsDialog()
     {
         this.InitializeComponent();
         IsPrimaryButtonEnabled = false;
         AgreeStatus = AgreeStatus.Agree;
     }
+    #endregion
 
-    private bool IsAgreeAllChecked()
-    {
-        if (PrivacyTermsCheck.IsChecked == true && UserAgreementCheck.IsChecked == true)
-            return true;
-        else
-            return false;
-    }
-
+    #region CheckBox Check/Uncheck Handlers
     private void OOBEDialogCheck_Checked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         if (IsAgreeAllChecked())
@@ -36,7 +33,19 @@ public sealed partial class OOBEAgreementsDialog : ContentDialog
     {
         IsPrimaryButtonEnabled = false;
     }
+    #endregion
 
+    #region Agree Situation Check Method
+    private bool IsAgreeAllChecked()
+    {
+        if (PrivacyTermsCheck.IsChecked == true && UserAgreementCheck.IsChecked == true)
+            return true;
+        else
+            return false;
+    }
+    #endregion
+
+    #region Dialog Button Click Handlers
     private async void OOBEAgreementsDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
         _ = await OOBEServices.SetOOBEStatusAsync("AgreementOOBE", Models.OOBESituation.DIsableOOBE);
@@ -46,4 +55,5 @@ public sealed partial class OOBEAgreementsDialog : ContentDialog
     {
         this.AgreeStatus = AgreeStatus.NotAgree;
     }
+    #endregion
 }

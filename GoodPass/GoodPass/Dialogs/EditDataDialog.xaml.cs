@@ -6,6 +6,7 @@ namespace GoodPass.Dialogs;
 
 public sealed partial class EditDataDialog : ContentDialog
 {
+    #region Properties
     public EditDataResult Result
     {
         get; set;
@@ -24,9 +25,9 @@ public sealed partial class EditDataDialog : ContentDialog
     public string? newPlatformUrl;
     public DateTime newDateTime;
 
-    /// <summary>
-    /// 编辑对话窗构造函数
-    /// </summary>
+    #endregion
+
+    #region Constructor
     public EditDataDialog(string accountName, string platformName, string platformUrl, string password)
     {
         this.InitializeComponent();
@@ -51,7 +52,9 @@ public sealed partial class EditDataDialog : ContentDialog
             EditDataDialog_UrlCheckText.Text = "平台Url合法";
         }
     }
+    #endregion
 
+    #region Password Generate Button Click Handlers
     /// <summary>
     /// 生成无特殊字符的随机密码
     /// </summary>
@@ -171,7 +174,9 @@ public sealed partial class EditDataDialog : ContentDialog
             EditDataDialog_PasswordBox.Password = GoodPassPWGService.GPstylePassword(EditDataDialog_PlatformBox.Text, EditDataDialog_AccountBox.Text);
         }
     }
+    #endregion
 
+    #region PasswordBox Control Handlers
     private void Add_PasswordRevealButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         if (Add_PasswordRevealButton.IsChecked == true)
@@ -183,7 +188,9 @@ public sealed partial class EditDataDialog : ContentDialog
             EditDataDialog_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
         }
     }
+    #endregion
 
+    #region Text Changed Handlers
     private void EditDataDialog_PlatformBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (EditDataDialog_PlatformBox.Text != String.Empty)
@@ -296,7 +303,9 @@ public sealed partial class EditDataDialog : ContentDialog
             }
         }
     }
+    #endregion
 
+    #region Edit Data Confirm Button Method
     /// <summary>
     /// 编辑确定后的处理
     /// </summary>
@@ -394,7 +403,9 @@ public sealed partial class EditDataDialog : ContentDialog
         newDateTime = App.DataManager.GetData(newPlatformName, newAccountName).LatestUpdateTime;
         App.ListDetailsVM.OnNavigatedTo(null);
     }
+    #endregion
 
+    #region Data Avaliable Check
     /// <summary>
     /// 检查编辑弹窗内的数据是否合法
     /// </summary>
@@ -410,4 +421,5 @@ public sealed partial class EditDataDialog : ContentDialog
             return false;
         }
     }
+    #endregion
 }
