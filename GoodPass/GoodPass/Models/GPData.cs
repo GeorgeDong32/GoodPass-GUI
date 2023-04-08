@@ -4,7 +4,7 @@ namespace GoodPass.Models;
 
 public class GPData
 {
-    /*数据*/
+    #region Properties
     public string PlatformName
     {
         get; set;
@@ -36,9 +36,9 @@ public class GPData
     }
 
     public string GetPassword;
-    /*End 数据*/
+    #endregion
 
-    /*方法*/
+    #region Constructors
     /// <summary>
     /// 默认GPData构造函数
     /// </summary>
@@ -95,7 +95,9 @@ public class GPData
         GetPassword = DecPassword;
         LatestUpdateTime = latestUpdateTime;
     }
+    #endregion
 
+    #region Self Update Method
     /// <summary>
     /// 数据自更新，预留接口
     /// </summary>
@@ -104,7 +106,9 @@ public class GPData
         /*Todo:添加数据自升级的相应代码*/
         await Task.CompletedTask;
     }
+    #endregion
 
+    #region Encrypt/Decrypt Data
     /// <summary>
     /// 数据解密
     /// </summary>
@@ -123,7 +127,9 @@ public class GPData
         GetPassword = "";
         return true;
     }
+    #endregion
 
+    #region Change Data Methods
     /// <summary>
     /// 更改密码
     /// </summary>
@@ -190,5 +196,5 @@ public class GPData
             return true;
         }
     }
-    /*End 方法*/
+    #endregion
 }

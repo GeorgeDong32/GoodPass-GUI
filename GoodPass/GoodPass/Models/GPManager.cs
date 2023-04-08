@@ -3,11 +3,11 @@ namespace GoodPass.Models;
 
 public class GPManager
 {
-    /*成员区*/
+    #region Properties
     private List<GPData> GPDatas;
-    /*End 成员区*/
+    #endregion
 
-    /*方法区*/
+    #region Constructor
     /// <summary>
     /// 构造函数
     /// </summary>
@@ -15,7 +15,9 @@ public class GPManager
     {
         GPDatas = new List<GPData>();
     }
+    #endregion
 
+    #region Search Methods
     /// <summary>
     /// 数据模糊搜索
     /// </summary>
@@ -69,6 +71,9 @@ public class GPManager
         return query.ToList();
     }
 
+    #endregion
+
+    #region Add/Del Data Methods
     /// <summary>
     /// 添加数据1(自带去重)
     /// </summary>
@@ -158,40 +163,20 @@ public class GPManager
         return false;
     }
 
+    #endregion
+
+    #region Change Data Methods
     /// <summary>
-    /// 更改密码
+    /// 更改平台名
     /// </summary>
     /// <param name="platformName">目标平台名</param>
     /// <param name="accountName">目标账号名</param>
-    /// <param name="newPassword">新密码</param>
+    /// <param name="newPlatformName">新平台名</param>
     /// <returns>更改结果</returns>
-    public string ChangePassword(string platformName, string accountName, string newPassword)//重新设置密码
+    public bool ChangePlatformName(string platformName, string accountName, string newPlatformName)
     {
-        var targetIndex = AccurateSearch(platformName, accountName);
-        return GPDatas[targetIndex].ChangePassword(newPassword);
-    }
-
-    public async void SelfUpdate()
-    {
-        if (!await GoodPass.Helpers.SecurityStatusHelper.GetAESStatusAsync())
-        {
-            await GoodPass.Helpers.SecurityStatusHelper.SetAESStatusAsync(true);
-            EncryptAllDatas();
-            var dataPath = Path.Combine($"C:\\Users\\{Environment.UserName}\\AppData\\Local", "GoodPass", "GoodPassData.csv");
-            await SaveToFileAsync(dataPath);
-            DecryptAllDatas();
-        }
-    }
-
-    /// <summary>
-    /// 更改平台Url
-    /// </summary>
-    /// <param name="platformName">目标平台名</param>
-    /// <param name="accountName">目标账号名</param>
-    /// <param name="newUrl">新Url</param>
-    /// <returns>更改结果</returns>
-    public bool ChangeUrl(string platformName, string accountName, string newUrl)
-    {
+        if (platformName == newPlatformName)
+            return false;
         var targetIndex = AccurateSearch(platformName, accountName);
         if (targetIndex == -1)
         {
@@ -199,7 +184,11 @@ public class GPManager
         }
         else
         {
-            return GPDatas[targetIndex].ChangeUrl(newUrl);
+            GPDatas[targetIndex].DataDecrypt();
+            var password = GPDatas[targetIndex].GetPassword;
+            var platformUrl = GPDatas[targetIndex].PlatformUrl;
+            DeleteData(platformName, accountName);
+            return AddData(newPlatformName, platformUrl, accountName, password);
         }
     }
 
@@ -232,16 +221,27 @@ public class GPManager
     }
 
     /// <summary>
-    /// 更改平台名
+    /// 更改密码
     /// </summary>
     /// <param name="platformName">目标平台名</param>
     /// <param name="accountName">目标账号名</param>
-    /// <param name="newPlatformName">新平台名</param>
+    /// <param name="newPassword">新密码</param>
     /// <returns>更改结果</returns>
-    public bool ChangePlatformName(string platformName, string accountName, string newPlatformName)
+    public string ChangePassword(string platformName, string accountName, string newPassword)//重新设置密码
     {
-        if (platformName == newPlatformName)
-            return false;
+        var targetIndex = AccurateSearch(platformName, accountName);
+        return GPDatas[targetIndex].ChangePassword(newPassword);
+    }
+
+    /// <summary>
+    /// 更改平台Url
+    /// </summary>
+    /// <param name="platformName">目标平台名</param>
+    /// <param name="accountName">目标账号名</param>
+    /// <param name="newUrl">新Url</param>
+    /// <returns>更改结果</returns>
+    public bool ChangeUrl(string platformName, string accountName, string newUrl)
+    {
         var targetIndex = AccurateSearch(platformName, accountName);
         if (targetIndex == -1)
         {
@@ -249,14 +249,27 @@ public class GPManager
         }
         else
         {
-            GPDatas[targetIndex].DataDecrypt();
-            var password = GPDatas[targetIndex].GetPassword;
-            var platformUrl = GPDatas[targetIndex].PlatformUrl;
-            DeleteData(platformName, accountName);
-            return AddData(newPlatformName, platformUrl, accountName, password);
+            return GPDatas[targetIndex].ChangeUrl(newUrl);
         }
     }
 
+    #endregion
+
+    #region Self Update Method
+    public async void SelfUpdate()
+    {
+        if (!await GoodPass.Helpers.SecurityStatusHelper.GetAESStatusAsync())
+        {
+            await GoodPass.Helpers.SecurityStatusHelper.SetAESStatusAsync(true);
+            EncryptAllDatas();
+            var dataPath = Path.Combine($"C:\\Users\\{Environment.UserName}\\AppData\\Local", "GoodPass", "GoodPassData.csv");
+            await SaveToFileAsync(dataPath);
+            DecryptAllDatas();
+        }
+    }
+    #endregion
+
+    #region Data and File Method
     /// <summary>
     /// 从本地数据文件加载数据
     /// </summary>
@@ -361,16 +374,9 @@ public class GPManager
             return true;
         }
     }
+    #endregion
 
-    /// <summary>
-    /// 获取所有数据
-    /// </summary>
-    /// <returns>IEnumerable形式的所有数据</returns>
-    public IEnumerable<GPData> GetAllDatas()
-    {
-        return GPDatas;
-    }
-
+    #region Encrypt/Decrypt Datas
     /// <summary>
     /// 解密所有数据
     /// </summary>
@@ -388,6 +394,18 @@ public class GPManager
         {
             data.DataEncrypt();
         }
+    }
+
+    #endregion
+
+    #region Get Datas Methods
+    /// <summary>
+    /// 获取所有数据
+    /// </summary>
+    /// <returns>IEnumerable形式的所有数据</returns>
+    public IEnumerable<GPData> GetAllDatas()
+    {
+        return GPDatas;
     }
 
     /// <summary>
@@ -417,5 +435,5 @@ public class GPManager
         else
             return GPDatas[targetIndex];
     }
-    /*End 方法区*/
+    #endregion
 }
