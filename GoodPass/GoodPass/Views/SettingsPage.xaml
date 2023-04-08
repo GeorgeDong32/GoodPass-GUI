@@ -106,7 +106,26 @@
                 </RelativePanel>
             </StackPanel>
 
-            <StackPanel x:Name="Settings_AboutArea" Grid.Row="3">
+            <StackPanel
+                x:Name="Settings_LanguageArea"
+                Grid.Row="3"
+                Margin="0,4,0,8">
+                <TextBlock
+                    x:Uid="Settings_LanguageTitle"
+                    Margin="{ThemeResource ContentDialogTitleMargin}"
+                    Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <DropDownButton x:Name="Settings_LanguageSelector" x:Uid="Settings_LanguageSelector">
+                    <TextBlock Name="Settings_LanguageText" x:Uid="Settings_LanguageText" />
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem x:Name="Settings_Language_English" x:Uid="Settings_Language_English" />
+                            <MenuFlyoutItem x:Name="Settings_Language_ZHCN" x:Uid="Settings_Language_ZHCN" />
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+            </StackPanel>
+
+            <StackPanel x:Name="Settings_AboutArea" Grid.Row="4">
                 <TextBlock x:Uid="Settings_About" Style="{ThemeResource SubtitleTextBlockStyle}" />
 
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
@@ -138,7 +157,7 @@
 
             <StackPanel
                 x:Name="Settings_AgreementsArea"
-                Grid.Row="4"
+                Grid.Row="5"
                 Margin="0,0,0,8"
                 Orientation="Horizontal">
                 <HyperlinkButton
@@ -189,13 +208,6 @@
                 </HyperlinkButton>
             </StackPanel>
 
-            <StackPanel
-                x:Name="testpanel"
-                Grid.Row="5"
-                Margin="8,0,0,0">
-                <!--  Test Windows Hello  -->
-
-            </StackPanel>
         </Grid>
     </ScrollViewer>
 </Page>
