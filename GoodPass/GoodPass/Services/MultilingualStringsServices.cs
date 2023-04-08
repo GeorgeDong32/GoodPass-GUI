@@ -33,7 +33,8 @@ public class MultilingualStringsServices
                                         "已启用Microsoft Passport",
                                         "未启用Microsoft Passport",
                                         "主密码正确",
-                                        "主密码错误");
+                                        "主密码错误",
+                                        "登录到GoodPass");
 
         UIStrings_en_US = new UIStrings("Account",
                                         "AccountName has copied!",
@@ -55,7 +56,8 @@ public class MultilingualStringsServices
                                         "Microsoft Passport is enabled",
                                         "Microsoft Passport is not enabled",
                                         "The master password is correct",
-                                        "The master password is incorrect");
+                                        "The master password is incorrect",
+                                        "Login to GoodPass");
     }
 
     #endregion
