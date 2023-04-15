@@ -114,15 +114,13 @@
                     x:Uid="Settings_LanguageTitle"
                     Margin="{ThemeResource ContentDialogTitleMargin}"
                     Style="{ThemeResource SubtitleTextBlockStyle}" />
-                <DropDownButton x:Name="Settings_LanguageSelector" x:Uid="Settings_LanguageSelector">
-                    <TextBlock Name="Settings_LanguageText" x:Uid="Settings_LanguageText" />
-                    <DropDownButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem x:Name="Settings_Language_English" x:Uid="Settings_Language_English" />
-                            <MenuFlyoutItem x:Name="Settings_Language_ZHCN" x:Uid="Settings_Language_ZHCN" />
-                        </MenuFlyout>
-                    </DropDownButton.Flyout>
-                </DropDownButton>
+
+                <ComboBox
+                    x:Name="Settings_LanguageSelector"
+                    x:Uid="Settings_LanguageSelector"
+                    DisplayMemberPath="DisplayName"
+                    ItemsSource="{x:Bind LanguageManager.AvaliableLanguages}"
+                    SelectionChanged="Settings_LanguageSelector_SelectionChanged" />
             </StackPanel>
 
             <StackPanel x:Name="Settings_AboutArea" Grid.Row="4">
