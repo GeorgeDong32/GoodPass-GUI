@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 
 namespace GoodPass.Models;
 
@@ -27,6 +28,7 @@ public class Language
     public Language()
     {
         Culture = new CultureInfo(Windows.System.UserProfile.GlobalizationPreferences.Languages[0]);
+        Debug.WriteLine(Culture.DisplayName);
         DisplayName = Culture.DisplayName;
         InteralName = Culture.Name;
     }
