@@ -62,9 +62,11 @@ public class LanguageManager
 
     public LanguageManager()
     {
-        AvaliableLanguages = new List<Language>();
-        AvaliableLanguages.Add(new Language(new CultureInfo("en-US")));
-        AvaliableLanguages.Add(new Language(new CultureInfo("zh-CN")));
+        AvaliableLanguages = new List<Language>
+        {
+            new Language(new CultureInfo("en-US")),
+            new Language(new CultureInfo("zh-CN"))
+        };
         CurrentLanguage = new Language();
     }
 
