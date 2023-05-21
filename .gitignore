@@ -10,6 +10,7 @@ Debug/
 *.vcxproj
 *.filters
 *.user
+backup/
 # 以下为Python忽略项
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -41,7 +42,6 @@ MANIFEST
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
 *.spec
 
 # Installer logs
