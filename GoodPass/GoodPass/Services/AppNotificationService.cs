@@ -9,8 +9,11 @@ namespace GoodPass.Notifications;
 
 public class AppNotificationService : IAppNotificationService
 {
+    #region Properties
     private readonly INavigationService _navigationService;
+    #endregion
 
+    #region Constructor and Destructor
     public AppNotificationService(INavigationService navigationService)
     {
         _navigationService = navigationService;
@@ -20,7 +23,9 @@ public class AppNotificationService : IAppNotificationService
     {
         Unregister();
     }
+    #endregion
 
+    #region Basic Functions
     public void Initialize()
     {
         AppNotificationManager.Default.NotificationInvoked += OnNotificationInvoked;
@@ -67,4 +72,5 @@ public class AppNotificationService : IAppNotificationService
     {
         AppNotificationManager.Default.Unregister();
     }
+    #endregion
 }

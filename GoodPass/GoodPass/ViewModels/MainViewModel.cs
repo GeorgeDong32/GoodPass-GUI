@@ -8,7 +8,7 @@ namespace GoodPass.ViewModels;
 
 public class MainViewModel : ObservableRecipient
 {
-
+    #region Properties
     private bool _isBackEnabled;
 
     public INavigationService NavigationService
@@ -26,7 +26,9 @@ public class MainViewModel : ObservableRecipient
         get => _isBackEnabled;
         set => SetProperty(ref _isBackEnabled, value);
     }
+    #endregion
 
+    #region Constructor and Basic Handlers
     public MainViewModel(INavigationService navigationService)
     {
         NavigationService = navigationService;
@@ -37,4 +39,5 @@ public class MainViewModel : ObservableRecipient
     private void OnNavigated(object sender, NavigationEventArgs e) => IsBackEnabled = NavigationService.CanGoBack;
 
     public void Login_UnLock() => NavigationService.NavigateTo(typeof(ListDetailsViewModel).FullName!);
+    #endregion
 }

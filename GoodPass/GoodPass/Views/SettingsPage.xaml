@@ -104,33 +104,6 @@
                             RelativePanel.RightOf="MicrosoftPassportSituationIcon" />
                     </RelativePanel>
                 </RelativePanel>
-
-                <RelativePanel x:Name="AESPanel" Margin="0,0,0,8">
-                    <ToggleButton
-                        x:Name="AESButton"
-                        x:Uid="AESButton"
-                        Margin="0,0,63.5,0"
-                        Click="AESButton_Click"
-                        RelativePanel.AlignLeftWithPanel="True" />
-
-                    <RelativePanel
-                        x:Name="AESSituation"
-                        RelativePanel.AlignBottomWithPanel="True"
-                        RelativePanel.RightOf="AESButton">
-                        <FontIcon
-                            x:Name="AESSituationIcon"
-                            Margin="8,2,0,8"
-                            FontFamily="Segoe MDL2 Assets"
-                            FontSize="14"
-                            Glyph="&#xE711;" />
-                        <!--  E711 叉图标，E73E 勾图标  -->
-                        <TextBlock
-                            x:Name="AESSituationText"
-                            x:Uid="AESSituationText"
-                            Margin="4,0,0,0"
-                            RelativePanel.RightOf="AESSituationIcon" />
-                    </RelativePanel>
-                </RelativePanel>
             </StackPanel>
 
             <StackPanel x:Name="Settings_AboutArea" Grid.Row="3">

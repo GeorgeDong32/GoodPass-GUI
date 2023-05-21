@@ -13,6 +13,7 @@ namespace GoodPass.Services;
 // https://github.com/microsoft/TemplateStudio/blob/main/docs/WinUI/navigation.md
 public class NavigationService : INavigationService
 {
+    #region Properties
     private readonly IPageService _pageService;
     private object? _lastParameterUsed;
     private Frame? _frame;
@@ -43,6 +44,9 @@ public class NavigationService : INavigationService
     [MemberNotNullWhen(true, nameof(Frame), nameof(_frame))]
     public bool CanGoBack => Frame != null && Frame.CanGoBack;
 
+    #endregion
+
+    #region Constructor and Basic Functions
     public NavigationService(IPageService pageService)
     {
         _pageService = pageService;
@@ -123,4 +127,5 @@ public class NavigationService : INavigationService
             Navigated?.Invoke(sender, e);
         }
     }
+    #endregion
 }
