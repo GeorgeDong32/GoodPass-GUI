@@ -415,7 +415,7 @@ public class GPManager
     /// <returns>指定数据</returns>
     public GPData? GetData(int index)
     {
-        if (index == -1 || index > GPDatas.Count)
+        if (index >= GPDatas.Count || index < 0 || GPDatas.Count == 0)
             return null;
         else
             return GPDatas[index];
@@ -430,7 +430,7 @@ public class GPManager
     public GPData? GetData(string platformName, string accountName)
     {
         var targetIndex = AccurateSearch(platformName, accountName);
-        if (targetIndex == -1 || targetIndex > GPDatas.Count)
+        if (targetIndex == -1 || targetIndex >= GPDatas.Count)
             return null;
         else
             return GPDatas[targetIndex];
