@@ -177,18 +177,26 @@ public class GPManager
     {
         if (platformName == newPlatformName)
             return false;
-        var targetIndex = AccurateSearch(platformName, accountName);
-        if (targetIndex == -1)
+        var checkIndex = AccurateSearch(newPlatformName, accountName);
+        if (checkIndex == -1)
         {
-            return false;
+            var targetIndex = AccurateSearch(platformName, accountName);
+            if (targetIndex == -1)
+            {
+                return false;
+            }
+            else
+            {
+                GPDatas[targetIndex].DataDecrypt();
+                var password = GPDatas[targetIndex].GetPassword;
+                var platformUrl = GPDatas[targetIndex].PlatformUrl;
+                DeleteData(platformName, accountName);
+                return AddData(newPlatformName, platformUrl, accountName, password);
+            }
         }
         else
         {
-            GPDatas[targetIndex].DataDecrypt();
-            var password = GPDatas[targetIndex].GetPassword;
-            var platformUrl = GPDatas[targetIndex].PlatformUrl;
-            DeleteData(platformName, accountName);
-            return AddData(newPlatformName, platformUrl, accountName, password);
+            return false;
         }
     }
 
