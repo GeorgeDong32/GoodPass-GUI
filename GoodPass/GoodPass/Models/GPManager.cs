@@ -25,15 +25,15 @@ public class GPManager
     /// <returns>搜索结果index数组</returns>
     public int[] FuzzySearch(string platformName) //预留接口（模糊搜索）
     {
-        var indexArray = new int[1] { -1 };
+        var indexArray = new int[0];
         var indexArrayCount = 0;
         foreach (var data in GPDatas)
         {
             if (data.PlatformName == platformName)
             {
+                Array.Resize(ref indexArray, indexArray.Length + 1);
                 indexArray[indexArrayCount] = GPDatas.IndexOf(data);
                 indexArrayCount++;
-                Array.Resize(ref indexArray, indexArray.Length + 1);
             }
         }
         return indexArray;
