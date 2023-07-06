@@ -214,6 +214,10 @@ public class GPManager
         {
             return false;
         }
+        if (AccurateSearch(platformName, newAccountName) != -1)
+        {
+            return false;
+        }
         else
         {
             GPDatas[targetIndex].ChangeAccountName(newAccountName);
