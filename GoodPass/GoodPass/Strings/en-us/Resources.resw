@@ -124,13 +124,13 @@
     <value>GoodPass</value>
   </data>
   <data name="ShellMenuBarItem_File.Title" xml:space="preserve">
-    <value>文件</value>
+    <value>File</value>
   </data>
   <data name="ShellMenuBarItem_Views.Title" xml:space="preserve">
     <value>Views</value>
   </data>
   <data name="ShellMenuItem_File_Exit.Text" xml:space="preserve">
-    <value>退出</value>
+    <value>Exit</value>
   </data>
   <data name="ShellMenuItem_Views_Main.Text" xml:space="preserve">
     <value>Main</value>
@@ -140,31 +140,31 @@
     <comment>Page title for MainPage</comment>
   </data>
   <data name="ListDetails_NoSelection.Text" xml:space="preserve">
-    <value>请添加数据或在左侧列表选择一个数据</value>
+    <value>Add data or select a data in the list on the left</value>
   </data>
   <data name="ShellMenuItem_Views_ListDetails.Text" xml:space="preserve">
     <value>ListDetails</value>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
-    <value>个性化</value>
+    <value>Personalize</value>
   </data>
   <data name="Settings_Theme.Text" xml:space="preserve">
-    <value>主题</value>
+    <value>Theme</value>
   </data>
   <data name="Settings_Theme_Light.Content" xml:space="preserve">
-    <value>明亮</value>
+    <value>Bright</value>
   </data>
   <data name="Settings_Theme_Dark.Content" xml:space="preserve">
-    <value>黑暗</value>
+    <value>Dark</value>
   </data>
   <data name="Settings_Theme_Default.Content" xml:space="preserve">
-    <value>跟随系统</value>
+    <value>Follow System</value>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>关于</value>
+    <value>About</value>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>安全简洁的密码管家</value>
+    <value>Secure and simple password manager</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
     <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Docs/Statements%26Agreements/Privacy%20Statement.md</value>
@@ -173,7 +173,7 @@
     <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Docs/Statements%26Agreements/User%20Agreement.md</value>
   </data>
   <data name="ShellMenuBarSettingsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
-    <value>设置</value>
+    <value>Settings</value>
   </data>
   <data name="AppNotificationSamplePayload" xml:space="preserve">
     <value>&lt;toast launch="action=ToastClick"&gt;
@@ -190,10 +190,10 @@
 &lt;/toast&gt;</value>
   </data>
   <data name="ShellMenuItem_File_Lock.Text" xml:space="preserve">
-    <value>锁定</value>
+    <value>Lock</value>
   </data>
   <data name="Settings_Title.Text" xml:space="preserve">
-    <value>设置</value>
+    <value>Settings</value>
     <comment>Page title for SettingsPage</comment>
   </data>
   <data name="SettingsPage_OpenSourceLicense.NavigateUri" xml:space="preserve">
@@ -206,201 +206,204 @@
     <value>View GitHub Repository</value>
   </data>
   <data name="SettingsPage_OpenSourceLicense_Text.Text" xml:space="preserve">
-    <value>开源许可证</value>
+    <value>Open Source License</value>
   </data>
   <data name="SettingsPage_PrivacyTermsLink_Text.Text" xml:space="preserve">
-    <value>隐私声明</value>
+    <value>Privacy Statement</value>
   </data>
   <data name="SettingsPage_UserAgreementLink_Text.Text" xml:space="preserve">
-    <value>用户协议</value>
+    <value>User Agreement</value>
   </data>
   <data name="ListDetailsDetailControl_AccountNameTitleText" xml:space="preserve">
-    <value>账户名</value>
+    <value>Account Name</value>
   </data>
   <data name="ListDetailsDetailControl_LastmodifiedTitleText" xml:space="preserve">
-    <value>最后修改时间</value>
+    <value>Last modified</value>
   </data>
   <data name="ListDetailsDetailControl_PasswordTitleText" xml:space="preserve">
-    <value>密码</value>
+    <value>Password</value>
   </data>
   <data name="ListDetailsDetailControl_PlatformUrlTitleText" xml:space="preserve">
-    <value>平台链接</value>
+    <value>Platform link</value>
   </data>
   <data name="ShellMenuBarAddDataButtonText.Text" xml:space="preserve">
-    <value>添加数据</value>
+    <value>Add data</value>
   </data>
   <data name="AddDataDialog_PlatformBox.Header" xml:space="preserve">
-    <value>平台名称</value>
+    <value>Platform name</value>
   </data>
   <data name="AddDataDialog_PlatformBox.PlaceholderText" xml:space="preserve">
-    <value>请输入平台名</value>
+    <value>Please enter platform name</value>
   </data>
   <data name="AddDataDialog_AccountBox.Header" xml:space="preserve">
-    <value>账号名</value>
+    <value>Account Name</value>
   </data>
   <data name="AddDataDialog_AccountBox.PlaceholderText" xml:space="preserve">
-    <value>请输入账号名</value>
+    <value>Please enter account name</value>
   </data>
   <data name="AddDataDialog_PasswordBox.Header" xml:space="preserve">
-    <value>密码</value>
+    <value>Password</value>
   </data>
   <data name="AddDataDialog_PasswordBox.PlaceholderText" xml:space="preserve">
-    <value>请输入密码</value>
+    <value>Please enter password</value>
   </data>
   <data name="AddDataDialog_PasswordModeText.Text" xml:space="preserve">
-    <value>生成密码</value>
+    <value>Generate password</value>
   </data>
   <data name="AddDataDialog_PasswordMode_GPStyle.Text" xml:space="preserve">
-    <value>GoodPass风格</value>
+    <value>GoodPass Style</value>
   </data>
   <data name="AddDataDialog_PasswordMode_RandomNoSpec.Text" xml:space="preserve">
-    <value>随机生成(无特殊字符)</value>
+    <value>Random Password (no special characters)</value>
   </data>
   <data name="AddDataDialog_PasswordMode_RandomSpec.Text" xml:space="preserve">
-    <value>随机生成(有特殊字符)</value>
+    <value>Random Password (with special characters)</value>
   </data>
   <data name="AddDataDialog_PlatformUrlBox.Header" xml:space="preserve">
-    <value>平台链接</value>
+    <value>Platform link</value>
   </data>
   <data name="AddDataDialog_PlatformUrlBox.PlaceholderText" xml:space="preserve">
     <value>https://example.com</value>
   </data>
   <data name="ShellMenuBarAddDataButton_Flyout_Title.Text" xml:space="preserve">
-    <value>请先解锁后再添加数据！</value>
+    <value>Please unlock it before adding data!</value>
   </data>
   <data name="AddDataDialog_PlatformCheckText.Text" xml:space="preserve">
-    <value>平台名不能为空</value>
+    <value>The platform name cannot be empty</value>
   </data>
   <data name="AddDataDialog_AccountCheckText.Text" xml:space="preserve">
-    <value>账号名不能为空</value>
+    <value>The account name cannot be empty</value>
   </data>
   <data name="AddDataDialog_UrlCheckText.Text" xml:space="preserve">
-    <value>Url为空，可选择添加链接</value>
+    <value>The URL is empty, optionally add a link</value>
   </data>
   <data name="AddDataDialog_PasswordLengthBox.PlaceholderText" xml:space="preserve">
-    <value>长度</value>
+    <value>Length</value>
   </data>
   <data name="AddDataDialog_PasswordLengthTeachtip.Title" xml:space="preserve">
-    <value>请先输入生成密码长度</value>
+    <value>Please enter the generated password length first</value>
   </data>
   <data name="EditDataDialog_AccountBox.Header" xml:space="preserve">
-    <value>账号名</value>
+    <value>Account Name</value>
   </data>
   <data name="EditDataDialog_AccountBox.PlaceholderText" xml:space="preserve">
-    <value>请输入账号名</value>
+    <value>Please enter account name</value>
   </data>
   <data name="EditDataDialog_AccountCheckText.Text" xml:space="preserve">
-    <value>账号名合法</value>
+    <value>The account name is legal</value>
   </data>
   <data name="EditDataDialog_PasswordBox.Header" xml:space="preserve">
-    <value>密码</value>
+    <value>Password</value>
   </data>
   <data name="EditDataDialog_PasswordBox.PlaceholderText" xml:space="preserve">
-    <value>请输入密码</value>
+    <value>Please enter password</value>
   </data>
   <data name="EditDataDialog_PasswordLengthBox.PlaceholderText" xml:space="preserve">
-    <value>长度</value>
+    <value>Length</value>
   </data>
   <data name="EditDataDialog_PasswordLengthTeachtip.Title" xml:space="preserve">
-    <value>请先输入生成密码长度</value>
+    <value>Please enter the generated password length first</value>
   </data>
   <data name="EditDataDialog_PasswordModeText.Text" xml:space="preserve">
-    <value>生成密码</value>
+    <value>Generate password</value>
   </data>
   <data name="EditDataDialog_PasswordMode_GPStyle.Text" xml:space="preserve">
-    <value>GoodPass风格</value>
+    <value>GoodPass Style</value>
   </data>
   <data name="EditDataDialog_PasswordMode_RandomNoSpec.Text" xml:space="preserve">
-    <value>随机生成(无特殊字符)</value>
+    <value>Random Password (no special characters)</value>
   </data>
   <data name="EditDataDialog_PasswordMode_RandomSpec.Text" xml:space="preserve">
-    <value>随机生成(有特殊字符)</value>
+    <value>Random Password (with special characters)</value>
   </data>
   <data name="EditDataDialog_PlatformBox.Header" xml:space="preserve">
-    <value>平台名称</value>
+    <value>Platform name</value>
   </data>
   <data name="EditDataDialog_PlatformBox.PlaceholderText" xml:space="preserve">
-    <value>请输入平台名</value>
+    <value>Please enter platform name</value>
   </data>
   <data name="EditDataDialog_PlatformCheckText.Text" xml:space="preserve">
-    <value>平台名合法</value>
+    <value>The name of the platform is legal</value>
   </data>
   <data name="EditDataDialog_PlatformUrlBox.Header" xml:space="preserve">
-    <value>平台链接</value>
+    <value>Platform link</value>
   </data>
   <data name="EditDataDialog_PlatformUrlBox.PlaceholderText" xml:space="preserve">
     <value>https://example.com</value>
   </data>
   <data name="EditDataDialog_UrlCheckText.Text" xml:space="preserve">
-    <value>Url为空，可选择添加链接</value>
+    <value>The URL is empty, optionally add a link</value>
   </data>
   <data name="OOBE_LoginTip.Title" xml:space="preserve">
-    <value>点击此解锁按钮开始使用GoodPass</value>
+    <value>Click this unlock button to start using GoodPass</value>
   </data>
   <data name="OOBE_AddDataTip.Title" xml:space="preserve">
-    <value>解锁后点击此按钮添加数据</value>
+    <value>Click this button to add data after unlocking</value>
   </data>
   <data name="OOBE_SettingTip.Title" xml:space="preserve">
-    <value>点击此按钮进入设置或离开设置</value>
+    <value>Tap this button to enter the settings or leave the settings</value>
   </data>
   <data name="ShellPage_AddDataButtonTip.Content" xml:space="preserve">
-    <value>添加数据</value>
+    <value>Add data</value>
   </data>
   <data name="ShellPage_SettingButtonTip.Content" xml:space="preserve">
-    <value>设置</value>
+    <value>Settings</value>
   </data>
   <data name="PrivacytermsHyperButton.NavigateUri" xml:space="preserve">
     <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Docs/Statements%26Agreements/Privacy%20Statement.md</value>
   </data>
   <data name="PrivacytermsHyperButtonText.Text" xml:space="preserve">
-    <value>隐私声明</value>
+    <value>Privacy Statement</value>
   </data>
   <data name="UserAgreementHyperButton.NavigateUri" xml:space="preserve">
     <value>https://github.com/GeorgeDong32/GoodPass/blob/main/Docs/Statements%26Agreements/User%20Agreement.md</value>
   </data>
-  <data name="UserAgreementHyperButtonText.Text" xml:space="preserve">
-    <value>用户协议</value>
-  </data>
   <data name="OOBE_GoBackTip.Title" xml:space="preserve">
-    <value>点击此处返回上一页面(存在上一页面时)</value>
+    <value>Click here to return to the previous page (if the previous page exists)</value>
   </data>
   <data name="ShellPage_BackButtonTip.Content" xml:space="preserve">
-    <value>返回</value>
+    <value>Go Back</value>
   </data>
   <data name="LoginBoxTip.Content" xml:space="preserve">
-    <value>输入密码按下回车解锁</value>
+    <value>Enter the password and press Enter to unlock</value>
   </data>
   <data name="OOBE_LoginBoxTip.Title" xml:space="preserve">
-    <value>在密码框内按下回车也可以解锁应用</value>
+    <value>Pressing Enter inside the password box also unlocks the app</value>
   </data>
   <data name="OOBE_SearchTip.Title" xml:space="preserve">
-    <value>解锁后点击此按钮搜索数据</value>
+    <value>After unlocking, click this button to search for data</value>
   </data>
   <data name="ShellMenuSearchBox.PlaceholderText" xml:space="preserve">
-    <value>请输入账号名或平台名进行搜索</value>
+    <value>Enter account name or platform name to search</value>
   </data>
   <data name="Settings_SecureTitle.Text" xml:space="preserve">
-    <value>安全性</value>
+    <value>Security</value>
   </data>
   <data name="ShellMenuItem_File_Export.Text" xml:space="preserve">
-    <value>导出数据</value>
-  </data>
-  <data name="AESButton.Content" xml:space="preserve">
-    <value>启用AES加密</value>
-  </data>
-  <data name="DataInsertButton.Content" xml:space="preserve">
-    <value>启用数据内嵌</value>
+    <value>Export data</value>
   </data>
   <data name="MicrosoftPassportButton.Content" xml:space="preserve">
-    <value>启用Microsoft Passport</value>
+    <value>Enable Microsoft Passport</value>
   </data>
   <data name="MPD_IntroText.Text" xml:space="preserve">
-    <value>Microsoft Passport是使用Windows Hello的生物识别验证体系</value>
+    <value>Microsoft Passport is a biometric authentication system that uses Windows Hello</value>
   </data>
   <data name="MPD_PasswordBox.Header" xml:space="preserve">
-    <value>验证主密码</value>
+    <value>Verify the master password</value>
   </data>
   <data name="MPD_PasswordBox.PlaceholderText" xml:space="preserve">
-    <value>请输入主密码以验证</value>
+    <value>Please enter your master password for verification</value>
+  </data>
+  <data name="ShellMenuItem_File_ExportCiphertext.Text" xml:space="preserve">
+    <value>Export encrypted data</value>
+  </data>
+  <data name="ShellMenuItem_File_ExportPlaintext.Text" xml:space="preserve">
+    <value>Export unencrypted data</value>
+  </data>
+  <data name="Settings_LanguageTitle.Text" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="UserAgreementHyperButtonText.Text" xml:space="preserve">
+    <value>User Agreement</value>
   </data>
 </root>

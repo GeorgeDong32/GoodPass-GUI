@@ -6,18 +6,23 @@ namespace GoodPass.Dialogs;
 
 public sealed partial class AddDataDialog : ContentDialog
 {
+    #region Properties
     public AddDataResult Result
     {
         get; set;
     }
+    #endregion
 
+    #region Constructor
     public AddDataDialog()
     {
         this.InitializeComponent();
         IsPrimaryButtonEnabled = false;
         Result = AddDataResult.Undetermined;
     }
+    #endregion
 
+    #region Password Generate Button Click Handlers
     private void AddDataDialog_PasswordMode_RandomNoSpec_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         AddDataDialog_PasswordModeText.Text = AddDataDialog_PasswordMode_RandomNoSpec.Text;
@@ -128,7 +133,9 @@ public sealed partial class AddDataDialog : ContentDialog
             AddDataDialog_PasswordBox.Password = GoodPassPWGService.GPstylePassword(AddDataDialog_PlatformBox.Text, AddDataDialog_AccountBox.Text);
         }
     }
+    #endregion
 
+    #region PasswordBox Control Handlers
     private void Add_PasswordRevealButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         if (Add_PasswordRevealButton.IsChecked == true)
@@ -140,7 +147,9 @@ public sealed partial class AddDataDialog : ContentDialog
             AddDataDialog_PasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
         }
     }
+    #endregion
 
+    #region Text Changed Handlers
     private void AddDataDialog_PlatformBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (AddDataDialog_PlatformBox.Text != String.Empty)
@@ -253,7 +262,9 @@ public sealed partial class AddDataDialog : ContentDialog
             }
         }
     }
+    #endregion
 
+    #region Add Data Button Click
     private void AddDataDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
         var result = App.DataManager.AddData(AddDataDialog_PlatformBox.Text, AddDataDialog_PlatformUrlBox.Text, AddDataDialog_AccountBox.Text, AddDataDialog_PasswordBox.Password);
@@ -276,7 +287,9 @@ public sealed partial class AddDataDialog : ContentDialog
             this.Result = AddDataResult.Failure_Duplicate;
         }
     }
+    #endregion
 
+    #region Data Avaliable Check
     private bool AddDataCheck()
     {
         if (AddDataDialog_PlatformBox.Text != String.Empty && AddDataDialog_AccountBox.Text != String.Empty && AddDataDialog_PasswordBox.Password != String.Empty)
@@ -295,4 +308,5 @@ public sealed partial class AddDataDialog : ContentDialog
             return false;
         }
     }
+    #endregion
 }

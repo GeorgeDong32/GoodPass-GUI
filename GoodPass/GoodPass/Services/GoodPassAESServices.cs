@@ -9,6 +9,7 @@ namespace GoodPass.Services;
 /// </summary>
 public static class GoodPassAESServices
 {
+    #region Encrypt and Decrypt Methods
     public static string EncryptToBase64(string plainText, byte[] Key, byte[] IV)
     {
         // Check arguments.
@@ -31,18 +32,14 @@ public static class GoodPassAESServices
             ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
             // Create the streams used for encryption.
-            using (MemoryStream msEncrypt = new MemoryStream())
+            using MemoryStream msEncrypt = new MemoryStream();
+            using CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write);
+            using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
             {
-                using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                {
-                    using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(plainText);
-                    }
-                    encrypted = msEncrypt.ToArray();
-                }
+                //Write all data to the stream.
+                swEncrypt.Write(plainText);
             }
+            encrypted = msEncrypt.ToArray();
         }
 
         return Convert.ToBase64String(encrypted);
@@ -62,7 +59,7 @@ public static class GoodPassAESServices
         // the decrypted text.
         string plaintext;
 
-        byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
+        var cipherTextBytes = Convert.FromBase64String(cipherText);
 
         // Create an Aes object
         // with the specified key and IV.
@@ -75,23 +72,18 @@ public static class GoodPassAESServices
             ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
             // Create the streams used for decryption.
-            using (MemoryStream msDecrypt = new MemoryStream(cipherTextBytes))
-            {
-                using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-                {
-                    using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-                    {
-
-                        // Read the decrypted bytes from the decrypting stream
-                        // and place them in a string.
-                        plaintext = srDecrypt.ReadToEnd();
-                    }
-                }
-            }
+            using MemoryStream msDecrypt = new MemoryStream(cipherTextBytes);
+            using CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
+            using StreamReader srDecrypt = new StreamReader(csDecrypt);
+            // Read the decrypted bytes from the decrypting stream
+            // and place them in a string.
+            plaintext = srDecrypt.ReadToEnd();
         }
         return plaintext;
     }
+    #endregion
 
+    #region AES Init Methods
     /// <summary>
     /// 生成AES初始化向量
     /// </summary>
@@ -157,4 +149,5 @@ public static class GoodPassAESServices
         var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, salt);
         return rfc2898DeriveBytes.GetBytes(32);
     }
+    #endregion
 }

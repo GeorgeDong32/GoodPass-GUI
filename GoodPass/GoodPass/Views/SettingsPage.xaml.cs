@@ -1,6 +1,9 @@
-﻿using System.Security.Cryptography;
+﻿using System.Diagnostics;
+using System.Globalization;
+using System.Security.Cryptography;
 using GoodPass.Dialogs;
 using GoodPass.Helpers;
+using GoodPass.Models;
 using GoodPass.Services;
 using GoodPass.ViewModels;
 using Microsoft.UI.Xaml;
@@ -17,12 +20,20 @@ public sealed partial class SettingsPage : Page
         get;
     }
 
+    public LanguageManager LanguageManager
+    {
+        get; set; 
+    }
+
     #endregion
 
     #region Methods
     public SettingsPage()
     {
         ViewModel = App.GetService<SettingsViewModel>();
+        LanguageManager = new LanguageManager();
+        Debug.WriteLine(LanguageManager.CurrentLanguage.DisplayName);
+        Debug.WriteLine(CultureInfo.CurrentUICulture.DisplayName);
         InitializeComponent();
         if (App.App_IsLock())
         {
@@ -105,6 +116,11 @@ public sealed partial class SettingsPage : Page
                     break;
             }
         }
+    }
+
+    private void Settings_LanguageSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
     }
 
     #endregion

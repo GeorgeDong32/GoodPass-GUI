@@ -4,6 +4,7 @@ namespace GoodPass.Services;
 
 public static class MicrosoftPassportService
 {
+    #region Set/Remove MSP Situation
     /// <summary>
     /// 设置MicrosoftPassport，并将主密码置于保险箱中用于以后解锁
     /// </summary>
@@ -12,10 +13,6 @@ public static class MicrosoftPassportService
     /// <returns></returns>
     public static async Task<bool> SetMicrosoftPassportAsync(string username, string masterkey)
     {
-        /*if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
-        {
-            return false;
-        }*/
         var createResult = await Helpers.MicrosoftPassportHelper.CreatePassportKeyAsync("GoodPass");
         if (!createResult)
         {
@@ -27,6 +24,26 @@ public static class MicrosoftPassportService
         return true;
     }
 
+    public static async Task<bool> RemoveMicrosoftPassportAsync(string username, string masterkey)
+    {
+        /*if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
+        {
+            return false;
+        }*/
+        var removeResult = await Helpers.MicrosoftPassportHelper.RemovePassportKeyAsync("GoodPass");
+        if (!removeResult)
+        {
+            return false;
+        }
+        var vault = new Windows.Security.Credentials.PasswordVault();
+        vault.Remove(new Windows.Security.Credentials.PasswordCredential("GoodPass", username, masterkey));
+        _ = await SecurityStatusHelper.SetMSPassportStatusAsync(false);
+        return true;
+    }
+
+    #endregion
+
+    #region SignIn
     /// <summary>
     /// 使用MSP登录并获取主密码
     /// </summary>
@@ -61,20 +78,5 @@ public static class MicrosoftPassportService
         }
     }
 
-    public static async Task<bool> RemoveMicrosoftPassportAsync(string username, string masterkey)
-    {
-        /*if (!MicrosoftPassportHelper.MicrosoftPassportAvailableCheckAsync().Result)
-        {
-            return false;
-        }*/
-        var removeResult = await Helpers.MicrosoftPassportHelper.RemovePassportKeyAsync("GoodPass");
-        if (!removeResult)
-        {
-            return false;
-        }
-        var vault = new Windows.Security.Credentials.PasswordVault();
-        vault.Remove(new Windows.Security.Credentials.PasswordCredential("GoodPass", username, masterkey));
-        _ = await SecurityStatusHelper.SetMSPassportStatusAsync(false);
-        return true;
-    }
+    #endregion
 }

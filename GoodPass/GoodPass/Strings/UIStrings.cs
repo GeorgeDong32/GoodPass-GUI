@@ -48,6 +48,7 @@ public class UIStrings
 
     public readonly string MPD_PasswordCheckFailed;
 
+    public readonly string MSPLoginTitle;
     /// <summary>
     /// UIStrings构造函数
     /// </summary>
@@ -71,7 +72,8 @@ public class UIStrings
                      string microsoftPassportSituatoinText1,
                      string microsoftPassportSituatoinText2,
                      string mpd_PasswordCheckSuccess,
-                     string mpd_PasswordCheckFailed)
+                     string mpd_PasswordCheckFailed,
+                     string mspLoginTitle)
     {
         ListDetailsDetailControl_AccountNameTitleText = listDetailsDetailControl_AccountNameTitleText;
         ListDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle = listDetailsDetailControl_CopiedTipforAcconutNameCopyButtonTitle;
@@ -94,5 +96,6 @@ public class UIStrings
         MicrosoftPassportSituatoinText2 = microsoftPassportSituatoinText2;
         MPD_PasswordCheckSuccess = mpd_PasswordCheckSuccess;
         MPD_PasswordCheckFailed = mpd_PasswordCheckFailed;
+        MSPLoginTitle = mspLoginTitle;
     }
 }

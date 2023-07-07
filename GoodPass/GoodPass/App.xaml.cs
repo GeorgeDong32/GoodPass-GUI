@@ -16,12 +16,7 @@ namespace GoodPass;
 // To learn more about WinUI 3, see https://docs.microsoft.com/windows/apps/winui/winui3/.
 public partial class App : Application
 {
-    // The .NET Generic Host provides dependency injection, configuration, logging, and other services.
-    // https://docs.microsoft.com/dotnet/core/extensions/generic-host
-    // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
-    // https://docs.microsoft.com/dotnet/core/extensions/configuration
-    // https://docs.microsoft.com/dotnet/core/extensions/logging
-
+    #region Properties
     public IHost Host
     {
         get;
@@ -73,7 +68,9 @@ public partial class App : Application
     {
         get; set;
     }
+    #endregion
 
+    #region Get Application Situation Methods
     /// <summary>
     /// 获取App锁定情况
     /// </summary>
@@ -106,6 +103,9 @@ public partial class App : Application
     /// </summary>
     public static void LeftSettingsPage() => InSettingsPage = false;
 
+    #endregion
+
+    #region Constructor and Basic Methods
     public static WindowEx MainWindow { get; } = new MainWindow();
 
     public App()
@@ -182,4 +182,5 @@ public partial class App : Application
 
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
+    #endregion
 }

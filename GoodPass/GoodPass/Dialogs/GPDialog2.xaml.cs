@@ -8,5 +8,4 @@ public sealed partial class GPDialog2 : ContentDialog
     {
         this.InitializeComponent();
     }
-
 }

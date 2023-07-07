@@ -5,12 +5,9 @@ using Windows.Security.Credentials.UI;
 namespace GoodPass.Helpers;
 public static class MicrosoftPassportHelper
 {
+    #region Available Check Method
     /// <summary>
-    /// Checks to see if Passport is ready to be used.
-    /// 
-    /// Passport has dependencies on:
-    ///     1. Having a connected Microsoft Account
-    ///     2. Having a Windows PIN set up for that _account on the local machine
+    /// 检查MSP可用性(在WinUI3中不可用)
     /// </summary>
     public static async Task<bool> MicrosoftPassportAvailableCheckAsync()
     {
@@ -22,7 +19,9 @@ public static class MicrosoftPassportHelper
 
         return true;
     }
+    #endregion
 
+    #region Create/Remove MSP Key Methods
     /// <summary>
     /// Creates a Passport key on the machine using the _account id passed.
     /// </summary>
@@ -52,11 +51,13 @@ public static class MicrosoftPassportHelper
 
         return true;
     }
+    #endregion
 
+    #region Sign/Verify Methods
     public static async Task<PassportSignInResult> PassportSignInAsync()
     {
         //TODO:多语言
-        var result = await UserConsentVerifier.RequestVerificationAsync("登录到GoodPass");
+        var result = await UserConsentVerifier.RequestVerificationAsync(App.UIStrings.MSPLoginTitle);
         return result switch
         {
             UserConsentVerificationResult.Verified => PassportSignInResult.Verified,
@@ -69,4 +70,5 @@ public static class MicrosoftPassportHelper
             _ => PassportSignInResult.NotUseable,
         };
     }
+    #endregion
 }

@@ -9,12 +9,14 @@ namespace GoodPass.Dialogs;
 
 public sealed partial class SetMKDialog : ContentDialog
 {
-
+    #region Properties
     private bool _isSecure
     {
         get; set;
     }
+    #endregion
 
+    #region Constructor
     public SetMKDialog()
     {
         _isSecure = false;
@@ -23,8 +25,9 @@ public sealed partial class SetMKDialog : ContentDialog
         SetMKDialog_PB2Status.Foreground = new SolidColorBrush(Color.FromArgb(200, 255, 0, 0));
         SetMKDialog_PB1Status.Foreground = new SolidColorBrush(Color.FromArgb(200, 255, 0, 0));
     }
+    #endregion
 
-    /*To Do: 设置密码相关逻辑代码*/
+    #region PasswordBox Enent Handlers
     private void RevealModeCheckbox_Changed1(object sender, RoutedEventArgs e)
     {
         if (SetMKDialog_PB1RevealBtn.IsChecked == true)
@@ -101,7 +104,9 @@ public sealed partial class SetMKDialog : ContentDialog
                 IsPrimaryButtonEnabled = false;
         }
     }
+    #endregion
 
+    #region Set Masterkey Method
     private async void SetMKDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
         var masterKey = SetMKDialog_PssswordBox1.Password;
@@ -114,4 +119,5 @@ public sealed partial class SetMKDialog : ContentDialog
             MasterKeyService.SetLocalMKHash(masterKey);
         }
     }
+    #endregion
 }

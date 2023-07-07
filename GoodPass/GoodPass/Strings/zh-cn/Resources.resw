@@ -403,4 +403,7 @@
   <data name="ShellMenuItem_File_ExportPlaintext.Text" xml:space="preserve">
     <value>导出未加密数据</value>
   </data>
+  <data name="Settings_LanguageTitle.Text" xml:space="preserve">
+    <value>语言</value>
+  </data>
 </root>

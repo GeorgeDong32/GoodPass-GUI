@@ -7,35 +7,36 @@ namespace GoodPass.Services;
 /// </summary>
 public static class GoodPassCryptographicServices
 {
+    #region Decrypt Methods
     /// <summary>
     /// 解密输入的字符串
     /// </summary>
-    /// <param name="input">待解密的字符串</param>
+    /// <param name="ciphertext">待解密的字符串</param>
     /// <returns>解密后字符串</returns>
     /// <exception cref="ArgumentNullException">空输入异常</exception>
-    public static string DecryptStr(string input)
+    public static string DecryptStr(string ciphertext)
     {
         if (App.MKBase == null)
             throw new ArgumentNullException("DecryptStr: App.MKBase is null");
-        return DecryptStr(input, App.MKBase);
+        return DecryptStr(ciphertext, App.MKBase);
     }
 
     /// <summary>
     /// (基础的)解密输入的字符串
     /// </summary>
-    /// <param name="input">待解密的字符串</param>
+    /// <param name="ciphertext">待解密的字符串</param>
     /// <param name="cryptBase">加密基</param>
     /// <returns>解密结果</returns>
     /// <exception cref="ArgumentNullException">输入字符串为空</exception>
-    public static string DecryptStr(string input, int[] cryptBase)
+    public static string DecryptStr(string ciphertext, int[] cryptBase)
     {
-        if (input == null || input == string.Empty)
+        if (ciphertext == null || ciphertext == string.Empty)
         {
             throw new ArgumentNullException("DecryptStr: input is null or empty");
         }
         if (SecurityStatusHelper.GetAESStatusAsync().Result)
         {
-            input = GoodPassAESServices.DecryptFromBase64(input, App.AESKey, App.AESIV);
+            ciphertext = GoodPassAESServices.DecryptFromBase64(ciphertext, App.AESKey, App.AESIV);
         }
         var decStr = "";
         var baseStr = "";
@@ -45,21 +46,21 @@ public static class GoodPassCryptographicServices
         Array.Fill(NumPos, -1);
         Array.Fill(SpecPos, -1);
         //找数字位置
-        NumPos[0] = (int)input[0] - 'A';
+        NumPos[0] = (int)ciphertext[0] - 'A';
         for (var i = 1; i <= NumPos[0]; i++)
         {
             switch (i % 2)
             {
                 case 0:
-                    NumPos[i] = (int)input[i] - 97;
+                    NumPos[i] = (int)ciphertext[i] - 97;
                     break;
                 case 1:
-                    NumPos[i] = (int)input[i] - 65;
+                    NumPos[i] = (int)ciphertext[i] - 65;
                     break;
             }
         }
         //找特殊字符位置
-        var retemp = input.ToCharArray();
+        var retemp = ciphertext.ToCharArray();
         Array.Reverse(retemp);
         var reinput = new string(retemp);
         SpecPos[0] = (int)reinput[0] - 'A';
@@ -67,8 +68,8 @@ public static class GoodPassCryptographicServices
         {
             SpecPos[i] = (int)reinput[i] - 65;
         }
-        var baseLength = input.Length - NumPos[0] - SpecPos[0] - 2;
-        baseStr = input.Substring(NumPos[0] + 1, baseLength);
+        var baseLength = ciphertext.Length - NumPos[0] - SpecPos[0] - 2;
+        baseStr = ciphertext.Substring(NumPos[0] + 1, baseLength);
 
         for (var i = 0; i < baseLength; i++)
         {
@@ -103,28 +104,30 @@ public static class GoodPassCryptographicServices
         }
         return decStr;
     }
+    #endregion
 
+    #region Encrypt Methods
     /// <summary>
     /// 加密输入的字符串
     /// </summary>
-    /// <param name="input">待加密字符串</param>
+    /// <param name="plaintext">待加密字符串</param>
     /// <returns>加密后字符串</returns>
-    public static string EncryptStr(string input)//Todo：测试char-int是否按要求转换
+    public static string EncryptStr(string plaintext)
     {
         if (App.MKBase == null)
             throw new ArgumentNullException("EncryptStr: App.MKBase is null");
-        return EncryptStr(input, App.MKBase);
+        return EncryptStr(plaintext, App.MKBase);
     }
 
     /// <summary>
     /// (基础的)加密输入字符串
     /// </summary>
-    /// <param name="input">待加密的字符串</param>
+    /// <param name="plaintext">待加密的字符串</param>
     /// <param name="cryptBase">加密基</param>
     /// <returns>加密结果</returns>
-    public static string EncryptStr(string input, int[] cryptBase)//Todo：测试char-int是否按要求转换
+    public static string EncryptStr(string plaintext, int[] cryptBase)
     {
-        if (input == null || input == string.Empty)
+        if (plaintext == null || plaintext == string.Empty)
         {
             throw new ArgumentNullException("EncryptStr: input is null or empty");
         }
@@ -134,13 +137,13 @@ public static class GoodPassCryptographicServices
         Array.Fill(NumPos, 0);
         Array.Fill(SpecPos, 0);
         //找数字位置
-        var Strlength = input.Length;
+        var Strlength = plaintext.Length;
         var npCount = 1;
         var specCount = 1;
         var output = "";
         for (var i = 0; i < Strlength; i++)
         {
-            if ((int)input[i] >= 48 && (int)input[i] <= 57)
+            if ((int)plaintext[i] >= 48 && (int)plaintext[i] <= 57)
             {
                 NumPos[npCount] = i;
                 npCount++;
@@ -150,7 +153,7 @@ public static class GoodPassCryptographicServices
         //全串加密
         for (var i = 0; i < Strlength; i++)
         {
-            var temp = (int)input[i];
+            var temp = (int)plaintext[i];
             //数字加密
             if (temp >= 48 && temp <= 57)
             {
@@ -215,4 +218,5 @@ public static class GoodPassCryptographicServices
         }
         return output;
     }
+    #endregion
 }

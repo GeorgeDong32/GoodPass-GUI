@@ -7,6 +7,7 @@ namespace GoodPass.Services;
 /// </summary>
 public static class GoodPassSHAServices
 {
+    #region Basic SHA256
     /// <summary>
     /// get SHA256 hash of the InputString
     /// </summary>
@@ -48,7 +49,9 @@ public static class GoodPassSHAServices
             throw new Exception(ex.Message);
         }
     }
+    #endregion
 
+    #region GPHES
     /// <summary>
     /// Get GoodPassHash value of the input string
     /// </summary>
@@ -69,7 +72,7 @@ public static class GoodPassSHAServices
                 else
                     mkbase[i] = 0;
             }
-            int addcon = InputString.Length / 8; var j = 0; var mkbc = 0;
+            var addcon = InputString.Length / 8; var j = 0; var mkbc = 0;
             for (var i = 0; i < 8; i++)
             {
                 j = 0;
@@ -105,4 +108,5 @@ public static class GoodPassSHAServices
             throw new Exception(ex.Message);
         }
     }
+    #endregion
 }

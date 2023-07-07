@@ -4,6 +4,7 @@ namespace GoodPass.Helpers;
 
 public static class SecurityStatusHelper
 {
+    #region Get/Set MSP Status Methods
     public static async Task<bool> GetMSPassportStatusAsync()
     {
         if (RuntimeHelper.IsMSIX)
@@ -44,7 +45,9 @@ public static class SecurityStatusHelper
             return false;
         }
     }
+    #endregion
 
+    #region Get/Set AES Status Methods
     public static async Task<bool> GetAESStatusAsync()
     {
         if (RuntimeHelper.IsMSIX)
@@ -85,7 +88,9 @@ public static class SecurityStatusHelper
             return false;
         }
     }
+    #endregion 
 
+    #region Get/Set MSP Vault Methods 
     public static async Task<bool> SetVaultUsername(string username)
     {
         if (RuntimeHelper.IsMSIX)
@@ -119,4 +124,5 @@ public static class SecurityStatusHelper
             throw new GPRuntimeException("GetVaultUsername: Not in MSIX");
         }
     }
+    #endregion
 }

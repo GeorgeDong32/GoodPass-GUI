@@ -4,6 +4,7 @@ namespace GoodPass.Services;
 
 public static class GoodPassDataService
 {
+    #region Data Methods
     /// <summary>
     /// 从DataManager获取IEnumerable形式的所有数据或初始化示例数据
     /// </summary>
@@ -45,4 +46,5 @@ public static class GoodPassDataService
         await Task.CompletedTask;
         return _allDatas;
     }
+    #endregion
 }

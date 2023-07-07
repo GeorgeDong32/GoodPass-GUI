@@ -4,10 +4,13 @@ namespace GoodPass.Services;
 
 public class MultilingualStringsServices
 {
+    #region Properties
     private readonly UIStrings UIStrings_zh_CN;
 
     private readonly UIStrings UIStrings_en_US;
+    #endregion
 
+    #region Constructor
     public MultilingualStringsServices()
     {
         UIStrings_zh_CN = new UIStrings("账号",
@@ -30,7 +33,8 @@ public class MultilingualStringsServices
                                         "已启用Microsoft Passport",
                                         "未启用Microsoft Passport",
                                         "主密码正确",
-                                        "主密码错误");
+                                        "主密码错误",
+                                        "登录到GoodPass");
 
         UIStrings_en_US = new UIStrings("Account",
                                         "AccountName has copied!",
@@ -52,10 +56,16 @@ public class MultilingualStringsServices
                                         "Microsoft Passport is enabled",
                                         "Microsoft Passport is not enabled",
                                         "The master password is correct",
-                                        "The master password is incorrect");
+                                        "The master password is incorrect",
+                                        "Login to GoodPass");
     }
 
+    #endregion
+
+    #region Get Language Strings
     public UIStrings Getzh_CN() => UIStrings_zh_CN;
 
     public UIStrings Geten_US() => UIStrings_en_US;
+
+    #endregion
 }
