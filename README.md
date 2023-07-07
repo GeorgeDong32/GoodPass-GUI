@@ -1,4 +1,4 @@
-# GoodPass-v3
+# GoodPass-GUI
 
 [![WinUI-Debug-Build](https://github.com/GeorgeDong32/GoodPass-v3/actions/workflows/WinUI-Debug-Build.yml/badge.svg)](https://github.com/GeorgeDong32/GoodPass-v3/actions/workflows/WinUI-Debug-Build.yml)
 
