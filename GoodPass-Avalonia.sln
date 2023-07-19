@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodPass", "GoodPass\GoodPass.csproj", "{9721713B-D8F5-4C3B-AC59-D0C4EDC9D715}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodPass.Android", "GoodPass.Android\GoodPass.Android.csproj", "{8702922E-B318-4CA2-A01A-438BD6C8ADE3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodPass.Desktop", "GoodPass.Desktop\GoodPass.Desktop.csproj", "{34D9A3BD-2E16-4C3E-B8D3-E978CF250FA0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodPass.iOS", "GoodPass.iOS\GoodPass.iOS.csproj", "{44076753-ECBA-4060-AAB0-AE5EC6988150}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9721713B-D8F5-4C3B-AC59-D0C4EDC9D715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9721713B-D8F5-4C3B-AC59-D0C4EDC9D715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9721713B-D8F5-4C3B-AC59-D0C4EDC9D715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9721713B-D8F5-4C3B-AC59-D0C4EDC9D715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8702922E-B318-4CA2-A01A-438BD6C8ADE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8702922E-B318-4CA2-A01A-438BD6C8ADE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8702922E-B318-4CA2-A01A-438BD6C8ADE3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8702922E-B318-4CA2-A01A-438BD6C8ADE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8702922E-B318-4CA2-A01A-438BD6C8ADE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8702922E-B318-4CA2-A01A-438BD6C8ADE3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{34D9A3BD-2E16-4C3E-B8D3-E978CF250FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D9A3BD-2E16-4C3E-B8D3-E978CF250FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D9A3BD-2E16-4C3E-B8D3-E978CF250FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D9A3BD-2E16-4C3E-B8D3-E978CF250FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44076753-ECBA-4060-AAB0-AE5EC6988150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44076753-ECBA-4060-AAB0-AE5EC6988150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44076753-ECBA-4060-AAB0-AE5EC6988150}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{44076753-ECBA-4060-AAB0-AE5EC6988150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44076753-ECBA-4060-AAB0-AE5EC6988150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44076753-ECBA-4060-AAB0-AE5EC6988150}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5578B46D-B06B-4C48-8224-0D4D1BBFBBE2}
+	EndGlobalSection
+EndGlobal
