@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.GeorgeDong32.GoodPass" android:versionCode="4" android:versionName="4.0.0">
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:label="AvaloniaTest" android:icon="@drawable/Icon" />
+	<application android:label="GoodPass" android:icon="@drawable/icon" />
+	<uses-sdk android:minSdkVersion="21" />
 </manifest>
