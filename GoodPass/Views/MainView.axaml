@@ -17,14 +17,78 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="{Binding Greeting}" />
-            <Button
-                x:Name="Button1"
-                Click="ButtonClick"
-                Content="点击我！" />
-        </StackPanel>
+    <Grid x:Name="LoginPage">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="48" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="32" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="1" />
+        <Image
+            x:Name="Login_Icon"
+            Grid.Row="1"
+            Grid.Column="1"
+            Source="/Assets/GoodPass.png" />
+
+        <TextBlock
+            x:Name="Login_Title"
+            Grid.Row="2"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            FontSize="40"
+            Text="Welcome to GoodPass" />
+
+        <Grid
+            x:Name="Login_PasswordArea"
+            Grid.Row="3"
+            Grid.Column="1"
+            Width="480">
+            <Border
+                Width="450"
+                Height="150"
+                BorderBrush="#e1e1e1"
+                BorderThickness="2"
+                CornerRadius="10" />
+
+            <Grid
+                Width="480"
+                Height="120"
+                VerticalAlignment="Center">
+                <TextBlock
+                    x:Name="Login_Password_title"
+                    Width="400"
+                    FontSize="22"
+                    FontWeight="Light"
+                    Text="主密码"
+                    TextAlignment="Left" />
+
+                <TextBox
+                    x:Name="Login_PasswordBox"
+                    Width="400"
+                    Height="34"
+                    PasswordChar="*"
+                    Watermark="输入主密码已解锁" />
+
+                <Button
+                    x:Name="Login_Check"
+                    Width="120"
+                    Height="35"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Content="&#xE785;"
+                    FontFamily="Segoe MDL2 Assets" />
+
+            </Grid>
+        </Grid>
+
+        <Grid
+            Grid.Row="4"
+            Width="450"
+            HorizontalAlignment="Center" />
+
     </Grid>
 
 </UserControl>
