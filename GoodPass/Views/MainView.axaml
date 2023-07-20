@@ -23,7 +23,7 @@
             <Button
                 x:Name="Button1"
                 Click="ButtonClick"
-                Content="Click me!" />
+                Content="点击我！" />
         </StackPanel>
     </Grid>
 
