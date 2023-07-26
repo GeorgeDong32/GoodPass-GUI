@@ -10,6 +10,10 @@
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+    <RunAOTCompilation>True</RunAOTCompilation>
+  </PropertyGroup>
 
   <ItemGroup>
     <AndroidResource Include="Icon.png">
