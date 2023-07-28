@@ -6,8 +6,8 @@
     xmlns:i="https://github.com/projektanker/icons.avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:GoodPass.ViewModels"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="350"
+    d:DesignWidth="600"
     x:DataType="vm:MainViewModel"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -53,7 +53,7 @@
             <Border
                 Height="150"
                 MaxWidth="450"
-                BorderBrush="#e1e1e1"
+                BorderBrush="#bebebe"
                 BorderThickness="2"
                 CornerRadius="10" />
 
@@ -84,6 +84,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Background="{DynamicResource ButtonBackground}"
+                    Click="LoginButtonClick"
                     CornerRadius="7">
                     <TextBlock
                         HorizontalAlignment="Center"

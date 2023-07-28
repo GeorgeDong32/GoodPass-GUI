@@ -2,5 +2,12 @@
 
 public class MainViewModel : ViewModelBase
 {
-    public string Greeting => "你好，中文";
+    /*public void LoginButtonClick(object sender)
+    {
+        if (sender is Button b)
+        {
+            b.Background = Brush.Parse("#000000");
+        }
+    }*/
 }
+
