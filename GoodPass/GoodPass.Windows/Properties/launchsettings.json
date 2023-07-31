@@ -1,0 +1,10 @@
+{
+  "profiles": {
+	"GoodPass.Windows (Package)": {
+	  "commandName": "MsixPackage"
+	},
+	"GoodPass.Windows (Unpackaged)": {
+	  "commandName": "Project"
+	}
+  }
+}
