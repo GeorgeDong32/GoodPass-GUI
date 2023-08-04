@@ -1,13 +1,18 @@
 ﻿using System.Threading.Tasks;
-using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using GoodPass.ViewModels;
+using ReactiveUI;
 
 namespace GoodPass.Views;
 
-public partial class MainView : UserControl
+public partial class MainView : ReactiveUserControl<MainViewModel>
 {
     public MainView()
     {
+        this.WhenActivated(disposables => { });
+        AvaloniaXamlLoader.Load(this);
         InitializeComponent();
     }
 

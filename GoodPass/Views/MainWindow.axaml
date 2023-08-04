@@ -2,13 +2,16 @@
     x:Class="GoodPass.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:app="clr-namespace:GoodPass"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rxui="clr-namespace:Avalonia.ReactiveUI;assembly=Avalonia.ReactiveUI"
     xmlns:views="clr-namespace:GoodPass.Views"
     xmlns:vm="using:GoodPass.ViewModels"
     Title="GoodPass"
     d:DesignHeight="350"
     d:DesignWidth="600"
+    x:DataType="vm:MainWindowViewModel"
     Background="{DynamicResource AppBackground}"
     ExtendClientAreaToDecorationsHint="True"
     Icon="/Assets/GoodPass.ico"
@@ -25,5 +28,58 @@
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <views:MainView />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="MainWindowBar" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="36" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="36" />
+                <ColumnDefinition Width="140" />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="GoBackButton"
+                Grid.Column="0"
+                Background="Transparent">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource Segoe MDL2 Assets}"
+                    Text="&#xE72B;" />
+            </Button>
+            <Button
+                x:Name="SettingsButton"
+                Grid.Column="2"
+                Background="Transparent">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource Segoe MDL2 Assets}"
+                    Text="&#xE713;" />
+            </Button>
+        </Grid>
+        <rxui:RoutedViewHost Grid.Row="2" Router="{Binding Router}">
+            <rxui:RoutedViewHost.DefaultContent>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="GoodPass is Loading..." />
+                    <ProgressBar
+                        Margin="20"
+                        FlowDirection="LeftToRight"
+                        IsEnabled="True"
+                        Value="61.8" />
+                </StackPanel>
+            </rxui:RoutedViewHost.DefaultContent>
+            <rxui:RoutedViewHost.ViewLocator>
+                <!--  See AppViewLocator.cs section below  -->
+                <app:AppViewLocator />
+            </rxui:RoutedViewHost.ViewLocator>
+        </rxui:RoutedViewHost>
+    </Grid>
 </Window>

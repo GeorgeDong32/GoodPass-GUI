@@ -1,13 +1,19 @@
-﻿namespace GoodPass.ViewModels;
+﻿using System;
+using ReactiveUI;
 
-public class MainViewModel : ViewModelBase
+namespace GoodPass.ViewModels;
+
+public class MainViewModel : ReactiveObject, IRoutableViewModel
 {
-    /*public void LoginButtonClick(object sender)
+    // Reference to IScreen that owns the routable view model.
+    public IScreen HostScreen
     {
-        if (sender is Button b)
-        {
-            b.Background = Brush.Parse("#000000");
-        }
-    }*/
+        get;
+    }
+
+    // Unique identifier for the routable view model.
+    public string UrlPathSegment { get; } = Guid.NewGuid().ToString().Substring(0, 5);
+
+    public MainViewModel(IScreen screen) => HostScreen = screen;
 }
 
