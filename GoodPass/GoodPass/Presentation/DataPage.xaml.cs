@@ -1,8 +1,8 @@
 ﻿namespace GoodPass.Presentation;
 
-public sealed partial class SecondPage : Page
+public sealed partial class DataPage : Page
 {
-    public SecondPage()
+    public DataPage()
     {
         this.InitializeComponent();
     }

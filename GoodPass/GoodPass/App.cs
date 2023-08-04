@@ -18,8 +18,8 @@ public class App : Application
             .UseToolkitNavigation()
             .Configure(host => host
 #if DEBUG
-				// Switch to Development environment when running in DEBUG
-				.UseEnvironment(Environments.Development)
+                // Switch to Development environment when running in DEBUG
+                .UseEnvironment(Environments.Development)
 #endif
                 .UseLogging(configure: (context, logBuilder) =>
                 {
@@ -75,7 +75,7 @@ public class App : Application
         views.Register(
             new ViewMap(ViewModel: typeof(ShellViewModel)),
             new ViewMap<MainPage, MainViewModel>(),
-            new DataViewMap<SecondPage, SecondViewModel, Entity>()
+            new DataViewMap<DataPage, DataPageViewModel, Entity>()
         );
 
         routes.Register(
@@ -83,7 +83,7 @@ public class App : Application
                 Nested: new RouteMap[]
                 {
                     new RouteMap("Main", View: views.FindByViewModel<MainViewModel>()),
-                    new RouteMap("Second", View: views.FindByViewModel<SecondViewModel>()),
+                    new RouteMap("DataPage", View: views.FindByViewModel<DataPageViewModel>()),
                 }
             )
         );

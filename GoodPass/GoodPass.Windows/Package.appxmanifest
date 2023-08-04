@@ -8,8 +8,8 @@
 
 	<Identity
 		Name="GoodPass"
-		Publisher="O=GeorgeDong32"
-		Version="1.0.0.0" />
+		Publisher="CN=GeorgeDong32"
+		Version="4.0.0.0" />
 
 	<Properties>
 		<DisplayName>GoodPass</DisplayName>
