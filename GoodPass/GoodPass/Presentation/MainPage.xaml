@@ -19,11 +19,12 @@
             <RowDefinition not_win:Height="48" win:Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <utu:NavigationBar>
+        <utu:NavigationBar Grid.Row="0">
             <AppBarButton
                 x:Name="MainSettingsBtn"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center">
+                VerticalAlignment="Center"
+                Command="{Binding GoToSettings}">
                 <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE713;" />
             </AppBarButton>
         </utu:NavigationBar>
@@ -83,7 +84,7 @@
                         Height="35"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
-                        Command="{Binding GoToSecond}"
+                        Command="{Binding GoToData}"
                         CornerRadius="7">
                         <TextBlock
                             HorizontalAlignment="Center"

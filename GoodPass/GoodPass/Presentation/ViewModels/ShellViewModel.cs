@@ -1,4 +1,4 @@
-namespace GoodPass.Presentation;
+namespace GoodPass.Presentation.ViewModels;
 
 public class ShellViewModel
 {

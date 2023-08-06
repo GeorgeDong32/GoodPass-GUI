@@ -1,3 +1,5 @@
+using GoodPass.Presentation.ViewModels;
+
 namespace GoodPass;
 
 public class App : Application
@@ -75,7 +77,8 @@ public class App : Application
         views.Register(
             new ViewMap(ViewModel: typeof(ShellViewModel)),
             new ViewMap<MainPage, MainViewModel>(),
-            new DataViewMap<DataPage, DataPageViewModel, Entity>()
+            new ViewMap<DataPage, DataPageViewModel>(),
+            new ViewMap<SettingsPage, SettingsPageViewModel>()
         );
 
         routes.Register(
@@ -84,6 +87,7 @@ public class App : Application
                 {
                     new RouteMap("Main", View: views.FindByViewModel<MainViewModel>()),
                     new RouteMap("DataPage", View: views.FindByViewModel<DataPageViewModel>()),
+                    new RouteMap("SettingsPage", View: views.FindByViewModel<SettingsPageViewModel>()),
                 }
             )
         );

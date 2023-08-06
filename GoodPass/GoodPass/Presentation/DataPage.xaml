@@ -2,26 +2,42 @@
     x:Class="GoodPass.Presentation.DataPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:android="http://uno.ui/android"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:GoodPass.Presentation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:not_win="http://uno.ui/not_win"
     xmlns:uen="using:Uno.Extensions.Navigation.UI"
     xmlns:utu="using:Uno.Toolkit.UI"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required"
+    mc:Ignorable="d android not_win">
 
     <Grid utu:SafeArea.Insets="All">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition not_win:Height="48" win:Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <utu:NavigationBar Content="Second Page">
+        <utu:NavigationBar Grid.Row="0">
             <utu:NavigationBar.MainCommand>
-                <AppBarButton>
-                    <AppBarButton.Icon>
-                        <BitmapIcon UriSource="ms-appx:///GoodPass/Assets/Icons/back.png" />
-                    </AppBarButton.Icon>
+                <AppBarButton
+                    x:Name="DataGoBackBtn"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <FontIcon
+                        not_win:FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                        win:FontFamily="Segoe MDL2 Assets"
+                        Glyph="&#xE830;" />
                 </AppBarButton>
             </utu:NavigationBar.MainCommand>
+            <AppBarButton
+                x:Name="DataSettingsBtn"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Command="{Binding GoToSettings}">
+                <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE713;" />
+            </AppBarButton>
         </utu:NavigationBar>
         <StackPanel
             Grid.Row="1"
@@ -31,7 +47,7 @@
                 Margin="8"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Text="{Binding Entity.Name}" />
+                Text="DataPage" />
         </StackPanel>
 
     </Grid>

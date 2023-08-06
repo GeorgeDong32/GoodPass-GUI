@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using GoodPass.Presentation.ViewModels;
 
 namespace GoodPass.Presentation;
 
@@ -18,7 +19,8 @@ public partial class MainViewModel : ObservableObject
         Title = "Main";
         Title += $" - {localizer["ApplicationName"]}";
         Title += $" - {appInfo?.Value?.Environment}";
-        GoToSecond = new AsyncRelayCommand(GoToDataPage);
+        GoToData = new AsyncRelayCommand(GoToDataPage);
+        GoToSettings = new AsyncRelayCommand(GoToSettingsPage);
         Debug.WriteLine(Title);
     }
     public string? Title
@@ -26,7 +28,12 @@ public partial class MainViewModel : ObservableObject
         get;
     }
 
-    public ICommand GoToSecond
+    public ICommand GoToData
+    {
+        get;
+    }
+
+    public ICommand GoToSettings
     {
         get;
     }
@@ -37,4 +44,8 @@ public partial class MainViewModel : ObservableObject
         await _navigator.NavigateViewModelAsync<DataPageViewModel>(this, data: new Entity(Name!));
     }
 
+    private async Task GoToSettingsPage()
+    {
+        await _navigator.NavigateViewModelAsync<SettingsPageViewModel>(this, data: new Entity(Name!));
+    }
 }
