@@ -9,31 +9,64 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
-    <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <utu:ExtendedSplashScreen
-            x:Name="Splash"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch">
-            <utu:ExtendedSplashScreen.LoadingContentTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*" />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border
+            x:Name="AppTitleBar"
+            x:Uid="AppTitleBar"
+            Grid.Row="0"
+            x:FieldModifier="public"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid Height="28" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.Column="0"
+                    Height="16"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Source="ms-appx:///GoodPass/Assets/Images/goodpass.png" />
+                <TextBlock
+                    x:Name="AppTitle"
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="GoodPass" />
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <utu:ExtendedSplashScreen
+                x:Name="Splash"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch">
+                <utu:ExtendedSplashScreen.LoadingContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                        <ProgressRing
-                            Grid.Row="1"
-                            Width="50"
-                            Height="50"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            IsActive="True" />
-                    </Grid>
-                </DataTemplate>
-            </utu:ExtendedSplashScreen.LoadingContentTemplate>
-        </utu:ExtendedSplashScreen>
-    </Border>
+                            <ProgressRing
+                                Grid.Row="1"
+                                Width="50"
+                                Height="50"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                IsActive="True" />
+                        </Grid>
+                    </DataTemplate>
+                </utu:ExtendedSplashScreen.LoadingContentTemplate>
+            </utu:ExtendedSplashScreen>
+        </Border>
+    </Grid>
+
 </UserControl>

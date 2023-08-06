@@ -1,3 +1,5 @@
+using GoodPass.Presentation;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Uno.Resizetizer;
 
@@ -23,5 +25,10 @@ public sealed partial class AppHead : App
         base.OnLaunched(args);
 
         MainWindow.SetWindowIcon();
+        //MainWindow.ExtendsContentIntoTitleBar = true;
+        MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+        MainWindow.AppWindow.TitleBar.BackgroundColor = Colors.Transparent;
+        MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
+        MainWindow.SetTitleBar(((Shell)(MainWindow.Content)).AppTitleBar);
     }
 }
