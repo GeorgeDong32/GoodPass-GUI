@@ -25,10 +25,15 @@ public sealed partial class AppHead : App
         base.OnLaunched(args);
 
         MainWindow.SetWindowIcon();
-        //MainWindow.ExtendsContentIntoTitleBar = true;
+#if __ANDROID__
+#endif
+#if __HAS_UNO_SKIA_GTK__
+#endif
+#if WINDOWS
         MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         MainWindow.AppWindow.TitleBar.BackgroundColor = Colors.Transparent;
         MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         MainWindow.SetTitleBar(((Shell)(MainWindow.Content)).AppTitleBar);
+#endif
     }
 }
