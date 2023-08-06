@@ -11,11 +11,12 @@
     xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    NavigationCacheMode="Required">
+    NavigationCacheMode="Required"
+    mc:Ignorable="d android not_win">
 
     <Grid utu:SafeArea.Insets="All">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48" />
+            <RowDefinition not_win:Height="48" win:Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <utu:NavigationBar>
@@ -87,7 +88,8 @@
                         <TextBlock
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                            not_win:FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                            win:FontFamily="Segoe MDL2 Assets"
                             Text="&#xE785;" />
                     </Button>
                 </Grid>

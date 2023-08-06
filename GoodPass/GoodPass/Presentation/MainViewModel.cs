@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace GoodPass.Presentation;
 
 public partial class MainViewModel : ObservableObject
@@ -17,6 +19,7 @@ public partial class MainViewModel : ObservableObject
         Title += $" - {localizer["ApplicationName"]}";
         Title += $" - {appInfo?.Value?.Environment}";
         GoToSecond = new AsyncRelayCommand(GoToDataPage);
+        Debug.WriteLine(Title);
     }
     public string? Title
     {
