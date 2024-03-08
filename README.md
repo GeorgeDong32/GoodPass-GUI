@@ -18,7 +18,7 @@ The codes there may have serious problems, so don't use them for other developme
 
 Go to [GoodPass](https://github.com/GeorgeDong32/GoodPass) for more project information
 
-Go to [GoodPass | GoodPass GUI (georgedong32.github.io)](https://georgedong32.github.io/GoodPass/GoodPass-GUI) for more information
+Go to [GoodPass | GoodPass GUI](https://goodpass.georgedong.tech/GoodPass-GUI) for more information
 
 ## License
 [The GoodPass License](https://github.com/GeorgeDong32/GoodPass/blob/main/LICENSE.md)
